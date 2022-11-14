@@ -1,7 +1,17 @@
+using FilcDataAccessLibrary.DataAccess;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ESContext>(options =>
+{
+    options.UseSqlServer(configuration.GetConnectionString("Default"));
+});
 
 var app = builder.Build();
 
