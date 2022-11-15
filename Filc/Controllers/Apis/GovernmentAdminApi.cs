@@ -12,6 +12,7 @@ namespace Filc.Controllers.Apis
         public School GetSchool(int schoolId)
         {
             // Restricted to: Government admin, SchoolAdmin that matches id of school
+            return null;
         }
 
         [HttpPost]
