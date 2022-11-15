@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace FilcDataAccessLibrary.Migrations
+namespace EFDataAccessLibrary.Migrations
 {
     /// <inheritdoc />
     public partial class InitialDBCreation : Migration

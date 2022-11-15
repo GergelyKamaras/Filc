@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using EFDataAccessLibrary.Models.ModelInterfaces;
 
-namespace FilcDataAccessLibrary.Models
+namespace EFDataAccessLibrary.Models
 {
     public class Teacher : ISchoolMember
     {

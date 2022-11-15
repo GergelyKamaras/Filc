@@ -1,4 +1,4 @@
-﻿namespace FilcDataAccessLibrary.Models.ModelEnums
+﻿namespace EFDataAccessLibrary.Models.ModelEnums
 {
     public enum Subject
     {

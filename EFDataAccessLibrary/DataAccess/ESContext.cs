@@ -1,8 +1,8 @@
-﻿using FilcDataAccessLibrary.Models;
+﻿using EFDataAccessLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace FilcDataAccessLibrary.DataAccess
+namespace EFDataAccessLibrary.DataAccess
 {
     public class ESContext : DbContext
     {

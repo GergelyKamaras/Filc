@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FilcDataAccessLibrary.Models
+namespace EFDataAccessLibrary.Models
 {
     public class Student : ISchoolMember
     {
