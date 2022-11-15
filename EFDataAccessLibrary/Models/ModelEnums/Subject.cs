@@ -5,8 +5,8 @@
         English,
         Math,
         History,
-        Phisics,
-        Attlethic,
+        Physics,
+        PhysicalEducation,
         Biology,
         Geographic
             //etc.
