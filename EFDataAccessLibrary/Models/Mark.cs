@@ -8,6 +8,7 @@ namespace EFDataAccessLibrary.Models
 {
     public class Mark
     {
+        public int Id { get; set; }
         public Teacher Teacher { get; set; }
         public Student Student { get; set; }
         public float Grade { get; set; }
