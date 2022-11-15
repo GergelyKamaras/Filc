@@ -1,8 +1,10 @@
-﻿namespace Filc.Services.Interfaces
+﻿using EFDataAccessLibrary.Models;
+
+namespace Filc.Services.Interfaces
 {
     public interface ITeacherService
     {
-        public Mark AddMark(int studentId);
+        public void AddMark(Mark mark);
         public void RegisterAbsence();
     }
 }

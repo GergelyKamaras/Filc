@@ -1,4 +1,6 @@
-﻿namespace Filc.Services.Interfaces
+﻿using EFDataAccessLibrary.Models.ModelInterfaces;
+
+namespace Filc.Services.Interfaces
 {
     public interface IAuthentication
     {
