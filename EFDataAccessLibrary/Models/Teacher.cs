@@ -7,6 +7,7 @@ namespace EFDataAccessLibrary.Models
     public class Teacher : ISchoolMember
     {
         [Required]
+        
         public int Id { get; set; }
 
 
@@ -39,6 +40,7 @@ namespace EFDataAccessLibrary.Models
         [MaxLength(20)]
         public string UserRole { get; set; }
         public List<Subject> Subjects { get; set; }
-        
+        public List<Lesson> Lessons{ get; set; }
+        public School School { get; set; }
     }
 }

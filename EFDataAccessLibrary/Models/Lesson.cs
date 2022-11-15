@@ -17,6 +17,8 @@ namespace EFDataAccessLibrary.Models
         public Subject Subject { get; set; }
         public List<Student> students { get; set; }
         public List<Teacher> Teachers { get; set; }
+        public School School { get; set; }
+
         
     }
 }

@@ -23,22 +23,22 @@ namespace EFDataAccessLibrary.Models
         [MaxLength(20)]
         public string SchoolType { get; set; }
 
-        [Required]
-        public SchoolAdmin SchoolAdmin { get; set; }
+        
+        public List<SchoolAdmin> SchoolAdmin { get; set; }
 
-        [Required]
+        
         public List<Student> Students { get; set; }
 
-        [Required]
+        
         public List<Subject> Subjects { get; set; }
 
-        [Required]
+        
         public List<Lesson> Lessons { get; set; }
         
-        [Required]
+        
         public List<Teacher> Teachers { get; set; }
 
-        [Required]
+        
         public List<SchoolClass> Classes { get; set; }
     }
 }

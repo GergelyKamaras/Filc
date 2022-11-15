@@ -12,6 +12,6 @@ namespace EFDataAccessLibrary.Models.ModelInterfaces
         public string LastName { get; set; }
         public string BirthDate { get; set; }
         public string Address { get; set; }
-        
+        public School School { get; set; }
     }
 }

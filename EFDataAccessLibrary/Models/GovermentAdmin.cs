@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace EFDataAccessLibrary.Models
 {
-    public class Parent : IUser
+    public class GovermentAdmin : IUser
     {
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string UserRole { get; set; }
-        public List<Student> Children { get; set; }
     }
 }

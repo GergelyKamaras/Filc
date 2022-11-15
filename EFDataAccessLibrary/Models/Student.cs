@@ -45,6 +45,7 @@ namespace EFDataAccessLibrary.Models
 
         public List<Lesson> Lessons { get; set; }
 
+        public School School { get; set; }
         
     }
 }
