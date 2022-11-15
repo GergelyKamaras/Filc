@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Filc.Controllers.Apis
 {
-    [Authorize]
     [Route("api/")]
     [ApiController]
     public class SchoolAdminApi : ControllerBase
@@ -18,6 +17,7 @@ namespace Filc.Controllers.Apis
         public IUser GetUser(string userRole, int id)
         {
             // Restricted to: Self, Government admin, SchoolAdmin that matches id of school, teacher of school, parent of child
+            return null;
         }
 
         [HttpPost]
@@ -47,6 +47,7 @@ namespace Filc.Controllers.Apis
         public Lesson GetLesson(int id)
         {
             // GovernmentAdmin, SchoolAdmin and school users if User school id matches lesson school id
+            return null;
         }
 
         [HttpPost]
@@ -76,6 +77,7 @@ namespace Filc.Controllers.Apis
         public Mark GetMark(int id)
         {
             //Restricted to: GovernmentAdmin, SchoolAdmin, child, teacher, parent of child
+            return null;
         }
 
         [HttpPost]
