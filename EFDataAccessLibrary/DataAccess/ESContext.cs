@@ -8,6 +8,7 @@ namespace EFDataAccessLibrary.DataAccess
     {
         public ESContext(DbContextOptions options) : base(options) { }
 
+        public DbSet<GovermentAdmin> GovermentAdmin { get; set; }
         public DbSet<School> School { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<SchoolAdmin> SchoolAdmin { get; set; }
