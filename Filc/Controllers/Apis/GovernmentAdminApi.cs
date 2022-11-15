@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Filc.Filc.Filc.Controllers.Apis
+namespace Filc.Controllers.Apis
 {
     [Authorize]
     [Route("/api/gov")]

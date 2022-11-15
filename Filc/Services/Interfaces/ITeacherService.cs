@@ -1,4 +1,4 @@
-﻿namespace Filc.Filc.Filc.Services.Interfaces
+﻿namespace Filc.Services.Interfaces
 {
     public interface ITeacherService
     {

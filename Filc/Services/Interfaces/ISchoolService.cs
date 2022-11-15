@@ -1,6 +1,6 @@
 ﻿using Microsoft.Identity.Client;
 
-namespace Filc.Filc.Filc.Services.Interfaces
+namespace Filc.Services.Interfaces
 {
     // Services should be accessed only by SchoolAdmins
     public interface ISchoolService
