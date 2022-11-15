@@ -1,7 +1,7 @@
 # Filc
 School management system
 
-##Dictionary
+## Dictionary
 Class : A group of students (e.g. 8/A)
 Lesson : A lesson of a subject (e.g. A math lesson in 2023 for 8/A)
 Period : A time period in a given day (e.g. Lunch break in 06/08/2022)
