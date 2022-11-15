@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDataAccessLibrary.Migrations
 {
     [DbContext(typeof(ESContext))]
-    [Migration("20221115122717_Add-Few-New-Table")]
-    partial class AddFewNewTable
+    [Migration("20221115130300_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
