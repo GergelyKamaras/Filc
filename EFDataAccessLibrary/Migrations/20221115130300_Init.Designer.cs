@@ -4,6 +4,7 @@ using EFDataAccessLibrary.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDataAccessLibrary.Migrations
 {
     [DbContext(typeof(ESContext))]
-    partial class ESContextModelSnapshot : ModelSnapshot
+    [Migration("20221115130300_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,31 +24,6 @@ namespace EFDataAccessLibrary.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.GovermentAdmin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserRole")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GovermentAdmin");
-                });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Lesson", b =>
                 {
@@ -60,15 +38,10 @@ namespace EFDataAccessLibrary.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SchoolId");
 
                     b.HasIndex("SubjectId");
 
@@ -98,102 +71,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parent");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.School", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("SchoolType")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("School");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.SchoolAdmin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BirthDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserRole")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SchoolId");
-
-                    b.ToTable("SchoolAdmin");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.SchoolClass", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SchoolId");
-
-                    b.ToTable("SchoolClasses");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Student", b =>
@@ -237,12 +114,6 @@ namespace EFDataAccessLibrary.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int?>("SchoolClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserRole")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -251,10 +122,6 @@ namespace EFDataAccessLibrary.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
-
-                    b.HasIndex("SchoolClassId");
-
-                    b.HasIndex("SchoolId");
 
                     b.ToTable("Student");
                 });
@@ -267,9 +134,6 @@ namespace EFDataAccessLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("SchoolId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
@@ -278,8 +142,6 @@ namespace EFDataAccessLibrary.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SchoolId");
 
                     b.HasIndex("TeacherId");
 
@@ -319,13 +181,13 @@ namespace EFDataAccessLibrary.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
+                    b.Property<int?>("LessonId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserRole")
                         .IsRequired()
@@ -334,7 +196,7 @@ namespace EFDataAccessLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SchoolId");
+                    b.HasIndex("LessonId");
 
                     b.ToTable("Teacher");
                 });
@@ -354,87 +216,26 @@ namespace EFDataAccessLibrary.Migrations
                     b.ToTable("LessonStudent");
                 });
 
-            modelBuilder.Entity("LessonTeacher", b =>
-                {
-                    b.Property<int>("LessonsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeachersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LessonsId", "TeachersId");
-
-                    b.HasIndex("TeachersId");
-
-                    b.ToTable("LessonTeacher");
-                });
-
             modelBuilder.Entity("EFDataAccessLibrary.Models.Lesson", b =>
                 {
-                    b.HasOne("EFDataAccessLibrary.Models.School", "School")
-                        .WithMany("Lessons")
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EFDataAccessLibrary.Models.Subject", "Subject")
                         .WithMany()
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("School");
-
                     b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.SchoolAdmin", b =>
-                {
-                    b.HasOne("EFDataAccessLibrary.Models.School", "School")
-                        .WithMany("SchoolAdmin")
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("School");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.SchoolClass", b =>
-                {
-                    b.HasOne("EFDataAccessLibrary.Models.School", "School")
-                        .WithMany("Classes")
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Student", b =>
                 {
                     b.HasOne("EFDataAccessLibrary.Models.Parent", null)
-                        .WithMany("Children")
+                        .WithMany("Childs")
                         .HasForeignKey("ParentId");
-
-                    b.HasOne("EFDataAccessLibrary.Models.SchoolClass", null)
-                        .WithMany("Students")
-                        .HasForeignKey("SchoolClassId");
-
-                    b.HasOne("EFDataAccessLibrary.Models.School", "School")
-                        .WithMany("Students")
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("School");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Subject", b =>
                 {
-                    b.HasOne("EFDataAccessLibrary.Models.School", null)
-                        .WithMany("Subjects")
-                        .HasForeignKey("SchoolId");
-
                     b.HasOne("EFDataAccessLibrary.Models.Teacher", null)
                         .WithMany("Subjects")
                         .HasForeignKey("TeacherId");
@@ -442,13 +243,9 @@ namespace EFDataAccessLibrary.Migrations
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Teacher", b =>
                 {
-                    b.HasOne("EFDataAccessLibrary.Models.School", "School")
+                    b.HasOne("EFDataAccessLibrary.Models.Lesson", null)
                         .WithMany("Teachers")
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("School");
+                        .HasForeignKey("LessonId");
                 });
 
             modelBuilder.Entity("LessonStudent", b =>
@@ -466,44 +263,14 @@ namespace EFDataAccessLibrary.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LessonTeacher", b =>
+            modelBuilder.Entity("EFDataAccessLibrary.Models.Lesson", b =>
                 {
-                    b.HasOne("EFDataAccessLibrary.Models.Lesson", null)
-                        .WithMany()
-                        .HasForeignKey("LessonsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFDataAccessLibrary.Models.Teacher", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Parent", b =>
                 {
-                    b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.School", b =>
-                {
-                    b.Navigation("Classes");
-
-                    b.Navigation("Lessons");
-
-                    b.Navigation("SchoolAdmin");
-
-                    b.Navigation("Students");
-
-                    b.Navigation("Subjects");
-
-                    b.Navigation("Teachers");
-                });
-
-            modelBuilder.Entity("EFDataAccessLibrary.Models.SchoolClass", b =>
-                {
-                    b.Navigation("Students");
+                    b.Navigation("Childs");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Teacher", b =>

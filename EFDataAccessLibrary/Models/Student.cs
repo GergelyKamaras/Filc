@@ -1,12 +1,15 @@
-﻿
+﻿using EFDataAccessLibrary.Models.ModelInterfaces;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using EFDataAccessLibrary.Models.ModelInterfaces;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EFDataAccessLibrary.Models
 {
-    public class Teacher : ISchoolMember
+    public class Student : ISchoolMember
     {
-        [Required]
         
         public int Id { get; set; }
 
@@ -14,7 +17,7 @@ namespace EFDataAccessLibrary.Models
         [Required]
         [MaxLength(40)]
         public string FirstName { get; set; }
-        
+
         [Required]
         [MaxLength(40)]
         public string LastName { get; set; }
@@ -39,8 +42,10 @@ namespace EFDataAccessLibrary.Models
         [Required]
         [MaxLength(20)]
         public string UserRole { get; set; }
-        public List<Subject> Subjects { get; set; }
-        public List<Lesson> Lessons{ get; set; }
+
+        public List<Lesson> Lessons { get; set; }
+
         public School School { get; set; }
+        
     }
 }
