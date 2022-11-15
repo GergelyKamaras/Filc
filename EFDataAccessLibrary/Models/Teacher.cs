@@ -35,13 +35,10 @@ namespace EFDataAccessLibrary.Models
         //TODO: encrypt password
         public string Password { get; set; }
 
-        
-
         [Required]
         [MaxLength(20)]
         public string UserRole { get; set; }
-
+        public List<Subject> Subjects { get; set; }
         
-        public List<Subject> Subjects { get; set; } 
     }
 }

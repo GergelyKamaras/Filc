@@ -44,5 +44,7 @@ namespace EFDataAccessLibrary.Models
         public string UserRole { get; set; }
 
         public List<Lesson> Lessons { get; set; }
+
+        
     }
 }
