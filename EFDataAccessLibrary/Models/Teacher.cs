@@ -7,7 +7,6 @@ namespace EFDataAccessLibrary.Models
     public class Teacher : ISchoolMember
     {
         [Required]
-        
         public int Id { get; set; }
 
 

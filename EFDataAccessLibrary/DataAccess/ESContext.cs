@@ -7,7 +7,6 @@ namespace EFDataAccessLibrary.DataAccess
     public class ESContext : DbContext
     {
         public ESContext(DbContextOptions options) : base(options) { }
-
         public DbSet<GovermentAdmin> GovermentAdmin { get; set; }
         public DbSet<School> School { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
@@ -17,8 +16,6 @@ namespace EFDataAccessLibrary.DataAccess
         public DbSet<Student> Student { get; set; }
         public DbSet<Lesson> Lesson { get; set; }
         public DbSet<Parent> Parent { get; set; }
-
-
-
+        public DbSet<Mark> Mark { get; set; }
     }
 }
