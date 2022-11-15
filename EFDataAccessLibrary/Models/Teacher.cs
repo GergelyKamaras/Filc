@@ -35,9 +35,13 @@ namespace FilcDataAccessLibrary.Models
         //TODO: encrypt password
         public string Password { get; set; }
 
+        
+
         [Required]
         [MaxLength(20)]
         public string UserRole { get; set; }
 
+        []
+        public List<string> Subjects { get; set; } 
     }
 }
