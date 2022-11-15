@@ -1,6 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
-
+using EFDataAccessLibrary.Models.ModelInterfaces;
 
 namespace FilcDataAccessLibrary.Models
 {
@@ -41,7 +41,7 @@ namespace FilcDataAccessLibrary.Models
         [MaxLength(20)]
         public string UserRole { get; set; }
 
-        []
-        public List<string> Subjects { get; set; } 
+        
+        public List<Subject> Subjects { get; set; } 
     }
 }
