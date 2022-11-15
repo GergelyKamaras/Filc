@@ -1,13 +1,12 @@
-﻿using Filc.Filc.Filc.Services.Interfaces;
+﻿using Filc.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Filc.Filc.Filc.Controllers.Apis
+namespace Filc.Controllers.Apis
 {
-    // TODO restrict access to SchoolAdmins
     [Authorize]
     [Route("api/")]
     [ApiController]
@@ -54,7 +53,7 @@ namespace Filc.Filc.Filc.Controllers.Apis
         [Route("lesson")]
         public void AddLesson([FromBody]Lesson lesson)
         {
-            //Restricted to: GovernmentAdmin, SchoolAdmin
+            // Restricted to: GovernmentAdmin, SchoolAdmin
         }
 
         [HttpPut]
