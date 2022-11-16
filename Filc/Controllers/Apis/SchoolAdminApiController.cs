@@ -31,57 +31,5 @@ namespace Filc.Controllers.Apis
             _studentService = studentService;
             _teacherService = teacherService;
         }
-        
-        // Lessons
-        [HttpGet]
-        [Route("lesson")]
-        public Lesson GetLesson(int id)
-        {
-            return null;
-        }
-
-        [HttpPost]
-        [Route("lesson")]
-        public void AddLesson([FromBody]Lesson lesson)
-        {
-        }
-
-        [HttpPut]
-        [Route("lesson")]
-        public void UpdateLesson([FromBody]Lesson lesson)
-        {
-        }
-
-        [HttpDelete]
-        [Route("lesson")]
-        public void DeleteLesson(int id)
-        {
-        }
-
-        //Marks
-        [HttpGet]
-        [Route("mark")]
-        public Mark GetMark(int id)
-        {
-            return null;
-        }
-
-        [HttpPost]
-        [Route("mark")]
-        public void AddMark([FromBody]Mark mark)
-        {
-        }
-
-        [HttpPut]
-        [Route("mark")]
-        public void UpdateMark([FromBody]Mark mark)
-        {
-        }
-
-        [HttpDelete]
-        [Route("mark")]
-        public void DeleteMark(int id)
-        {
-        }
     }
 }
