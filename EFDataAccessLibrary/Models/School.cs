@@ -16,7 +16,7 @@ namespace EFDataAccessLibrary.Models
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(200)]
+        [MaxLength(100)]
         public string Address { get; set; }
 
         [Required]
