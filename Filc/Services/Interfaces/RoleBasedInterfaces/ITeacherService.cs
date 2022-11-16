@@ -1,4 +1,4 @@
-﻿namespace Filc.Services.New_intefaces.RoleBasedInterfaces
+﻿namespace Filc.Services.Interfaces.RoleBasedInterfaces
 {
     public interface ITeacherService
     {

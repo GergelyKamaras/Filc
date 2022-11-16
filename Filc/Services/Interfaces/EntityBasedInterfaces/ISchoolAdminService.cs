@@ -1,6 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
 
-namespace Filc.Services.New_intefaces
+namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
     public interface ISchoolAdminService
     {
