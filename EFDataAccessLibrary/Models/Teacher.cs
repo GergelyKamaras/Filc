@@ -7,7 +7,6 @@ namespace EFDataAccessLibrary.Models
 {
     public class Teacher : ISchoolMember
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]
@@ -22,27 +21,16 @@ namespace EFDataAccessLibrary.Models
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(10)]
-        public string BirthDate { get; set; }
+        [Timestamp]
+        public DateTime BirthDate { get; set; }
 
         [Required]
-        [MaxLength(200)]
+        [MaxLength(100)]
         public string Address { get; set; }
+        public List<Subject>? Subjects { get; set; }
+        public List<Lesson>? Lessons{ get; set; }
 
         [Required]
-        [MaxLength(200)]
-        public string Email { get; set; }
-
-        [Required]
-        [MaxLength(200)]
-        //TODO: encrypt password
-        public string Password { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        public string UserRole { get; set; }
-        public List<Subject> Subjects { get; set; }
-        public List<Lesson> Lessons{ get; set; }
         public School School { get; set; }
     }
 }

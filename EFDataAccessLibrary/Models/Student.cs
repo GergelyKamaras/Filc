@@ -26,15 +26,16 @@ namespace EFDataAccessLibrary.Models
         public string LastName { get; set; }
 
         [Required]
-        [MaxLength(10)]
-        public string BirthDate { get; set; }
+        [Timestamp]
+        public DateTime BirthDate { get; set; }
 
         [Required]
-        [MaxLength(200)]
+        [MaxLength(100)]
         public string Address { get; set; }
 
-        public List<Lesson> Lessons { get; set; }
+        public List<Lesson>? Lessons { get; set; }
 
+        [Required]
         public School School { get; set; }
         
     }

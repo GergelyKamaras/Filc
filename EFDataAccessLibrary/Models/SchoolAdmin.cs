@@ -15,11 +15,24 @@ namespace EFDataAccessLibrary.Models
 
         [Required]
         public IdentityUser user { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string BirthDate { get; set; }
-        public string Address { get; set; }
         
+        [Required]
+        [MaxLength(20)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Timestamp]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Address { get; set; }
+
+        [Required]
         public School School { get; set; }
 
     }
