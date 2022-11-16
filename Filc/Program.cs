@@ -15,15 +15,17 @@ builder.Services.AddDbContext<ESContext>(options =>
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ESContext>();
 
+// Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminService, GovernmentAdminService>();
-builder.Services.AddTransient<IParentService, IParentService>();
-builder.Services.AddTransient<IStudentService, IStudentService>();
-builder.Services.AddTransient<ITeacherService, ITeacherService>();
-builder.Services.AddTransient<ISchoolAdminService, ISchoolAdminService>();
-builder.Services.AddTransient<ISchoolAdminService, ISchoolAdminService>();
-builder.Services.AddTransient<ISchoolService, ISchoolService>();
-builder.Services.AddTransient<ILessonService, ILessonService>();
-builder.Services.AddTransient<IMarkService, IMarkService>();
+builder.Services.AddTransient<IParentService, ParentService>();
+builder.Services.AddTransient<IStudentService, StudentService>();
+builder.Services.AddTransient<ITeacherService, TeacherService>();
+builder.Services.AddTransient<ISchoolAdminService, SchoolAdminService>();
+builder.Services.AddTransient<ISchoolService, SchoolService>();
+builder.Services.AddTransient<ILessonService, LessonService>();
+builder.Services.AddTransient<IMarkService, MarkService>();
+
+// Register role based query service interface implementations
 
 
 
