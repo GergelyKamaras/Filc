@@ -1,4 +1,6 @@
 using EFDataAccessLibrary.DataAccess;
+using Filc.Services.DataBaseQueryServices;
+using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<ESContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ESContext>();
+
+builder.Services.AddTransient<IGovernmentAdminService, GovernmentAdminService>();
 
 
 var app = builder.Build();
