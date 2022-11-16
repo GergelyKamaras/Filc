@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models.ModelInterfaces;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +14,8 @@ namespace EFDataAccessLibrary.Models
         
         public int Id { get; set; }
 
+        [Required]
+        public IdentityUser user { get; set; }
 
         [Required]
         [MaxLength(40)]
@@ -29,19 +32,6 @@ namespace EFDataAccessLibrary.Models
         [Required]
         [MaxLength(200)]
         public string Address { get; set; }
-
-        [Required]
-        [MaxLength(200)]
-        public string Email { get; set; }
-
-        [Required]
-        [MaxLength(200)]
-        //TODO: encrypt password
-        public string Password { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        public string UserRole { get; set; }
 
         public List<Lesson> Lessons { get; set; }
 
