@@ -91,7 +91,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\GovAdmin\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Student\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\GovAdmin\Index.cshtml" />
   </ItemGroup>
 
 </Project>
