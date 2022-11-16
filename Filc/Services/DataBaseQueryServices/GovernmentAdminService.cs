@@ -12,6 +12,11 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db = esContext;
         }
+
+        public List<GovernmentAdmin> GetAllGovernmentAdmins()
+        {
+            return _db.GovernmentAdmin.ToList();
+        }
         public GovernmentAdmin GetGovernmentAdmin(int id)
         {
             return _db.GovernmentAdmin.First(x => x.Id == id);
