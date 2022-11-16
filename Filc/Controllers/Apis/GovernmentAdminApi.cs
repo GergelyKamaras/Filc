@@ -37,5 +37,11 @@ namespace Filc.Controllers.Apis
         {
             return _governmentAdminService.GetAllGovernmentAdmins();
         }
+
+        [HttpPost]
+        public void AddAdmin([FromBody] GovernmentAdmin admin)
+        {
+            _governmentAdminService.AddGovernmentAdmin(admin);
+        }
     }
 }
