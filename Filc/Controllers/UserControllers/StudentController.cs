@@ -10,5 +10,10 @@ namespace Filc.Controllers.UserControllers
         {
             return View();
         }
+
+        public IActionResult Grades()
+        {
+            return View();
+        }
     }
 }
