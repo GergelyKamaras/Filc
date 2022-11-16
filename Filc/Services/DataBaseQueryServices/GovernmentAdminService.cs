@@ -21,13 +21,11 @@ namespace Filc.Services.DataBaseQueryServices
         {
             return _db.GovernmentAdmin.First(x => x.Id == id);
         }
-
         public void AddGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
             _db.GovernmentAdmin.Add(governmentAdmin);
             _db.SaveChanges();
         }
-
         public void RemoveGovernmentAdmin(int id)
         {
             _db.GovernmentAdmin.Remove(_db.GovernmentAdmin.First(x => x.Id == id));
