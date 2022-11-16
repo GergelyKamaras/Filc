@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/gov")]
     public class GovernmentAdminApi : Controller
     {
         private readonly IGovernmentAdminService _governmentAdminService;
@@ -17,9 +17,9 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolService _schoolService;
         private readonly IStudentService _studentService;
         private readonly ITeacherService _teacherService;
-
-        public GovernmentAdminApi(IGovernmentAdminService governmentAdminService, ILessonService lessonService, 
-            IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService, 
+        
+        public GovernmentAdminApi(IGovernmentAdminService governmentAdminService, ILessonService lessonService,
+            IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService,
             ISchoolService schoolService, IStudentService studentService, ITeacherService teacherService)
         {
             _governmentAdminService = governmentAdminService;
@@ -38,10 +38,30 @@ namespace Filc.Controllers.Apis
             return _governmentAdminService.GetAllGovernmentAdmins();
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public GovernmentAdmin GetAdmin(int id)
+        {
+            return _governmentAdminService.GetGovernmentAdmin(id);
+        }
+
         [HttpPost]
         public void AddAdmin([FromBody] GovernmentAdmin admin)
         {
             _governmentAdminService.AddGovernmentAdmin(admin);
+        }
+
+        [HttpPut]
+        public void UpdateAdmin(GovernmentAdmin admin)
+        {
+            _governmentAdminService.UpdateGovernmentAdmin(admin);
+        }
+        
+        [HttpDelete]
+        [Route("{id}")]
+        public void DeleteAdmin(int id)
+        {
+            _governmentAdminService.RemoveGovernmentAdmin(id);
         }
     }
 }
