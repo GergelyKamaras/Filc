@@ -1,8 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
+using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
+using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
 
 namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
-    public interface ILessonService
+    public interface ILessonService : IParentRoleLessonService, IStudentRoleLessonService, ITeacherRoleLessonService
     {
         public Lesson GetLessonById(int id);
         public List<Lesson> GetLessonByStudentId(int id);

@@ -1,8 +1,9 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
 
 namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
-    public interface ITeacherService
+    public interface ITeacherService : ITeacherRoleTeacherService
     {
         public Teacher GetTeacher(int id);
         public void AddTeacher(Teacher teacher);
