@@ -14,7 +14,7 @@ namespace Filc.Controllers.Apis
     
     [Route("api/schooladmin")]
     [ApiController]
-    public class SchoolAdminApi : ControllerBase
+    public class SchoolAdminApiController : ControllerBase
     {
         private ILessonService _lessonService;
         private IMarkService _markService;
@@ -24,7 +24,7 @@ namespace Filc.Controllers.Apis
         private IStudentService _studentService;
         private ITeacherService _teacherService;
 
-        public SchoolAdminApi(ILessonService lessonService, IMarkService markService, IParentService parentService, 
+        public SchoolAdminApiController(ILessonService lessonService, IMarkService markService, IParentService parentService, 
             ISchoolAdminRoleSchoolAdminService schoolAdminService, ISchoolService schoolService, 
             IStudentService studentService, ITeacherService teacherService)
         {
