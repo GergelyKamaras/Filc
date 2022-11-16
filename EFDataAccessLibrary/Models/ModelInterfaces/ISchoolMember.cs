@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EFDataAccessLibrary.Models.ModelInterfaces
 {
-    public interface ISchoolMember : IUser
+    public interface ISchoolMember 
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
