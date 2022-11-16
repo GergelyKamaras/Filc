@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                @if (ViewData["Title"] == "Home Page" || ViewData["Title"] == "Privacy")
+                @if (ViewData["Title"] == "Home Page" || ViewData["Title"] == "Privacy Policy")
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Filc</a>
                 } 
@@ -38,7 +38,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (ViewData["Title"] == "Home Page" || ViewData["Title"] == "Privacy")
+                        @if (ViewData["Title"] == "Home Page" || ViewData["Title"] == "Privacy Policy")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -66,6 +66,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Grades">Grades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="TimeTable">Time Table</a>
                             </li>
                         }
                         else if (ViewData["Title"] == "Teacher Page")
