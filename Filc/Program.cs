@@ -18,6 +18,16 @@ builder.Services.AddDbContext<ESContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ESContext>();
 
 builder.Services.AddTransient<IGovernmentAdminService, GovernmentAdminService>();
+builder.Services.AddTransient<IParentService, IParentService>();
+builder.Services.AddTransient<IStudentService, IStudentService>();
+builder.Services.AddTransient<ITeacherService, ITeacherService>();
+builder.Services.AddTransient<ISchoolAdminService, ISchoolAdminService>();
+builder.Services.AddTransient<ISchoolAdminService, ISchoolAdminService>();
+builder.Services.AddTransient<ISchoolService, ISchoolService>();
+builder.Services.AddTransient<ILessonService, ILessonService>();
+builder.Services.AddTransient<IMarkService, IMarkService>();
+
+
 
 
 var app = builder.Build();
