@@ -11,6 +11,7 @@ namespace Filc.Controllers.UserControllers
             return View();
         }
 
+        [Route("/grades")]
         public IActionResult Grades()
         {
             return View();
