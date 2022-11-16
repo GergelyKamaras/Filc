@@ -1,22 +1,22 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class ParentApiController : ControllerBase
     {
-        private IParentRoleSchoolService _studentService;
-        private IParentRoleSchoolService _schoolService;
-        private IParentRoleSchoolService _markService;
-        private IParentRoleSchoolService _parentService;
+        private readonly IParentRoleStudentService _studentService;
+        private readonly IParentRoleSchoolService _schoolService;
+        private readonly IParentRoleMarkService _markService;
+        private readonly IParentRoleParentService _parentService;
 
-        public ParentApiController(IParentRoleSchoolService studentService, IParentRoleSchoolService schoolService, 
-            IParentRoleSchoolService markService, IParentRoleSchoolService parentService)
+        public ParentApiController(IParentRoleStudentService studentService, IParentRoleSchoolService schoolService,
+            IParentRoleMarkService markService, IParentRoleParentService parentService)
         {
             _studentService = studentService;
             _schoolService = schoolService;

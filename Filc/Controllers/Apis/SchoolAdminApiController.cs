@@ -1,28 +1,23 @@
 ﻿using EFDataAccessLibrary.Models;
-using EFDataAccessLibrary.Models.ModelInterfaces;
-using Filc.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Filc.Controllers.Apis
 {
-    
-    
-    [Route("api/schooladmin")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class SchoolAdminApiController : ControllerBase
     {
-        private ILessonService _lessonService;
-        private IMarkService _markService;
-        private IParentService _parentService;
-        private ISchoolAdminRoleSchoolAdminService _schoolAdminService;
-        private ISchoolService _schoolService;
-        private IStudentService _studentService;
-        private ITeacherService _teacherService;
+        private readonly ISchoolAdminRoleSchoolAdminService _schoolAdminService;
+        private readonly ILessonService _lessonService;
+        private readonly IMarkService _markService;
+        private readonly IParentService _parentService;
+        private readonly ISchoolService _schoolService;
+        private readonly IStudentService _studentService;
+        private readonly ITeacherService _teacherService;
 
         public SchoolAdminApiController(ILessonService lessonService, IMarkService markService, IParentService parentService, 
             ISchoolAdminRoleSchoolAdminService schoolAdminService, ISchoolService schoolService, 
@@ -36,9 +31,7 @@ namespace Filc.Controllers.Apis
             _studentService = studentService;
             _teacherService = teacherService;
         }
-
         
-
         // Lessons
         [HttpGet]
         [Route("lesson")]

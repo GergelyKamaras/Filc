@@ -1,20 +1,21 @@
 ﻿using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class TeacherApiController : ControllerBase
     {
 
-        private IMarkService _markService;
-        private ITeacherRoleLessonService _lessonService;
-        private ITeacherRoleSchoolService _schoolService;
-        private ITeacherRoleStudentService _studentService;
-        private ITeacherRoleTeacherService _teacherService;
+        private readonly IMarkService _markService;
+        private readonly ITeacherRoleLessonService _lessonService;
+        private readonly ITeacherRoleSchoolService _schoolService;
+        private readonly ITeacherRoleStudentService _studentService;
+        private readonly ITeacherRoleTeacherService _teacherService;
 
         public TeacherApiController(IMarkService markService, ITeacherRoleLessonService teacherRoleLessonService,
             ITeacherRoleSchoolService teacherRoleSchoolService, ITeacherRoleStudentService teacherRoleStudentService,
