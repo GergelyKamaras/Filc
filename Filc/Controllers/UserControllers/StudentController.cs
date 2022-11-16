@@ -16,5 +16,11 @@ namespace Filc.Controllers.UserControllers
         {
             return View();
         }
+
+        [Route("/timetable")]
+        public IActionResult TimeTable()
+        {
+            return View();
+        }
     }
 }
