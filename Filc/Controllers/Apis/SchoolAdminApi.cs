@@ -12,28 +12,7 @@ namespace Filc.Controllers.Apis
     [ApiController]
     public class SchoolAdminApi : ControllerBase
     {
-        // Users
-        [HttpGet]
-        [Route("user")]
-        public IUser GetUser(string userRole, int id)
-        {
-            // Restricted to: Self, Government admin, SchoolAdmin that matches id of school, teacher of school, parent of child
-            return null;
-        }
-
-        [HttpPost]
-        [Route("user")]
-        public void AddUser([FromBody]IUser user)
-        {
-            // Restricted to: GovernmentAdmin, SchoolAdmin
-        }
-
-        [HttpPut]
-        [Route("user")]
-        public void UpdateUser([FromBody]IUser user)
-        {
-            // Restricted to: Government admin, SchoolAdmin, self, parent of child
-        }
+        
 
         [HttpDelete]
         [Route("user")]

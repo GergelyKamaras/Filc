@@ -10,7 +10,7 @@ namespace Filc.Services.Interfaces
         public void RegisterTeacher(Teacher teacher, int schoolId);
         public void RegisterStudent(Student student, int schoolId);
         public void DeleteUser(string userRole, int id);
-        public void UpdateUser(IUser user);
+        
         public void UpdateLesson(int lessonId);
         public void AddStudentToClass(int StudentId, int ClassId);
         public void CreateLesson();
