@@ -1,10 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace EFDataAccessLibrary.DataAccess
 {
-    public class ESContext : DbContext
+    public class ESContext : IdentityDbContext
     {
         public ESContext(DbContextOptions options) : base(options) { }
         public DbSet<GovermentAdmin> GovermentAdmin { get; set; }
