@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class GovernmentAdminApi : Controller
@@ -32,30 +31,11 @@ namespace Filc.Controllers.Apis
             _studentService = studentService;
             _teacherService = teacherService;
         }
-        
+
         [HttpGet]
-        [Route("school")]
-        public School GetSchool(int schoolId)
+        public List<GovernmentAdmin> GetAllAdmins()
         {
-            return null;
-        }
-
-        [HttpPost]
-        [Route("school")]
-        public void AddSchool(School school)
-        {
-        }
-
-        [HttpPut]
-        [Route("school")]
-        public void UpdateSchool(School school)
-        {
-        }
-
-        [HttpDelete]
-        [Route("school")]
-        public void DeleteSchool(int schoolId)
-        {
+            return _governmentAdminService.GetAllGovernmentAdmins();
         }
     }
 }
