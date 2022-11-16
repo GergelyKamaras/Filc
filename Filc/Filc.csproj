@@ -86,8 +86,4 @@
     <ProjectReference Include="..\EFDataAccessLibrary\EFDataAccessLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Interfaces\RoleBasedInterfaces\StudentRole\" />
-  </ItemGroup>
-
 </Project>
