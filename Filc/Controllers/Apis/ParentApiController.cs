@@ -8,14 +8,14 @@ namespace Filc.Controllers.Apis
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentController : ControllerBase
+    public class ParentApiController : ControllerBase
     {
         private IParentRoleSchoolService _studentService;
         private IParentRoleSchoolService _schoolService;
         private IParentRoleSchoolService _markService;
         private IParentRoleSchoolService _parentService;
 
-        public ParentController(IParentRoleSchoolService studentService, IParentRoleSchoolService schoolService, 
+        public ParentApiController(IParentRoleSchoolService studentService, IParentRoleSchoolService schoolService, 
             IParentRoleSchoolService markService, IParentRoleSchoolService parentService)
         {
             _studentService = studentService;
