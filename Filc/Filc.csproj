@@ -88,7 +88,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Interfaces\RoleBasedInterfaces\StudentRole\" />
-    <Folder Include="Services\Interfaces\RoleBasedInterfaces\TeacherRole\" />
   </ItemGroup>
 
 </Project>
