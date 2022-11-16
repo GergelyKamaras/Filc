@@ -2,8 +2,8 @@
 
 namespace Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole
 {
-    public interface ITeacherRoleStudentService
+    public interface ITeacherRoleSchoolService
     {
-        public Student GetStudent(int id);
+        public School GetSchool(int id);
     }
 }
