@@ -1,6 +1,13 @@
-﻿namespace Filc.Services.Interfaces.EntityBasedInterfaces
+﻿using EFDataAccessLibrary.Models;
+
+namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
-    public class IStudentService
+    public interface IStudentService
     {
+        public Student GetStudent(int id);
+        public List<Student> GetAllStudents();
+        public void AddStudent(Student student);
+        public void UpdateStudent(Student student);
+        public void DeleteStudent(int id);
     }
 }
