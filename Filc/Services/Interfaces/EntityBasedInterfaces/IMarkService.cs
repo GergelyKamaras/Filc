@@ -1,8 +1,10 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
+using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
 
 namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
-    public interface IMarkService
+    public interface IMarkService : IParentRoleMarkService, IStudentRoleMarkService
     {
         public Mark GeMark(int id);
         public void AddMark(Mark mark);

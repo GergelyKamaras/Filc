@@ -1,8 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
+using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
+using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
 
 namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
-    public interface ISchoolService
+    public interface ISchoolService : IParentRoleSchoolService, IStudentRoleSchoolService, ITeacherRoleSchoolService
     {
         public School GetSchool(int id);
         public List<School> GetAllSchools();
