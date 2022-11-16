@@ -23,13 +23,5 @@ namespace Filc.Controllers.Apis
             _markService = markService;
             _parentService = parentService;
         }
-
-        [Route("/student")]
-        [HttpGet]
-        public Student GetStudent(int id)
-        {
-            return _studentService.GetStudent(id);
-        }
-
     }
 }
