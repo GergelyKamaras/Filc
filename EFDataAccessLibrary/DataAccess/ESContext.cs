@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using EFDataAccessLibrary.Models.ModelInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -6,11 +7,53 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFDataAccessLibrary.DataAccess
 {
+    
     public class ESContext : IdentityDbContext
     {
         public ESContext(DbContextOptions options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+
+            modelBuilder.Entity<IdentityUser>()
+                .Ignore(p => p.UserName)
+                .Ignore(p => p.NormalizedUserName)
+                .Ignore(p => p.NormalizedEmail)
+                .Ignore(p => p.AccessFailedCount)
+                .Ignore(p => p.ConcurrencyStamp)
+                .Ignore(p => p.SecurityStamp)
+                .Ignore(p => p.PhoneNumber)
+                .Ignore(p => p.PhoneNumberConfirmed)
+                .Ignore(p => p.LockoutEnabled)
+                .Ignore(p => p.LockoutEnd)
+                .Ignore(p => p.TwoFactorEnabled) 
+                .ToTable("Users", "Authetication");
+
+
+            modelBuilder.Entity<IdentityRole>()
+                .Ignore(p => p.ConcurrencyStamp)
+                .Ignore(p => p.NormalizedName)
+                .ToTable("Roles", "Authetication");
+
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .ToTable("UserRoles", "Authetication");
+            
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .ToTable("UserLogins", "Authetication");
+
+            modelBuilder.Entity<IdentityUserClaim<string>>()
+                .ToTable("UserClaims", "Authetication");
+            
+            modelBuilder.Entity<IdentityRoleClaim<string>>()
+                .ToTable("RoleClaims", "Authetication");
+            
+            modelBuilder.Entity<IdentityUserToken<string>>()
+                .ToTable("UserTokens", "Authetication");
+
+
+        }
 
         public DbSet<GovermentAdmin> GovermentAdmin { get; set; }
         public DbSet<School> School { get; set; }
