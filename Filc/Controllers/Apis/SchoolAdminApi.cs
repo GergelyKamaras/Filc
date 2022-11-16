@@ -5,49 +5,45 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using Filc.Services.Interfaces.EntityBasedInterfaces;
+using Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole;
 
 namespace Filc.Controllers.Apis
 {
-    [Route("api/")]
+    
+    
+    [Route("api/schooladmin")]
     [ApiController]
     public class SchoolAdminApi : ControllerBase
     {
-        // Users
-        [HttpGet]
-        [Route("user")]
-        public IUser GetUser(string userRole, int id)
+        private ILessonService _lessonService;
+        private IMarkService _markService;
+        private IParentService _parentService;
+        private ISchoolAdminRoleSchoolAdminService _schoolAdminService;
+        private ISchoolService _schoolService;
+        private IStudentService _studentService;
+        private ITeacherService _teacherService;
+
+        public SchoolAdminApi(ILessonService lessonService, IMarkService markService, IParentService parentService, 
+            ISchoolAdminRoleSchoolAdminService schoolAdminService, ISchoolService schoolService, 
+            IStudentService studentService, ITeacherService teacherService)
         {
-            // Restricted to: Self, Government admin, SchoolAdmin that matches id of school, teacher of school, parent of child
-            return null;
+            _lessonService = lessonService;
+            _markService = markService;
+            _parentService = parentService;
+            _schoolAdminService = schoolAdminService;
+            _schoolService = schoolService;
+            _studentService = studentService;
+            _teacherService = teacherService;
         }
 
-        [HttpPost]
-        [Route("user")]
-        public void AddUser([FromBody]IUser user)
-        {
-            // Restricted to: GovernmentAdmin, SchoolAdmin
-        }
-
-        [HttpPut]
-        [Route("user")]
-        public void UpdateUser([FromBody]IUser user)
-        {
-            // Restricted to: Government admin, SchoolAdmin, self, parent of child
-        }
-
-        [HttpDelete]
-        [Route("user")]
-        public void DeleteUser(string userRole, int id)
-        {
-            // Restricted to: Government admin, SchoolAdmin
-        }
+        
 
         // Lessons
         [HttpGet]
         [Route("lesson")]
         public Lesson GetLesson(int id)
         {
-            // GovernmentAdmin, SchoolAdmin and school users if User school id matches lesson school id
             return null;
         }
 
@@ -55,21 +51,18 @@ namespace Filc.Controllers.Apis
         [Route("lesson")]
         public void AddLesson([FromBody]Lesson lesson)
         {
-            // Restricted to: GovernmentAdmin, SchoolAdmin
         }
 
         [HttpPut]
         [Route("lesson")]
         public void UpdateLesson([FromBody]Lesson lesson)
         {
-            //Restricted to: GovernmentAdmin, SchoolAdmin
         }
 
         [HttpDelete]
         [Route("lesson")]
         public void DeleteLesson(int id)
         {
-            //Restricted to: GovernmentAdmin, SchoolAdmin
         }
 
         //Marks
@@ -77,7 +70,6 @@ namespace Filc.Controllers.Apis
         [Route("mark")]
         public Mark GetMark(int id)
         {
-            //Restricted to: GovernmentAdmin, SchoolAdmin, child, teacher, parent of child
             return null;
         }
 
@@ -85,21 +77,18 @@ namespace Filc.Controllers.Apis
         [Route("mark")]
         public void AddMark([FromBody]Mark mark)
         {
-            // Restricted to: Teacher, there needs to be a lesson where the child is taught by the teacher
         }
 
         [HttpPut]
         [Route("mark")]
         public void UpdateMark([FromBody]Mark mark)
         {
-            // Restricted to: Teacher, there needs to be a lesson where the child is taught by the teacher
         }
 
         [HttpDelete]
         [Route("mark")]
         public void DeleteMark(int id)
         {
-            // Restricted to: Teacher, there needs to be a lesson where the child is taught by the teacher
         }
     }
 }
