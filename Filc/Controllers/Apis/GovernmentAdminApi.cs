@@ -6,19 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [Authorize]
-    [Route("/api/governmentadmin")]
+    [ApiController]
+    [Route("api/[controller]")]
     public class GovernmentAdminApi : Controller
     {
-        private IGovernmentAdminService _governmentAdminService;
-        private ILessonService _lessonService;
-        private IMarkService _markService;
-        private IParentService _parentService;
-        private ISchoolAdminService _schoolAdminService;
-        private ISchoolService _schoolService;
-        private IStudentService _studentService;
-        private ITeacherService _teacherService;
+        private readonly IGovernmentAdminService _governmentAdminService;
+        private readonly ILessonService _lessonService;
+        private readonly IMarkService _markService;
+        private readonly IParentService _parentService;
+        private readonly ISchoolAdminService _schoolAdminService;
+        private readonly ISchoolService _schoolService;
+        private readonly IStudentService _studentService;
+        private readonly ITeacherService _teacherService;
 
-        public GovernmentAdminApi(IGovernmentAdminService governmentAdminService, ILessonService lessonService, IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService, ISchoolService schoolService, IStudentService studentService, ITeacherService teacherService)
+        public GovernmentAdminApi(IGovernmentAdminService governmentAdminService, ILessonService lessonService, 
+            IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService, 
+            ISchoolService schoolService, IStudentService studentService, ITeacherService teacherService)
         {
             _governmentAdminService = governmentAdminService;
             _lessonService = lessonService;
