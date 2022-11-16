@@ -2,6 +2,7 @@
 
 namespace Filc.Controllers.UserControllers
 {
+    [Route("/schooladmin")]
     public class SchoolAdminController : Controller
     {
         public IActionResult Index()
