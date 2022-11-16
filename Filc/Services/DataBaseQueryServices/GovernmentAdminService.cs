@@ -16,26 +16,19 @@ namespace Filc.Services.DataBaseQueryServices
         {
             return _db.GovernmentAdmin.First(x => x.Id == id);
         }
-
         public void AddGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
-            List<GovernmentAdmin> governmentAdmins = _db.GovernmentAdmin.ToList();
-            governmentAdmins.Add(governmentAdmin);
+            _db.GovernmentAdmin.Add(governmentAdmin);
             _db.SaveChanges();
         }
-
         public void RemoveGovernmentAdmin(int id)
         {
-            List<GovernmentAdmin> governmentAdmins = _db.GovernmentAdmin.ToList();
-            var admin = governmentAdmins.First(x => x.Id == id);
-            governmentAdmins.Remove(admin);
+            _db.GovernmentAdmin.Remove(_db.GovernmentAdmin.First(x => x.Id == id));
             _db.SaveChanges();
         }
         public void UpdateGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
-            List<GovernmentAdmin> governmentAdmins = _db.GovernmentAdmin.ToList();
-            var oldAdmin = governmentAdmins.First(x => x.Id == governmentAdmin.Id);
-            oldAdmin = governmentAdmin;
+            _db.GovernmentAdmin.Update(governmentAdmin);
             _db.SaveChanges();
         }
     }
