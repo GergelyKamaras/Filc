@@ -14,6 +14,7 @@ namespace Filc.Services.DataBaseQueryServices
         public void AddSchoolAdmin(SchoolAdmin schoolAdmin)
         {
             _db.SchoolAdmin.Add(schoolAdmin);
+            _db.SaveChanges();
         }
         public SchoolAdmin GetSchoolAdmin(int schoolAdminId)
         {
