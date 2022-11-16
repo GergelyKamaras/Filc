@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,9 @@ namespace EFDataAccessLibrary.DataAccess
     public class ESContext : IdentityDbContext
     {
         public ESContext(DbContextOptions options) : base(options) { }
+
+
+
         public DbSet<GovermentAdmin> GovermentAdmin { get; set; }
         public DbSet<School> School { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
