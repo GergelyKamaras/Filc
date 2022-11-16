@@ -9,7 +9,6 @@ namespace EFDataAccessLibrary.Models
         [Required]
         public int Id { get; set; }
 
-
         [Required]
         [MaxLength(40)]
         public string FirstName { get; set; }
