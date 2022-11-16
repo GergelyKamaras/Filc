@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EFDataAccessLibrary.Models
 {
-    public class GovermentAdmin : IUser
+    public class GovernmentAdmin : IUser
     {
         public int Id { get; set; }
         public string Email { get; set; }
