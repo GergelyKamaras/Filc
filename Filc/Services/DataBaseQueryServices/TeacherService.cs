@@ -29,7 +29,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
 
         public void RemoveTeacher(int id)
-        {
+    {
             _db.Teacher.Remove(_db.Teacher.First(teacher => teacher.Id == id));
             _db.SaveChanges();
         }

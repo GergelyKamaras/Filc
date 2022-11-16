@@ -34,7 +34,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
 
         public void UpdateSchool(School school)
-        {
+    {
             _db.School.Update(school);
             _db.SaveChanges();
         }
