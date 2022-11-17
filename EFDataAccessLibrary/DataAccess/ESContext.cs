@@ -18,12 +18,6 @@ namespace EFDataAccessLibrary.DataAccess
 
 
             modelBuilder.Entity<IdentityUser>()
-                .Ignore(p => p.UserName)
-                .Ignore(p => p.NormalizedUserName)
-                .Ignore(p => p.NormalizedEmail)
-                .Ignore(p => p.AccessFailedCount)
-                .Ignore(p => p.ConcurrencyStamp)
-                .Ignore(p => p.SecurityStamp)
                 .Ignore(p => p.PhoneNumber)
                 .Ignore(p => p.PhoneNumberConfirmed)
                 .Ignore(p => p.LockoutEnabled)
@@ -55,7 +49,7 @@ namespace EFDataAccessLibrary.DataAccess
 
         }
 
-        public DbSet<GovermentAdmin> GovermentAdmin { get; set; }
+        public DbSet<GovernmentAdmin> GovernmentAdmin { get; set; }
         public DbSet<School> School { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<SchoolAdmin> SchoolAdmin { get; set; }
