@@ -12,19 +12,95 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Filc</a>
+                @if (ViewData["Title"] == "Home Page" || ViewData["Title"] == "Privacy Policy")
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Filc</a>
+                } 
+                else if (ViewData["Title"] == "Student Page")
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Student" asp-action="Index">Filc</a>
+                }
+                else if (ViewData["Title"] == "Teacher Page")
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Teacher" asp-action="Index">Filc</a>
+                }
+                else if (ViewData["Title"] == "Admin Page")
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="SchoolAdmin" asp-action="Index">Filc</a>
+                }
+                else if (ViewData["Title"] == "Government Page")
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="GovAdmin" asp-action="Index">Filc</a>
+                }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (ViewData["Title"] == "Home Page" || ViewData["Title"] == "Privacy Policy")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Index">Teacher Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SchoolAdmin" asp-action="Index">Admin Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GovAdmin" asp-action="Index">Government Page</a>
+                            </li>
+                        }
+                        else if (ViewData["Title"] == "Student Page")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">My Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Grades">Grades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="TimeTable">Time Table</a>
+                            </li>
+                        }
+                        else if (ViewData["Title"] == "Teacher Page")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="Index">My Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Teacher" asp-action="GiveEvaluation">Give an Evaluation</a>
+                            </li>
+                        }
+                        else if (ViewData["Title"] == "Admin Page")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SchoolAdmin" asp-action="Index">My Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SchoolAdmin" asp-action="RegisterUser">Register a New User</a>
+                            </li>
+                        }
+                        else if (ViewData["Title"] == "Government Page")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GovAdmin" asp-action="Index">My Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GovAdmin" asp-action="RegisterSchool">Add a New School</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GovAdmin" asp-action="RegisterAdmin">Register a New School Admin</a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <partial name="_LoginPartial" />

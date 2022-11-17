@@ -1,0 +1,42 @@
+﻿@model dynamic
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+    ViewData["Title"] = "Teacher Page";
+}
+
+<div class="container">
+    <h1>Give an Evaluation</h1>
+    <form id="eval_form">
+        <label for="eval_form_class">Select a class:</label>
+        <select id="eval_form_class">
+            <option>7/A.</option>
+            <option>8/A.</option>
+        </select>
+        <label for="eval_form_subject">Select a subject:</label>
+        <select id="eval_form_subject">
+            <option>Math</option>
+            <option>Physics</option>
+        </select>
+        <label for="eval_form_student">Select a student:</label>
+        <select id="eval_form_student">
+            <option>Mark Zuckerberg</option>
+            <option>Eva Smith</option>
+            <option>Adrien Loco</option>
+            <option>etc.</option>
+        </select>
+        <label for="eval_form_grade">Select a grade:</label>
+        <select id="eval_form_grade">
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+        </select>
+        <br/>
+        <label for="eval_form_description">Description(Optional):</label>
+        <textarea id="eval_form_description"></textarea>
+        <br/>
+        <button type="submit">Finalize</button>
+    </form>
+</div>

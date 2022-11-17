@@ -1,0 +1,22 @@
+﻿@model dynamic
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+    ViewData["Title"] = "Government Page";
+}
+
+<div class="container">
+    <form id="register_admin">
+        <br/>
+        <label for="register_admin_email">Email of school admin:</label>
+        <input type="email" id="register_admin_email" placeholder="example@example.com"/>
+        <br/>
+        <label for="register_admin_firstname">First Name of school admin:</label>
+        <input type="text" id="register_admin_firstname" placeholder="John"/>
+        <br/>
+        <label for="register_admin_lastname">Last Name of school admin:</label>
+        <input type="text" id="register_admin_lastname" placeholder="Doe" />
+        <br/>
+        <button type="submit">Register</button>
+    </form>
+</div>

@@ -1,0 +1,21 @@
+﻿@model dynamic
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+    ViewData["Title"] = "Admin Page";
+}
+
+<div class="container">
+    <h1 id="name">Hi &lt;FirstName&gt; &lt;FirstName&gt;!</h1>
+    <br/>
+    <br/>
+    <h2>You are the &lt;SchoolName&gt;'s Administrator</h2>
+    <br />
+    <h3>The stats of the school are:</h3>
+    <br/>
+    <p>Number of Students: <strong>&lt;NumOfStudents&gt;</strong></p>
+    <p>Academic Average of School: <strong>&lt;SchoolAvg&gt;</strong></p>
+    <p>Number of Classes: <strong>&lt;NumOfClasses&gt;</strong></p>
+    <p>Number of Teachers: <strong>&lt;NumOfTeachers&gt;</strong></p>
+    <p>Capacity of school: <strong>&lt;NumOfUsers&gt;/&lt;MaxCapacity&gt;</strong></p>
+</div>
