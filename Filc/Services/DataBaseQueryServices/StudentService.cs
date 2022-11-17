@@ -34,7 +34,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
 
         public void DeleteStudent(int id)
-    {
+        {
             _db.Student.Remove(_db.Student.First(student => student.Id == id));
             _db.SaveChanges();
         }
