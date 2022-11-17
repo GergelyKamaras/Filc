@@ -22,6 +22,11 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.Users.First(user => user.Id == id);
         }
 
+        public IdentityUser GetUserByEmail(string email)
+        {
+            return _db.Users.First(user => user.Email == email);
+        }
+
         public void UpdateUser(IdentityUser user)
         {
             _db.Users.Update(user);
