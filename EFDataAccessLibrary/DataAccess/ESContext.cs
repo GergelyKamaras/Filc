@@ -27,8 +27,6 @@ namespace EFDataAccessLibrary.DataAccess
 
 
             modelBuilder.Entity<IdentityRole>()
-                .Ignore(p => p.ConcurrencyStamp)
-                .Ignore(p => p.NormalizedName)
                 .ToTable("Roles", "Authetication");
 
             modelBuilder.Entity<IdentityUserRole<string>>()
