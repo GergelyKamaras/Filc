@@ -18,7 +18,11 @@ builder.Services.AddDbContext<ESContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ESContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ESContext>()
+    .AddDefaultTokenProviders();
+
+
 
 // Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminService, GovernmentAdminService>();

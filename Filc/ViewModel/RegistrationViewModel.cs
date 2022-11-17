@@ -18,5 +18,9 @@ namespace Filc.ViewModel
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "Password and confirmation password do not match")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [MaxLength(30)]
+        public string Role { get; set; }
     }
 }
