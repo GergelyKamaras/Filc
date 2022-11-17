@@ -1,24 +1,31 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Filc.Services.DataBaseQueryServices
 {
     public class SchoolAdminService : ISchoolAdminService
     {
         private ESContext _db;
-        public SchoolAdminService(ESContext esContext)
+        private IUserService _userService;
+        public SchoolAdminService(ESContext esContext, IUserService userService)
         {
+            _userService = userService;
             _db = esContext;
         }
-        public void AddSchoolAdmin(SchoolAdmin schoolAdmin)
+        public void AddSchoolAdmin(SchoolAdmin schoolAdmin, string email)
         {
+            IdentityUser user = _userService.GetUserByEmail(email);
+            schoolAdmin.user = user;
             _db.SchoolAdmin.Add(schoolAdmin);
             _db.SaveChanges();
         }
         public SchoolAdmin GetSchoolAdmin(int schoolAdminId)
         {
-            return _db.SchoolAdmin.First(x => x.Id == schoolAdminId);
+            return _db.SchoolAdmin.Include(admin => admin.user)
+                .First(x => x.Id == schoolAdminId);
         }
 
         public void UpdateSchoolAdmin(SchoolAdmin schoolAdmin)
