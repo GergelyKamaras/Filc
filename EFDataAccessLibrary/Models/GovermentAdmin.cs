@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EFDataAccessLibrary.Models
 {
-    public class GovernmentAdmin : IUser
+    public class GovernmentAdmin
     {
         public int Id { get; set; }
 
