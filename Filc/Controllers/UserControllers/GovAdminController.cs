@@ -9,5 +9,11 @@ namespace Filc.Controllers.UserControllers
         {
             return View();
         }
+
+        [Route("/register-new")]
+        public IActionResult RegisterSchool()
+        {
+            return View();
+        }
     }
 }
