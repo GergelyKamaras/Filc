@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/gov")]
     public class GovernmentAdminApi : Controller
     {
         private readonly IGovernmentAdminService _governmentAdminService;
@@ -18,9 +17,9 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolService _schoolService;
         private readonly IStudentService _studentService;
         private readonly ITeacherService _teacherService;
-
-        public GovernmentAdminApi(IGovernmentAdminService governmentAdminService, ILessonService lessonService, 
-            IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService, 
+        
+        public GovernmentAdminApi(IGovernmentAdminService governmentAdminService, ILessonService lessonService,
+            IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService,
             ISchoolService schoolService, IStudentService studentService, ITeacherService teacherService)
         {
             _governmentAdminService = governmentAdminService;
@@ -32,30 +31,37 @@ namespace Filc.Controllers.Apis
             _studentService = studentService;
             _teacherService = teacherService;
         }
-        
+
         [HttpGet]
-        [Route("school")]
-        public School GetSchool(int schoolId)
+        public List<GovernmentAdmin> GetAllAdmins()
         {
-            return null;
+            return _governmentAdminService.GetAllGovernmentAdmins();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public GovernmentAdmin GetAdmin(int id)
+        {
+            return _governmentAdminService.GetGovernmentAdmin(id);
         }
 
         [HttpPost]
-        [Route("school")]
-        public void AddSchool(School school)
+        public void AddAdmin([FromBody] GovernmentAdmin admin)
         {
+            _governmentAdminService.AddGovernmentAdmin(admin);
         }
 
         [HttpPut]
-        [Route("school")]
-        public void UpdateSchool(School school)
+        public void UpdateAdmin(GovernmentAdmin admin)
         {
+            _governmentAdminService.UpdateGovernmentAdmin(admin);
         }
-
+        
         [HttpDelete]
-        [Route("school")]
-        public void DeleteSchool(int schoolId)
+        [Route("{id}")]
+        public void DeleteAdmin(int id)
         {
+            _governmentAdminService.RemoveGovernmentAdmin(id);
         }
     }
 }
