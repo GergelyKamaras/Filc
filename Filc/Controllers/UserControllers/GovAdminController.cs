@@ -16,5 +16,10 @@ namespace Filc.Controllers.UserControllers
         {
             return View();
         }
+        [Route("/admin")]
+        public IActionResult RegisterAdmin()
+        {
+            return View();
+        }
     }
 }
