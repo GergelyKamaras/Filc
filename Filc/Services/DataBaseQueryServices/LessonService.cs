@@ -17,6 +17,7 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
+                .Include(lesson => lesson.Subject)
                 .First(lesson => lesson.Id == id);
         }
 
@@ -25,6 +26,7 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
+                .Include(lesson => lesson.Subject)
                 .Where(lesson => lesson.students.Exists(student => student.Id == id)).ToList();
         }
 
@@ -33,6 +35,7 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
+                .Include(lesson => lesson.Subject)
                 .Where(lesson => lesson.Teachers.Exists(teacher => teacher.Id == id)).ToList();
         }
 
