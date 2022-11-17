@@ -1,17 +1,30 @@
-﻿@model dynamic
-
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 @{
     Layout = "../Shared/_Layout.cshtml";
     ViewData["Title"] = "Student Page";
 }
 
 <div class="container">
-    <h1 id="name">Hi &lt;FirstName&gt; &lt;FirstName&gt;!</h1>
-    <br/>
-    <br />
-    <h2 id="title" class="align-self-center">Your Basic informations:</h2>
-    <br/>
-    <p>Birth Date: <strong>&lt;BirthDate&gt;</strong></p>
-    <p>Class: <strong>&lt;ClassName&gt;</strong></p>
-    <p>Academic average: <strong>&lt;Avg&gt;</strong></p>
+
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h1 id="name">Hi @User.Identity.Name!</h1>
+
+        <br />
+        <br />
+        <h2 id="title" class="align-self-center">Your Basic information:</h2>
+        <br />
+        <p>Birth Date: <strong>07/09/2006</strong></p>
+        <p>Class: <strong>10.a</strong></p>
+        <p>Academic average: <strong>4,3</strong></p>
+    }
+    else
+    {
+        <h1>Hello User!</h1>
+        <p>Please <a asp-controller="Account" asp-action="Login">log in.</a></p>
+    }
+    
+
 </div>
