@@ -1,6 +1,7 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -20,11 +21,23 @@ namespace Filc.Services.DataBaseQueryServices
 
         public School GetSchool(int id)
         {
-            return _db.School.First(x => x.Id == id);
+            return _db.School.Include(school => school.Classes)
+                .Include(school => school.Lessons)
+                .Include(school => school.SchoolAdmin)
+                .Include(school => school.Students)
+                .Include(school => school.Subjects)
+                .Include(school => school.Teachers)
+                .First(x => x.Id == id);
         }
         public List<School> GetAllSchools()
         {
-            return _db.School.ToList();
+            return _db.School.Include(school => school.Classes)
+                .Include(school => school.Lessons)
+                .Include(school => school.SchoolAdmin)
+                .Include(school => school.Students)
+                .Include(school => school.Subjects)
+                .Include(school => school.Teachers)
+                .ToList();
         }
 
         public void RemoveSchool(int id)
