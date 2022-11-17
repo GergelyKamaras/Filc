@@ -6,7 +6,7 @@ namespace Filc.Services.Interfaces.EntityBasedInterfaces
     public interface ITeacherService : ITeacherRoleTeacherService
     {
         public Teacher GetTeacher(int id);
-        public void AddTeacher(Teacher teacher);
+        public void AddTeacher(Teacher teacher, string email);
         public void UpdateTeacher(Teacher teacher);
         public void RemoveTeacher(int id);
     }
