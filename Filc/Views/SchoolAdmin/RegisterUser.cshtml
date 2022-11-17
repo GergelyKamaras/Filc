@@ -1,0 +1,31 @@
+﻿@model dynamic
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+    ViewData["Title"] = "Admin Page";
+}
+
+<div class="container">
+    <form id="register_user">
+        <label for="register_user_role">Select the role of user:</label>
+        <select id="register_user_role">
+            <option>School Administrator</option>
+            <option>Teacher</option>
+            <option>Student</option>
+        </select>
+        <br/>
+        <label for="register_user_email">Email of user:</label>
+        <input type="email" id="register_user_email" placeholder="example@example.com"/>
+        <br/>
+        <label for="register_user_firstname">First Name of user:</label>
+        <input type="text" id="register_user_firstname" placeholder="John"/>
+        <br/>
+        <label for="register_user_lastname">Last Name of user:</label>
+        <input type="text" id="register_user_lastname" placeholder="Doe" />
+        <br/>
+        <label for="register_user_birthdate">Birthdate of user:</label>
+        <input type="date" id="register_user_birthdate"/>
+        <br/>
+        <button type="submit">Register</button>
+    </form>
+</div>
