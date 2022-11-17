@@ -2,7 +2,7 @@
 
 namespace Filc.Controllers.UserControllers
 {
-    [Route("/student")]
+    [Route("/nebulo")]
     public class StudentController : Controller
     {
         
@@ -11,13 +11,13 @@ namespace Filc.Controllers.UserControllers
             return View();
         }
 
-        [Route("/grades")]
+        [Route("grades")]
         public IActionResult Grades()
         {
             return View();
         }
 
-        [Route("/timetable")]
+        [Route("timetable")]
         public IActionResult TimeTable()
         {
             return View();

@@ -10,13 +10,12 @@ namespace Filc.Controllers.UserControllers
             return View();
         }
 
-        [Route("/register-new")]
-        [Route("/school")]
+        [Route("register-new/school")]
         public IActionResult RegisterSchool()
         {
             return View();
         }
-        [Route("/admin")]
+        [Route("register-new/admin")]
         public IActionResult RegisterAdmin()
         {
             return View();
