@@ -23,13 +23,14 @@ namespace Filc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { Email = model.Email };
+                var user = new IdentityUser { UserName=model.Email ,Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
+
                 }
                 foreach(var error in result.Errors)
                 {
