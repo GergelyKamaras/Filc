@@ -24,7 +24,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 
 
 
-builder.Services.AddTransient<UserService, UserService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 // Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminService, GovernmentAdminService>();
