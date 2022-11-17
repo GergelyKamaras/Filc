@@ -1,6 +1,7 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -13,17 +14,26 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public Lesson GetLessonById(int id)
         {
-            return _db.Lesson.First(lesson => lesson.Id == id);
+            return _db.Lesson.Include(lesson => lesson.School)
+                .Include(lesson => lesson.Teachers)
+                .Include(lesson => lesson.students)
+                .First(lesson => lesson.Id == id);
         }
 
         public List<Lesson> GetLessonByStudentId(int id)
         {
-            return _db.Lesson.Where(lesson => lesson.students.Exists(student => student.Id == id)).ToList();
+            return _db.Lesson.Include(lesson => lesson.School)
+                .Include(lesson => lesson.Teachers)
+                .Include(lesson => lesson.students)
+                .Where(lesson => lesson.students.Exists(student => student.Id == id)).ToList();
         }
 
         public List<Lesson> GetLessonsByTeacher(int id)
         {
-            return _db.Lesson.Where(lesson => lesson.Teachers.Exists(teacher => teacher.Id == id)).ToList();
+            return _db.Lesson.Include(lesson => lesson.School)
+                .Include(lesson => lesson.Teachers)
+                .Include(lesson => lesson.students)
+                .Where(lesson => lesson.Teachers.Exists(teacher => teacher.Id == id)).ToList();
         }
 
         public void AddLesson(Lesson lesson)
