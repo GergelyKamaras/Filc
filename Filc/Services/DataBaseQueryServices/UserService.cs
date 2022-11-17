@@ -12,6 +12,11 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db = esContext;
         }
+
+        public List<IdentityUser> GetAllUsers()
+        {
+            return _db.Users.ToList();
+        }
         public IdentityUser GetUserById(string id)
         {
             return _db.Users.First(user => user.Id == id);
