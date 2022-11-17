@@ -9,5 +9,11 @@ namespace Filc.Controllers.UserControllers
         {
             return View();
         }
+
+        [Route("/give-eval")]
+        public IActionResult GiveEvaluation()
+        {
+            return View();
+        }
     }
 }
