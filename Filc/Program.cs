@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ESContext>(options =>
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ESContext>();
 
-builder.Services.AddTransient<UserService, UserService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 // Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminService, GovernmentAdminService>();

@@ -1,11 +1,12 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Filc.ViewModel;
 using Microsoft.AspNetCore.Identity;
 
 namespace Filc.Services.DataBaseQueryServices
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private ESContext _db;
         public UserService(ESContext esContext)
