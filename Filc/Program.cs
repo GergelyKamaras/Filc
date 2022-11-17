@@ -2,6 +2,9 @@ using EFDataAccessLibrary.DataAccess;
 using Filc.Services.DataBaseQueryServices;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
 using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
+using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
+using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +31,23 @@ builder.Services.AddTransient<ILessonService, LessonService>();
 builder.Services.AddTransient<IMarkService, MarkService>();
 
 // Register role based query service interface implementations
+builder.Services.AddTransient<IParentRoleMarkService, MarkService>();
+builder.Services.AddTransient<IParentRoleLessonService, LessonService>();
+builder.Services.AddTransient<IParentRoleParentService, ParentService>();
+builder.Services.AddTransient<IParentRoleSchoolService, SchoolService>();
+builder.Services.AddTransient<IParentRoleStudentService, StudentService>();
 
+builder.Services.AddTransient<ISchoolAdminService, SchoolAdminService>();
+
+builder.Services.AddTransient<IStudentRoleLessonService, LessonService>();
+builder.Services.AddTransient<IStudentRoleMarkService, MarkService>();
+builder.Services.AddTransient<IStudentRoleSchoolService, SchoolService>();
+builder.Services.AddTransient<IStudentRoleStudentService, StudentService>();
+
+builder.Services.AddTransient<ITeacherRoleLessonService, LessonService>();
+builder.Services.AddTransient<ITeacherRoleSchoolService, SchoolService>();
+builder.Services.AddTransient<ITeacherRoleStudentService, StudentService>();
+builder.Services.AddTransient<ITeacherRoleTeacherService, TeacherService>();
 
 
 
