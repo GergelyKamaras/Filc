@@ -11,6 +11,7 @@ namespace Filc.Controllers.UserControllers
         }
 
         [Route("/register-new")]
+        [Route("/school")]
         public IActionResult RegisterSchool()
         {
             return View();
