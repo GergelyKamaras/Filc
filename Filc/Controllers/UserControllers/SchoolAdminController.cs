@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.UserControllers
 {
-    [Route("/schooladmin")]
     public class SchoolAdminController : Controller
     {
         public IActionResult Index()
