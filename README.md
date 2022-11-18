@@ -1,5 +1,9 @@
 # Filc
 School management system
+Acronyms:
+Fabulous interactive learning cteation
+Fast integrated learning circle
+
 
 ## Dictionary
 Class : A group of students (e.g. 8/A)
