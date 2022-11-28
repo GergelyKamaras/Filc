@@ -1,4 +1,5 @@
-﻿using EFDataAccessLibrary.Models;
+﻿using System.Diagnostics.Contracts;
+using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -143,5 +144,49 @@ namespace Filc.Controllers.Apis
         {
             _teacherService.RemoveTeacher(id);
         }
+
+        // Lessons
+        [HttpGet]
+        [Route("lessons/{id}")]
+        public Lesson GetLesson(int id)
+        {
+            return _lessonService.GetLessonById(id);
+        }
+
+        [HttpGet]
+        [Route("lessons/students/{id}")]
+        public List<Lesson> GetLessonsByStudent(int id)
+        {
+            return _lessonService.GetLessonByStudentId(id);
+        }
+
+        [HttpGet]
+        [Route("lessons/teachers/{id}")]
+        public List<Lesson> GetLessonsByTeacher(int id)
+        {
+            return _lessonService.GetLessonsByTeacher(id);
+        }
+
+        [HttpPost]
+        [Route("lessons")]
+        public void AddLesson([FromBody] Lesson lesson)
+        {
+            _lessonService.AddLesson(lesson);
+        }
+
+        [HttpPut]
+        [Route("lessons")]
+        public void UpdateLesson([FromBody] Lesson lesson)
+        {
+            _lessonService.UpdateLesson(lesson);
+        }
+
+        [HttpDelete]
+        [Route("lessons/{id}")]
+        public void DeleteLesson(int id)
+        {
+            _lessonService.DeleteLesson(id);
+        }
+
     }
 }
