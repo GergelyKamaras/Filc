@@ -7,6 +7,11 @@ using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
 using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Configuration;
+using static System.Formats.Asn1.AsnWriter;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -18,10 +23,10 @@ builder.Services.AddDbContext<ESContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ESContext>()
-    .AddDefaultTokenProviders();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+.AddEntityFrameworkStores<ESContext>()
+    .AddDefaultTokenProviders();
 
 
 builder.Services.AddTransient<IUserService, UserService>();
@@ -60,6 +65,17 @@ builder.Services.AddTransient<ITeacherRoleTeacherService, TeacherService>();
 
 
 var app = builder.Build();
+
+var services = app.Services.CreateScope().ServiceProvider;
+try
+{
+    await SeedRoles.InitRoleSeeds(services.GetRequiredService<RoleManager<IdentityRole>>());
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred while seeding the database.");
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
