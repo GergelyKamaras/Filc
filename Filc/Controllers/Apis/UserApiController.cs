@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    [Route("api/user")]
+    [Route("api/users")]
     public class UserApiController
     {
         private readonly IUserService _userService;
