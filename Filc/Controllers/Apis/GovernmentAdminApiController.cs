@@ -95,10 +95,18 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpDelete]
-        [Route("schoold/{id}")]
+        [Route("schools/{id}")]
         public void DeleteSchool(int id)
         {
             _schoolService.RemoveSchool(id);
+        }
+
+        // Teachers
+        [HttpGet]
+        [Route("teachers")]
+        public List<Teacher> GetAllTeachers()
+        {
+            return _teacherService.GetAllTeachers();
         }
     }
 }
