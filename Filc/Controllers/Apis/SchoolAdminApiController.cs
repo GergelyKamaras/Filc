@@ -8,7 +8,7 @@ namespace Filc.Controllers.Apis
 {
     [Authorize]
     [ApiController]
-    [Route("api/schooladmin")]
+    [Route("api/schooladmins")]
     public class SchoolAdminApiController : ControllerBase
     {
         private readonly ISchoolAdminRoleSchoolAdminService _schoolAdminService;
@@ -30,6 +30,25 @@ namespace Filc.Controllers.Apis
             _schoolService = schoolService;
             _studentService = studentService;
             _teacherService = teacherService;
+        }
+
+        [HttpGet]
+        [Route("schools/{id}")]
+        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int id)
+        {
+            return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
+        }
+
+        [HttpPost]
+        public void AddSchoolAdmin([FromBody] SchoolAdmin admin)
+        {
+            _schoolAdminService.AddSchoolAdmin(admin, admin.user.Email);
+        }
+
+        [HttpPut]
+        public void UpdateSchoolAdmin(SchoolAdmin admin)
+        {
+            _schoolAdminService.UpdateSchoolAdmin(admin);
         }
     }
 }
