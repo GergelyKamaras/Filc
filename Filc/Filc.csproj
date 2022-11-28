@@ -4,15 +4,31 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+	<TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+	<IsPackable>false</IsPackable>
+	<SpaRoot>ClientApp\</SpaRoot>
+	<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+	<SpaProxyServerUrl>https://localhost:44453</SpaProxyServerUrl>
+	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
   </PropertyGroup>
-
-  <ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.3" />
+	</ItemGroup>
+	
+	<ItemGroup>
+    <Content Include="obj\fil-react-app.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
     <Content Include="Properties\launchSettings.json" />
     <Content Include="Properties\serviceDependencies.json" />
     <Content Include="Properties\serviceDependencies.local.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="obj\fil-react-app.csproj.nuget.g.props" />
+    <None Include="obj\fil-react-app.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
     <None Include="wwwroot\css\site.css" />
     <None Include="wwwroot\favicon.ico" />
     <None Include="wwwroot\js\site.js" />
@@ -78,6 +94,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -111,5 +128,10 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\GovAdmin\Index.cshtml" />
   </ItemGroup>
-
+	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+		<!-- ... -->
+	</Target>
 </Project>
