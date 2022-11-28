@@ -608,7 +608,7 @@ namespace EFDataAccessLibrary.Migrations
                         .IsRequired();
 
                     b.HasOne("EFDataAccessLibrary.Models.Student", "Student")
-                        .WithMany()
+                        .WithMany("Marks")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -836,6 +836,11 @@ namespace EFDataAccessLibrary.Migrations
             modelBuilder.Entity("EFDataAccessLibrary.Models.SchoolClass", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("EFDataAccessLibrary.Models.Student", b =>
+                {
+                    b.Navigation("Marks");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Teacher", b =>

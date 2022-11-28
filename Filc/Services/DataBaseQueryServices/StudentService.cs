@@ -20,6 +20,7 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
+                .Include(student => student.Marks)
                 .First(x => x.Id == id);
         }
 
@@ -28,6 +29,7 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
+                .Include(student => student.Marks)
                 .ToList();
         }
 

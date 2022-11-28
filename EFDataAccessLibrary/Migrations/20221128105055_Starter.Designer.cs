@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDataAccessLibrary.Migrations
 {
     [DbContext(typeof(ESContext))]
-    [Migration("20221117133735_DeleteImportantIgnores")]
-    partial class DeleteImportantIgnores
+    [Migration("20221128105055_Starter")]
+    partial class Starter
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -610,7 +610,7 @@ namespace EFDataAccessLibrary.Migrations
                         .IsRequired();
 
                     b.HasOne("EFDataAccessLibrary.Models.Student", "Student")
-                        .WithMany()
+                        .WithMany("Marks")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -838,6 +838,11 @@ namespace EFDataAccessLibrary.Migrations
             modelBuilder.Entity("EFDataAccessLibrary.Models.SchoolClass", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("EFDataAccessLibrary.Models.Student", b =>
+                {
+                    b.Navigation("Marks");
                 });
 
             modelBuilder.Entity("EFDataAccessLibrary.Models.Teacher", b =>
