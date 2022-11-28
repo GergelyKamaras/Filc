@@ -53,7 +53,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPut]
-        public void UpdateGovernmentAdmin(GovernmentAdmin admin)
+        public void UpdateGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
             _governmentAdminService.UpdateGovernmentAdmin(admin);
         }
@@ -82,14 +82,14 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("schools")]
-        public void UpdateSchool(School school)
+        public void UpdateSchool([FromBody] School school)
         {
             _schoolService.UpdateSchool(school);
         }
 
         [HttpPost]
         [Route("schools")]
-        public void AddSchool(School school)
+        public void AddSchool([FromBody] School school)
         {
             _schoolService.AddSchool(school);
         }
@@ -107,6 +107,41 @@ namespace Filc.Controllers.Apis
         public List<Teacher> GetAllTeachers()
         {
             return _teacherService.GetAllTeachers();
+        }
+
+        [HttpGet]
+        [Route("teachers/{id}")]
+        public Teacher GetTeacher(int id)
+        {
+            return _teacherService.GetTeacher(id);
+        }
+
+        [HttpGet]
+        [Route("teachers/school/{id}")]
+        public List<Teacher> GetTeachersBySchool(int id)
+        {
+            return _teacherService.GetAllTeachersBySchool(id);
+        }
+
+        [HttpPost]
+        [Route("teachers")]
+        public void AddTeacher([FromBody] Teacher teacher)
+        {
+            _teacherService.AddTeacher(teacher, teacher.user.Email);
+        }
+
+        [HttpPut]
+        [Route("teachers")]
+        public void UpdateTeacher([FromBody] Teacher teacher)
+        {
+            _teacherService.UpdateTeacher(teacher);
+        }
+
+        [HttpDelete]
+        [Route("teachers/{id}")]
+        public void DeleteTeacher(int id)
+        {
+            _teacherService.RemoveTeacher(id);
         }
     }
 }
