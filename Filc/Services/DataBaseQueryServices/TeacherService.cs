@@ -2,6 +2,7 @@
 using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -16,7 +17,28 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public Teacher GetTeacher(int id)
         {
-            return _db.Teacher.First(x => x.Id == id);
+            return _db.Teacher.Include(teacher => teacher.School)
+                .Include(teacher => teacher.user)
+                .Include(teacher => teacher.Lessons)
+                .Include(teacher => teacher.Subjects)
+                .First(x => x.Id == id);
+        }
+        public List<Teacher> GetAllTeachers()
+        {
+            return _db.Teacher.Include(teacher => teacher.School)
+                .Include(teacher => teacher.user)
+                .Include(teacher => teacher.Lessons)
+                .Include(teacher => teacher.Subjects)
+                .ToList();
+        }
+        public List<Teacher> GetAllTeachersBySchool(int schoolId)
+        {
+            return _db.Teacher.Where(teacher => teacher.School.Id == schoolId)
+                .Include(teacher => teacher.School)
+                .Include(teacher => teacher.user)
+                .Include(teacher => teacher.Lessons)
+                .Include(teacher => teacher.Subjects)
+                .ToList();
         }
 
         public void AddTeacher(Teacher teacher, string email)
