@@ -128,6 +128,10 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\GovAdmin\Index.cshtml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\DataFetches\" />
+  </ItemGroup>
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
 		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
