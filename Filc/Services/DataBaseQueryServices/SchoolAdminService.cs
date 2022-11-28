@@ -22,6 +22,19 @@ namespace Filc.Services.DataBaseQueryServices
             _db.SchoolAdmin.Add(schoolAdmin);
             _db.SaveChanges();
         }
+
+        public List<SchoolAdmin> GetAllSchoolAdmins()
+        {
+            return _db.SchoolAdmin.ToList();
+        }
+
+        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
+        {
+            return _db.SchoolAdmin.Where(admin => admin.School.Id == schoolId)
+                .Include(admin => admin.user)
+                .ToList();
+        }
+
         public SchoolAdmin GetSchoolAdmin(int schoolAdminId)
         {
             return _db.SchoolAdmin.Include(admin => admin.user)
