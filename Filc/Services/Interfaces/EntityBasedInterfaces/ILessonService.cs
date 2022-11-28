@@ -7,6 +7,8 @@ namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
     public interface ILessonService : IParentRoleLessonService, IStudentRoleLessonService, ITeacherRoleLessonService
     {
+        public new Lesson GetLessonById(int id);
+        public new List<Lesson> GetLessonByStudentId(int id);
         public void AddLesson(Lesson lesson);
         public void UpdateLesson(Lesson lesson);
         public void DeleteLesson(int id);
