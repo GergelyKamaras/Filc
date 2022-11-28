@@ -22,10 +22,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ESContext>()
     .AddDefaultTokenProviders();
 
-
-
-builder.Services.AddTransient<IUserService, UserService>();
-
 builder.Services.AddTransient<IUserService, UserService>();
 
 // Register entity based query service interface implementations
