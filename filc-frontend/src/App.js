@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
+import Header from './Components/Header'
+import SignInBox from './Components/SignInBox'
+import './App.css';
 
-export default class App extends Component {
+function App() {
+
+
+    return (
+        <div className="App">
+            <Header />
+            <SignInBox />
+        </div>
+    );
+}
+
+export default App;
+
+
+/*export default class App extends Component {
     static displayName = App.name;
 
     constructor(props) {
@@ -56,4 +73,4 @@ export default class App extends Component {
         const data = await response.json();
         this.setState({ forecasts: data, loading: false });
     }
-}
+}*/
