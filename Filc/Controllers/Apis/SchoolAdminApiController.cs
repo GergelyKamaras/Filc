@@ -8,7 +8,7 @@ namespace Filc.Controllers.Apis
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/schooladmin")]
     public class SchoolAdminApiController : ControllerBase
     {
         private readonly ISchoolAdminRoleSchoolAdminService _schoolAdminService;

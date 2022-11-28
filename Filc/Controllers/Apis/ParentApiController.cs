@@ -7,7 +7,7 @@ namespace Filc.Controllers.Apis
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/parent")]
     public class ParentApiController : ControllerBase
     {
         private readonly IParentRoleStudentService _studentService;

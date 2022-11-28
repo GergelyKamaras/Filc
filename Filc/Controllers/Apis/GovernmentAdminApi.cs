@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/gov")]
-    public class GovernmentAdminApi : Controller
+    [Route("api/governmentadmin")]
+    public class GovernmentAdminApiController : Controller
     {
         private readonly IGovernmentAdminService _governmentAdminService;
         private readonly ILessonService _lessonService;
@@ -18,7 +18,7 @@ namespace Filc.Controllers.Apis
         private readonly IStudentService _studentService;
         private readonly ITeacherService _teacherService;
         
-        public GovernmentAdminApi(IGovernmentAdminService governmentAdminService, ILessonService lessonService,
+        public GovernmentAdminApiController(IGovernmentAdminService governmentAdminService, ILessonService lessonService,
             IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService,
             ISchoolService schoolService, IStudentService studentService, ITeacherService teacherService)
         {
@@ -32,6 +32,7 @@ namespace Filc.Controllers.Apis
             _teacherService = teacherService;
         }
 
+        // Government Admins
         [HttpGet]
         public List<GovernmentAdmin> GetAllAdmins()
         {

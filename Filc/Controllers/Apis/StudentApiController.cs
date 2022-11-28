@@ -6,7 +6,7 @@ namespace Filc.Controllers.Apis
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/student")]
     public class StudentApiController : ControllerBase
     {
         
