@@ -11,7 +11,9 @@ namespace Filc.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<IdentityUser> userManager
+            , SignInManager<IdentityUser> signInManager
+            , RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -31,7 +33,7 @@ namespace Filc.Controllers
             return View();
         }
         [HttpPost]
-        
+        // Centrum
         public async Task<IActionResult> Register(RegistrationViewModel model)
         {
             if (ModelState.IsValid)
@@ -39,22 +41,24 @@ namespace Filc.Controllers
                 var user = new IdentityUser { UserName=model.Email ,Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                if (await _roleManager.RoleExistsAsync(model.Role))
                 {
+                    await _userManager.AddToRoleAsync(user, model.Role);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    if(!await _roleManager.RoleExistsAsync(model.Role))
+                    if (result.Succeeded)
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(model.Role));
-                    }
-                    if(await _roleManager.RoleExistsAsync(model.Role))
-                    {
-                        await _userManager.AddToRoleAsync(user, model.Role);
-                    }
-                    
-                    return RedirectToAction("index", "home");
 
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+
+
+
+                        return RedirectToAction("index", "home");
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Role does not exist");
                 }
                 foreach(var error in result.Errors)
                 {
