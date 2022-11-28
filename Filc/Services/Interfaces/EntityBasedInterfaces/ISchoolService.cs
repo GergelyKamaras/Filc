@@ -7,6 +7,7 @@ namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
     public interface ISchoolService : IParentRoleSchoolService, IStudentRoleSchoolService, ITeacherRoleSchoolService
     {
+        public School GetSchool(int id);
         public List<School> GetAllSchools();
         public void AddSchool(School school);
         public void RemoveSchool(int id);
