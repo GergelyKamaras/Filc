@@ -188,5 +188,48 @@ namespace Filc.Controllers.Apis
             _lessonService.DeleteLesson(id);
         }
 
+        // Marks
+        [HttpGet]
+        [Route("marks/{id}")]
+        public Mark GetMark(int id)
+        {
+            return _markService.GetMark(id);
+        }
+
+        [HttpGet]
+        [Route("marks/student/{id}")]
+        public List<Mark> GetMarksByStudent(int id)
+        {
+            return _markService.GetMarksByStudent(id);
+        }
+
+        [HttpGet]
+        [Route("marks/lesson/{id}")]
+        public List<Mark> GetMarksByLesson(int id)
+        {
+            return _markService.GetMarkByLesson(id);
+        }
+
+        [HttpPost]
+        [Route("marks")]
+        public void AddMark([FromBody] Mark mark)
+        {
+            _markService.AddMark(mark);
+        }
+
+        [HttpPut]
+        [Route("marks")]
+        public void UpdateMark([FromBody] Mark mark)
+        {
+            _markService.UpdateMark(mark);
+        }
+
+        [HttpDelete]
+        [Route("marks/{id}")]
+        public void DeleteMark(int id)
+        {
+            _markService.DeleteMark(id);
+        }
+
     }
 }

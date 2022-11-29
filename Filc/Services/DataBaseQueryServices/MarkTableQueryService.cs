@@ -50,9 +50,5 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Subject).ToList();
         }
-        public List<Mark> GetMarksByLessonByStudent(int studentId, int lessonId)
-        {
-            return GetMarkByLesson(lessonId).Where(mark => mark.Student.Id == studentId).ToList();
-        }
     }
 }
