@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Filc.Controllers
 {
+    [ApiController]
+    [Route("authentication")]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -28,13 +30,15 @@ namespace Filc.Controllers
         }
 
         [HttpGet]
+
         public IActionResult Register()
         {
             return View();
         }
         [HttpPost]
+        [Route("register")]
         // Centrum
-        public async Task<IActionResult> Register(RegistrationViewModel model)
+        public async Task<RegistrationModel> Register(RegistrationModel model)
         {
             if (ModelState.IsValid)
             {
@@ -52,7 +56,7 @@ namespace Filc.Controllers
 
 
 
-                        return RedirectToAction("index", "home");
+                        return model;
 
                     }
                 }
@@ -65,7 +69,7 @@ namespace Filc.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            return View(model);
+            return model;
         }
 
         [HttpGet]
@@ -75,7 +79,7 @@ namespace Filc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
             if (ModelState.IsValid)
             {
