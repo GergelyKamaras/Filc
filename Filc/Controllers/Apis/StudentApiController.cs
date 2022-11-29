@@ -1,4 +1,4 @@
-﻿using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
+﻿using Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

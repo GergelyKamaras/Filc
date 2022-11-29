@@ -1,5 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

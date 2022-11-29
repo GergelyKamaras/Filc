@@ -1,6 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
 
-namespace Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole
+namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole
 {
     public interface ISchoolAdminServiceForSchoolAdminRole
     {

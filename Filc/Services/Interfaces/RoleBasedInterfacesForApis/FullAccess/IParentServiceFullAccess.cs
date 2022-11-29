@@ -1,7 +1,7 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
 
-namespace Filc.Services.Interfaces.EntityBasedInterfaces
+namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface IParentServiceFullAccess : IParentServiceForParentRole
     {

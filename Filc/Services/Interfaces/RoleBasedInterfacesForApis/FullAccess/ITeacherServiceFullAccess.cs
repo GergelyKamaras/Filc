@@ -1,7 +1,7 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 
-namespace Filc.Services.Interfaces.EntityBasedInterfaces
+namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface ITeacherServiceFullAccess : ITeacherServiceForTeacherRole
     {

@@ -1,5 +1,5 @@
-﻿using Filc.Services.Interfaces.EntityBasedInterfaces;
-using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
+﻿using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

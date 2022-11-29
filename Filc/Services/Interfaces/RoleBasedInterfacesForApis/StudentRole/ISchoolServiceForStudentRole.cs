@@ -1,6 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
 
-namespace Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole
+namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole
 {
     public interface ISchoolServiceForStudentRole
     {

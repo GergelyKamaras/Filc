@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Filc.Services.Interfaces.EntityBasedInterfaces
+namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface IUserServiceFullAccess
     {

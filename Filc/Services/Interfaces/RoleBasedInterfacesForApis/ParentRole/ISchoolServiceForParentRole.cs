@@ -1,6 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
 
-namespace Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole
+namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole
 {
     public interface ISchoolServiceForParentRole
     {

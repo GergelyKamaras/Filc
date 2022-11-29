@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
 using EFDataAccessLibrary.Models;
-using Filc.Services.Interfaces.EntityBasedInterfaces;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

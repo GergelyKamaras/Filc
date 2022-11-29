@@ -1,6 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
 
-namespace Filc.Services.Interfaces.EntityBasedInterfaces
+namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface IGovernmentAdminServiceFullAccess
     {

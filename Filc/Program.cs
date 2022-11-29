@@ -1,13 +1,13 @@
 using EFDataAccessLibrary.DataAccess;
 using Filc.Services.DataBaseQueryServices;
-using Filc.Services.Interfaces.EntityBasedInterfaces;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using EFDataAccessLibrary.Models;
-using Filc.Services.Interfaces.RoleBasedInterfaces.ParentRole;
-using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
-using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");

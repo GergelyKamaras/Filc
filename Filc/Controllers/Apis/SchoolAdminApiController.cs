@@ -1,7 +1,7 @@
 ﻿using EFDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
-using Filc.Services.Interfaces.EntityBasedInterfaces;
-using Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
