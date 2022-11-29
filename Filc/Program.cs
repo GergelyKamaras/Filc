@@ -7,6 +7,7 @@ using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
 using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
