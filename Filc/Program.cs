@@ -12,22 +12,28 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Configuration;
 using static System.Formats.Asn1.AsnWriter;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
 
+// add react Single page app rootpath
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "ClientApp/build";
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// Add Entity Dbcontext
 builder.Services.AddDbContext<ESContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
-
-
+// Add Role and User To Database
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 .AddEntityFrameworkStores<ESContext>()
     .AddDefaultTokenProviders();
-
 
 builder.Services.AddTransient<IUserService, UserService>();
 
@@ -66,14 +72,15 @@ builder.Services.AddTransient<ITeacherRoleTeacherService, TeacherService>();
 
 var app = builder.Build();
 
-var services = app.Services.CreateScope().ServiceProvider;
+
+var seedService = app.Services.CreateScope().ServiceProvider;
 try
 {
-    await SeedRoles.InitRoleSeeds(services.GetRequiredService<RoleManager<IdentityRole>>());
+    await SeedRoles.InitRoleSeeds(seedService.GetRequiredService<RoleManager<IdentityRole>>());
 }
 catch (Exception ex)
 {
-    var logger = services.GetRequiredService<ILogger<Program>>();
+    var logger = seedService.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occurred while seeding the database.");
 }
 
@@ -88,14 +95,24 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSpaStaticFiles();
 app.UseRouting();
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "ClientApp";
 
+    if (app.Environment.IsDevelopment())
+    {
+        spa.UseReactDevelopmentServer(npmScript: "start");
+    }
+});
 app.UseAuthorization();
 app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapFallbackToFile("index.html"); ;
 
 app.Run();
