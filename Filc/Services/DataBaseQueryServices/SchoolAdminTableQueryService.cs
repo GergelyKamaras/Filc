@@ -9,8 +9,8 @@ namespace Filc.Services.DataBaseQueryServices
     public class SchoolAdminTableQueryService : ISchoolAdminServiceFullAccess
     {
         private readonly ESContext _db;
-        private readonly IUserService _userService;
-        public SchoolAdminService(ESContext esContext, IUserService userService)
+        private readonly IUserServiceFullAccess _userService;
+        public SchoolAdminTableQueryService(ESContext esContext, IUserServiceFullAccess userService)
         {
             _userService = userService;
             _db = esContext;
@@ -66,7 +66,14 @@ namespace Filc.Services.DataBaseQueryServices
 
         public SchoolAdmin GetASchoolAdmin()
         {
-            throw new NotImplementedException();
+            return new SchoolAdmin
+            {
+                FirstName = "ads",
+                user = new IdentityUser
+                {
+                    Email = "asd@asd.hu"
+                }
+            };
         }
     }
 }
