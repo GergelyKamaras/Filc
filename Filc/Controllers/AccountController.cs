@@ -29,12 +29,7 @@ namespace Filc.Controllers
             return RedirectToAction("index", "home");
         }
 
-        [HttpGet]
 
-        public IActionResult Register()
-        {
-            return View();
-        }
         [HttpPost]
         [Route("register")]
         // Centrum
@@ -48,16 +43,10 @@ namespace Filc.Controllers
                 if (await _roleManager.RoleExistsAsync(model.Role))
                 {
                     await _userManager.AddToRoleAsync(user, model.Role);
-
                     if (result.Succeeded)
                     {
-
                         await _signInManager.SignInAsync(user, isPersistent: false);
-
-
-
                         return model;
-
                     }
                 }
                 else
@@ -70,12 +59,6 @@ namespace Filc.Controllers
                 }
             }
             return model;
-        }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
         }
 
         [HttpPost]
