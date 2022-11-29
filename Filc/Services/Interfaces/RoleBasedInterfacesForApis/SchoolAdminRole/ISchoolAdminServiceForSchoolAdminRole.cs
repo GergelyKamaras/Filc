@@ -8,7 +8,6 @@ namespace Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole
         public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId);
         public SchoolAdmin GetSchoolAdminById(int schoolAdminId);
         public void UpdateSchoolAdmin(SchoolAdmin schoolAdmin);
-
         public SchoolAdmin GetASchoolAdmin();
 
     }

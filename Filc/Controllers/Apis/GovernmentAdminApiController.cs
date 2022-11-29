@@ -295,5 +295,48 @@ namespace Filc.Controllers.Apis
         {
             _parentService.DeleteParent(id);
         }
+
+        // SchoolAdmins
+        [HttpGet]
+        [Route("schooladmins")]
+        public List<SchoolAdmin> GetAllSchoolAdmins()
+        {
+            return _schoolAdminService.GetAllSchoolAdmins();
+        }
+
+        [HttpGet]
+        [Route("schooladmins/school/{id}")]
+        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int id)
+        {
+            return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
+        }
+
+        [HttpGet]
+        [Route("schooladmins/{id}")]
+        public SchoolAdmin GetAdmin(int id)
+        {
+            return _schoolAdminService.GetSchoolAdminById(id);
+        }
+
+        [HttpPost]
+        [Route("schooladmins")]
+        public void AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        {
+            _schoolAdminService.AddSchoolAdmin(schoolAdmin);
+        }
+
+        [HttpPut]
+        [Route("schooladmins")]
+        public void UpdateSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        {
+            _schoolAdminService.UpdateSchoolAdmin(schoolAdmin);
+        }
+
+        [HttpDelete]
+        [Route("schooladmins")]
+        public void DeleteSchoolAdmin(int id)
+        {
+            _schoolAdminService.DeleteSchoolAdmin(id);
+        }
     }
 }
