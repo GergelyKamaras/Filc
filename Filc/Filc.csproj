@@ -18,7 +18,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-    <Content Include="obj\fil-react-app.csproj.nuget.dgspec.json" />
+    <Content Include="obj\filc-react-app.csproj.nuget.dgspec.json" />
     <Content Include="obj\project.assets.json" />
     <Content Include="Properties\launchSettings.json" />
     <Content Include="Properties\serviceDependencies.json" />
@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="obj\fil-react-app.csproj.nuget.g.props" />
-    <None Include="obj\fil-react-app.csproj.nuget.g.targets" />
+    <None Include="obj\filc-react-app.csproj.nuget.g.props" />
+    <None Include="obj\filc-react-app.csproj.nuget.g.targets" />
     <None Include="obj\project.nuget.cache" />
     <None Include="wwwroot\css\site.css" />
     <None Include="wwwroot\favicon.ico" />
