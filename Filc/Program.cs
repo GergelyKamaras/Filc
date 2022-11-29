@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Configuration;
-using static System.Formats.Asn1.AsnWriter;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
@@ -97,6 +96,17 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSpaStaticFiles();
 app.UseRouting();
+app.UseAuthorization();
+app.UseAuthentication();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller}/{action=Index}/{id?}");
+});
+
+app.MapFallbackToFile("index.html");
+
 app.UseSpa(spa =>
 {
     spa.Options.SourcePath = "ClientApp";
@@ -106,13 +116,5 @@ app.UseSpa(spa =>
         spa.UseReactDevelopmentServer(npmScript: "start");
     }
 });
-app.UseAuthorization();
-app.UseAuthentication();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapFallbackToFile("index.html"); ;
 
 app.Run();
