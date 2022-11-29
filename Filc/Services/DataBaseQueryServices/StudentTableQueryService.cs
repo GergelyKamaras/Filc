@@ -31,9 +31,9 @@ namespace Filc.Services.DataBaseQueryServices
                 .ToList();
         }
 
-        public void AddStudent(Student student, string email)
+        public void AddStudent(Student student)
         {
-            IdentityUser user = _userService.GetUserByEmail(email);
+            IdentityUser user = _userService.GetUserByEmail(student.user.Email);
             student.user = user;
             _db.Student.Add(student);
             _db.SaveChanges();
