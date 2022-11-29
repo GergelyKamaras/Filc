@@ -1,5 +1,5 @@
 ﻿const RegistrationFetch = async (data) => {
-    const response = await fetch('/', {
+    const response = await fetch('/api/registration', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
