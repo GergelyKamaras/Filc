@@ -8,8 +8,8 @@ namespace Filc.Controllers.Apis
     [Route("api/users")]
     public class UserApiController
     {
-        private readonly IUserService _userService;
-        public UserApiController(IUserService userService)
+        private readonly IUserServiceFullAccess _userService;
+        public UserApiController(IUserServiceFullAccess userService)
         {
             _userService = userService;
         }

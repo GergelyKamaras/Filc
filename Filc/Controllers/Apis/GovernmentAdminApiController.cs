@@ -10,18 +10,18 @@ namespace Filc.Controllers.Apis
     [Route("api/governmentadmins")]
     public class GovernmentAdminApiController : Controller
     {
-        private readonly IGovernmentAdminService _governmentAdminService;
-        private readonly ILessonService _lessonService;
-        private readonly IMarkService _markService;
-        private readonly IParentService _parentService;
-        private readonly ISchoolAdminService _schoolAdminService;
-        private readonly ISchoolService _schoolService;
-        private readonly IStudentService _studentService;
-        private readonly ITeacherService _teacherService;
+        private readonly IGovernmentAdminServiceFullAccess _governmentAdminService;
+        private readonly ILessonServiceFullAccess _lessonService;
+        private readonly IMarkServiceFullAccess _markService;
+        private readonly IParentServiceFullAccess _parentService;
+        private readonly ISchoolAdminServiceFullAccess _schoolAdminService;
+        private readonly ISchoolServiceFullAccess _schoolService;
+        private readonly IStudentServiceFullAccess _studentService;
+        private readonly ITeacherServiceFullAccess _teacherService;
         
-        public GovernmentAdminApiController(IGovernmentAdminService governmentAdminService, ILessonService lessonService,
-            IMarkService markService, IParentService parentService, ISchoolAdminService schoolAdminService,
-            ISchoolService schoolService, IStudentService studentService, ITeacherService teacherService)
+        public GovernmentAdminApiController(IGovernmentAdminServiceFullAccess governmentAdminService, ILessonServiceFullAccess lessonService,
+            IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, ISchoolAdminServiceFullAccess schoolAdminService,
+            ISchoolServiceFullAccess schoolService, IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService)
         {
             _governmentAdminService = governmentAdminService;
             _lessonService = lessonService;

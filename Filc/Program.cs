@@ -22,36 +22,36 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ESContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
 
 // Register entity based query service interface implementations
-builder.Services.AddTransient<IGovernmentAdminService, GovernmentAdminService>();
-builder.Services.AddTransient<IParentService, ParentService>();
-builder.Services.AddTransient<IStudentService, StudentService>();
-builder.Services.AddTransient<ITeacherService, TeacherService>();
-builder.Services.AddTransient<ISchoolAdminService, SchoolAdminService>();
-builder.Services.AddTransient<ISchoolService, SchoolService>();
-builder.Services.AddTransient<ILessonService, LessonService>();
-builder.Services.AddTransient<IMarkService, MarkService>();
+builder.Services.AddTransient<IGovernmentAdminServiceFullAccess, GovernmentAdminTableQueryService>();
+builder.Services.AddTransient<IParentServiceFullAccess, ParentTableQueryService>();
+builder.Services.AddTransient<IStudentServiceFullAccess, StudentTableQueryService>();
+builder.Services.AddTransient<ITeacherServiceFullAccess, TeacherTableQueryService>();
+builder.Services.AddTransient<ISchoolAdminServiceFullAccess, SchoolAdminTableQueryService>();
+builder.Services.AddTransient<ISchoolServiceFullAccess, SchoolTableQueryService>();
+builder.Services.AddTransient<ILessonServiceFullAccess, LessonTableQueryService>();
+builder.Services.AddTransient<IMarkServiceFullAccess, MarkTableQueryService>();
 
 // Register role based query service interface implementations
-builder.Services.AddTransient<IParentRoleMarkService, MarkService>();
-builder.Services.AddTransient<IParentRoleLessonService, LessonService>();
-builder.Services.AddTransient<IParentRoleParentService, ParentService>();
-builder.Services.AddTransient<IParentRoleSchoolService, SchoolService>();
-builder.Services.AddTransient<IParentRoleStudentService, StudentService>();
+builder.Services.AddTransient<IMarkServiceForParentRole, MarkTableQueryService>();
+builder.Services.AddTransient<ILessonServiceForParentRole, LessonTableQueryService>();
+builder.Services.AddTransient<IParentServiceForParentRole, ParentTableQueryService>();
+builder.Services.AddTransient<ISchoolServiceForParentRole, SchoolTableQueryService>();
+builder.Services.AddTransient<IStudentServiceForParentRole, StudentTableQueryService>();
 
-builder.Services.AddTransient<ISchoolAdminService, SchoolAdminService>();
+builder.Services.AddTransient<ISchoolAdminServiceFullAccess, SchoolAdminTableQueryService>();
 
-builder.Services.AddTransient<IStudentRoleLessonService, LessonService>();
-builder.Services.AddTransient<IStudentRoleMarkService, MarkService>();
-builder.Services.AddTransient<IStudentRoleSchoolService, SchoolService>();
-builder.Services.AddTransient<IStudentRoleStudentService, StudentService>();
+builder.Services.AddTransient<ILessonServiceForStudentRole, LessonTableQueryService>();
+builder.Services.AddTransient<IMarkServiceForStudentRole, MarkTableQueryService>();
+builder.Services.AddTransient<ISchoolServiceForStudentRole, SchoolTableQueryService>();
+builder.Services.AddTransient<IStudentServiceForStudentRole, StudentTableQueryService>();
 
-builder.Services.AddTransient<ITeacherRoleLessonService, LessonService>();
-builder.Services.AddTransient<ITeacherRoleSchoolService, SchoolService>();
-builder.Services.AddTransient<ITeacherRoleStudentService, StudentService>();
-builder.Services.AddTransient<ITeacherRoleTeacherService, TeacherService>();
+builder.Services.AddTransient<ILessonServiceForTeacherRole, LessonTableQueryService>();
+builder.Services.AddTransient<ISchoolServiceForTeacherRole, SchoolTableQueryService>();
+builder.Services.AddTransient<IStudentServiceForTeacherRole, StudentTableQueryService>();
+builder.Services.AddTransient<ITeacherServiceForTeacherRole, TeacherTableQueryService>();
 
 
 

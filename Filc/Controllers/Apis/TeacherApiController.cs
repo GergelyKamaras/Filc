@@ -11,15 +11,15 @@ namespace Filc.Controllers.Apis
     public class TeacherApiController : ControllerBase
     {
 
-        private readonly IMarkService _markService;
-        private readonly ITeacherRoleLessonService _lessonService;
-        private readonly ITeacherRoleSchoolService _schoolService;
-        private readonly ITeacherRoleStudentService _studentService;
-        private readonly ITeacherRoleTeacherService _teacherService;
+        private readonly IMarkServiceFullAccess _markService;
+        private readonly ILessonServiceForTeacherRole _lessonService;
+        private readonly ISchoolServiceForTeacherRole _schoolService;
+        private readonly IStudentServiceForTeacherRole _studentService;
+        private readonly ITeacherServiceForTeacherRole _teacherService;
 
-        public TeacherApiController(IMarkService markService, ITeacherRoleLessonService teacherRoleLessonService,
-            ITeacherRoleSchoolService teacherRoleSchoolService, ITeacherRoleStudentService teacherRoleStudentService,
-            ITeacherRoleTeacherService teacherRoleTeacherService)
+        public TeacherApiController(IMarkServiceFullAccess markService, ILessonServiceForTeacherRole teacherRoleLessonService,
+            ISchoolServiceForTeacherRole teacherRoleSchoolService, IStudentServiceForTeacherRole teacherRoleStudentService,
+            ITeacherServiceForTeacherRole teacherRoleTeacherService)
         {
             _markService = markService;
             _lessonService = teacherRoleLessonService;

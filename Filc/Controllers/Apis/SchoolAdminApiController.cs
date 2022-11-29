@@ -11,17 +11,17 @@ namespace Filc.Controllers.Apis
     [Route("api/schooladmins")]
     public class SchoolAdminApiController : ControllerBase
     {
-        private readonly ISchoolAdminRoleSchoolAdminService _schoolAdminService;
-        private readonly ILessonService _lessonService;
-        private readonly IMarkService _markService;
-        private readonly IParentService _parentService;
-        private readonly ISchoolService _schoolService;
-        private readonly IStudentService _studentService;
-        private readonly ITeacherService _teacherService;
+        private readonly ISchoolAdminServiceForSchoolAdminRole _schoolAdminService;
+        private readonly ILessonServiceFullAccess _lessonService;
+        private readonly IMarkServiceFullAccess _markService;
+        private readonly IParentServiceFullAccess _parentService;
+        private readonly ISchoolServiceFullAccess _schoolService;
+        private readonly IStudentServiceFullAccess _studentService;
+        private readonly ITeacherServiceFullAccess _teacherService;
 
-        public SchoolAdminApiController(ILessonService lessonService, IMarkService markService, IParentService parentService, 
-            ISchoolAdminRoleSchoolAdminService schoolAdminService, ISchoolService schoolService, 
-            IStudentService studentService, ITeacherService teacherService)
+        public SchoolAdminApiController(ILessonServiceFullAccess lessonService, IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, 
+            ISchoolAdminServiceForSchoolAdminRole schoolAdminService, ISchoolServiceFullAccess schoolService, 
+            IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService)
         {
             _lessonService = lessonService;
             _markService = markService;
