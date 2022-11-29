@@ -7,8 +7,8 @@ const IndexPage = () => {
         <>
             <div className="index-parent">
                 <div className="gov-news">
-                    <div>
-                        sajt
+        <div>
+            sajt
                     </div>
                      </div>
                 <div className="profile">
@@ -23,7 +23,7 @@ const IndexPage = () => {
                     sajt
                      </div>
 
-            </div>
+        </div>
         </>
     );
 };
