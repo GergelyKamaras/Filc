@@ -5,17 +5,19 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
   env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:3616';
 
 const context =  [
-  "/weatherforecast",
+    "/weatherforecast",
+    "/api",
+    "/gov"
 ];
 
 module.exports = function(app) {
-  const appProxy = createProxyMiddleware(context, {
-    target: target,
+  const appProxy = createProxyMiddleware( {
+      target: target,
     secure: false,
     headers: {
       Connection: 'Keep-Alive'
     }
   });
 
-  app.use(appProxy);
+  app.use("/kiskutya", appProxy);
 };

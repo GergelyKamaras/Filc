@@ -14,7 +14,11 @@ const AppRoutes = [
   {
     path: '/fetch-data',
     element: <FetchData />
-  }
+    },
+  {
+    path: '/api/gov',
+    
+    },
 ];
 
 export default AppRoutes;
