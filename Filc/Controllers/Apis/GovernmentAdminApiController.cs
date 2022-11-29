@@ -76,10 +76,10 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("schools/{id}")]
-        //public School GetSchool(int id)
-        //{
-        //    return _schoolService.GetSchool(id);
-        //}
+        public School GetSchool(int id)
+        {
+            return _schoolService.GetSchool(id);
+        }
 
         [HttpPut]
         [Route("schools")]
@@ -231,5 +231,40 @@ namespace Filc.Controllers.Apis
             _markService.DeleteMark(id);
         }
 
+        // Students
+        [HttpGet]
+        [Route("students")]
+        public List<Student> GetAllStudents()
+        {
+            return _studentService.GetAllStudents();
+        }
+
+        [HttpGet]
+        [Route("students/{id}")]
+        public Student GetStudent(int id)
+        {
+            return _studentService.GetStudent(id);
+        }
+
+        [HttpPost]
+        [Route("students")]
+        public void AddStudent([FromBody] Student student)
+        {
+            _studentService.AddStudent(student);
+        }
+
+        [HttpPut]
+        [Route("students")]
+        public void UpdateStudent([FromBody] Student student)
+        {
+            _studentService.UpdateStudent(student);
+        }
+
+        [HttpDelete]
+        [Route("students/{id}")]
+        public void RemoveStudent(int id)
+        {
+            _studentService.DeleteStudent(id);
+        }
     }
 }
