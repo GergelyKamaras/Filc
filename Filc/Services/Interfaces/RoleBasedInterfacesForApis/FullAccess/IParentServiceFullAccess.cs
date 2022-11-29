@@ -5,7 +5,7 @@ namespace Filc.Services.Interfaces.EntityBasedInterfaces
 {
     public interface IParentServiceFullAccess : IParentServiceForParentRole
     {
-        public void AddParent(Parent parent, string email);
+        public void AddParent(Parent parent);
         public void DeleteParent(int id);
     }
 }

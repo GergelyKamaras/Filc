@@ -266,5 +266,34 @@ namespace Filc.Controllers.Apis
         {
             _studentService.DeleteStudent(id);
         }
+
+        // Parents
+        [HttpGet]
+        [Route("parents/{id}")]
+        public Parent GetParent(int id)
+        {
+            return _parentService.GetParent(id);
+        }
+
+        [HttpPost]
+        [Route("parents")]
+        public void AddParent([FromBody] Parent parent)
+        {
+            _parentService.AddParent(parent);
+        }
+
+        [HttpPut]
+        [Route("parents")]
+        public void UpdateParent([FromBody] Parent parent)
+        {
+            _parentService.UpdateParent(parent);
+        }
+
+        [HttpDelete]
+        [Route("parents")]
+        public void DeleteParent(int id)
+        {
+            _parentService.DeleteParent(id);
+        }
     }
 }

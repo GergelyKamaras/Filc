@@ -22,9 +22,9 @@ namespace Filc.Services.DataBaseQueryServices
                 .First(parent => parent.Id == id);
         }
 
-        public void AddParent(Parent parent, string email)
+        public void AddParent(Parent parent)
         {
-            IdentityUser user = _userService.GetUserByEmail(email);
+            IdentityUser user = _userService.GetUserByEmail(parent.user.Email);
             parent.user = user;
             _db.Parent.Add(parent);
             _db.SaveChanges();
