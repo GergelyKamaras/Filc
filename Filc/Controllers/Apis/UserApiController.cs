@@ -1,14 +1,15 @@
 ﻿using Filc.Services.DataBaseQueryServices;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    [Route("api/user")]
+    [Route("api/users")]
     public class UserApiController
     {
-        private readonly UserService _userService;
-        public UserApiController(UserService userService)
+        private readonly IUserServiceFullAccess _userService;
+        public UserApiController(IUserServiceFullAccess userService)
         {
             _userService = userService;
         }

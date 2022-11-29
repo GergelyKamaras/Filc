@@ -1,29 +1,29 @@
-﻿using EFDataAccessLibrary.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics.Contracts;
+using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
-using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    
     [ApiController]
-    [Route("api/schooladmins")]
-    public class SchoolAdminApiController : ControllerBase
+    [Route("api/governmentadmins")]
+    public class GovernmentAdminApiController : Controller
     {
-        private readonly ISchoolAdminServiceForSchoolAdminRole _schoolAdminService;
+        private readonly IGovernmentAdminServiceFullAccess _governmentAdminService;
         private readonly ILessonServiceFullAccess _lessonService;
         private readonly IMarkServiceFullAccess _markService;
         private readonly IParentServiceFullAccess _parentService;
-        private readonly ISchoolServiceForSchoolAdminRole _schoolService;
+        private readonly ISchoolAdminServiceFullAccess _schoolAdminService;
+        private readonly ISchoolServiceFullAccess _schoolService;
         private readonly IStudentServiceFullAccess _studentService;
         private readonly ITeacherServiceFullAccess _teacherService;
-
-        public SchoolAdminApiController(ILessonServiceFullAccess lessonService, IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, 
-            ISchoolAdminServiceForSchoolAdminRole schoolAdminService, ISchoolServiceForSchoolAdminRole schoolService, 
-            IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService)
+        
+        public GovernmentAdminApiController(IGovernmentAdminServiceFullAccess governmentAdminService, ILessonServiceFullAccess lessonService,
+            IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, ISchoolAdminServiceFullAccess schoolAdminService,
+            ISchoolServiceFullAccess schoolService, IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService)
         {
+            _governmentAdminService = governmentAdminService;
             _lessonService = lessonService;
             _markService = markService;
             _parentService = parentService;
@@ -32,42 +32,47 @@ namespace Filc.Controllers.Apis
             _studentService = studentService;
             _teacherService = teacherService;
         }
-        //test
-        [HttpGet]
-        public SchoolAdmin GetASchoolAdmin()
-        {
-            return _schoolAdminService.GetASchoolAdmin();
-        }
 
-        // SchoolAdmins
+        // Government Admins
         [HttpGet]
-        [Route("schools/{id}/admins")]
-        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
+        public List<GovernmentAdmin> GetAllGovernmentAdmins()
         {
-            return _schoolAdminService.GetAllSchoolAdminsBySchool(schoolId);
+            return _governmentAdminService.GetAllGovernmentAdmins();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public SchoolAdmin GetSchoolAdminById(int id)
+        public GovernmentAdmin GetGovernmentAdmin(int id)
         {
-            return _schoolAdminService.GetSchoolAdminById(id);
+            return _governmentAdminService.GetGovernmentAdmin(id);
         }
 
         [HttpPost]
-        public void AddSchoolAdmin([FromBody] SchoolAdmin admin)
+        public void AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
-
-            _schoolAdminService.AddSchoolAdmin(admin);
+            _governmentAdminService.AddGovernmentAdmin(admin, admin.user.Email);
         }
 
         [HttpPut]
-        public void UpdateSchoolAdmin(SchoolAdmin admin)
+        public void UpdateGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
-            _schoolAdminService.UpdateSchoolAdmin(admin);
+            _governmentAdminService.UpdateGovernmentAdmin(admin);
+        }
+        
+        [HttpDelete]
+        [Route("{id}")]
+        public void DeleteGovernmentAdmin(int id)
+        {
+            _governmentAdminService.RemoveGovernmentAdmin(id);
         }
 
         // Schools
+        [HttpGet]
+        [Route("schools")]
+        public List<School> GetAllSchools()
+        {
+            return _schoolService.GetAllSchools();
+        }
 
         [HttpGet]
         [Route("schools/{id}")]
@@ -83,8 +88,21 @@ namespace Filc.Controllers.Apis
             _schoolService.UpdateSchool(school);
         }
 
-        // Teachers
+        [HttpPost]
+        [Route("schools")]
+        public void AddSchool([FromBody] School school)
+        {
+            _schoolService.AddSchool(school);
+        }
 
+        [HttpDelete]
+        [Route("schools/{id}")]
+        public void DeleteSchool(int id)
+        {
+            _schoolService.RemoveSchool(id);
+        }
+
+        // Teachers
         [HttpGet]
         [Route("teachers")]
         public List<Teacher> GetAllTeachers()
@@ -128,7 +146,6 @@ namespace Filc.Controllers.Apis
         }
 
         // Lessons
-
         [HttpGet]
         [Route("lessons/{id}")]
         public Lesson GetLesson(int id)
@@ -172,7 +189,6 @@ namespace Filc.Controllers.Apis
         }
 
         // Marks
-
         [HttpGet]
         [Route("marks/{id}")]
         public Mark GetMark(int id)
@@ -216,7 +232,6 @@ namespace Filc.Controllers.Apis
         }
 
         // Students
-
         [HttpGet]
         [Route("students")]
         public List<Student> GetAllStudents()
@@ -253,7 +268,6 @@ namespace Filc.Controllers.Apis
         }
 
         // Parents
-
         [HttpGet]
         [Route("parents/{id}")]
         public Parent GetParent(int id)
@@ -280,6 +294,49 @@ namespace Filc.Controllers.Apis
         public void DeleteParent(int id)
         {
             _parentService.DeleteParent(id);
+        }
+
+        // SchoolAdmins
+        [HttpGet]
+        [Route("schooladmins")]
+        public List<SchoolAdmin> GetAllSchoolAdmins()
+        {
+            return _schoolAdminService.GetAllSchoolAdmins();
+        }
+
+        [HttpGet]
+        [Route("schooladmins/school/{id}")]
+        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int id)
+        {
+            return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
+        }
+
+        [HttpGet]
+        [Route("schooladmins/{id}")]
+        public SchoolAdmin GetAdmin(int id)
+        {
+            return _schoolAdminService.GetSchoolAdminById(id);
+        }
+
+        [HttpPost]
+        [Route("schooladmins")]
+        public void AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        {
+            _schoolAdminService.AddSchoolAdmin(schoolAdmin);
+        }
+
+        [HttpPut]
+        [Route("schooladmins")]
+        public void UpdateSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        {
+            _schoolAdminService.UpdateSchoolAdmin(schoolAdmin);
+        }
+
+        [HttpDelete]
+        [Route("schooladmins")]
+        public void DeleteSchoolAdmin(int id)
+        {
+            _schoolAdminService.DeleteSchoolAdmin(id);
         }
     }
 }
