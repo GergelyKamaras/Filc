@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Configuration;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
@@ -35,8 +36,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
-
-builder.Services.AddTransient<IUserService, UserService>();
 
 // Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminServiceFullAccess, GovernmentAdminTableQueryService>();
