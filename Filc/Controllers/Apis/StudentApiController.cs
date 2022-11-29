@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
-    [Authorize]
     [ApiController]
     [Route("api/students")]
     public class StudentApiController : ControllerBase
