@@ -12,6 +12,10 @@
 	<SpaProxyServerUrl>https://localhost:44453</SpaProxyServerUrl>
 	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\components\controllers\NewFile.txt" />
+  </ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.3" />
