@@ -10,12 +10,12 @@ namespace Filc.Controllers.Apis
     public class StudentApiController : ControllerBase
     {
         
-        private readonly IStudentRoleLessonService _lessonService;
-        private readonly IStudentRoleMarkService _markService;
-        private readonly IStudentRoleSchoolService _schoolService;
-        private readonly IStudentRoleStudentService _studentService;
-        public StudentApiController(IStudentRoleLessonService lessonService, IStudentRoleMarkService markService,
-            IStudentRoleSchoolService schoolService, IStudentRoleStudentService studentService)
+        private readonly ILessonServiceForStudentRole _lessonService;
+        private readonly IMarkServiceForStudentRole _markService;
+        private readonly ISchoolServiceForStudentRole _schoolService;
+        private readonly IStudentServiceForStudentRole _studentService;
+        public StudentApiController(ILessonServiceForStudentRole lessonService, IMarkServiceForStudentRole markService,
+            ISchoolServiceForStudentRole schoolService, IStudentServiceForStudentRole studentService)
         {
             _studentService = studentService;
             _lessonService = lessonService;
