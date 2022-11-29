@@ -44,6 +44,7 @@ builder.Services.AddTransient<IStudentServiceForParentRole, StudentTableQuerySer
 
 builder.Services.AddTransient<ISchoolAdminServiceFullAccess, SchoolAdminTableQueryService>();
 builder.Services.AddTransient<ISchoolAdminServiceForSchoolAdminRole, SchoolAdminTableQueryService>();
+builder.Services.AddTransient<ISchoolServiceForSchoolAdminRole, SchoolTableQueryService>();
 
 builder.Services.AddTransient<ILessonServiceForStudentRole, LessonTableQueryService>();
 builder.Services.AddTransient<IMarkServiceForStudentRole, MarkTableQueryService>();
