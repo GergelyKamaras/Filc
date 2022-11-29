@@ -36,15 +36,13 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void AddSchoolAdmin(SchoolAdmin schoolAdmin)
         {
-
             IdentityUser user = _userService.GetUserByEmail(schoolAdmin.user.Email);
             if(user.Email != null)
             {
                 schoolAdmin.user = user;
                 _db.SchoolAdmin.Add(schoolAdmin);
                 _db.SaveChanges();
-            }
-            
+            }     
         }  
 
         public void UpdateSchoolAdmin(SchoolAdmin schoolAdmin)
@@ -57,11 +55,6 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db.SchoolAdmin.Remove(_db.SchoolAdmin.First(admin => admin.Id == schoolAdminId));
             _db.SaveChanges();
-        }
-
-        public void AddSchoolAdmin(SchoolAdmin schoolAdmin, string email)
-        {
-            throw new NotImplementedException();
         }
 
         public SchoolAdmin GetASchoolAdmin()

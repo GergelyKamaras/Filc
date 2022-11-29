@@ -56,8 +56,8 @@ namespace Filc.Controllers.Apis
         [HttpPost]
         public void AddSchoolAdmin([FromBody] SchoolAdmin admin)
         {
-            
-            _schoolAdminService.AddSchoolAdmin(admin, admin.user.Email);
+
+            _schoolAdminService.AddSchoolAdmin(admin);
         }
 
         [HttpPut]
