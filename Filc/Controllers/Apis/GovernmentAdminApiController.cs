@@ -75,10 +75,10 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("schools/{id}")]
-        public School GetSchool(int id)
-        {
-            return _schoolService.GetSchool(id);
-        }
+        //public School GetSchool(int id)
+        //{
+        //    return _schoolService.GetSchool(id);
+        //}
 
         [HttpPut]
         [Route("schools")]

@@ -7,6 +7,7 @@ using Filc.Services.Interfaces.RoleBasedInterfaces.StudentRole;
 using Filc.Services.Interfaces.RoleBasedInterfaces.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -42,6 +43,8 @@ builder.Services.AddTransient<IParentRoleSchoolService, SchoolService>();
 builder.Services.AddTransient<IParentRoleStudentService, StudentService>();
 
 builder.Services.AddTransient<ISchoolAdminService, SchoolAdminService>();
+builder.Services.AddTransient<ISchoolAdminRoleSchoolAdminService, SchoolAdminService>();
+
 
 builder.Services.AddTransient<IStudentRoleLessonService, LessonService>();
 builder.Services.AddTransient<IStudentRoleMarkService, MarkService>();

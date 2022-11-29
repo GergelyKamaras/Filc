@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Filc.Services.Interfaces.EntityBasedInterfaces;
 using Filc.Services.Interfaces.RoleBasedInterfaces.SchoolAdminRole;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Filc.Controllers.Apis
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/schooladmins")]
     public class SchoolAdminApiController : ControllerBase
@@ -31,17 +32,31 @@ namespace Filc.Controllers.Apis
             _studentService = studentService;
             _teacherService = teacherService;
         }
+        //test
+        [HttpGet]
+        public SchoolAdmin GetASchoolAdmin()
+        {
+            return _schoolAdminService.GetASchoolAdmin();
+        }
 
         [HttpGet]
-        [Route("schools/{id}")]
-        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int id)
+        [Route("schools/{id}/admins")]
+        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
         {
-            return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
+            return _schoolAdminService.GetAllSchoolAdminsBySchool(schoolId);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public SchoolAdmin GetSchoolAdminById(int id)
+        {
+            return _schoolAdminService.GetSchoolAdminById(id);
         }
 
         [HttpPost]
         public void AddSchoolAdmin([FromBody] SchoolAdmin admin)
         {
+            
             _schoolAdminService.AddSchoolAdmin(admin, admin.user.Email);
         }
 
