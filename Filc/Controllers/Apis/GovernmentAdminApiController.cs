@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
 using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.SchoolAdmin;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -299,7 +300,7 @@ namespace Filc.Controllers.Apis
         // SchoolAdmins
         [HttpGet]
         [Route("schooladmins")]
-        public List<SchoolAdmin> GetAllSchoolAdmins()
+        public List<SchoolAdminViewModel> GetAllSchoolAdmins()
         {
             return _schoolAdminService.GetAllSchoolAdmins();
         }

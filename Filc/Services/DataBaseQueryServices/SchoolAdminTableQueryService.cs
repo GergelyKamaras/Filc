@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.SchoolAdmin;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,18 +17,21 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
         }
 
-        public List<SchoolAdmin> GetAllSchoolAdmins()
+        public List<SchoolAdminViewModel> GetAllSchoolAdmins()
         {
             List<SchoolAdmin> schoolAdmins = _db.SchoolAdmin
                 .Include(admin => admin.School)
                 .Include(admin => admin.user)
                 .ToList();
-            foreach (var admin in schoolAdmins)
+            
+            List<SchoolAdminViewModel> returnList = new List<SchoolAdminViewModel>();
+
+            foreach (SchoolAdmin admin in schoolAdmins)
             {
-                admin.School.SchoolAdmin = null;
+                returnList.Add(new SchoolAdminViewModel(admin));
             }
 
-            return schoolAdmins;
+            return returnList;
         }
 
         public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
