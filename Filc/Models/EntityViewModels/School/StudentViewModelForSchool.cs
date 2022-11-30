@@ -7,7 +7,7 @@ namespace Filc.Models.EntityViewModels.School
     public class StudentViewModelForSchool
     {
         public int Id { get; set; }
-        public IdentityUser user { get; set; }
+        public ApplicationUser user { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
