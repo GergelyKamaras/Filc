@@ -43,7 +43,7 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void AddTeacher(Teacher teacher, string email)
         {
-            IdentityUser user = _userService.GetUserByEmail(email);
+            ApplicationUser user = _userService.GetUserByEmail(email);
             teacher.user = user;
             _db.Teacher.Add(teacher);
             _db.SaveChanges();
