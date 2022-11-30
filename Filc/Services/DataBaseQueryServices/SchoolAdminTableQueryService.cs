@@ -18,7 +18,16 @@ namespace Filc.Services.DataBaseQueryServices
 
         public List<SchoolAdmin> GetAllSchoolAdmins()
         {
-            return _db.SchoolAdmin.ToList();
+            List<SchoolAdmin> schoolAdmins = _db.SchoolAdmin
+                .Include(admin => admin.School)
+                .Include(admin => admin.user)
+                .ToList();
+            foreach (var admin in schoolAdmins)
+            {
+                admin.School.SchoolAdmin = null;
+            }
+
+            return schoolAdmins;
         }
 
         public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
@@ -31,6 +40,7 @@ namespace Filc.Services.DataBaseQueryServices
         public SchoolAdmin GetSchoolAdminById(int id)
         {
             return _db.SchoolAdmin.Include(admin => admin.user)
+                .Include(admin => admin.School)
                 .First(x => x.Id == id);
         }
 
