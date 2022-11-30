@@ -1,5 +1,7 @@
-﻿const RegistrationFetch = async (data) => {
-    const response = await fetch('/api/registration', {
+﻿import React from 'react'
+
+const RegistrationFetch = async (data) => {
+    const response = await fetch('https://localhost:7014/authentication/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
