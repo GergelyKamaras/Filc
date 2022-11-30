@@ -12,5 +12,15 @@ namespace Filc.Models.EntityViewModels.School
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
+
+        public TeacherViewModelForSchool(Teacher teacher)
+        {
+            Id = teacher.Id;
+            user = teacher.user;
+            FirstName = teacher.FirstName;
+            LastName = teacher.LastName;
+            BirthDate = teacher.BirthDate;
+            Address = teacher.Address;
+        }
     }
 }
