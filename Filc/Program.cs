@@ -7,15 +7,28 @@ using Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System.Configuration;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+
+var allowOrigins = builder.Configuration.GetValue<string>("AllowOrigins");
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+        policy =>
+        {
+            policy.WithOrigins(allowOrigins) // note the port is included 
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
 
 // add react Single page app rootpath
 builder.Services.AddSpaStaticFiles(configuration =>
@@ -34,6 +47,40 @@ builder.Services.AddDbContext<ESContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 .AddEntityFrameworkStores<ESContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Default Lockout settings.
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 0;
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true
+    };
+});
 
 builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
 
@@ -69,8 +116,23 @@ builder.Services.AddTransient<IStudentServiceForTeacherRole, StudentTableQuerySe
 builder.Services.AddTransient<ITeacherServiceForTeacherRole, TeacherTableQueryService>();
 
 
-
+//https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order middleware order
 var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+     app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseSpaStaticFiles();
+app.UseRouting();
+app.UseCors("MyAllowedOrigins");
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 
 var seedService = app.Services.CreateScope().ServiceProvider;
@@ -84,21 +146,9 @@ catch (Exception ex)
     logger.LogError(ex, "An error occurred while seeding the database.");
 }
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
 
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseSpaStaticFiles();
-app.UseRouting();
-app.UseAuthorization();
-app.UseAuthentication();
+
 
 app.MapControllerRoute(
     name: "default",
