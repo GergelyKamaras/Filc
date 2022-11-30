@@ -1,4 +1,5 @@
-﻿using Filc.Services.DataBaseQueryServices;
+﻿using EFDataAccessLibrary.Models;
+using Filc.Services.DataBaseQueryServices;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +16,14 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpGet]
-        public List<IdentityUser> GetAllUsers()
+        public List<ApplicationUser> GetAllUsers()
         {
             return _userService.GetAllUsers();
         }
 
         [HttpGet]
         [Route("first")]
-        public IdentityUser GetFirstUser()
+        public ApplicationUser GetFirstUser()
         {
             return _userService.GetAllUsers().First();
         }

@@ -1,7 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Filc.ViewModel;
-using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Filc.Models.JWTAuthenticationModel;
+using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 
 namespace Filc.Controllers
 {
@@ -9,68 +15,129 @@ namespace Filc.Controllers
     [Route("authentication")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _configuration;
+        private readonly IUserServiceFullAccess _userService;
 
-        public AccountController(UserManager<IdentityUser> userManager
-            , SignInManager<IdentityUser> signInManager
-            , RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<ApplicationUser> userManager
+            , SignInManager<ApplicationUser> signInManager
+            , RoleManager<IdentityRole> roleManager
+            , IConfiguration configuration,
+            IUserServiceFullAccess userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager; 
+            _roleManager = roleManager;
+            _configuration = configuration;
+            _userService = userService;
         }
 
         [HttpPost]
+        [Route("/logout")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("index", "home");
+            return Ok(new JWTAuthenticationResponse
+            {
+                Status = "Success",
+                Message = "You Logged out!"
+            });
         }
 
 
         [HttpPost]
         [Route("register")]
         // Centrum
-        public async Task<RegistrationModel> Register(RegistrationModel model)
+        public async Task<IActionResult> Register(RegistrationModel model)
         {
-            if (ModelState.IsValid)
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
+            if (userExists != null)
             {
-                var user = new IdentityUser { UserName=model.Email ,Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (await _roleManager.RoleExistsAsync(model.Role))
-                {
-                    await _userManager.AddToRoleAsync(user, model.Role);
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return model;
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Role does not exist");
-                }
-                foreach(var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = "User already exists!" });
             }
-            return model;
+
+            ApplicationUser user = new ()
+            { 
+                UserName=model.Email,
+                Email = model.Email,
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   new JWTAuthenticationResponse { Status = "Error", Message = "User creation failed! Please check user details and try again" });
+            }
+
+            if (await _roleManager.RoleExistsAsync(model.Role))
+            {
+                await _userManager.AddToRoleAsync(user, model.Role);
+
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   new JWTAuthenticationResponse { Status = "Error", Message = "The spevified Role is not valid" });
+            }
+
+            return Ok(new JWTAuthenticationResponse 
+            { 
+                Status = "Success",
+                Message = "User created successfully!"
+            });
+        }
+
+        [HttpGet]
+        [Route("/login")]
+        public string Login([FromBody] string email)
+        {
+            return _userService.GetSaltByEmail(email);
         }
 
         [HttpPost]
+        [Route("/login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                
+
+                var userRoles = await _userManager.GetRolesAsync(user);
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+                foreach(var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+                var token = GetToken(authClaims);
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = token.ValidTo
+                });
             }
-            throw new NotImplementedException();
+            return Unauthorized();
+
         }
 
+        private JwtSecurityToken GetToken(List<Claim> authClaims)
+        {
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:ValidIssuer"],
+                audience: _configuration["JWT:ValidAudience"],
+                expires: DateTime.Now.AddHours(3),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                );
+
+            return token;
+        }
     }
 }

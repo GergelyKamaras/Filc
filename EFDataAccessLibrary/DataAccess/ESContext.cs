@@ -3,12 +3,12 @@ using EFDataAccessLibrary.Models.ModelInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using System.Runtime.CompilerServices;
 
 namespace EFDataAccessLibrary.DataAccess
 {
     
-    public class ESContext : IdentityDbContext
+    public class ESContext : IdentityDbContext<ApplicationUser>
     {
         public ESContext(DbContextOptions options) : base(options) { }
 
@@ -16,13 +16,12 @@ namespace EFDataAccessLibrary.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-
-            modelBuilder.Entity<IdentityUser>()
-                .Ignore(p => p.PhoneNumber)
+            modelBuilder.Entity<ApplicationUser>()
                 .Ignore(p => p.PhoneNumberConfirmed)
+                .Ignore(p => p.PhoneNumber)
                 .Ignore(p => p.LockoutEnabled)
                 .Ignore(p => p.LockoutEnd)
-                .Ignore(p => p.TwoFactorEnabled) 
+                .Ignore(p => p.TwoFactorEnabled)
                 .ToTable("Users", "Authetication");
 
 

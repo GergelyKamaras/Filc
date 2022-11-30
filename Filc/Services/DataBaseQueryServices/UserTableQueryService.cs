@@ -13,19 +13,23 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db = esContext;
         }
-        public List<IdentityUser> GetAllUsers()
+        public List<ApplicationUser> GetAllUsers()
         {
             return _db.Users.ToList();
         }
-        public IdentityUser GetUserById(string id)
+        public ApplicationUser GetUserById(string id)
         {
             return _db.Users.First(user => user.Id == id);
         }
-        public IdentityUser GetUserByEmail(string email)
+        public ApplicationUser GetUserByEmail(string email)
         {
             return _db.Users.First(user => user.Email == email);
         }
-        public void UpdateUser(IdentityUser user)
+        public string GetSaltByEmail(string email)
+        {
+            return _db.Users.First(user => user.Email == email).Salt;
+        }
+        public void UpdateUser(ApplicationUser user)
         {
             _db.Users.Update(user);
             _db.SaveChanges();

@@ -22,5 +22,9 @@ namespace Filc.ViewModel
         [Required]
         [MaxLength(30)]
         public string Role { get; set; }
+
+        [Required]
+        [MaxLength(200)]
+        public string Salt { get; set; }
     }
 }

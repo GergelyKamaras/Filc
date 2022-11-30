@@ -28,7 +28,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public void AddGovernmentAdmin(GovernmentAdmin governmentAdmin, string email)
         {
-            IdentityUser user = _userService.GetUserByEmail(email);
+            ApplicationUser user = _userService.GetUserByEmail(email);
             governmentAdmin.user = user;
             _db.GovernmentAdmin.Add(governmentAdmin);
             _db.SaveChanges();

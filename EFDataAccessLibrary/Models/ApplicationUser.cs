@@ -1,5 +1,4 @@
-﻿using EFDataAccessLibrary.Models.ModelInterfaces;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace EFDataAccessLibrary.Models
 {
-    public class GovernmentAdmin
+    public class ApplicationUser : IdentityUser
     {
-        public int Id { get; set; }
-
         [Required]
-        public ApplicationUser user { get; set; }        
+        [MaxLength(200)]
+        public string Salt { get; set; }
     }
 }
