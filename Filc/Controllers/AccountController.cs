@@ -74,6 +74,7 @@ namespace Filc.Controllers
             if (await _roleManager.RoleExistsAsync(model.Role))
             {
                 await _userManager.AddToRoleAsync(user, model.Role);
+
             }
             else
             {
@@ -102,6 +103,7 @@ namespace Filc.Controllers
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
+
                 var userRoles = await _userManager.GetRolesAsync(user);
                 var authClaims = new List<Claim>
                 {
@@ -120,7 +122,7 @@ namespace Filc.Controllers
                 });
             }
             return Unauthorized();
-        
+
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
