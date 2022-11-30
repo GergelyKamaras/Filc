@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/*Routes available to all users*/}
           <Route path="" element={<SignInBox />} />
-          <Route path="Unauthorized" element={<Unauthorized />}
+          <Route path="Unauthorized" element={<Unauthorized />} />
 
           {/*TODO: Routes available to Students*/}
           <Route element={<RequireAuth allowedRoles={["Student"]} />}>
