@@ -8,11 +8,15 @@ using System.Text;
 using Filc.Models.JWTAuthenticationModel;
 using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace Filc.Controllers
 {
     [ApiController]
     [Route("authentication")]
+    [AllowAnonymous]
+    [EnableCors]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -50,7 +54,7 @@ namespace Filc.Controllers
         [HttpPost]
         [Route("register")]
         // Centrum
-        public async Task<IActionResult> Register(RegistrationModel model)
+        public async Task<Object> Register(RegistrationModel model)
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
@@ -63,6 +67,7 @@ namespace Filc.Controllers
             { 
                 UserName=model.Email,
                 Email = model.Email,
+                Salt = model.Salt,
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
@@ -79,7 +84,7 @@ namespace Filc.Controllers
             else
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                   new JWTAuthenticationResponse { Status = "Error", Message = "The spevified Role is not valid" });
+                   new JWTAuthenticationResponse { Status = "Error", Message = "The specified Role is not valid" });
             }
 
             return Ok(new JWTAuthenticationResponse 
