@@ -1,0 +1,38 @@
+
+body{
+    background-color: aliceblue;
+}
+
+
+.index-parent{
+    
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.1fr 2fr 1fr 0.1fr;
+    grid-template-rows: 0.1fr repeat(2, 1fr) 0.1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.gov-news{
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.profile{
+    grid-area: 2 / 3 / 3 / 4;
+}
+
+.profile-inner{
+    height: 600px;
+    width: 600px;
+    
+}
+
+.school-news{
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.profile-functs{
+    grid-area: 3 / 3 / 4 / 4;
+}

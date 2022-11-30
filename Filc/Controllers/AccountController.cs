@@ -29,12 +29,7 @@ namespace Filc.Controllers
             return RedirectToAction("index", "home");
         }
 
-        [HttpGet]
 
-        public IActionResult Register()
-        {
-            return View();
-        }
         [HttpPost]
         [Route("register")]
         // Centrum
@@ -48,16 +43,10 @@ namespace Filc.Controllers
                 if (await _roleManager.RoleExistsAsync(model.Role))
                 {
                     await _userManager.AddToRoleAsync(user, model.Role);
-
                     if (result.Succeeded)
                     {
-
                         await _signInManager.SignInAsync(user, isPersistent: false);
-
-
-
                         return model;
-
                     }
                 }
                 else
@@ -72,27 +61,14 @@ namespace Filc.Controllers
             return model;
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            if (ModelState.IsValid)
+            var user = await _userManager.FindByNameAsync(model.Email);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("index", "home");
-                }
-                
-                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
-                
+
             }
-            return View(model);
         
         }
 

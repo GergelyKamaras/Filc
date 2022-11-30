@@ -1,0 +1,80 @@
+.profile{
+    height: 600px;
+    width: 500px;
+    border: 1px solid;
+    border-radius: 2%;
+    box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.88);
+    -webkit-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.88);
+    -moz-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.88);
+}
+.profile-top{
+    height: 150px;
+    display: flex;
+}
+.profile-details{
+    height: 300px;
+}
+.profile-footer{
+    height: 150px;
+}
+
+.profile-pic{
+    display: inline;
+    height: 125px;
+    width: 125px;
+    margin-left: 25px;
+    margin-top: 25px;
+    border-radius: 2px;
+    text-align: center;
+    justify-items: center;
+    box-shadow: inset 5px 5px 4px #d9d9d9,
+            inset -5px -5px 4px #e7e7e7;
+}
+
+.not-logged-text{
+    display: inline;
+    margin-top: 65px;
+    margin-left: 30px;
+    font-size: 24px;
+}
+
+.login-btn{
+    float: right;
+    margin-top: 85px;
+    margin-right: 35px;
+    background-color: #0095ff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.15385;
+    outline: none;
+    padding: 8px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.login-btn:hover,
+.login-btn:focus {
+  background-color: #07c;
+}
+
+.login-btn:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.login-btn:active {
+  background-color: #0064bd;
+  box-shadow: none;
+}
