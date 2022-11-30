@@ -9,7 +9,16 @@ function App() {
     return (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="" element={<SignInBox /> } />
+          {/*Routes available to all users*/}
+          <Route path="" element={<SignInBox />} />
+
+          {/*TODO: Routes available to Students*/}
+
+          {/*TODO: Routes available to Teachers*/}
+
+          {/*TODO: Routes available to SchoolAdmins*/}
+
+          {/*TODO: Routes available to GovAdmins*/}
         </Route>
       </Routes>
     );
