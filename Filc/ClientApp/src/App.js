@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
 import Header from './components/Header'
 import SignInBox from './components/SignInBox'
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
 
 function App() {
 
 
     return (
-        <div className="App">
-            <Header />
-            <SignInBox />
-        </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="" element={<SignInBox /> } />
+        </Route>
+      </Routes>
     );
 }
 
