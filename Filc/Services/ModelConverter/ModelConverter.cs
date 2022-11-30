@@ -7,15 +7,15 @@ namespace Filc.Services.ModelConverter
     {
         public static List<SchoolAdminViewModel> MapSchoolAdminToSchoolAdminViewModel(List<SchoolAdmin> schoolAdmin)
         {
-            List<SchoolAdminViewModel> returnList = new List<SchoolAdminViewModel>();
+            List<SchoolAdminViewModel> schoolAdminList = new List<SchoolAdminViewModel>();
 
             foreach (SchoolAdmin admin in schoolAdmin)
             {
-                returnList.Add(new SchoolAdminViewModel(admin));
+                schoolAdminList.Add(new SchoolAdminViewModel(admin));
             }
 
-            return returnList;
+            return schoolAdminList;
         }
-        
+
     }
 }

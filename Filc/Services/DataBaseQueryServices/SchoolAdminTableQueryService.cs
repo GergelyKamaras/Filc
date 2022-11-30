@@ -27,19 +27,23 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapSchoolAdminToSchoolAdminViewModel(schoolAdmins);
         }
 
-        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
+        public List<SchoolAdminViewModel> GetAllSchoolAdminsBySchool(int schoolId)
         {
-            return _db.SchoolAdmin.Where(admin => admin.School.Id == schoolId)
+            List<SchoolAdmin> schoolAdmins =  _db.SchoolAdmin.Where(admin => admin.School.Id == schoolId)
                 .Include(admin => admin.user)
                 .Include(admin => admin.School)
                 .ToList();
+
+            return ModelConverter.ModelConverter.MapSchoolAdminToSchoolAdminViewModel(schoolAdmins);
         }
 
-        public SchoolAdmin GetSchoolAdminById(int id)
+        public SchoolAdminViewModel GetSchoolAdminById(int id)
         {
-            return _db.SchoolAdmin.Include(admin => admin.user)
+            SchoolAdmin schoolAdmin = _db.SchoolAdmin.Include(admin => admin.user)
                 .Include(admin => admin.School)
                 .First(x => x.Id == id);
+
+            return new SchoolAdminViewModel(schoolAdmin);
         }
 
         public void AddSchoolAdmin(SchoolAdmin schoolAdmin)

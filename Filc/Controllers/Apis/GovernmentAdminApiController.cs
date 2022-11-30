@@ -307,14 +307,14 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("schooladmins/school/{id}")]
-        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int id)
+        public List<SchoolAdminViewModel> GetAllSchoolAdminsBySchool(int id)
         {
             return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
         }
 
         [HttpGet]
         [Route("schooladmins/{id}")]
-        public SchoolAdmin GetAdmin(int id)
+        public SchoolAdminViewModel GetAdmin(int id)
         {
             return _schoolAdminService.GetSchoolAdminById(id);
         }
