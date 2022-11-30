@@ -1,8 +1,7 @@
-import Header from './components/Header'
 import SignInBox from './components/SignInBox'
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
 
 function App() {
 
