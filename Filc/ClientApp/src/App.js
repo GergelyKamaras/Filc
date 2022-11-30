@@ -2,6 +2,7 @@ import SignInBox from './components/SignInBox'
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
+import RequireAuth from './components/RequireAuth';
 
 function App() {
 
@@ -13,12 +14,20 @@ function App() {
           <Route path="" element={<SignInBox />} />
 
           {/*TODO: Routes available to Students*/}
+          <Route element={<RequireAuth allowedRoles={["Student"]} />}>
+          </Route>
 
           {/*TODO: Routes available to Teachers*/}
+          <Route element={<RequireAuth allowedRoles={["Teacher"]} />}>
+          </Route>
 
           {/*TODO: Routes available to SchoolAdmins*/}
+          <Route element={<RequireAuth allowedRoles={["SchoolAdmin"]} />}>
+          </Route>
 
           {/*TODO: Routes available to GovAdmins*/}
+          <Route element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
+          </Route>
         </Route>
       </Routes>
     );
