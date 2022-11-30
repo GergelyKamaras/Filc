@@ -29,7 +29,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        public void AddUser([FromBody] IdentityUser user)
+        public void AddUser([FromBody] ApplicationUser user)
         {
             _userService.AddUser(user);
         }
