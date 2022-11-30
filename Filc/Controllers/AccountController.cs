@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Filc.Models.JWTAuthenticationModel;
 
 namespace Filc.Controllers
 {
@@ -29,62 +30,64 @@ namespace Filc.Controllers
         }
 
         [HttpPost]
+        [Route("/logout")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
         }
 
-        [HttpGet]
 
-        public IActionResult Register()
-        {
-            return View();
-        }
         [HttpPost]
         [Route("register")]
         // Centrum
-        public async Task<RegistrationModel> Register(RegistrationModel model)
+        public async Task<IActionResult> Register(RegistrationModel model)
         {
-            if (ModelState.IsValid)
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
+            if (userExists != null)
             {
-                var user = new IdentityUser { UserName=model.Email ,Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (await _roleManager.RoleExistsAsync(model.Role))
-                {
-                    await _userManager.AddToRoleAsync(user, model.Role);
-
-                    if (result.Succeeded)
-                    {
-
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-
-
-
-                        return model;
-
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Role does not exist");
-                }
-                foreach(var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = "User already exists!" });
             }
-            return model;
+
+            IdentityUser user = new ()
+            { 
+                UserName=model.Email,
+                Email = model.Email,
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   new JWTAuthenticationResponse { Status = "Error", Message = "User creation failed! Please check user details and try again" });
+            }
+
+            if (await _roleManager.RoleExistsAsync(model.Role))
+            {
+                await _userManager.AddToRoleAsync(user, model.Role);
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   new JWTAuthenticationResponse { Status = "Error", Message = "The spevified Role is not valid" });
+            }
+
+            return Ok(new JWTAuthenticationResponse 
+            { 
+                Status = "Success",
+                Message = "User created successfully!"
+            });
         }
 
         [HttpGet]
+        [Route("/login")]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [Route("/login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
