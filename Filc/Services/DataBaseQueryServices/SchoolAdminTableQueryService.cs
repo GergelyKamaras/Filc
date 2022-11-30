@@ -4,6 +4,7 @@ using Filc.Models.EntityViewModels.SchoolAdmin;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Filc.Services.ModelConverter;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -23,21 +24,14 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(admin => admin.School)
                 .Include(admin => admin.user)
                 .ToList();
-            
-            List<SchoolAdminViewModel> returnList = new List<SchoolAdminViewModel>();
-
-            foreach (SchoolAdmin admin in schoolAdmins)
-            {
-                returnList.Add(new SchoolAdminViewModel(admin));
-            }
-
-            return returnList;
+            return ModelConverter.ModelConverter.MapSchoolAdminToSchoolAdminViewModel(schoolAdmins);
         }
 
         public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
         {
             return _db.SchoolAdmin.Where(admin => admin.School.Id == schoolId)
                 .Include(admin => admin.user)
+                .Include(admin => admin.School)
                 .ToList();
         }
 
