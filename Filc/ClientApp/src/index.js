@@ -10,7 +10,10 @@ const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
-  <BrowserRouter basename={baseUrl}>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/*" element={<App />} />
+    </Routes>
     <App />
   </BrowserRouter>);
 
