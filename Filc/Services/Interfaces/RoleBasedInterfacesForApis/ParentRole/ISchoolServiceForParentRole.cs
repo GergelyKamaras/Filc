@@ -1,9 +1,10 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.School;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole
 {
     public interface ISchoolServiceForParentRole
     {
-        public School GetSchool(int id);
+        public SchoolViewModel GetSchool(int id);
     }
 }
