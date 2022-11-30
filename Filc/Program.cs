@@ -31,7 +31,7 @@ builder.Services.AddDbContext<ESContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 // Add Role and User To Database
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 .AddEntityFrameworkStores<ESContext>()
     .AddDefaultTokenProviders();
 

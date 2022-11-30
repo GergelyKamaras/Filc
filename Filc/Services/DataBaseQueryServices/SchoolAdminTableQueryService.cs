@@ -48,7 +48,7 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void AddSchoolAdmin(SchoolAdmin schoolAdmin)
         {
-            IdentityUser user = _userService.GetUserByEmail(schoolAdmin.user.Email);
+            ApplicationUser user = _userService.GetUserByEmail(schoolAdmin.user.Email);
             schoolAdmin.School = _db.School.First(school => school.Id == schoolAdmin.School.Id);
             if(user.Email != null)
             {
@@ -75,7 +75,7 @@ namespace Filc.Services.DataBaseQueryServices
             return new SchoolAdmin
             {
                 FirstName = "ads",
-                user = new IdentityUser
+                user = new ApplicationUser
                 {
                     Email = "asd@asd.hu"
                 }
