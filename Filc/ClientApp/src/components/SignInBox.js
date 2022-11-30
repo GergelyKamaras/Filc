@@ -1,45 +1,63 @@
 ﻿import RegistrationFetch from "../components/controllers/RegistrationFetch"
-import { useState } from 'react'
+import GetHashedPasswordFetch from "../components/controllers/GetHashedPasswordFetch"
+import LoginApiFetch from "../components/controllers/LoginApiFetch"
+import bcrypt from 'bcryptjs'
+import { useRef } from 'react'
+import React from 'react'
 
 
 const SignInBox = () => {
-    const [emailState, setEmailState] = useState("");
-    const [passwordState, setPasswordState] = useState("");
+    const emailInputRef = useRef();
+    const passwordInputRef = useRef();
 
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        if (id === "Email") {
-            setEmailState(value);
-        }
-        if (id === "Password") {
-            setPasswordState(value);
-        }
+    const handleRegistration = (e) => {
+        e.preventDefault();
+
+        const salt = bcrypt.genSaltSync(10);
+
+        const email = emailInputRef.current.value;
+        const password = passwordInputRef.current.value;
+        const hashedPassword = bcrypt.hashSync(password, salt);
+
+        var userData = {};
+        userData["Email"] = email;
+        userData["Username"] = email;
+        userData["Password"] = hashedPassword;
+        userData["salt"] = salt;
+     
+        var json = JSON.stringify(userData);
+        console.log(userData);
+        RegistrationFetch(json);
+
+        window.localStorage.setItem('login', JSON.stringify({ email, hashedPassword })); // load into session
     }
 
-  const SendUser = (e) => {
-      e.preventDefault();
+    const handleLogin = (e) => {
+        e.preventDefault();
 
-      var userData = {};
-      userData["Email"] = emailState;
-      userData["Password"] = passwordState;
-     
-      var json = JSON.stringify(userData);
-      console.log(userData);
-      RegistrationFetch(json);
+        var data = {};
+        data["Email"] = emailInputRef;
+        data["Username"] = emailInputRef;
+       
+        var salt = GetHashedPasswordFetch(data);
+        const hashedPassword = bcrypt.hashSync(passwordInputRef, salt)
+        data["Password"] = hashedPassword;
+
+        LoginApiFetch(data);
     }
 
     return (
         <div>
-            <h3>Sign In</h3>
+            <h3>Registration/Sign In</h3>
             <div className="col-md-12">
-                <form method="POST" action="/api/registration" onSubmit={SendUser}>
+                <form>
                     <div className="form-group">
                         <label htmlFor="Email">Email</label>
-                        <input value={emailState} onChange={(e)=>handleInputChange(e)} id="Email" className="form-control" />
+                        <input ref={emailInputRef} id="Email" type="email" className="form-control" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="Password">Password</label>
-                        <input value={passwordState} onChange={(e) => handleInputChange(e)} id="Password" className="form-control" />
+                        <input ref={passwordInputRef} id="Password" type="password" className="form-control" />
                     </div>
                     {/*<div className="form-group">*/}
                     {/*    <div className="checkbox">*/}
@@ -47,7 +65,10 @@ const SignInBox = () => {
                     {/*        <input id="RememberMe" type="checkbox" />*/}
                     {/*    </div>*/}
                     {/*</div>*/}
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-primary"
+                        onClick={handleRegistration}>Register</button>
+                    <button type="submit" className="btn btn-primary"
+                        onClick={handleLogin}>Login</button>
                 </form>
             </div>
         </div>
