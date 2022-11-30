@@ -6,7 +6,7 @@ namespace Filc.Models.EntityViewModels.SchoolAdmin
 {
     public class SchoolViewModelForSchoolAdminViewModel
     {
-        public SchoolViewModelForSchoolAdminViewModel(School school)
+        public SchoolViewModelForSchoolAdminViewModel(EFDataAccessLibrary.Models.School school)
         {
             Id = school.Id;
             Name = school.Name;
