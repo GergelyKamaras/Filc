@@ -19,15 +19,18 @@ const SignInBox = () => {
         const password = passwordInputRef.current.value;
         const hashedPassword = bcrypt.hashSync(password, salt);
 
-        var userData = {};
-        userData["Email"] = email;
-        userData["Username"] = email;
-        userData["Password"] = hashedPassword;
-        userData["salt"] = salt;
+        var userData = {
+            Email: email,
+            Username: email,
+            Password: hashedPassword,
+            Salt: salt,
+            Role: "SchoolAdmin"
+        };
+        
      
-        var json = JSON.stringify(userData);
+        
         console.log(userData);
-        RegistrationFetch(json);
+        RegistrationFetch(userData);
 
         window.localStorage.setItem('login', JSON.stringify({ email, hashedPassword })); // load into session
     }
