@@ -7,15 +7,22 @@ using Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System.Configuration;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7014") // note the port is included 
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 // add react Single page app rootpath
 builder.Services.AddSpaStaticFiles(configuration =>
@@ -68,10 +75,7 @@ builder.Services.AddTransient<ISchoolServiceForTeacherRole, SchoolTableQueryServ
 builder.Services.AddTransient<IStudentServiceForTeacherRole, StudentTableQueryService>();
 builder.Services.AddTransient<ITeacherServiceForTeacherRole, TeacherTableQueryService>();
 
-
-
 var app = builder.Build();
-
 
 var seedService = app.Services.CreateScope().ServiceProvider;
 try
@@ -99,6 +103,7 @@ app.UseSpaStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
+app.UseCors("MyAllowedOrigins");
 
 app.MapControllerRoute(
     name: "default",
