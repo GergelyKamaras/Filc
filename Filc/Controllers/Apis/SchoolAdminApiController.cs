@@ -1,9 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.SchoolAdmin;
 using Microsoft.AspNetCore.Mvc;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Filc.Models.EntityViewModels.School;
 
 namespace Filc.Controllers.Apis
 {
@@ -42,14 +44,14 @@ namespace Filc.Controllers.Apis
         // SchoolAdmins
         [HttpGet]
         [Route("schools/{id}/admins")]
-        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
+        public List<SchoolAdminViewModel> GetAllSchoolAdminsBySchool(int schoolId)
         {
             return _schoolAdminService.GetAllSchoolAdminsBySchool(schoolId);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public SchoolAdmin GetSchoolAdminById(int id)
+        public SchoolAdminViewModel GetSchoolAdminById(int id)
         {
             return _schoolAdminService.GetSchoolAdminById(id);
         }
@@ -71,7 +73,7 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("schools/{id}")]
-        public School GetSchool(int id)
+        public SchoolViewModel GetSchool(int id)
         {
             return _schoolService.GetSchool(id);
         }

@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.School;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace Filc.Controllers.Apis
         // Schools
         [HttpGet]
         [Route("schools/{id}")]
-        public School GetSchool(int id)
+        public SchoolViewModel GetSchool(int id)
         {
             return _schoolService.GetSchool(id);
         }

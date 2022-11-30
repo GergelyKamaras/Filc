@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.School;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,25 +20,28 @@ namespace Filc.Services.DataBaseQueryServices
             _db.SaveChanges();
         }
 
-        public School GetSchool(int id)
+        public SchoolViewModel GetSchool(int id)
         {
-            return _db.School.Include(school => school.Classes)
+            School school = _db.School.Include(school => school.Classes)
                 .Include(school => school.Lessons)
                 .Include(school => school.SchoolAdmin)
                 .Include(school => school.Students)
                 .Include(school => school.Subjects)
                 .Include(school => school.Teachers)
                 .First(x => x.Id == id);
+            
+            return new SchoolViewModel(school);
         }
-        public List<School> GetAllSchools()
+        public List<SchoolViewModel> GetAllSchools()
         {
-            return _db.School.Include(school => school.Classes)
+            List<School> schools = _db.School.Include(school => school.Classes)
                 .Include(school => school.Lessons)
                 .Include(school => school.SchoolAdmin)
                 .Include(school => school.Students)
                 .Include(school => school.Subjects)
                 .Include(school => school.Teachers)
                 .ToList();
+            return ModelConverter.ModelConverter.MapSchoolToSchoolViewModel(schools);
         }
 
         public void RemoveSchool(int id)

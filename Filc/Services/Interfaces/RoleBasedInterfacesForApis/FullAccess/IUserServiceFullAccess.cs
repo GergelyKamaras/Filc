@@ -9,7 +9,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
         public ApplicationUser GetUserById(string id);
         public ApplicationUser GetUserByEmail(string email);
         public string GetSaltByEmail(string email);
-        
+        public void AddUser(ApplicationUser user);
         public void UpdateUser(ApplicationUser user);
         public void DeleteUser(string id);
     }

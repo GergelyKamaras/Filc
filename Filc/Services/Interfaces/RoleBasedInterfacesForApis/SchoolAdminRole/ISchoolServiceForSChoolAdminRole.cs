@@ -1,10 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.School;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole
 {
     public interface ISchoolServiceForSchoolAdminRole
     {
-        public School GetSchool(int id);
+        public SchoolViewModel GetSchool(int id);
 
         public void UpdateSchool(School school);
     }

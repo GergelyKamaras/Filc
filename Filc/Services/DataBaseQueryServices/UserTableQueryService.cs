@@ -29,6 +29,12 @@ namespace Filc.Services.DataBaseQueryServices
         {
             return _db.Users.First(user => user.Email == email).Salt;
         }
+        
+        public void AddUser(ApplicationUser user)
+        {
+            _db.Users.Add(user);
+            _db.SaveChanges();
+        }
         public void UpdateUser(ApplicationUser user)
         {
             _db.Users.Update(user);

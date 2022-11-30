@@ -1,8 +1,10 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.SchoolAdmin;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Filc.Services.ModelConverter;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -16,27 +18,38 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
         }
 
-        public List<SchoolAdmin> GetAllSchoolAdmins()
+        public List<SchoolAdminViewModel> GetAllSchoolAdmins()
         {
-            return _db.SchoolAdmin.ToList();
-        }
-
-        public List<SchoolAdmin> GetAllSchoolAdminsBySchool(int schoolId)
-        {
-            return _db.SchoolAdmin.Where(admin => admin.School.Id == schoolId)
+            List<SchoolAdmin> schoolAdmins = _db.SchoolAdmin
+                .Include(admin => admin.School)
                 .Include(admin => admin.user)
                 .ToList();
+            return ModelConverter.ModelConverter.MapSchoolAdminToSchoolAdminViewModel(schoolAdmins);
         }
 
-        public SchoolAdmin GetSchoolAdminById(int id)
+        public List<SchoolAdminViewModel> GetAllSchoolAdminsBySchool(int schoolId)
         {
-            return _db.SchoolAdmin.Include(admin => admin.user)
+            List<SchoolAdmin> schoolAdmins =  _db.SchoolAdmin.Where(admin => admin.School.Id == schoolId)
+                .Include(admin => admin.user)
+                .Include(admin => admin.School)
+                .ToList();
+
+            return ModelConverter.ModelConverter.MapSchoolAdminToSchoolAdminViewModel(schoolAdmins);
+        }
+
+        public SchoolAdminViewModel GetSchoolAdminById(int id)
+        {
+            SchoolAdmin schoolAdmin = _db.SchoolAdmin.Include(admin => admin.user)
+                .Include(admin => admin.School)
                 .First(x => x.Id == id);
+
+            return new SchoolAdminViewModel(schoolAdmin);
         }
 
         public void AddSchoolAdmin(SchoolAdmin schoolAdmin)
         {
             ApplicationUser user = _userService.GetUserByEmail(schoolAdmin.user.Email);
+            schoolAdmin.School = _db.School.First(school => school.Id == schoolAdmin.School.Id);
             if(user.Email != null)
             {
                 schoolAdmin.user = user;

@@ -28,5 +28,11 @@ namespace Filc.Controllers.Apis
             return _userService.GetAllUsers().First();
         }
 
+        [HttpPost]
+        public void AddUser([FromBody] IdentityUser user)
+        {
+            _userService.AddUser(user);
+        }
+
     }
 }
