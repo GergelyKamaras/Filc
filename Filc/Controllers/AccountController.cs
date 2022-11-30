@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Filc.Models.JWTAuthenticationModel;
+using EFDataAccessLibrary.Models;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 
 namespace Filc.Controllers
 {
@@ -13,20 +15,23 @@ namespace Filc.Controllers
     [Route("authentication")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserServiceFullAccess _userService;
 
-        public AccountController(UserManager<IdentityUser> userManager
-            , SignInManager<IdentityUser> signInManager
+        public AccountController(UserManager<ApplicationUser> userManager
+            , SignInManager<ApplicationUser> signInManager
             , RoleManager<IdentityRole> roleManager
-            , IConfiguration configuration)
+            , IConfiguration configuration,
+            IUserServiceFullAccess userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -34,7 +39,11 @@ namespace Filc.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("index", "home");
+            return Ok(new JWTAuthenticationResponse
+            {
+                Status = "Success",
+                Message = "You Logged out!"
+            });
         }
 
 
@@ -50,7 +59,7 @@ namespace Filc.Controllers
                     new JWTAuthenticationResponse { Status = "Error", Message = "User already exists!" });
             }
 
-            IdentityUser user = new ()
+            ApplicationUser user = new ()
             { 
                 UserName=model.Email,
                 Email = model.Email,
@@ -81,9 +90,9 @@ namespace Filc.Controllers
 
         [HttpGet]
         [Route("/login")]
-        public IActionResult Login()
+        public string Login([FromBody] string email)
         {
-            return View();
+            return _userService.GetSaltByEmail(email);
         }
 
         [HttpPost]
