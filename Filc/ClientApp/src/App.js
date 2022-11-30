@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
+import NotFound from './components/NotFound';
 
 function App() {
 
@@ -30,6 +31,9 @@ function App() {
           {/*TODO: Routes available to GovAdmins*/}
           <Route element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
           </Route>
+
+          {/*Not Existing Route*/}
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     );
