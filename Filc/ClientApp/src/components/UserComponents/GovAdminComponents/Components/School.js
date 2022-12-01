@@ -1,36 +1,66 @@
 ﻿import SchoolFetchById from "../Controllers/SchoolFetchById";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
 const School = () => {
-  let params = useParams();
-  const [loading, setLoading] = useState(true);
-  const [school, setSchool] = useState(false);
+    let params = useParams();
+    const [loading, setLoading] = useState(true);
+    const [school, setSchool] = useState(false);
 
-  useEffect(() => {
-    const dataFetch = async () => {
+    const navigate = useNavigate();
 
-      const data = await SchoolFetchById(params.id);
-
-      setSchool(data);
-      setLoading(false);
+    function NavigateToSchoolAdmin(e, id) {
+        e.preventDefault();
+        navigate('/govadmin/schooladmins/' + id);
     }
-    dataFetch();
-  }, []);
+
+    useEffect(() => {
+        const dataFetch = async () => {
+
+            const data = await SchoolFetchById(params.id);
+
+            setSchool(data);
+            setLoading(false);
+        }
+        dataFetch();
+    }, []);
 
   return (
     <>
-      {loading ? <h1>Loading Data...</h1>
+      {loading ? <h3>Loading...</h3>
         : school ? (
-          <div>
-            <h1>{school.name} Data</h1>
-            <p>{school.address}</p>
-            <p>{school.schoolType}</p>
-          </div>
+            <div className="school" key={school.id}>
+                <h3>{school.name}</h3>
+                <p><strong>Address:</strong> {school.address}</p>
+                <p><strong>Type: </strong>{school.schoolType}</p>
+                <p><strong>School Admins: </strong></p>
+                    {school.schoolAdmin.map((admin) => (
+                        <><p key={admin.id}> - {admin.firstName} {admin.lastName}</p><button onClick={(e) => NavigateToSchoolAdmin(e, admin.id) }>See Admin</button></>
+                    ))}
+                <p><strong>Number of students: </strong>{school.students.length}</p>
+                <p><strong>Students:</strong></p>
+                    {school.students.map((student) => (
+                        <p key={student.id}> - {student.firstName} {student.lastName}</p>
+                    ))}
+                <p><strong>Subjects:</strong></p>
+                      {school.subjects.map((subject) => (
+                          <p key={subject.id}> - {subject.name}</p>
+                      ))}
+                <p><strong>Lessons:</strong></p>
+                <p><strong>Teachers:</strong> </p>
+                      {school.teachers.map((teacher) => (
+                          <p key={teacher.id}> - {teacher.firstName} {teacher.LastName}</p>
+                      ))}
+                <p><strong>Classes: </strong></p>
+                      {school.classes.map((schoolClass) => (
+                          <p key={schoolClass.id}> - {schoolClass.name}</p>
+                      ))}
+            </div>
+          
         ) : (
             <div>
-              <h1>Data not found</h1>
-              <p>We haven't found anything under this id</p>
+              <h3>Data not found</h3>
+              <p>There aren't any schools in the system with that ID.</p>
             </div>
           )
       }
