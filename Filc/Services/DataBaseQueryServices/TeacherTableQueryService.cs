@@ -1,6 +1,8 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Teacher;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,30 +17,35 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
             _userService = userService;
         }
-        public Teacher GetTeacher(int id)
+        public TeacherViewModel GetTeacher(int id)
         {
-            return _db.Teacher.Include(teacher => teacher.School)
+            Teacher Teacher = _db.Teacher.Include(teacher => teacher.School)
                 .Include(teacher => teacher.user)
                 .Include(teacher => teacher.Lessons)
                 .Include(teacher => teacher.Subjects)
                 .First(x => x.Id == id);
+            return new TeacherViewModel(Teacher);
         }
-        public List<Teacher> GetAllTeachers()
+        public List<TeacherViewModel> GetAllTeachers()
         {
-            return _db.Teacher.Include(teacher => teacher.School)
+            List<Teacher> Teachers = _db.Teacher.Include(teacher => teacher.School)
                 .Include(teacher => teacher.user)
                 .Include(teacher => teacher.Lessons)
                 .Include(teacher => teacher.Subjects)
                 .ToList();
+            return ModelConverter.ModelConverter.MapTeachersToTeacherViewModels(Teachers);
         }
-        public List<Teacher> GetAllTeachersBySchool(int schoolId)
+
+        //todo
+        public List<TeacherViewModel> GetAllTeachersBySchool(int schoolId)
         {
-            return _db.Teacher.Where(teacher => teacher.School.Id == schoolId)
+            List<Teacher> Teachers = _db.Teacher.Where(teacher => teacher.School.Id == schoolId)
                 .Include(teacher => teacher.School)
                 .Include(teacher => teacher.user)
                 .Include(teacher => teacher.Lessons)
                 .Include(teacher => teacher.Subjects)
                 .ToList();
+            return ModelConverter.ModelConverter.MapTeachersToTeacherViewModels(Teachers);
         }
 
         public void AddTeacher(Teacher teacher, string email)
@@ -60,5 +67,7 @@ namespace Filc.Services.DataBaseQueryServices
             _db.Teacher.Remove(_db.Teacher.First(teacher => teacher.Id == id));
             _db.SaveChanges();
         }
+
+        
     }
 }

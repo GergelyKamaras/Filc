@@ -6,6 +6,7 @@ using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.ViewModels.Teacher;
 
 namespace Filc.Controllers.Apis
 {
@@ -89,21 +90,21 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("teachers")]
-        public List<Teacher> GetAllTeachers()
+        public List<TeacherViewModel> GetAllTeachers()
         {
             return _teacherService.GetAllTeachers();
         }
 
         [HttpGet]
         [Route("teachers/{id}")]
-        public Teacher GetTeacher(int id)
+        public TeacherViewModel GetTeacher(int id)
         {
             return _teacherService.GetTeacher(id);
         }
 
         [HttpGet]
         [Route("teachers/school/{id}")]
-        public List<Teacher> GetTeachersBySchool(int id)
+        public List<TeacherViewModel> GetTeachersBySchool(int id)
         {
             return _teacherService.GetAllTeachersBySchool(id);
         }
