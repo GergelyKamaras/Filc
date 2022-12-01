@@ -1,4 +1,4 @@
-﻿const GovAdminListFetch = async (id) => {
+﻿const SchoolAdminListFetch = async (id) => {
   const response = await fetch(
     `https://localhost:7014/api/schooladmins/schools/${id}/admins`, {
     method: 'GET'
@@ -10,4 +10,4 @@
   return response.json();
 }
 
-export default GovAdminListFetch;
+export default SchoolAdminListFetch;
