@@ -57,7 +57,7 @@ namespace Filc.Controllers.Apis
         [HttpPost]
         public void AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
-            _governmentAdminService.AddGovernmentAdmin(admin, admin.user.Email);
+            _governmentAdminService.AddGovernmentAdmin(admin);
         }
 
         [HttpPut]

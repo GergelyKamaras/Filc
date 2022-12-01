@@ -26,9 +26,9 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.GovernmentAdmin.Include(admin => admin.user)
                 .First(x => x.Id == id);
         }
-        public void AddGovernmentAdmin(GovernmentAdmin governmentAdmin, string email)
+        public void AddGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
-            ApplicationUser user = _userService.GetUserByEmail(email);
+            ApplicationUser user = _userService.GetUserByEmail(governmentAdmin.user.Email);
             governmentAdmin.user = user;
             _db.GovernmentAdmin.Add(governmentAdmin);
             _db.SaveChanges();
