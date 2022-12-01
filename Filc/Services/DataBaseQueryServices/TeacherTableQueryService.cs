@@ -48,9 +48,11 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapTeachersToTeacherViewModels(Teachers);
         }
 
-        public void AddTeacher(Teacher teacher, string email)
+        public void AddTeacher(Teacher teacher)
         {
-            ApplicationUser user = _userService.GetUserByEmail(email);
+            ApplicationUser user = _userService.GetUserByEmail(teacher.user.Email);
+            teacher.School = _db.School.First(school => school.Id == teacher.School.Id);
+            teacher.Lessons = _db.Lesson.Where(lesson => lesson.Teachers.Any(t => t.Id == teacher.Id)).ToList();
             teacher.user = user;
             _db.Teacher.Add(teacher);
             _db.SaveChanges();
