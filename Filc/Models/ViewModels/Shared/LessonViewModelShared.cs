@@ -8,7 +8,7 @@ namespace Filc.Models.ViewModels.Shared
         public int Id { get; set; }
         public string Name { get; set; }
         public Subject Subject { get; set; }
-        public LessonViewModelShared(Lesson lesson)
+        public LessonViewModelShared(EFDataAccessLibrary.Models.Lesson lesson)
         {
             Id = lesson.Id;
             Name = lesson.Name;

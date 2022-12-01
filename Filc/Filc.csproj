@@ -136,7 +136,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\DataFetches\" />
-    <Folder Include="Models\ViewModels\Mark\" />
     <Folder Include="Models\ViewModels\Teacher\" />
     <Folder Include="Models\ViewModels\Student\" />
   </ItemGroup>
