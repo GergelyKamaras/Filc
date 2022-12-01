@@ -1,6 +1,6 @@
 ﻿const SchoolAdminFetchById = async (id) => {
   const response = await fetch(
-    `https://localhost:7014/api/governmentadmins/${id}`, {
+    `https://localhost:7014/api/schooladmins/${id}`, {
     method: 'GET'
   }
   );
