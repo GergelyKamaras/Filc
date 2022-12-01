@@ -29,7 +29,7 @@ function AddSchool() {
     }
 
     return (
-        <div>
+        <div className="add-new-school" style={{ display: 'grid', float: 'right' }}>
             <h3>Register a new school</h3>
             <div className="col-md-12">
                 <form>
