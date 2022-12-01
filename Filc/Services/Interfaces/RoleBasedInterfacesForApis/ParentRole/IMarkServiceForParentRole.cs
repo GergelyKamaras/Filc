@@ -1,10 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Mark;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole
 {
     public interface IMarkServiceForParentRole
     {
-        public Mark GetMark(int id);
-        public List<Mark> GetMarksByStudent(int studentId);
+        public MarkViewModel GetMark(int id);
+        public List<MarkViewModel> GetMarksByStudent(int studentId);
     }
 }
