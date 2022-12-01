@@ -9,6 +9,7 @@ import GovAdmins from './components/UserComponents/GovAdminComponents/Components
 import GovAdmin from './components/UserComponents/GovAdminComponents/Components/GovAdmin';
 import SchoolAdmins from './components/UserComponents/GovAdminComponents/Components/SchoolAdmins';
 import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
+import Schools from './components/UserComponents/GovAdminComponents/Components/Schools';
 
 function App() {
 
@@ -36,8 +37,9 @@ function App() {
           <Route path="govadmin" element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
             <Route path="list" element={<GovAdmins />} />
             <Route path="list/:id" element={<GovAdmin />} />
-            <Route path="school/:schoolid/admins" element={<SchoolAdmins />} />
+            <Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />
             <Route path="schooladmins/:id" element={<SchoolAdmin />} />
+            <Route path="schools/" element={<Schools /> } />
           </Route>
 
           {/*Not Existing Route*/}
