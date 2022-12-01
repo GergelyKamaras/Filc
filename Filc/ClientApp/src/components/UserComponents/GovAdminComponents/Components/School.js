@@ -1,7 +1,7 @@
 ﻿import SchoolFetchById from "../Controllers/SchoolFetchById";
 import { useParams } from 'react-router-dom';
 
-const SchoolAdmin = () => {
+const School = () => {
   let params = useParams();
   const RequestedSchool = SchoolFetchById(params.id);
 
@@ -13,4 +13,4 @@ const SchoolAdmin = () => {
   );
 }
 
-export default SchoolAdmin;
+export default School;
