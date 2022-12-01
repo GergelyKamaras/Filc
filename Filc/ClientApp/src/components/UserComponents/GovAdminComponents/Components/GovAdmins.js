@@ -1,7 +1,7 @@
 ﻿import GovAdminListFetch from "../Controllers/GovAdminListFetch";
 
 const GovAdmins = () => {
-  const GovAdminList = GovAdminListFetch;
+  const GovAdminList = JSON.stringify(GovAdminListFetch);
 
   return (
     <>
