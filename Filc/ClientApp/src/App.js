@@ -10,6 +10,7 @@ import GovAdmin from './components/UserComponents/GovAdminComponents/Components/
 import SchoolAdmins from './components/UserComponents/GovAdminComponents/Components/SchoolAdmins';
 import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
 import Schools from './components/UserComponents/GovAdminComponents/Components/Schools';
+import School from './components/UserComponents/GovAdminComponents/Components/School';
 
 function App() {
 
@@ -39,7 +40,8 @@ function App() {
             <Route path="list/:id" element={<GovAdmin />} />
             <Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />
             <Route path="schooladmins/:id" element={<SchoolAdmin />} />
-            <Route path="schools/" element={<Schools /> } />
+            <Route path="schools/" element={<Schools />} />
+            <Route path="schools/:id" element={<School />} />
           </Route>
 
           {/*Not Existing Route*/}
