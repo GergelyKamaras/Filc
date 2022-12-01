@@ -1,0 +1,602 @@
+{
+	"info": {
+		"_postman_id": "b48446ea-b553-4489-831f-ba3f56430fb8",
+		"name": "Filc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23979706"
+	},
+	"item": [
+		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "GetAllAdmins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseGovApiUrl}}",
+							"host": [
+								"{{BaseGovApiUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddGovernmentAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\" : {\r\n        \"id\": \"22adff23-01f1-415e-afc8-fa05048d9606\",\r\n        \"userName\": \"gergely.kamaras@gmail.com\",\r\n        \"normalizedUserName\": \"GERGELY.KAMARAS@GMAIL.COM\",\r\n        \"email\": \"gergely.kamaras@gmail.com\",\r\n        \"normalizedEmail\": \"GERGELY.KAMARAS@GMAIL.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEAVLTHIrugwks3Jxcin3h9Ejc5nk+9O9bQBy2H1pqUFsvKdW2ykB1+aVAICUS+hO2A==\",\r\n        \"securityStamp\": \"GKMR2L7EZ6CMXWSRZJKAFFLVKVC5TLQY\",\r\n        \"concurrencyStamp\": \"732e98ba-7f91-4f85-b65b-2a0afabc77d9\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseGovApiUrl}}",
+							"host": [
+								"{{BaseGovApiUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseGovApiUrl}}/1",
+							"host": [
+								"{{BaseGovApiUrl}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAdmin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\" : 5,\r\n    \"Email\" : \"nemjolan.hegy@hegy.com\",\r\n    \"Password\" : \"Hegy\",\r\n    \"UserRole\" : \"GovernmentAdmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseGovApiUrl}}",
+							"host": [
+								"{{BaseGovApiUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAdmin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseGovApiUrl}}/3",
+							"host": [
+								"{{BaseGovApiUrl}}"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SeedData",
+			"item": [
+				{
+					"name": "Checks",
+					"item": [
+						{
+							"name": "GetAllGovAdmins",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseGovApiUrl}}",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllUsers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUsersApiUrl}}",
+									"host": [
+										"{{BaseUsersApiUrl}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetSchools",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/schools",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"schools"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllSchoolAdmins",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/schooladmins",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"schooladmins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllStudents",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/students",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOneStudent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/students/1",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"students",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllTeachers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/teachers",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOneTeacher",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/teachers/2",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"teachers",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AddSeedData",
+					"item": [
+						{
+							"name": "AddGovernmentAdmin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"7c9941ff-3697-4c68-959c-cca5812ed783\",\r\n        \"userName\": \"admin@admin.com\",\r\n        \"normalizedUserName\": \"ADMIN@ADMIN.COM\",\r\n        \"email\": \"admin@admin.com\",\r\n        \"normalizedEmail\": \"ADMIN@ADMIN.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEOVC7/1jRqNeZZiWGdb88NNJe1SLkuqdmSDVlD8EunPopnAqRTBthoOciWIFJGNjFw==\",\r\n        \"securityStamp\": \"GDFOKUYMQI74UTQHBNODI6K2UI3MTLZP\",\r\n        \"concurrencyStamp\": \"b300438e-8906-493e-851d-6d1f29f73171\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddSchool",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\" : \"School Of Awesomness\",\r\n    \"Address\" : \"Main Street 1\",\r\n    \"SchoolType\" : \"Grammar School\",\r\n    \"Classes\": [],\r\n    \"Lessons\": [],\r\n    \"Students\": [],\r\n    \"Subjects\": [],\r\n    \"Teachers\": [],\r\n    \"SchoolAdmin\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/schools",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"schools"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddSchool2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\" : \"School Of Rock\",\r\n    \"Address\" : \"Main Street 1\",\r\n    \"SchoolType\" : \"Music School\",\r\n    \"Classes\": [],\r\n    \"Lessons\": [],\r\n    \"Students\": [],\r\n    \"Subjects\": [],\r\n    \"Teachers\": [],\r\n    \"SchoolAdmin\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/schools",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"schools"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddSchool3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\" : \"School Of Life\",\r\n    \"Address\" : \"Main Street 3\",\r\n    \"SchoolType\" : \"Hard School\",\r\n    \"Classes\": [],\r\n    \"Lessons\": [],\r\n    \"Students\": [],\r\n    \"Subjects\": [],\r\n    \"Teachers\": [],\r\n    \"SchoolAdmin\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/schools",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"schools"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddSchoolAdmin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"6ab1a024-660c-46f6-b904-118990e81f92\",\r\n        \"userName\": \"schooladmin@admin.com\",\r\n        \"normalizedUserName\": \"SCHOOLADMIN@ADMIN.COM\",\r\n        \"email\": \"schooladmin@admin.com\",\r\n        \"normalizedEmail\": \"SCHOOLADMIN@ADMIN.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEBhmEL2LtWixSh1/a3CMx89XiDDddrwK+B+/Xpstj6EgJDYmbrbi9qI5HO9EXsJT2Q==\",\r\n        \"securityStamp\": \"UQTCHPXFDBQ2HOYHA7VICZQR3UZ2RXXY\",\r\n        \"concurrencyStamp\": \"3d6c7ab3-4f45-4c55-8c65-41cecd12842d\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"SchoolAdmin\",\r\n    \"LastName\" : \"Von Admin\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/schooladmins",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"schooladmins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddTeacher1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"ef54a696-1fb2-4afc-a037-d66ce7098311\",\r\n        \"userName\": \"teacher1@admin.com\",\r\n        \"normalizedUserName\": \"TEACHER1@ADMIN.COM\",\r\n        \"email\": \"teacher1@admin.com\",\r\n        \"normalizedEmail\": \"TEACHER1@ADMIN.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEJi7trPW/T8DIEXXP9fiiph3Im+Jc8Os8jU1jfK5+rQ2ZILq2EcTJQdEoTa2g6RuBw==\",\r\n        \"securityStamp\": \"4Y5KLOCIC5WDVNIYIIGUHSXWYX2VAN4Z\",\r\n        \"concurrencyStamp\": \"ed54866f-c3a7-41f2-a969-c779073a5950\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"Teacher1\",\r\n    \"LastName\" : \"Von Teacher\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/teachers",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddTeacher2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"5b7ae4fb-b467-42bf-9bb3-91fce3f5f894\",\r\n        \"userName\": \"teacher2@admin.com\",\r\n        \"normalizedUserName\": \"TEACHER2@ADMIN.COM\",\r\n        \"email\": \"teacher2@admin.com\",\r\n        \"normalizedEmail\": \"TEACHER2@ADMIN.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEDXu8SNL2ufBwKqCWlmtkspFqfhcvv1In6Ao5atfQqn1hwimDype5y0hPWpyhR/1rQ==\",\r\n        \"securityStamp\": \"Z4LQLA4WDJ3Q6K5SCSC2LLCRX4CSEV4A\",\r\n        \"concurrencyStamp\": \"924c6414-a895-4d9f-957e-a300eb2f87b7\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"Teacher2\",\r\n    \"LastName\" : \"Von Teacher\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/teachers",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddStudent1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"ddf85e9c-cbec-4a51-a0b4-a2b686541fda\",\r\n        \"userName\": \"teststudent1@gmail.com\",\r\n        \"normalizedUserName\": \"TESTSTUDENT1@GMAIL.COM\",\r\n        \"email\": \"teststudent1@gmail.com\",\r\n        \"normalizedEmail\": \"TESTSTUDENT1@GMAIL.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEDvfB579y8PB1NycprdMU69/mbbAhTCE70IvA2ft+BU8Jppo+vEtc0gy1Dr14NQp3g==\",\r\n        \"securityStamp\": \"DQFPQGAPSORYBGUFGBCRUR3KO6MLNTCM\",\r\n        \"concurrencyStamp\": \"be1b6ae5-3ee4-41ee-82a9-b88b946e2b11\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"Student1\",\r\n    \"LastName\" : \"Von Student\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/students",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddStudent2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"6f24a4c4-0ff2-4642-a44d-ddf5612546e4\",\r\n        \"userName\": \"teststudent2@gmail.com\",\r\n        \"normalizedUserName\": \"TESTSTUDENT2@GMAIL.COM\",\r\n        \"email\": \"teststudent2@gmail.com\",\r\n        \"normalizedEmail\": \"TESTSTUDENT2@GMAIL.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAELgmBqHhEm11HxM5kHitirxsCgDx15tDnJ/wQyTlS4iski5pl2g3RbCbCkJdXntA+g==\",\r\n        \"securityStamp\": \"2XNI47E324QETMUAC6KFNYLIAIHJYEER\",\r\n        \"concurrencyStamp\": \"fc58a33e-d8f3-4d84-a27c-e46e6d38f8ea\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"Student2\",\r\n    \"LastName\" : \"Von Student\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/students",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddStudent3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"82298a0f-7b2c-40d0-aa93-cc2a746555d7\",\r\n        \"userName\": \"teststudent3@gmail.com\",\r\n        \"normalizedUserName\": \"TESTSTUDENT3@GMAIL.COM\",\r\n        \"email\": \"teststudent3@gmail.com\",\r\n        \"normalizedEmail\": \"TESTSTUDENT3@GMAIL.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAELUCqs2uZQe95WyRNwyF3F358SnsSNn49vAwltz0CU3+P42qXbn7CROTpm/043aCZA==\",\r\n        \"securityStamp\": \"CZNHZ5Z26HAXPVBGVBCVNR2MUDDUKW2J\",\r\n        \"concurrencyStamp\": \"67632c0f-047a-4cbb-ae25-956e522c5e46\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"Student3\",\r\n    \"LastName\" : \"Von Student\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/students",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddStudent4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"5ea85e6f-df5d-423a-a316-30a0ac36cc56\",\r\n        \"userName\": \"teststudent4@gmail.com\",\r\n        \"normalizedUserName\": \"TESTSTUDENT4@GMAIL.COM\",\r\n        \"email\": \"teststudent4@gmail.com\",\r\n        \"normalizedEmail\": \"TESTSTUDENT4@GMAIL.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEOplhYue+g0e7RR86guHPMsKdvrZQWHXp+hABVdw/Bkm1g8ykPWTYOiwGLVFeLgBBw==\",\r\n        \"securityStamp\": \"WN4C4PPNHBZPE3PMUIAVJ2HMPLTDG2X2\",\r\n        \"concurrencyStamp\": \"927af205-6238-4c9a-bd65-6d4ce5c095db\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"Student4\",\r\n    \"LastName\" : \"Von Student\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/students",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddStudent5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\" : {\r\n        \"salt\": \"$2a$10$6V3o1DUBVVi8WXdg5sEAHO\",\r\n        \"id\": \"72c8fdbf-31f0-4e4f-8de1-bc6b69ebd572\",\r\n        \"userName\": \"teststudent5@gmail.com\",\r\n        \"normalizedUserName\": \"TESTSTUDENT5@GMAIL.COM\",\r\n        \"email\": \"teststudent5@gmail.com\",\r\n        \"normalizedEmail\": \"TESTSTUDENT5@GMAIL.COM\",\r\n        \"emailConfirmed\": false,\r\n        \"passwordHash\": \"AQAAAAEAACcQAAAAEFw21+v3avQtDsSUs+8lZEDatnM0sLaMDEShBaKGTKpD1k2MWhY1Uw3en43U6e3n4g==\",\r\n        \"securityStamp\": \"D7BK6YFUGTUIRAP2JW6PPOZ6F5SGZPUX\",\r\n        \"concurrencyStamp\": \"d84a6a4e-2bcf-49ba-a43a-869e917486a5\",\r\n        \"phoneNumber\": null,\r\n        \"phoneNumberConfirmed\": false,\r\n        \"twoFactorEnabled\": false,\r\n        \"lockoutEnd\": null,\r\n        \"lockoutEnabled\": false,\r\n        \"accessFailedCount\": 0\r\n    },\r\n    \"School\" : {\r\n        \"id\": 1,\r\n        \"name\": \"School Of Awesomness\",\r\n        \"address\": \"Main Street 1\",\r\n        \"schoolType\": \"Grammar School\",\r\n        \"schoolAdmin\": [],\r\n        \"students\": [],\r\n        \"subjects\": [],\r\n        \"lessons\": [],\r\n        \"teachers\": [],\r\n        \"classes\": []\r\n    },\r\n    \"FirstName\" : \"Student5\",\r\n    \"LastName\" : \"Von Student\",\r\n    \"BirthdDate\" : \"30/11/2022 11:13:32\",\r\n    \"Address\" : \"Main Street 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseGovApiUrl}}/students",
+									"host": [
+										"{{BaseGovApiUrl}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseGovApiUrl",
+			"value": "https://localhost:7014/api/governmentadmins",
+			"type": "string"
+		},
+		{
+			"key": "BaseUsersApiUrl",
+			"value": "https://localhost:7014/api/users",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
