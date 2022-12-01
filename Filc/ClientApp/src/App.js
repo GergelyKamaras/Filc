@@ -5,6 +5,7 @@ import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 import NotFound from './components/NotFound';
+import GovAdmins from './components/UserComponents/GovAdminComponents/Components/GovAdmins';
 
 function App() {
 
@@ -29,7 +30,8 @@ function App() {
           </Route>
 
           {/*TODO: Routes available to GovAdmins*/}
-          <Route element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
+          <Route path="govadmin" element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
+            <Route path="list" element={<GovAdmins /> } />
           </Route>
 
           {/*Not Existing Route*/}
