@@ -10,6 +10,7 @@ using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Filc.Models.AuthenticationModels;
 
 namespace Filc.Controllers
 {
@@ -54,7 +55,7 @@ namespace Filc.Controllers
         [HttpPost]
         [Route("register")]
         // Centrum
-        public async Task<Object> Register(RegistrationModel model)
+        public async Task<ObjectResult> Register(RegistrationModel model)
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
@@ -94,16 +95,21 @@ namespace Filc.Controllers
             });
         }
 
-        [HttpGet]
-        [Route("/login")]
-        public string Login([FromBody] string email)
+        [HttpPost]
+        [Route("loginsalt")]
+        public ObjectResult GetLoginSalt(EmailModel model)
         {
-            return _userService.GetSaltByEmail(email);
+            
+            return Ok(new 
+            {
+                Status = "Success",
+                Message = _userService.GetSaltByEmail(model.Email)
+            });
         }
 
         [HttpPost]
-        [Route("/login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
@@ -122,11 +128,14 @@ namespace Filc.Controllers
                 var token = GetToken(authClaims);
                 return Ok(new
                 {
+
+                    message = "SUCCESS",
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });
             }
-            return Unauthorized();
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                   new JWTAuthenticationResponse { Status = "Error", Message = "Account not valid" });;
 
         }
 

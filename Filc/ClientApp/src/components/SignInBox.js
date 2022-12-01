@@ -35,17 +35,21 @@ const SignInBox = () => {
         window.localStorage.setItem('login', JSON.stringify({ email, hashedPassword })); // load into session
     }
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
+        const email = emailInputRef.current.value;
 
-        var data = {};
-        data["Email"] = emailInputRef;
-        data["Username"] = emailInputRef;
-       
-        var salt = GetHashedPasswordFetch(data);
-        const hashedPassword = bcrypt.hashSync(passwordInputRef, salt)
-        data["Password"] = hashedPassword;
+        const userEmail = {
+            Email:email
+        }
 
+        const salt = await GetHashedPasswordFetch(userEmail);
+        const hashedPassword = bcrypt.hashSync(passwordInputRef.current.value, salt)
+        
+        var data = {
+            Email: email,
+            Password: hashedPassword,
+        };
         LoginApiFetch(data);
     }
 
