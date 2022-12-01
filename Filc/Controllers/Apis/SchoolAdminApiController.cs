@@ -111,7 +111,7 @@ namespace Filc.Controllers.Apis
         [Route("teachers")]
         public void AddTeacher([FromBody] Teacher teacher)
         {
-            _teacherService.AddTeacher(teacher, teacher.user.Email);
+            _teacherService.AddTeacher(teacher);
         }
 
         [HttpPut]

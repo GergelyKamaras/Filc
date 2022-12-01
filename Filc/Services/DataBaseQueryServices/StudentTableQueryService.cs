@@ -40,6 +40,9 @@ namespace Filc.Services.DataBaseQueryServices
         public void AddStudent(Student student)
         {
             ApplicationUser user = _userService.GetUserByEmail(student.user.Email);
+            student.School = _db.School.First(school => school.Id == student.School.Id);
+            student.Marks = _db.Mark.Where(mark => mark.Student.Id == student.Id).ToList();
+            student.Lessons = _db.Lesson.Where(lesson => lesson.students.Any(s => s.Id == student.Id)).ToList();
             student.user = user;
             _db.Student.Add(student);
             _db.SaveChanges();

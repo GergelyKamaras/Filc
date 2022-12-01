@@ -129,7 +129,7 @@ var seedService = app.Services.CreateScope().ServiceProvider;
 try
 {
     await SeedRoles.InitRoleSeeds(seedService.GetRequiredService<RoleManager<IdentityRole>>());
-    await SeedAdmin.InitAdminSeed(seedService.GetRequiredService<RoleManager<IdentityRole>>(),
+    await SeedUsers.InitData(seedService.GetRequiredService<RoleManager<IdentityRole>>(),
         seedService.GetRequiredService<UserManager<ApplicationUser>>());
 }
 catch (Exception ex)
