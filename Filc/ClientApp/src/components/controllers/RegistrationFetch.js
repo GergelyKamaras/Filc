@@ -8,10 +8,9 @@ const RegistrationFetch = (data) => {
       },
       body: JSON.stringify(data)
     }).then((response) => response.json()).then((result)=>{
-      
       if(result.message === "SUCCESS"){
-        alert("You are logged in");
-        
+          alert("You are logged in");
+
       }else{
           alert("Plese check your login information")
       }
