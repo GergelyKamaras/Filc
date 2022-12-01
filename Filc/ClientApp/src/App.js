@@ -6,8 +6,6 @@ import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 import NotFound from './components/NotFound';
-import GovAdmins from './components/UserComponents/GovAdminComponents/Components/GovAdmins';
-import GovAdmin from './components/UserComponents/GovAdminComponents/Components/GovAdmin';
 import SchoolAdmins from './components/UserComponents/GovAdminComponents/Components/SchoolAdmins';
 import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
 import Schools from './components/UserComponents/GovAdminComponents/Components/Schools';
@@ -25,6 +23,7 @@ function App() {
           <Route path="" element={<AppIndex />} />
           <Route path='/login' element={<LoginPage/>}/>
           <Route path="Unauthorized" element={<Unauthorized />} />
+          <Route path="schooladmins/:id" element={<SchoolAdmin />} />
 
           {/*TODO: Routes available to Students*/}
           <Route element={<RequireAuth allowedRoles={["Student"]} />}>
