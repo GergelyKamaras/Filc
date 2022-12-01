@@ -5,7 +5,7 @@
   }
   );
   if (!response.ok) {
-    return JSON.stringify({});
+    return false;
   }
   return response.json();
 }
