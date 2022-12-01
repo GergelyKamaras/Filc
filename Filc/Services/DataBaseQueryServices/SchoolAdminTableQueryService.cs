@@ -69,17 +69,5 @@ namespace Filc.Services.DataBaseQueryServices
             _db.SchoolAdmin.Remove(_db.SchoolAdmin.First(admin => admin.Id == schoolAdminId));
             _db.SaveChanges();
         }
-
-        public SchoolAdmin GetASchoolAdmin()
-        {
-            return new SchoolAdmin
-            {
-                FirstName = "ads",
-                user = new ApplicationUser
-                {
-                    Email = "asd@asd.hu"
-                }
-            };
-        }
     }
 }
