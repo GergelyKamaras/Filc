@@ -1,0 +1,13 @@
+.school-parent{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.1fr 2fr 1fr 0.1fr;
+    grid-template-rows: 0.1fr repeat(2, 1fr) 0.1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.school{
+    grid-area: 2 / 2 / 3 / 3;
+}

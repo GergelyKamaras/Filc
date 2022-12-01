@@ -1,5 +1,6 @@
 ﻿import AddSchoolFetch from '../Controllers/SchoolAdd'
 import { useRef } from 'react'
+import '../../../../Style/AddSchool.css';
 
 function AddSchool() {
     const nameInputRef = useRef();

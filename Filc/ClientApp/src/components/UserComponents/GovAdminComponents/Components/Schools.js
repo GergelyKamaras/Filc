@@ -2,6 +2,8 @@
 import AddSchool from '../Components/AddSchool'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../../../../Style/SchoolsPage.css';
+
 
 const Schools = () => {
     const [schoolData, setSchoolData] = useState({ schools: [] });
@@ -25,7 +27,7 @@ const Schools = () => {
     }, []);
 
     return (
-        <div>
+        <div className="school-parent">
             <h1>Schools</h1>
             {isLoading ? (
                 <div><h3>Loading ...</h3></div>

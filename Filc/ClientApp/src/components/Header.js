@@ -19,16 +19,15 @@ function Header() {
     }
     const adminFuncts =<>
      <Nav.Link href="govadmin/schools">Registered schools in the system</Nav.Link>
-    <Nav.Link href="#action2">View national statistics</Nav.Link>
+    <Nav.Link href="govadmin/schooladmins">School administrator registration</Nav.Link>
     <Nav.Link href="#action3">Students of the system</Nav.Link>
-    <Nav.Link href="#action4">School administrator registration</Nav.Link>
+    <Nav.Link href="#action2">View national statistics</Nav.Link>
     </>
     const standard =
     <>
     <Nav.Link href="">Login first</Nav.Link>
     </>
     useEffect(()=>{
-      console.log("szia")
       setFucts(
         (role===null) ? 
           standard
