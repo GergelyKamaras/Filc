@@ -21,7 +21,6 @@ namespace EFDataAccessLibrary.Models
         public string LastName { get; set; }
 
         [Required]
-        [Timestamp]
         public DateTime BirthDate { get; set; }
 
         [Required]

@@ -5,7 +5,10 @@
   }
   );
   if (!response.ok) {
-    return JSON.stringify({});
+    return false;
+  }
+  if (response.json().then((body) => body.length === 0)) {
+    return false;
   }
   return response.json();
 }

@@ -8,7 +8,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
     {
         public List<TeacherViewModel> GetAllTeachers();
         public List<TeacherViewModel> GetAllTeachersBySchool(int schoolId);
-        public void AddTeacher(Teacher teacher, string email);
+        public void AddTeacher(Teacher teacher);
         public void RemoveTeacher(int id);
     }
 }
