@@ -1,5 +1,8 @@
 ﻿using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.ViewModels.Mark;
+using Filc.Models.ViewModels.Parent;
+using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,21 +38,21 @@ namespace Filc.Controllers.Apis
         // Marks
         [HttpGet]
         [Route("marks/{id}")]
-        public Mark GetMark(int id)
+        public MarkViewModel GetMark(int id)
         {
             return _markService.GetMark(id);
         }
 
         [HttpGet]
         [Route("marks/student/{id}")]
-        public List<Mark> GetMarksByStudent(int id)
+        public List<MarkViewModel> GetMarksByStudent(int id)
         {
             return _markService.GetMarksByStudent(id);
         }
 
         [HttpGet]
         [Route("students/{id}")]
-        public Student GetStudent(int id)
+        public StudentViewModel GetStudent(int id)
         {
             return _studentService.GetStudent(id);
         }
@@ -64,7 +67,7 @@ namespace Filc.Controllers.Apis
         // Parents
         [HttpGet]
         [Route("parents/{id}")]
-        public Parent GetParent(int id)
+        public ParentViewModel GetParent(int id)
         {
             return _parentService.GetParent(id);
         }

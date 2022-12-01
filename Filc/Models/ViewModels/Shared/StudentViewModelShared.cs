@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Filc.Models.EntityViewModels.School
+namespace Filc.Models.ViewModels.Shared
 {
-    public class TeacherViewModelForSchool
+    public class StudentViewModelShared
     {
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -13,14 +13,14 @@ namespace Filc.Models.EntityViewModels.School
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
 
-        public TeacherViewModelForSchool(Teacher teacher)
+        public StudentViewModelShared(EFDataAccessLibrary.Models.Student student)
         {
-            Id = teacher.Id;
-            user = teacher.user;
-            FirstName = teacher.FirstName;
-            LastName = teacher.LastName;
-            BirthDate = teacher.BirthDate;
-            Address = teacher.Address;
+            Id = student.Id;
+            user = student.user;
+            FirstName = student.FirstName;
+            LastName = student.LastName;
+            BirthDate = student.BirthDate;
+            Address = student.Address;
         }
     }
 }

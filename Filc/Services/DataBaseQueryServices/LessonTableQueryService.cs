@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Lesson;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,31 +13,34 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db = esContext;
         }
-        public Lesson GetLessonById(int id)
+        public LessonViewModel GetLessonById(int id)
         {
-            return _db.Lesson.Include(lesson => lesson.School)
+            Lesson lesson = _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
                 .Include(lesson => lesson.Subject)
                 .First(lesson => lesson.Id == id);
+            return new LessonViewModel(lesson);
         }
 
-        public List<Lesson> GetLessonByStudentId(int id)
+        public List<LessonViewModel> GetLessonByStudentId(int id)
         {
-            return _db.Lesson.Include(lesson => lesson.School)
+            List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
                 .Include(lesson => lesson.Subject)
                 .Where(lesson => lesson.students.Exists(student => student.Id == id)).ToList();
+            return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 
-        public List<Lesson> GetLessonsByTeacher(int id)
+        public List<LessonViewModel> GetLessonsByTeacher(int id)
         {
-            return _db.Lesson.Include(lesson => lesson.School)
+            List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
                 .Include(lesson => lesson.Subject)
                 .Where(lesson => lesson.Teachers.Exists(teacher => teacher.Id == id)).ToList();
+            return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 
         public void AddLesson(Lesson lesson)

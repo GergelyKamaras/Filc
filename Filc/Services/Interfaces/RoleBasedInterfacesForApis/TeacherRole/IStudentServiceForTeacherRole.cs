@@ -1,9 +1,10 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Student;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole
 {
     public interface IStudentServiceForTeacherRole
     {
-        public Student GetStudent(int id);
+        public StudentViewModel GetStudent(int id);
     }
 }

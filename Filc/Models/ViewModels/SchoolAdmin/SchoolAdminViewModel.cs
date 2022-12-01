@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Shared;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,7 +15,7 @@ namespace Filc.Models.EntityViewModels.SchoolAdmin
             LastName = admin.LastName;
             BirthDate = admin.BirthDate;
             Address = admin.Address;
-            School = new SchoolViewModelForSchoolAdminViewModel(admin.School);
+            School = new SchoolViewModelShared(admin.School);
         }
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -22,6 +23,6 @@ namespace Filc.Models.EntityViewModels.SchoolAdmin
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
-        public virtual SchoolViewModelForSchoolAdminViewModel School { get; set; }
+        public virtual SchoolViewModelShared School { get; set; }
     }
 }

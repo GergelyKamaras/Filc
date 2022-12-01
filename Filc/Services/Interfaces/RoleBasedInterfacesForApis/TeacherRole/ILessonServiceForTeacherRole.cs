@@ -1,11 +1,12 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Lesson;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole
 {
     public interface ILessonServiceForTeacherRole
     {
-        public Lesson GetLessonById(int id);
-        public List<Lesson> GetLessonByStudentId(int id);
-        public List<Lesson> GetLessonsByTeacher(int id);
+        public LessonViewModel GetLessonById(int id);
+        public List<LessonViewModel> GetLessonByStudentId(int id);
+        public List<LessonViewModel> GetLessonsByTeacher(int id);
     }
 }
