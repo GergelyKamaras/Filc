@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using EFDataAccessLibrary.Models;
 
-namespace Filc.Models.EntityViewModels.SchoolAdmin
+namespace Filc.Models.ViewModels.Shared
 {
-    public class SchoolViewModelForSchoolAdminViewModel
+    public class SchoolViewModelShared
     {
-        public SchoolViewModelForSchoolAdminViewModel(EFDataAccessLibrary.Models.School school)
+        public SchoolViewModelShared(School school)
         {
             Id = school.Id;
             Name = school.Name;

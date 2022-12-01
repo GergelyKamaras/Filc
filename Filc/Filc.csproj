@@ -136,6 +136,10 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\DataFetches\" />
+    <Folder Include="Models\ViewModels\Mark\" />
+    <Folder Include="Models\ViewModels\Lesson\" />
+    <Folder Include="Models\ViewModels\Teacher\" />
+    <Folder Include="Models\ViewModels\Student\" />
   </ItemGroup>
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
 		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

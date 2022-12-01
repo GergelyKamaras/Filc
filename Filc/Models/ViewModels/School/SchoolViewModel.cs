@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Shared;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -10,12 +11,12 @@ namespace Filc.Models.EntityViewModels.School
         public string Name { get; set; }
         public string Address { get; set; }
         public string SchoolType { get; set; }
-        public List<SchoolAdminViewModelForSchool> SchoolAdmin { get; set; }
-        public List<StudentViewModelForSchool> Students { get; set; }
-        public List<SubjectViewModelForSchool> Subjects { get; set; }
-        public List<LessonViewModelForSchool> Lessons { get; set; }
-        public List<TeacherViewModelForSchool> Teachers { get; set; }
-        public List<SchoolClassViewModelForSchool> Classes { get; set; }
+        public List<SchoolAdminViewModelShared> SchoolAdmin { get; set; }
+        public List<StudentViewModelShared> Students { get; set; }
+        public List<SubjectViewModelShared> Subjects { get; set; }
+        public List<LessonViewModelShared> Lessons { get; set; }
+        public List<TeacherViewModelShared> Teachers { get; set; }
+        public List<SchoolClassViewModelShared> Classes { get; set; }
 
         public SchoolViewModel(EFDataAccessLibrary.Models.School school)
         {
@@ -24,23 +25,23 @@ namespace Filc.Models.EntityViewModels.School
             Address = school.Address;
             SchoolType = school.SchoolType;
 
-            SchoolAdmin = new List<SchoolAdminViewModelForSchool>();
-            school.SchoolAdmin.ForEach(admin => SchoolAdmin.Add(new SchoolAdminViewModelForSchool(admin)));
+            SchoolAdmin = new List<SchoolAdminViewModelShared>();
+            school.SchoolAdmin.ForEach(admin => SchoolAdmin.Add(new SchoolAdminViewModelShared(admin)));
 
-            Students = new List<StudentViewModelForSchool>();
-            school.Students.ForEach(student => Students.Add(new StudentViewModelForSchool(student)));
+            Students = new List<StudentViewModelShared>();
+            school.Students.ForEach(student => Students.Add(new StudentViewModelShared(student)));
 
-            Subjects = new List<SubjectViewModelForSchool>();
-            school.Subjects.ForEach(subject => Subjects.Add(new SubjectViewModelForSchool(subject)));
+            Subjects = new List<SubjectViewModelShared>();
+            school.Subjects.ForEach(subject => Subjects.Add(new SubjectViewModelShared(subject)));
 
-            Lessons = new List<LessonViewModelForSchool>();
-            school.Lessons.ForEach(lesson => Lessons.Add(new LessonViewModelForSchool(lesson)));
+            Lessons = new List<LessonViewModelShared>();
+            school.Lessons.ForEach(lesson => Lessons.Add(new LessonViewModelShared(lesson)));
             
-            Teachers = new List<TeacherViewModelForSchool>();
-            school.Teachers.ForEach(teacher => Teachers.Add(new TeacherViewModelForSchool(teacher)));
+            Teachers = new List<TeacherViewModelShared>();
+            school.Teachers.ForEach(teacher => Teachers.Add(new TeacherViewModelShared(teacher)));
 
-            Classes = new List<SchoolClassViewModelForSchool>();
-            school.Classes.ForEach(schoolClass => Classes.Add(new SchoolClassViewModelForSchool(schoolClass)));
+            Classes = new List<SchoolClassViewModelShared>();
+            school.Classes.ForEach(schoolClass => Classes.Add(new SchoolClassViewModelShared(schoolClass)));
         }
     }
 }

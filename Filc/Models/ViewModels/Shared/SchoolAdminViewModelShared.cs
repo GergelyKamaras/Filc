@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using EFDataAccessLibrary.Models;
 
 
-namespace Filc.Models.EntityViewModels.School
+namespace Filc.Models.ViewModels.Shared
 {
-    public class SchoolAdminViewModelForSchool
+    public class SchoolAdminViewModelShared
     {
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -15,7 +15,7 @@ namespace Filc.Models.EntityViewModels.School
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
 
-        public SchoolAdminViewModelForSchool(EFDataAccessLibrary.Models.SchoolAdmin schoolAdmin)
+        public SchoolAdminViewModelShared(SchoolAdmin schoolAdmin)
         {
             Id = schoolAdmin.Id;
             user = schoolAdmin.user;

@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using EFDataAccessLibrary.Models;
 
-namespace Filc.Models.EntityViewModels.School
+namespace Filc.Models.ViewModels.Shared
 {
-    public class SchoolClassViewModelForSchool
+    public class SchoolClassViewModelShared
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public SchoolClassViewModelForSchool(SchoolClass schoolClass)
+        public SchoolClassViewModelShared(EFDataAccessLibrary.Models.SchoolClass schoolClass)
         {
             Id = schoolClass.Id;
             Name = schoolClass.Name;
