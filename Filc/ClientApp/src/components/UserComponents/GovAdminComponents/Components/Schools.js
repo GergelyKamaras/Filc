@@ -1,4 +1,5 @@
 ﻿import SchoolListFetch from "../Controllers/SchoolListFetch";
+import AddSchool from '../Components/AddSchool'
 import { useState, useEffect } from 'react'
 
 const Schools = () => {
@@ -32,14 +33,15 @@ const Schools = () => {
                                 <p key={admin.id}> - {admin.firstName} {admin.lastName}</p>
                             ))}
                             <p><strong>Number of students: </strong>{school.students.length}</p>
-                            <p>Subjects:</p>
-                            <p>Lessons:</p>
-                            <p>Teachers: </p>
-                            <p>Classes: </p>
+                            <p><strong>Subjects:</strong></p>
+                            <p><strong>Lessons:</strong></p>
+                            <p><strong>Teachers:</strong> </p>
+                            <p><strong>Classes: </strong></p>
                         </div>
                     ))}
                 </ul>
             )}
+            <AddSchool />
         </div>
 
     );
