@@ -12,7 +12,7 @@ import SchoolAdmins from './components/UserComponents/GovAdminComponents/Compone
 import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
 import Schools from './components/UserComponents/GovAdminComponents/Components/Schools';
 import School from './components/UserComponents/GovAdminComponents/Components/School';
-import IndexPage from './Pages/AppIndex';
+import AppIndex from './Pages/AppIndex';
 import LoginPage from './Pages/LoginPage';
 
 function App() {
