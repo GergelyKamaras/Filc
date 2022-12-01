@@ -10,7 +10,7 @@ import SchoolAdmins from './components/UserComponents/GovAdminComponents/Compone
 import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
 import Schools from './components/UserComponents/GovAdminComponents/Components/Schools';
 import School from './components/UserComponents/GovAdminComponents/Components/School';
-import AppIndex from './Pages/AppIndex';
+import IndexPage from './Pages/AppIndex';
 import LoginPage from './Pages/LoginPage';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/*Routes available to all users*/}
-          <Route path="" element={<AppIndex />} />
+          <Route path="" element={<IndexPage/>} />
           <Route path='/login' element={<LoginPage/>}/>
           <Route path="Unauthorized" element={<Unauthorized />} />
           <Route path="schooladmins/:id" element={<SchoolAdmin />} />

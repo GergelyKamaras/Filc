@@ -1,21 +1,22 @@
 .profile{
-    height: 600px;
+    background-color: rgb(255, 255, 255);
+    height: 500px;
     width: 500px;
-    border: 1px solid;
-    border-radius: 2%;
-    box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.88);
-    -webkit-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.88);
-    -moz-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.88);
+    border: 0.2px groove rgba(128, 127, 127, 0.815);
+    border-radius: 0.2%;
+    box-shadow: 1px 1px 1px 0.2px rgba(133, 125, 125, 0.815);
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(133, 125, 125, 0.815);
+    -moz-box-shadow: 1px 1px 1px 1px rgba(133, 125, 125, 0.815);
 }
 .profile-top{
     height: 150px;
     display: flex;
 }
 .profile-details{
-    height: 300px;
+    height: 400px;
 }
 .profile-footer{
-    height: 150px;
+    height: 50px;
 }
 
 .profile-pic{
@@ -29,6 +30,13 @@
     justify-items: center;
     box-shadow: inset 5px 5px 4px #d9d9d9,
             inset -5px -5px 4px #e7e7e7;
+}
+
+.logged-text{
+    display: inline;
+    margin-top: 65px;
+    margin-left: 30px;
+    font-size: 24px;
 }
 
 .not-logged-text{

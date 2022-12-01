@@ -1,5 +1,5 @@
 import Header from '../components/Header';
-import SignInBox from '../components/SignInBox';
+import SignInBox from '../components/IndexPageComponents/SignInBox';
 import React from "react";
 
 const LoginPage = () => {

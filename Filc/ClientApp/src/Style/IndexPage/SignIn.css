@@ -1,0 +1,41 @@
+.sign-in-box{
+    width: 400px;
+    height: 400px;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.login-btn{
+    float: right;
+    margin-top: 85px;
+    background-color: #0095ff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.15385;
+    outline: none;
+    padding: 8px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.email{
+    margin-top: 50px;
+    
+}
+
+.password{
+    margin-top: 25px;
+}
