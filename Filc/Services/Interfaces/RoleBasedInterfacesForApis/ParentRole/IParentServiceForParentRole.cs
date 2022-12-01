@@ -5,7 +5,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole
 {
     public interface IParentServiceForParentRole
     {
-        public ParentrentViewModel GetParent(int id);
+        public ParentViewModel GetParent(int id);
         public void UpdateParent(Parent parent);
     }
 }

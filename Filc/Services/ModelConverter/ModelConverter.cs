@@ -40,10 +40,10 @@ namespace Filc.Services.ModelConverter
             return lessonModels;
         }
 
-        public static List<ParentrentViewModel> MapParentsToParentViewModel(List<Parent> parents)
+        public static List<ParentViewModel> MapParentsToParentViewModel(List<Parent> parents)
         {
-            List<ParentrentViewModel> parentModels = new List<ParentrentViewModel>();
-            parents.ForEach(parent => parentModels.Add(new ParentrentViewModel(parent)));
+            List<ParentViewModel> parentModels = new List<ParentViewModel>();
+            parents.ForEach(parent => parentModels.Add(new ParentViewModel(parent)));
             return parentModels;
         }
 
