@@ -4,9 +4,9 @@ const RequireAuth = ({allowedRoles}) => {
   const location = useLocation();
 
   return (
-    localStorage?.token?.claims[1]?.find(role => allowedRoles.includes(role))
+    allowedRoles.includes(localStorage?.userRole)
       ? <Outlet />
-      : localStorage?.token
+      : localStorage?.userEmail
         ? <Navigate to="/Unauthorized" state={{ from: location }} replace />
         : <Navigate to="/" state={{ from: location }} replace />
   );
