@@ -1,7 +1,9 @@
 ﻿import SchoolAdminListFetch from "../Controllers/SchoolAdminListFetch";
+import { useParams } from "react-router-dom";
 
 const SchoolAdmins = () => {
-  const SchoolAdminList = SchoolAdminListFetch();
+  const params = useParams();
+  const SchoolAdminList = SchoolAdminListFetch(params.schoolid);
 
   return (
     <>
