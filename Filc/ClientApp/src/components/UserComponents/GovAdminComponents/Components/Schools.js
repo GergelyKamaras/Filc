@@ -1,10 +1,18 @@
 ﻿import SchoolListFetch from "../Controllers/SchoolListFetch";
 import AddSchool from '../Components/AddSchool'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Schools = () => {
     const [schoolData, setSchoolData] = useState({ schools: [] });
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    function navigateToSchool(e, id) {
+        e.preventDefault();
+        navigate('/govadmin/schools/' + id);
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,7 +28,7 @@ const Schools = () => {
         <div>
             <h1>Schools</h1>
             {isLoading ? (
-                <div>Loading ...</div>
+                <div><h3>Loading ...</h3></div>
             ) : (
                 <ul>
                     {schoolData.schools.map((school) => (
@@ -31,12 +39,9 @@ const Schools = () => {
                             <p><strong>School Admins: </strong></p>
                                 {school.schoolAdmin.map((admin) => (
                                 <p key={admin.id}> - {admin.firstName} {admin.lastName}</p>
-                            ))}
+                                ))}
                             <p><strong>Number of students: </strong>{school.students.length}</p>
-                            <p><strong>Subjects:</strong></p>
-                            <p><strong>Lessons:</strong></p>
-                            <p><strong>Teachers:</strong> </p>
-                            <p><strong>Classes: </strong></p>
+                            <button onClick={(e) => navigateToSchool(e, school.id)}>School page</button>
                         </div>
                     ))}
                 </ul>
