@@ -8,7 +8,7 @@ namespace EFDataAccessLibrary.DataAccess
 {
     public enum Roles
     {
-        Goverment,
+        Government,
         SchoolAdmin,
         Teacher,
         Student,
