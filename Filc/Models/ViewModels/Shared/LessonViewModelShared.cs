@@ -7,12 +7,12 @@ namespace Filc.Models.ViewModels.Shared
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Subject Subject { get; set; }
+        public SubjectViewModelShared Subject { get; set; }
         public LessonViewModelShared(EFDataAccessLibrary.Models.Lesson lesson)
         {
             Id = lesson.Id;
             Name = lesson.Name;
-            Subject = lesson.Subject;
+            Subject = new SubjectViewModelShared(lesson.Subject);
         }
     }
 }
