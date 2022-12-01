@@ -6,6 +6,7 @@ import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
 import NotFound from './components/NotFound';
 import GovAdmins from './components/UserComponents/GovAdminComponents/Components/GovAdmins';
+import GovAdmin from './components/UserComponents/GovAdminComponents/Components/GovAdmin';
 
 function App() {
 
@@ -31,7 +32,8 @@ function App() {
 
           {/*TODO: Routes available to GovAdmins*/}
           <Route path="govadmin" element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
-            <Route path="list" element={<GovAdmins /> } />
+            <Route path="list" element={<GovAdmins />} />
+            <Route path="list/:id" element={<GovAdmin /> } />
           </Route>
 
           {/*Not Existing Route*/}
