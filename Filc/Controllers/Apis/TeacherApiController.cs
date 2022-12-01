@@ -1,5 +1,9 @@
 ﻿using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.ViewModels.Lesson;
+using Filc.Models.ViewModels.Mark;
+using Filc.Models.ViewModels.Student;
+using Filc.Models.ViewModels.Teacher;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Authorization;
@@ -40,7 +44,7 @@ namespace Filc.Controllers.Apis
         // Teachers
         [HttpGet]
         [Route("{id}")]
-        public Teacher GetTeacher(int id)
+        public TeacherViewModel GetTeacher(int id)
         {
             return _teacherService.GetTeacher(id);
         }
@@ -54,21 +58,21 @@ namespace Filc.Controllers.Apis
         // Lessons
         [HttpGet]
         [Route("lessons/{id}")]
-        public Lesson GetLesson(int id)
+        public LessonViewModel GetLesson(int id)
         {
             return _lessonService.GetLessonById(id);
         }
 
         [HttpGet]
         [Route("lessons/students/{id}")]
-        public List<Lesson> GetLessonsByStudent(int id)
+        public List<LessonViewModel> GetLessonsByStudent(int id)
         {
             return _lessonService.GetLessonByStudentId(id);
         }
 
         [HttpGet]
         [Route("lessons/teachers/{id}")]
-        public List<Lesson> GetLessonsByTeacher(int id)
+        public List<LessonViewModel> GetLessonsByTeacher(int id)
         {
             return _lessonService.GetLessonsByTeacher(id);
         }
@@ -76,21 +80,21 @@ namespace Filc.Controllers.Apis
         // Marks
         [HttpGet]
         [Route("marks/{id}")]
-        public Mark GetMark(int id)
+        public MarkViewModel GetMark(int id)
         {
             return _markService.GetMark(id);
         }
 
         [HttpGet]
         [Route("marks/student/{id}")]
-        public List<Mark> GetMarksByStudent(int id)
+        public List<MarkViewModel> GetMarksByStudent(int id)
         {
             return _markService.GetMarksByStudent(id);
         }
 
         [HttpGet]
         [Route("marks/lesson/{id}")]
-        public List<Mark> GetMarksByLesson(int id)
+        public List<MarkViewModel> GetMarksByLesson(int id)
         {
             return _markService.GetMarkByLesson(id);
         }
@@ -119,7 +123,7 @@ namespace Filc.Controllers.Apis
         // Students
         [HttpGet]
         [Route("students/{id}")]
-        public Student GetStudent(int id)
+        public StudentViewModel GetStudent(int id)
         {
             return _studentService.GetStudent(id);
         }

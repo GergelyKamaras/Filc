@@ -20,7 +20,6 @@ const InnerProfil = ({logged}) => {
                 <div className="profile-top">
                     <div className="profile-pic">unavailable</div>
                     <p className="not-logged-text">You have to login first</p>
-
                 </div>
                 <div className="profile-details">
 

@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Mark;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,13 +13,14 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db = esContext;
         }
-        public Mark GetMark(int id)
+        public MarkViewModel GetMark(int id)
         {
-            return _db.Mark.Include(mark => mark.Lesson)
+            Mark mark = _db.Mark.Include(mark => mark.Lesson)
                 .Include(mark => mark.Student)
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Subject)
                 .First(x => x.Id == id);
+            return new MarkViewModel(mark);
         }
         public void AddMark(Mark mark)
         {
@@ -35,20 +37,22 @@ namespace Filc.Services.DataBaseQueryServices
             _db.Mark.Remove(_db.Mark.First(mark => mark.Id == id));
             _db.SaveChanges();
         }
-        public List<Mark> GetMarksByStudent(int studentId)
+        public List<MarkViewModel> GetMarksByStudent(int studentId)
         {
-            return _db.Mark.Include(mark => mark.Lesson)
+            List<Mark> marks = _db.Mark.Include(mark => mark.Lesson)
                 .Include(mark => mark.Student)
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Subject)
                 .Where(mark => mark.Student.Id == studentId).ToList();
+            return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
         }
-        public List<Mark> GetMarkByLesson(int lessonId)
+        public List<MarkViewModel> GetMarkByLesson(int lessonId)
         {
-            return _db.Mark.Where(mark => mark.Lesson.Id == lessonId).Include(mark => mark.Lesson)
+            List<Mark> marks = _db.Mark.Where(mark => mark.Lesson.Id == lessonId).Include(mark => mark.Lesson)
                 .Include(mark => mark.Student)
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Subject).ToList();
+            return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
         }
     }
 }

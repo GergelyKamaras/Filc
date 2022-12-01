@@ -12,9 +12,9 @@ namespace EFDataAccessLibrary.DataAccess
         
         public static async Task InitRoleSeeds(RoleManager<IdentityRole> roleManager)
         {
-            if (!await roleManager.RoleExistsAsync(Roles.Goverment.ToString()))
+            if (!await roleManager.RoleExistsAsync(Roles.Government.ToString()))
             {
-                await roleManager.CreateAsync(new IdentityRole(Roles.Goverment.ToString())).ConfigureAwait(true);
+                await roleManager.CreateAsync(new IdentityRole(Roles.Government.ToString())).ConfigureAwait(true);
             }
             if (!await roleManager.RoleExistsAsync(Roles.SchoolAdmin.ToString()))
             {

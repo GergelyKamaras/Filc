@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Configuration;
+using Filc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -115,7 +116,6 @@ builder.Services.AddTransient<ISchoolServiceForTeacherRole, SchoolTableQueryServ
 builder.Services.AddTransient<IStudentServiceForTeacherRole, StudentTableQueryService>();
 builder.Services.AddTransient<ITeacherServiceForTeacherRole, TeacherTableQueryService>();
 
-
 //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order middleware order
 var app = builder.Build();
 
@@ -125,20 +125,12 @@ if (!app.Environment.IsDevelopment())
      app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseSpaStaticFiles();
-app.UseRouting();
-app.UseCors("MyAllowedOrigins");
-app.UseAuthentication();
-app.UseAuthorization();
-
-
-
 var seedService = app.Services.CreateScope().ServiceProvider;
 try
 {
     await SeedRoles.InitRoleSeeds(seedService.GetRequiredService<RoleManager<IdentityRole>>());
+    await SeedAdmin.InitAdminSeed(seedService.GetRequiredService<RoleManager<IdentityRole>>(),
+        seedService.GetRequiredService<UserManager<ApplicationUser>>());
 }
 catch (Exception ex)
 {
@@ -146,9 +138,13 @@ catch (Exception ex)
     logger.LogError(ex, "An error occurred while seeding the database.");
 }
 
-
-
-
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseSpaStaticFiles();
+app.UseRouting();
+app.UseCors("MyAllowedOrigins");
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

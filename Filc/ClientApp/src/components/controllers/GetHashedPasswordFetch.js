@@ -1,14 +1,20 @@
-﻿import React from 'react'
+﻿
+import React from 'react'
+import { resultingClientExists } from 'workbox-core/_private';
 
-const GetHashedPasswordFetch = async (data) => {
-    const response = await fetch('https://localhost:7014/authentication/login', {
-        method: 'GET',
+const GetHashedPasswordFetch = (data) => {
+    const myresponse = fetch('https://localhost:7014/authentication/loginsalt', {
+        method: 'POST',
         headers: {
+            "Accept": "application/json",
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    })
-    return await response;
+
+    }).then((response) => response.json()).then(result =>{
+        return result.message; 
+  }) 
+  return myresponse
 }
 
 export default GetHashedPasswordFetch;
