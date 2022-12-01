@@ -13,7 +13,7 @@ namespace Filc.Models.ViewModels.Shared
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
 
-        public TeacherViewModelShared(Teacher teacher)
+        public TeacherViewModelShared(EFDataAccessLibrary.Models.Teacher teacher)
         {
             Id = teacher.Id;
             user = teacher.user;
