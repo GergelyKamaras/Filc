@@ -7,8 +7,8 @@ import Unauthorized from './components/Unauthorized';
 import NotFound from './components/NotFound';
 import GovAdmins from './components/UserComponents/GovAdminComponents/Components/GovAdmins';
 import GovAdmin from './components/UserComponents/GovAdminComponents/Components/GovAdmin';
-import SchoolAdmins from './components/UserComponents/SchoolAdminComponents/Components/SchoolAdmins';
-import SchoolAdmin from './components/UserComponents/SchoolAdminComponents/Components/SchoolAdmin';
+import SchoolAdmins from './components/UserComponents/GovAdminComponents/Components/SchoolAdmins';
+import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
 
 function App() {
 
