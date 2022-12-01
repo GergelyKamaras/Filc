@@ -1,9 +1,9 @@
-﻿import GovAdminListFetchById from "../Controllers/GovAdminListFetchById";
+﻿import GovAdminFetchById from "../Controllers/GovAdminFetchById";
 import { useParams } from 'react-router-dom';
 
 const GovAdmin = () => {
   let params = useParams();
-  const RequestedAdmin = GovAdminListFetchById(params.id); 
+  const RequestedAdmin = GovAdminFetchById(params.id); 
 
   return (
     <>
