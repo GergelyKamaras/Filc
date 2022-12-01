@@ -135,7 +135,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\components\UserComponents\SchoolAdminComponents\Components\" />
     <Folder Include="ClientApp\src\DataFetches\" />
   </ItemGroup>
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
