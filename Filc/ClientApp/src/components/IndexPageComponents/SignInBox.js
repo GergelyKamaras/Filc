@@ -1,12 +1,11 @@
-﻿import RegistrationFetch from "../components/controllers/RegistrationFetch"
-import GetHashedPasswordFetch from "../components/controllers/GetHashedPasswordFetch"
-import LoginApiFetch from "../components/controllers/LoginApiFetch"
+﻿import RegistrationFetch from "../controllers/RegistrationFetch"
+import GetHashedPasswordFetch from "../controllers/GetHashedPasswordFetch"
+import LoginApiFetch from "../controllers/LoginApiFetch"
 import bcrypt from 'bcryptjs'
 import { useRef } from 'react'
-import React from 'react'
+import '../../Style/IndexPage/SignIn.css'
 
-
-const SignInBox = () => {
+const SignInBox = (setLogin) => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
@@ -31,12 +30,11 @@ const SignInBox = () => {
         
         console.log(userData);
         RegistrationFetch(userData);
-
-        window.localStorage.setItem('login', JSON.stringify({ email, hashedPassword })); // load into session
     }
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        
         const email = emailInputRef.current.value;
 
         const userEmail = {
@@ -50,31 +48,26 @@ const SignInBox = () => {
             Email: email,
             Password: hashedPassword,
         };
+
         LoginApiFetch(data);
+        setLogin();
     }
 
     return (
-        <div>
-            <h3>Registration/Sign In</h3>
-            <div className="col-md-12">
+        <div className="sign-in-box">
+            <div className="sign-in-box-inner">
                 <form>
-                    <div className="form-group">
+                    <div className="form-group email">
                         <label htmlFor="Email">Email</label>
                         <input ref={emailInputRef} id="Email" type="email" className="form-control" />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group password">
                         <label htmlFor="Password">Password</label>
                         <input ref={passwordInputRef} id="Password" type="password" className="form-control" />
                     </div>
-                    {/*<div className="form-group">*/}
-                    {/*    <div className="checkbox">*/}
-                    {/*        <label htmlFor="RememberMe">Remember Me</label>*/}
-                    {/*        <input id="RememberMe" type="checkbox" />*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    <button type="submit" className="btn btn-primary"
-                        onClick={handleRegistration}>Register</button>
-                    <button type="submit" className="btn btn-primary"
+                    {/* <button type="submit" className="btn btn-primary"
+                        onClick={handleRegistration}>Register</button> */}
+                    <button type="submit" className="login-btn"
                         onClick={handleLogin}>Login</button>
                 </form>
             </div>
