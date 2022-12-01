@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.ViewModels.Parent;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,12 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
             _userService = userService;
         }
-        public Parent GetParent(int id)
+        public ParentrentViewModel GetParent(int id)
         {
-            return _db.Parent.Include(parent => parent.user)
+            Parent parent = _db.Parent.Include(parent => parent.user)
                 .Include(parent => parent.Children)
                 .First(parent => parent.Id == id);
+            return new ParentrentViewModel(parent);
         }
 
         public void AddParent(Parent parent)
