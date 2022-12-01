@@ -4,7 +4,7 @@
       method: 'GET'
   }
   );
-  return response;
+  return response.json();
 }
 
 export default GovAdminListFetch;
