@@ -17,10 +17,10 @@ function Header() {
         localStorage.clear();
         navigate("")
     }
-    const adminFuncts =<>
-     <Nav.Link href="govadmin/schools">Registered schools in the system</Nav.Link>
-    <Nav.Link href="govadmin/schooladmins">School administrator registration</Nav.Link>
-    <Nav.Link href="#action3">Students of the system</Nav.Link>
+    const govAdminFuncts =<>
+     <Nav.Link href="govadmin/schools">All Schools</Nav.Link>
+    <Nav.Link href="govadmin/schooladmins/1">School Administrators</Nav.Link>
+    <Nav.Link href="#action3">All Students</Nav.Link>
     <Nav.Link href="#action2">View national statistics</Nav.Link>
     </>
     const standard =
@@ -32,7 +32,7 @@ function Header() {
         (role===null) ? 
           standard
         :
-        adminFuncts
+        govAdminFuncts
       
       )
   },[localStorage.getItem("userRole")])
@@ -55,7 +55,7 @@ function Header() {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                    System Management Accesses
+                    System Management Access
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
@@ -73,10 +73,10 @@ function Header() {
                     title="Profile manager"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                     >
-                        <NavDropdown.Item href="#action3">Edit personal datas</NavDropdown.Item>
+                        <NavDropdown.Item href="#action3">Edit personal data</NavDropdown.Item>
                         <NavDropdown.Item href="#action4">Change password</NavDropdown.Item>
                         <NavDropdown.Item href="#action5">Settings</NavDropdown.Item>
-                        <NavDropdown.Item href="#action5">Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={(e) => e.preventDefault(), logout}>Logout</NavDropdown.Item>
                   </NavDropdown>
                   :
                   <NavDropdown
