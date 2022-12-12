@@ -60,6 +60,7 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateSchoolAdmin(SchoolAdmin schoolAdmin)
         {
+            schoolAdmin.School = _db.SchoolAdmin.First(a => a.Id == schoolAdmin.Id).School;
             _db.SchoolAdmin.Update(schoolAdmin);
             _db.SaveChanges();
         }
