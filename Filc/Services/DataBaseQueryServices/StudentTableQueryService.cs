@@ -50,6 +50,10 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateStudent(Student student)
         {
+            student.user = _userService.GetUserByEmail(student.user.Email);
+            student.School = _db.School.First(s => s.Id == student.School.Id);
+            student.Marks = _db.Mark.Where(mark => mark.Student.Id == student.Id).ToList();
+            student.Lessons = _db.Lesson.Where(lesson => lesson.students.Any(s => s.Id == student.Id)).ToList();
             _db.Student.Update(student);
             _db.SaveChanges();
         }
