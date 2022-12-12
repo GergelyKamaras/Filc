@@ -45,12 +45,36 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void AddLesson(Lesson lesson)
         {
+            lesson.School = _db.School.First(s => s.Id == lesson.School.Id);
+            
+            for (int i = 0; i < lesson.students.Count; i++)
+            {
+                lesson.students[i] = _db.Student.First(s => s.Id == lesson.students[i].Id);
+            }
+
+            for (int i = 0; i < lesson.Teachers.Count; i++)
+            {
+                lesson.Teachers[i] = _db.Teacher.First(t => t.Id == lesson.Teachers[i].Id);
+            }
+            
             _db.Lesson.Add(lesson);
             _db.SaveChanges();
         }
 
         public void UpdateLesson(Lesson lesson)
         {
+            lesson.School = _db.School.First(s => s.Id == lesson.School.Id);
+
+            for (int i = 0; i < lesson.students.Count; i++)
+            {
+                lesson.students[i] = _db.Student.First(s => s.Id == lesson.students[i].Id);
+            }
+
+            for (int i = 0; i < lesson.Teachers.Count; i++)
+            {
+                lesson.Teachers[i] = _db.Teacher.First(t => t.Id == lesson.Teachers[i].Id);
+            }
+
             _db.Lesson.Update(lesson);
             _db.SaveChanges();
         }
