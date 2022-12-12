@@ -28,12 +28,21 @@ namespace Filc.Services.DataBaseQueryServices
         {
             ApplicationUser user = _userService.GetUserByEmail(parent.user.Email);
             parent.user = user;
+            for (int i = 0; i < parent.Children.Count; i++)
+            {
+                parent.Children[i] = _db.Student.First(s => s.Id == parent.Children[i].Id);
+            }
             _db.Parent.Add(parent);
             _db.SaveChanges();
         }
 
         public void UpdateParent(Parent parent)
         {
+            parent.user = _userService.GetUserByEmail(parent.user.Email);
+            for (int i = 0; i < parent.Children.Count; i++)
+            {
+                parent.Children[i] = _db.Student.First(s => s.Id == parent.Children[i].Id);
+            }
             _db.Parent.Update(parent);
             _db.SaveChanges();
         }
