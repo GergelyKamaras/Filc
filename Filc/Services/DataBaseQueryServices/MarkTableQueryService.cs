@@ -24,11 +24,17 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public void AddMark(Mark mark)
         {
+            mark.Lesson = _db.Lesson.First(l => l.Id == mark.Lesson.Id);
+            mark.Student = _db.Student.First(s => s.Id == mark.Student.Id);
+            mark.Teacher = _db.Teacher.First(t => t.Id == mark.Teacher.Id);
             _db.Mark.Add(mark);
             _db.SaveChanges();
         }
         public void UpdateMark(Mark mark)
         {
+            mark.Lesson = _db.Lesson.First(l => l.Id == mark.Lesson.Id);
+            mark.Student = _db.Student.First(s => s.Id == mark.Student.Id);
+            mark.Teacher = _db.Teacher.First(t => t.Id == mark.Teacher.Id);
             _db.Mark.Update(mark);
             _db.SaveChanges();
         }
