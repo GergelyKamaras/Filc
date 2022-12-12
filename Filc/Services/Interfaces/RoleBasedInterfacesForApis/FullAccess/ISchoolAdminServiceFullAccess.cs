@@ -6,7 +6,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface ISchoolAdminServiceFullAccess : ISchoolAdminServiceForSchoolAdminRole
     {
-        public List<SchoolAdminViewModel> GetAllSchoolAdmins();
+        public List<SchoolAdminDTO> GetAllSchoolAdmins();
         public void DeleteSchoolAdmin(int schoolAdminId);
     }
 }

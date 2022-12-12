@@ -5,7 +5,7 @@ using Filc.Models.ViewModels.Shared;
 
 namespace Filc.Models.ViewModels.Student
 {
-    public class StudentViewModel
+    public class StudentDTO
     {
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -13,11 +13,11 @@ namespace Filc.Models.ViewModels.Student
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
-        public List<LessonViewModelShared>? Lessons { get; set; }
-        public List<MarkViewModelShared>? Marks { get; set; }
-        public SchoolViewModelShared School { get; set; }
+        public List<LessonSharedDTO>? Lessons { get; set; }
+        public List<MarkSharedDTO>? Marks { get; set; }
+        public SchoolSharedDTO School { get; set; }
 
-        public StudentViewModel(EFDataAccessLibrary.Models.Student student)
+        public StudentDTO(EFDataAccessLibrary.Models.Student student)
         {
             Id = student.Id;
             user = student.user;
@@ -25,11 +25,11 @@ namespace Filc.Models.ViewModels.Student
             LastName = student.LastName;
             BirthDate = student.BirthDate;
             Address = student.Address;
-            School = new SchoolViewModelShared(student.School);
-            Lessons = new List<LessonViewModelShared>();
-            student.Lessons.ForEach(lesson => Lessons.Add(new LessonViewModelShared(lesson)));
-            Marks = new List<MarkViewModelShared>();
-            student.Marks.ForEach(mark => Marks.Add(new MarkViewModelShared(mark)));
+            School = new SchoolSharedDTO(student.School);
+            Lessons = new List<LessonSharedDTO>();
+            student.Lessons.ForEach(lesson => Lessons.Add(new LessonSharedDTO(lesson)));
+            Marks = new List<MarkSharedDTO>();
+            student.Marks.ForEach(mark => Marks.Add(new MarkSharedDTO(mark)));
         }
     }
 }

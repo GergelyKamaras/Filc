@@ -17,17 +17,17 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
             _userService = userService;
         }
-        public StudentViewModel GetStudent(int id)
+        public StudentDTO GetStudent(int id)
         {
             Student student = _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
                 .Include(student => student.Marks)
                 .First(x => x.Id == id);
-            return new StudentViewModel(student);
+            return new StudentDTO(student);
         }
 
-        public List<StudentViewModel> GetAllStudents()
+        public List<StudentDTO> GetAllStudents()
         {
             List<Student> students = _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)
@@ -50,6 +50,10 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateStudent(Student student)
         {
+            student.user = _userService.GetUserByEmail(student.user.Email);
+            student.School = _db.School.First(s => s.Id == student.School.Id);
+            student.Marks = _db.Mark.Where(mark => mark.Student.Id == student.Id).ToList();
+            student.Lessons = _db.Lesson.Where(lesson => lesson.students.Any(s => s.Id == student.Id)).ToList();
             _db.Student.Update(student);
             _db.SaveChanges();
         }

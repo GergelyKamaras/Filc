@@ -30,7 +30,7 @@ namespace Filc.Controllers.Apis
         // Schools
         [HttpGet]
         [Route("schools/{id}")]
-        public SchoolViewModel GetSchool(int id)
+        public SchoolDTO GetSchool(int id)
         {
             return _schoolService.GetSchool(id);
         }
@@ -38,21 +38,21 @@ namespace Filc.Controllers.Apis
         // Marks
         [HttpGet]
         [Route("marks/{id}")]
-        public MarkViewModel GetMark(int id)
+        public MarkDTO GetMark(int id)
         {
             return _markService.GetMark(id);
         }
 
         [HttpGet]
         [Route("marks/student/{id}")]
-        public List<MarkViewModel> GetMarksByStudent(int id)
+        public List<MarkDTO> GetMarksByStudent(int id)
         {
             return _markService.GetMarksByStudent(id);
         }
 
         [HttpGet]
         [Route("students/{id}")]
-        public StudentViewModel GetStudent(int id)
+        public StudentDTO GetStudent(int id)
         {
             return _studentService.GetStudent(id);
         }
@@ -67,7 +67,7 @@ namespace Filc.Controllers.Apis
         // Parents
         [HttpGet]
         [Route("parents/{id}")]
-        public ParentViewModel GetParent(int id)
+        public ParentDTO GetParent(int id)
         {
             return _parentService.GetParent(id);
         }

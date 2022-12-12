@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Filc.Models.ViewModels.Shared
 {
-    public class StudentViewModelShared
+    public class StudentSharedDTO
     {
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -13,7 +13,7 @@ namespace Filc.Models.ViewModels.Shared
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
 
-        public StudentViewModelShared(EFDataAccessLibrary.Models.Student student)
+        public StudentSharedDTO(EFDataAccessLibrary.Models.Student student)
         {
             Id = student.Id;
             user = student.user;

@@ -17,16 +17,16 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
             _userService = userService;
         }
-        public TeacherViewModel GetTeacher(int id)
+        public TeacherDTO GetTeacher(int id)
         {
             Teacher Teacher = _db.Teacher.Include(teacher => teacher.School)
                 .Include(teacher => teacher.user)
                 .Include(teacher => teacher.Lessons)
                 .Include(teacher => teacher.Subjects)
                 .First(x => x.Id == id);
-            return new TeacherViewModel(Teacher);
+            return new TeacherDTO(Teacher);
         }
-        public List<TeacherViewModel> GetAllTeachers()
+        public List<TeacherDTO> GetAllTeachers()
         {
             List<Teacher> Teachers = _db.Teacher.Include(teacher => teacher.School)
                 .Include(teacher => teacher.user)
@@ -37,7 +37,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
 
         //todo
-        public List<TeacherViewModel> GetAllTeachersBySchool(int schoolId)
+        public List<TeacherDTO> GetAllTeachersBySchool(int schoolId)
         {
             List<Teacher> Teachers = _db.Teacher.Where(teacher => teacher.School.Id == schoolId)
                 .Include(teacher => teacher.School)
@@ -60,6 +60,10 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateTeacher(Teacher teacher)
         {
+            teacher.user = _userService.GetUserByEmail(teacher.user.Email);
+            teacher.School = _db.Teacher.First(t => t.Id == teacher.Id).School;
+            teacher.Lessons = _db.Teacher.First(t => t.Id == teacher.Id).Lessons;
+            teacher.Subjects = _db.Teacher.First(t => t.Id == teacher.Id).Subjects;
             _db.Teacher.Update(teacher);
             _db.SaveChanges();
         }

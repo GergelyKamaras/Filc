@@ -43,14 +43,14 @@ namespace Filc.Controllers.Apis
         // SchoolAdmins
         [HttpGet]
         [Route("schools/{id}/admins")]
-        public List<SchoolAdminViewModel> GetAllSchoolAdminsBySchool(int schoolId)
+        public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdminsBySchool(int schoolId)
         {
             return _schoolAdminService.GetAllSchoolAdminsBySchool(schoolId);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public SchoolAdminViewModel GetSchoolAdminById(int id)
+        public Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO GetSchoolAdminById(int id)
         {
             return _schoolAdminService.GetSchoolAdminById(id);
         }
@@ -72,7 +72,7 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("schools/{id}")]
-        public SchoolViewModel GetSchool(int id)
+        public Models.EntityViewModels.School.SchoolDTO GetSchool(int id)
         {
             return _schoolService.GetSchool(id);
         }
@@ -88,21 +88,21 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("teachers")]
-        public List<TeacherViewModel> GetAllTeachers()
+        public List<TeacherDTO> GetAllTeachers()
         {
             return _teacherService.GetAllTeachers();
         }
 
         [HttpGet]
         [Route("teachers/{id}")]
-        public TeacherViewModel GetTeacher(int id)
+        public TeacherDTO GetTeacher(int id)
         {
             return _teacherService.GetTeacher(id);
         }
 
         [HttpGet]
         [Route("teachers/school/{id}")]
-        public List<TeacherViewModel> GetTeachersBySchool(int id)
+        public List<TeacherDTO> GetTeachersBySchool(int id)
         {
             return _teacherService.GetAllTeachersBySchool(id);
         }
@@ -132,21 +132,21 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("lessons/{id}")]
-        public LessonViewModel GetLesson(int id)
+        public LessonDTO GetLesson(int id)
         {
             return _lessonService.GetLessonById(id);
         }
 
         [HttpGet]
         [Route("lessons/students/{id}")]
-        public List<LessonViewModel> GetLessonsByStudent(int id)
+        public List<LessonDTO> GetLessonsByStudent(int id)
         {
             return _lessonService.GetLessonByStudentId(id);
         }
 
         [HttpGet]
         [Route("lessons/teachers/{id}")]
-        public List<LessonViewModel> GetLessonsByTeacher(int id)
+        public List<LessonDTO> GetLessonsByTeacher(int id)
         {
             return _lessonService.GetLessonsByTeacher(id);
         }
@@ -176,21 +176,21 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("marks/{id}")]
-        public MarkViewModel GetMark(int id)
+        public MarkDTO GetMark(int id)
         {
             return _markService.GetMark(id);
         }
 
         [HttpGet]
         [Route("marks/student/{id}")]
-        public List<MarkViewModel> GetMarksByStudent(int id)
+        public List<MarkDTO> GetMarksByStudent(int id)
         {
             return _markService.GetMarksByStudent(id);
         }
 
         [HttpGet]
         [Route("marks/lesson/{id}")]
-        public List<MarkViewModel> GetMarksByLesson(int id)
+        public List<MarkDTO> GetMarksByLesson(int id)
         {
             return _markService.GetMarkByLesson(id);
         }
@@ -220,14 +220,14 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("students")]
-        public List<StudentViewModel> GetAllStudents()
+        public List<StudentDTO> GetAllStudents()
         {
             return _studentService.GetAllStudents();
         }
 
         [HttpGet]
         [Route("students/{id}")]
-        public StudentViewModel GetStudent(int id)
+        public StudentDTO GetStudent(int id)
         {
             return _studentService.GetStudent(id);
         }
@@ -257,7 +257,7 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("parents/{id}")]
-        public ParentViewModel GetParent(int id)
+        public ParentDTO GetParent(int id)
         {
             return _parentService.GetParent(id);
         }

@@ -40,6 +40,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public void UpdateGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
+            governmentAdmin.user = _db.GovernmentAdmin.First(admin => admin.Id == governmentAdmin.Id).user;
             _db.GovernmentAdmin.Update(governmentAdmin);
             _db.SaveChanges();
         }

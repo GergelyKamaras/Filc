@@ -20,7 +20,7 @@ namespace Filc.Services.DataBaseQueryServices
             _db.SaveChanges();
         }
 
-        public SchoolViewModel GetSchool(int id)
+        public SchoolDTO GetSchool(int id)
         {
             School school = _db.School.Include(school => school.Classes)
                 .Include(school => school.Lessons)
@@ -30,9 +30,9 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(school => school.Teachers)
                 .First(x => x.Id == id);
             
-            return new SchoolViewModel(school);
+            return new SchoolDTO(school);
         }
-        public List<SchoolViewModel> GetAllSchools()
+        public List<SchoolDTO> GetAllSchools()
         {
             List<School> schools = _db.School.Include(school => school.Classes)
                 .Include(school => school.Lessons)

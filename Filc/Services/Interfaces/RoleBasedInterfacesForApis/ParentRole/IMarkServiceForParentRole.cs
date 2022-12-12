@@ -5,7 +5,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole
 {
     public interface IMarkServiceForParentRole
     {
-        public MarkViewModel GetMark(int id);
-        public List<MarkViewModel> GetMarksByStudent(int studentId);
+        public MarkDTO GetMark(int id);
+        public List<MarkDTO> GetMarksByStudent(int studentId);
     }
 }

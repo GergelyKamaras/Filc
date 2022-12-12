@@ -16,24 +16,33 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
             _userService = userService;
         }
-        public ParentViewModel GetParent(int id)
+        public ParentDTO GetParent(int id)
         {
             Parent parent = _db.Parent.Include(parent => parent.user)
                 .Include(parent => parent.Children)
                 .First(parent => parent.Id == id);
-            return new ParentViewModel(parent);
+            return new ParentDTO(parent);
         }
 
         public void AddParent(Parent parent)
         {
             ApplicationUser user = _userService.GetUserByEmail(parent.user.Email);
             parent.user = user;
+            for (int i = 0; i < parent.Children.Count; i++)
+            {
+                parent.Children[i] = _db.Student.First(s => s.Id == parent.Children[i].Id);
+            }
             _db.Parent.Add(parent);
             _db.SaveChanges();
         }
 
         public void UpdateParent(Parent parent)
         {
+            parent.user = _userService.GetUserByEmail(parent.user.Email);
+            for (int i = 0; i < parent.Children.Count; i++)
+            {
+                parent.Children[i] = _db.Student.First(s => s.Id == parent.Children[i].Id);
+            }
             _db.Parent.Update(parent);
             _db.SaveChanges();
         }

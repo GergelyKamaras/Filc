@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Filc.Models.ViewModels.Shared
 {
-    public class LessonViewModelShared
+    public class LessonSharedDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public SubjectViewModelShared Subject { get; set; }
-        public LessonViewModelShared(EFDataAccessLibrary.Models.Lesson lesson)
+        public SubjectSharedDTO Subject { get; set; }
+        public LessonSharedDTO(EFDataAccessLibrary.Models.Lesson lesson)
         {
             Id = lesson.Id;
             Name = lesson.Name;
-            Subject = new SubjectViewModelShared(lesson.Subject);
+            Subject = new SubjectSharedDTO(lesson.Subject);
         }
     }
 }

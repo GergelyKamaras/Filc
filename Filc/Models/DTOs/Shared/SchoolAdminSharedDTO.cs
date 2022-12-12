@@ -5,7 +5,7 @@ using EFDataAccessLibrary.Models;
 
 namespace Filc.Models.ViewModels.Shared
 {
-    public class SchoolAdminViewModelShared
+    public class SchoolAdminSharedDTO
     {
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -15,7 +15,7 @@ namespace Filc.Models.ViewModels.Shared
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
 
-        public SchoolAdminViewModelShared(SchoolAdmin schoolAdmin)
+        public SchoolAdminSharedDTO(SchoolAdmin schoolAdmin)
         {
             Id = schoolAdmin.Id;
             user = schoolAdmin.user;

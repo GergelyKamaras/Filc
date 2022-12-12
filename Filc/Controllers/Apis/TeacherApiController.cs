@@ -36,7 +36,7 @@ namespace Filc.Controllers.Apis
         // Schools
         [HttpGet]
         [Route("schools/{id}")]
-        public SchoolViewModel GetSchool(int id)
+        public SchoolDTO GetSchool(int id)
         {
             return _schoolService.GetSchool(id);
         }
@@ -44,7 +44,7 @@ namespace Filc.Controllers.Apis
         // Teachers
         [HttpGet]
         [Route("{id}")]
-        public TeacherViewModel GetTeacher(int id)
+        public TeacherDTO GetTeacher(int id)
         {
             return _teacherService.GetTeacher(id);
         }
@@ -58,21 +58,21 @@ namespace Filc.Controllers.Apis
         // Lessons
         [HttpGet]
         [Route("lessons/{id}")]
-        public LessonViewModel GetLesson(int id)
+        public LessonDTO GetLesson(int id)
         {
             return _lessonService.GetLessonById(id);
         }
 
         [HttpGet]
         [Route("lessons/students/{id}")]
-        public List<LessonViewModel> GetLessonsByStudent(int id)
+        public List<LessonDTO> GetLessonsByStudent(int id)
         {
             return _lessonService.GetLessonByStudentId(id);
         }
 
         [HttpGet]
         [Route("lessons/teachers/{id}")]
-        public List<LessonViewModel> GetLessonsByTeacher(int id)
+        public List<LessonDTO> GetLessonsByTeacher(int id)
         {
             return _lessonService.GetLessonsByTeacher(id);
         }
@@ -80,21 +80,21 @@ namespace Filc.Controllers.Apis
         // Marks
         [HttpGet]
         [Route("marks/{id}")]
-        public MarkViewModel GetMark(int id)
+        public MarkDTO GetMark(int id)
         {
             return _markService.GetMark(id);
         }
 
         [HttpGet]
         [Route("marks/student/{id}")]
-        public List<MarkViewModel> GetMarksByStudent(int id)
+        public List<MarkDTO> GetMarksByStudent(int id)
         {
             return _markService.GetMarksByStudent(id);
         }
 
         [HttpGet]
         [Route("marks/lesson/{id}")]
-        public List<MarkViewModel> GetMarksByLesson(int id)
+        public List<MarkDTO> GetMarksByLesson(int id)
         {
             return _markService.GetMarkByLesson(id);
         }
@@ -123,7 +123,7 @@ namespace Filc.Controllers.Apis
         // Students
         [HttpGet]
         [Route("students/{id}")]
-        public StudentViewModel GetStudent(int id)
+        public StudentDTO GetStudent(int id)
         {
             return _studentService.GetStudent(id);
         }

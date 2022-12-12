@@ -6,8 +6,8 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface ITeacherServiceFullAccess : ITeacherServiceForTeacherRole
     {
-        public List<TeacherViewModel> GetAllTeachers();
-        public List<TeacherViewModel> GetAllTeachersBySchool(int schoolId);
+        public List<TeacherDTO> GetAllTeachers();
+        public List<TeacherDTO> GetAllTeachersBySchool(int schoolId);
         public void AddTeacher(Teacher teacher);
         public void RemoveTeacher(int id);
     }
