@@ -17,17 +17,17 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
             _userService = userService;
         }
-        public StudentViewModel GetStudent(int id)
+        public StudentDTO GetStudent(int id)
         {
             Student student = _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
                 .Include(student => student.Marks)
                 .First(x => x.Id == id);
-            return new StudentViewModel(student);
+            return new StudentDTO(student);
         }
 
-        public List<StudentViewModel> GetAllStudents()
+        public List<StudentDTO> GetAllStudents()
         {
             List<Student> students = _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)

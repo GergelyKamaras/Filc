@@ -16,12 +16,12 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
             _userService = userService;
         }
-        public ParentViewModel GetParent(int id)
+        public ParentDTO GetParent(int id)
         {
             Parent parent = _db.Parent.Include(parent => parent.user)
                 .Include(parent => parent.Children)
                 .First(parent => parent.Id == id);
-            return new ParentViewModel(parent);
+            return new ParentDTO(parent);
         }
 
         public void AddParent(Parent parent)

@@ -18,7 +18,7 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
         }
 
-        public List<SchoolAdminViewModel> GetAllSchoolAdmins()
+        public List<SchoolAdminDTO> GetAllSchoolAdmins()
         {
             List<SchoolAdmin> schoolAdmins = _db.SchoolAdmin
                 .Include(admin => admin.School)
@@ -27,7 +27,7 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapSchoolAdminToSchoolAdminViewModel(schoolAdmins);
         }
 
-        public List<SchoolAdminViewModel> GetAllSchoolAdminsBySchool(int schoolId)
+        public List<SchoolAdminDTO> GetAllSchoolAdminsBySchool(int schoolId)
         {
             List<SchoolAdmin> schoolAdmins =  _db.SchoolAdmin.Where(admin => admin.School.Id == schoolId)
                 .Include(admin => admin.user)
@@ -37,13 +37,13 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapSchoolAdminToSchoolAdminViewModel(schoolAdmins);
         }
 
-        public SchoolAdminViewModel GetSchoolAdminById(int id)
+        public SchoolAdminDTO GetSchoolAdminById(int id)
         {
             SchoolAdmin schoolAdmin = _db.SchoolAdmin.Include(admin => admin.user)
                 .Include(admin => admin.School)
                 .First(x => x.Id == id);
 
-            return new SchoolAdminViewModel(schoolAdmin);
+            return new SchoolAdminDTO(schoolAdmin);
         }
 
         public void AddSchoolAdmin(SchoolAdmin schoolAdmin)

@@ -8,8 +8,8 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface ILessonServiceFullAccess : ILessonServiceForParentRole, ILessonServiceForStudentRole, ILessonServiceForTeacherRole
     {
-        public new LessonViewModel GetLessonById(int id);
-        public new List<LessonViewModel> GetLessonByStudentId(int id);
+        public new LessonDTO GetLessonById(int id);
+        public new List<LessonDTO> GetLessonByStudentId(int id);
         public void AddLesson(Lesson lesson);
         public void UpdateLesson(Lesson lesson);
         public void DeleteLesson(int id);

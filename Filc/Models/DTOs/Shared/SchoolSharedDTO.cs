@@ -4,9 +4,9 @@ using EFDataAccessLibrary.Models;
 
 namespace Filc.Models.ViewModels.Shared
 {
-    public class SchoolViewModelShared
+    public class SchoolSharedDTO
     {
-        public SchoolViewModelShared(School school)
+        public SchoolSharedDTO(School school)
         {
             Id = school.Id;
             Name = school.Name;

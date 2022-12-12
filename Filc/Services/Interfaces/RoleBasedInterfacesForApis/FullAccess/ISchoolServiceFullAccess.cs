@@ -9,8 +9,8 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface ISchoolServiceFullAccess : ISchoolServiceForParentRole, ISchoolServiceForStudentRole, ISchoolServiceForTeacherRole, ISchoolServiceForSchoolAdminRole
     {
-        public new SchoolViewModel GetSchool(int id);
-        public List<SchoolViewModel> GetAllSchools();
+        public new SchoolDTO GetSchool(int id);
+        public List<SchoolDTO> GetAllSchools();
         public void AddSchool(School school);
         public void RemoveSchool(int id);
         public new void UpdateSchool(School school);

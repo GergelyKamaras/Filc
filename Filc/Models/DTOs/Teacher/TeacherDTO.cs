@@ -4,7 +4,7 @@ using Filc.Models.ViewModels.Shared;
 
 namespace Filc.Models.ViewModels.Teacher
 {
-    public class TeacherViewModel
+    public class TeacherDTO
     {
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -12,11 +12,11 @@ namespace Filc.Models.ViewModels.Teacher
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
-        public List<SubjectViewModelShared>? Subjects { get; set; }
-        public List<LessonViewModelShared>? Lessons { get; set; }
-        public SchoolViewModelShared School { get; set; }
+        public List<SubjectSharedDTO>? Subjects { get; set; }
+        public List<LessonSharedDTO>? Lessons { get; set; }
+        public SchoolSharedDTO School { get; set; }
 
-        public TeacherViewModel(EFDataAccessLibrary.Models.Teacher teacher)
+        public TeacherDTO(EFDataAccessLibrary.Models.Teacher teacher)
         {
             Id = teacher.Id;
             user = teacher.user;
@@ -25,13 +25,13 @@ namespace Filc.Models.ViewModels.Teacher
             BirthDate = teacher.BirthDate;
             Address = teacher.Address;
 
-            Subjects = new List<SubjectViewModelShared>();
-            teacher.Subjects.ForEach(subject => Subjects.Add(new SubjectViewModelShared(subject)));
+            Subjects = new List<SubjectSharedDTO>();
+            teacher.Subjects.ForEach(subject => Subjects.Add(new SubjectSharedDTO(subject)));
 
-            Lessons = new List<LessonViewModelShared>();
-            teacher.Lessons.ForEach(lesson => Lessons.Add(new LessonViewModelShared(lesson)));
+            Lessons = new List<LessonSharedDTO>();
+            teacher.Lessons.ForEach(lesson => Lessons.Add(new LessonSharedDTO(lesson)));
 
-            School = new SchoolViewModelShared(teacher.School);
+            School = new SchoolSharedDTO(teacher.School);
         }
     }
 }

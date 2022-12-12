@@ -5,6 +5,6 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole
 {
     public interface ISchoolServiceForStudentRole
     {
-        public SchoolViewModel GetSchool(int id);
+        public SchoolDTO GetSchool(int id);
     }
 }

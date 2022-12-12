@@ -13,17 +13,17 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db = esContext;
         }
-        public LessonViewModel GetLessonById(int id)
+        public LessonDTO GetLessonById(int id)
         {
             Lesson lesson = _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
                 .Include(lesson => lesson.Subject)
                 .First(lesson => lesson.Id == id);
-            return new LessonViewModel(lesson);
+            return new LessonDTO(lesson);
         }
 
-        public List<LessonViewModel> GetLessonByStudentId(int id)
+        public List<LessonDTO> GetLessonByStudentId(int id)
         {
             List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)
@@ -33,7 +33,7 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 
-        public List<LessonViewModel> GetLessonsByTeacher(int id)
+        public List<LessonDTO> GetLessonsByTeacher(int id)
         {
             List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
                 .Include(lesson => lesson.Teachers)

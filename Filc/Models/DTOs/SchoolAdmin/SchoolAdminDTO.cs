@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Filc.Models.EntityViewModels.SchoolAdmin
 {
-    public class SchoolAdminViewModel
+    public class SchoolAdminDTO
     {
-        public SchoolAdminViewModel(EFDataAccessLibrary.Models.SchoolAdmin admin)
+        public SchoolAdminDTO(EFDataAccessLibrary.Models.SchoolAdmin admin)
         {
             Id = admin.Id;
             user = admin.user;
@@ -15,7 +15,7 @@ namespace Filc.Models.EntityViewModels.SchoolAdmin
             LastName = admin.LastName;
             BirthDate = admin.BirthDate;
             Address = admin.Address;
-            School = new SchoolViewModelShared(admin.School);
+            School = new SchoolSharedDTO(admin.School);
         }
         public int Id { get; set; }
         public ApplicationUser user { get; set; }
@@ -23,6 +23,6 @@ namespace Filc.Models.EntityViewModels.SchoolAdmin
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
-        public virtual SchoolViewModelShared School { get; set; }
+        public virtual SchoolSharedDTO School { get; set; }
     }
 }

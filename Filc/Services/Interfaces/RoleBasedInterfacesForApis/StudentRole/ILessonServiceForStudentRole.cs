@@ -5,7 +5,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole
 {
     public interface ILessonServiceForStudentRole
     {
-        public LessonViewModel GetLessonById(int id);
-        public List<LessonViewModel> GetLessonByStudentId(int id);
+        public LessonDTO GetLessonById(int id);
+        public List<LessonDTO> GetLessonByStudentId(int id);
     }
 }

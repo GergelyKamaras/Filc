@@ -13,14 +13,14 @@ namespace Filc.Services.DataBaseQueryServices
         {
             _db = esContext;
         }
-        public MarkViewModel GetMark(int id)
+        public MarkDTO GetMark(int id)
         {
             Mark mark = _db.Mark.Include(mark => mark.Lesson)
                 .Include(mark => mark.Student)
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Subject)
                 .First(x => x.Id == id);
-            return new MarkViewModel(mark);
+            return new MarkDTO(mark);
         }
         public void AddMark(Mark mark)
         {
@@ -37,7 +37,7 @@ namespace Filc.Services.DataBaseQueryServices
             _db.Mark.Remove(_db.Mark.First(mark => mark.Id == id));
             _db.SaveChanges();
         }
-        public List<MarkViewModel> GetMarksByStudent(int studentId)
+        public List<MarkDTO> GetMarksByStudent(int studentId)
         {
             List<Mark> marks = _db.Mark.Include(mark => mark.Lesson)
                 .Include(mark => mark.Student)
@@ -46,7 +46,7 @@ namespace Filc.Services.DataBaseQueryServices
                 .Where(mark => mark.Student.Id == studentId).ToList();
             return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
         }
-        public List<MarkViewModel> GetMarkByLesson(int lessonId)
+        public List<MarkDTO> GetMarkByLesson(int lessonId)
         {
             List<Mark> marks = _db.Mark.Where(mark => mark.Lesson.Id == lessonId).Include(mark => mark.Lesson)
                 .Include(mark => mark.Student)
