@@ -60,6 +60,9 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateTeacher(Teacher teacher)
         {
+            teacher.School = _db.Teacher.First(t => t.Id == teacher.Id).School;
+            teacher.Lessons = _db.Teacher.First(t => t.Id == teacher.Id).Lessons;
+            teacher.Subjects = _db.Teacher.First(t => t.Id == teacher.Id).Subjects;
             _db.Teacher.Update(teacher);
             _db.SaveChanges();
         }
