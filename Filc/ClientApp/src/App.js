@@ -23,7 +23,6 @@ function App() {
           <Route path="" element={<IndexPage/>} />
           <Route path='/login' element={<LoginPage/>}/>
           <Route path="Unauthorized" element={<Unauthorized />} />
-          <Route path="schooladmins/:id" element={<SchoolAdmin />} />
 
           {/*TODO: Routes available to Students*/}
           <Route element={<RequireAuth allowedRoles={["Student"]} />}>
