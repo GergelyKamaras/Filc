@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole;
@@ -11,7 +12,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
         public new StudentDTO GetStudent(int id);
         public new void UpdateStudent(Student student);
         public List<StudentDTO> GetAllStudents();
-        public void AddStudent(Student student);
+        public JWTAuthenticationResponse AddStudent(Student student);
         public void DeleteStudent(int id);
     }
 }

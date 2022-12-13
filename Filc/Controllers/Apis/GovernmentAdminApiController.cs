@@ -2,6 +2,7 @@
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
 using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
@@ -12,6 +13,7 @@ using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.DependencyResolver;
 
 namespace Filc.Controllers.Apis
 {
@@ -71,7 +73,8 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during user registration!" + e);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             return Ok(_governmentAdminService.AddGovernmentAdmin(admin));
         }
@@ -149,9 +152,22 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("teachers")]
-        public void AddTeacher([FromBody] Teacher teacher)
+        public async Task<ObjectResult> AddTeacher([FromBody] Teacher teacher)
         {
-            _teacherService.AddTeacher(teacher);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(teacher.user, "Government")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            
+            return Ok(_teacherService.AddTeacher(teacher));
         }
 
         [HttpPut]
@@ -271,9 +287,21 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("students")]
-        public void AddStudent([FromBody] Student student)
+        public async Task<ObjectResult> AddStudent([FromBody] Student student)
         {
-            _studentService.AddStudent(student);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(student.user, "Government")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            return Ok(_studentService.AddStudent(student));
         }
 
         [HttpPut]
@@ -300,9 +328,21 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("parents")]
-        public void AddParent([FromBody] Parent parent)
+        public async Task<ObjectResult> AddParent([FromBody] Parent parent)
         {
-            _parentService.AddParent(parent);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(parent.user, "Government")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            return Ok(_parentService.AddParent(parent));
         }
 
         [HttpPut]
@@ -354,7 +394,8 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during user registration!" + e);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             return Ok(_schoolAdminService.AddSchoolAdmin(schoolAdmin));
         }
