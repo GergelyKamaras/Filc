@@ -76,7 +76,9 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void RemoveTeacher(int id)
         {
-            _db.Teacher.Remove(_db.Teacher.First(teacher => teacher.Id == id));
+            Teacher teacher = _db.Teacher.Include(t => t.user)
+                .First(t => t.Id == id);
+            _userService.DeleteUser(teacher.user.Id);
             _db.SaveChanges();
         }
 

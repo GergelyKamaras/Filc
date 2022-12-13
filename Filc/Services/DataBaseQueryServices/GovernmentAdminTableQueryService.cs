@@ -45,7 +45,9 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public void RemoveGovernmentAdmin(int id)
         {
-            _db.GovernmentAdmin.Remove(_db.GovernmentAdmin.First(x => x.Id == id));
+            GovernmentAdmin admin = _db.GovernmentAdmin.Include(a => a.user)
+                .First(a => a.Id == id);
+            _userService.DeleteUser(admin.user.Id);
             _db.SaveChanges();
         }
         public void UpdateGovernmentAdmin(GovernmentAdmin governmentAdmin)
