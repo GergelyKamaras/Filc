@@ -55,7 +55,10 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void DeleteParent(int id)
         {
-            _db.Parent.Remove(_db.Parent.First(parent => parent.Id == id));
+            Parent parent = _db.Parent.Include(p => p.user)
+                .First(p => p.Id == id);
+            _userService.DeleteUser(parent.user.Id);
+            _db.SaveChanges();
         }
     }
 }
