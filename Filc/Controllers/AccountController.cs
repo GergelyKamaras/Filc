@@ -11,6 +11,7 @@ using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Filc.Models.AuthenticationModels;
+using Filc.Services.Interfaces;
 
 namespace Filc.Controllers
 {
@@ -20,23 +21,17 @@ namespace Filc.Controllers
     [EnableCors]
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
         private readonly IUserServiceFullAccess _userService;
+        private readonly ILogin _loginService;
 
-        public AccountController(UserManager<ApplicationUser> userManager
-            , SignInManager<ApplicationUser> signInManager
-            , RoleManager<IdentityRole> roleManager
-            , IConfiguration configuration,
-            IUserServiceFullAccess userService)
+        public AccountController(SignInManager<ApplicationUser> signInManager,
+                                 IUserServiceFullAccess userService,
+                                 ILogin loginService)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
-            _configuration = configuration;
             _userService = userService;
+            _loginService = loginService;
         }
 
         [HttpPost]
@@ -67,21 +62,9 @@ namespace Filc.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.Email);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            try
             {
-
-                var userRoles = await _userManager.GetRolesAsync(user);
-                var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
-                foreach(var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-                var token = GetToken(authClaims);
+                var token = await _loginService.Login(model);
                 return Ok(new
                 {
                     message = "SUCCESS",
@@ -89,23 +72,12 @@ namespace Filc.Controllers
                     expiration = token.ValidTo
                 });
             }
-            return StatusCode(StatusCodes.Status500InternalServerError,
-                   new JWTAuthenticationResponse { Status = "Error", Message = "Account not valid" });;
-
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   new JWTAuthenticationResponse { Status = e.ToString(), Message = "Account not valid" });
+            }
         }
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
-        {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"],
-                audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(3),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
-
-            return token;
-        }
+        
     }
 }
