@@ -12,42 +12,40 @@ import Schools from './components/UserComponents/GovAdminComponents/Components/S
 import School from './components/UserComponents/GovAdminComponents/Components/School';
 import IndexPage from './Pages/AppIndex';
 import LoginPage from './Pages/LoginPage';
+import RegisterUser from './components/UserComponents/GovAdminComponents/Components/Registration/RegisterUser'
 
 function App() {
 
 
     return (
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {/*Routes available to all users*/}
-          <Route path="" element={<IndexPage/>} />
-          <Route path='/login' element={<LoginPage/>}/>
-          <Route path="Unauthorized" element={<Unauthorized />} />
-          <Route path="schooladmins/:id" element={<SchoolAdmin />} />
+        <Routes>
+            <Route path="/" element={<Layout />} />
 
-          {/*TODO: Routes available to Students*/}
-          <Route element={<RequireAuth allowedRoles={["Student"]} />}>
-          </Route>
+            {/*Routes available to all users*/}
+            <Route path="" element={<IndexPage/>} />
+            <Route path='/login' element={<LoginPage/>}/>
+            <Route path="Unauthorized" element={<Unauthorized />} />
+            <Route path="schooladmins/:id" element={<SchoolAdmin />} />
 
-          {/*TODO: Routes available to Teachers*/}
-          <Route element={<RequireAuth allowedRoles={["Teacher"]} />}>
-          </Route>
+            {/*TODO: Routes available to Students*/}
+            <Route element={<RequireAuth allowedRoles={["Student"]} />} />
+          
+            {/*TODO: Routes available to Teachers*/}
+            <Route element={<RequireAuth allowedRoles={["Teacher"]} />} />
+          
+            {/*TODO: Routes available to SchoolAdmins*/}
+            <Route element={<RequireAuth allowedRoles={["SchoolAdmin"]} />} />
+            <Route path="register" element={<RegisterUser />} />
 
-          {/*TODO: Routes available to SchoolAdmins*/}
-          <Route element={<RequireAuth allowedRoles={["SchoolAdmin"]} />}>
-          </Route>
-
-          {/*TODO: Routes available to GovAdmins*/}
-          <Route path="govadmin" element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
+            {/*TODO: Routes available to GovAdmins*/}
+            <Route path="govadmin" element={<RequireAuth allowedRoles={["GovAdmin"]} />} />
             <Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />
             <Route path="schooladmins/:id" element={<SchoolAdmin />} />
             <Route path="schools/" element={<Schools />} />
             <Route path="schools/:id" element={<School />} />
-          </Route>
-
-          {/*Not Existing Route*/}
-          <Route path="*" element={<NotFound />} />
-        </Route>
+    
+            {/*Not Existing Route*/}
+            <Route path="*" element={<NotFound />} />
       </Routes>
     );
 }
