@@ -86,6 +86,9 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
 builder.Services.AddTransient<IRegistration, RegistrationService>();
+builder.Services.AddTransient<ILogin, LoginService>();
+builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
+
 
 // Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminServiceFullAccess, GovernmentAdminTableQueryService>();
