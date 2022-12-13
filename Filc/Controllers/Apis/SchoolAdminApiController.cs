@@ -56,10 +56,10 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        public void AddSchoolAdmin([FromBody] SchoolAdmin admin)
+        public ObjectResult AddSchoolAdmin([FromBody] SchoolAdmin admin)
         {
 
-            _schoolAdminService.AddSchoolAdmin(admin);
+            return Ok(_schoolAdminService.AddSchoolAdmin(admin));
         }
 
         [HttpPut]

@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Configuration;
 using Filc.Services;
+using Filc.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -84,6 +85,10 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
+builder.Services.AddTransient<IRegistration, RegistrationService>();
+builder.Services.AddTransient<ILogin, LoginService>();
+builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
+
 
 // Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminServiceFullAccess, GovernmentAdminTableQueryService>();
