@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Teacher;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
@@ -48,7 +49,7 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapTeachersToTeacherViewModels(Teachers);
         }
 
-        public void AddTeacher(Teacher teacher)
+        public JWTAuthenticationResponse AddTeacher(Teacher teacher)
         {
             ApplicationUser user = _userService.GetUserByEmail(teacher.user.Email);
             teacher.School = _db.School.First(school => school.Id == teacher.School.Id);
@@ -56,6 +57,11 @@ namespace Filc.Services.DataBaseQueryServices
             teacher.user = user;
             _db.Teacher.Add(teacher);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!"
+            };
         }
 
         public void UpdateTeacher(Teacher teacher)

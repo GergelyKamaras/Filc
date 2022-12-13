@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Parent;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
@@ -24,7 +25,7 @@ namespace Filc.Services.DataBaseQueryServices
             return new ParentDTO(parent);
         }
 
-        public void AddParent(Parent parent)
+        public JWTAuthenticationResponse AddParent(Parent parent)
         {
             ApplicationUser user = _userService.GetUserByEmail(parent.user.Email);
             parent.user = user;
@@ -34,6 +35,11 @@ namespace Filc.Services.DataBaseQueryServices
             }
             _db.Parent.Add(parent);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!"
+            };
         }
 
         public void UpdateParent(Parent parent)
