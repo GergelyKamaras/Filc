@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
@@ -6,7 +7,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
     {
         public GovernmentAdmin GetGovernmentAdmin(int id);
         public List<GovernmentAdmin> GetAllGovernmentAdmins();
-        public void AddGovernmentAdmin(GovernmentAdmin governmentAdmin);
+        public Task<JWTAuthenticationResponse> AddGovernmentAdmin(GovernmentAdmin governmentAdmin);
         public void RemoveGovernmentAdmin(int id);
         public void UpdateGovernmentAdmin(GovernmentAdmin governmentAdmin);
     }
