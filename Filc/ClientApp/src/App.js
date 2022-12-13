@@ -23,7 +23,6 @@ function App() {
           <Route path="" element={<IndexPage/>} />
           <Route path='/login' element={<LoginPage/>}/>
           <Route path="Unauthorized" element={<Unauthorized />} />
-          <Route path="schooladmins/:id" element={<SchoolAdmin />} />
 
           {/*TODO: Routes available to Students*/}
           <Route element={<RequireAuth allowedRoles={["Student"]} />}>
@@ -38,7 +37,7 @@ function App() {
           </Route>
 
           {/*TODO: Routes available to GovAdmins*/}
-          <Route path="govadmin" element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
+          <Route path="govadmin" element={<RequireAuth allowedRoles={["Government"]} />}>
             <Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />
             <Route path="schooladmins/:id" element={<SchoolAdmin />} />
             <Route path="schools/" element={<Schools />} />
