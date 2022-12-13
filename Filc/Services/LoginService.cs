@@ -37,7 +37,8 @@ namespace Filc.Services
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
-                authClaims.Add(GetShoolIdClaim(model));
+                if (model.Role != "GovernmentAdmin")
+                    authClaims.Add(GetShoolIdClaim(model));
 
                 return _jwtTokenGenerator.GetToken(authClaims);
                 
@@ -47,23 +48,26 @@ namespace Filc.Services
 
         private Claim GetShoolIdClaim(LoginModel model)
         {
-            string claimKey = "schoolId";
-            return model.Role switch
+            switch (model.Role)
             {
-                "Teacher" => new Claim(claimKey,
-                                        _db.Teacher.Where(t => t.user.Email == model.Email)
-                                        .Select(t => t.School.Id).First().ToString()),
+                case "Teacher":
+                    return new Claim(model.Role,
+                        _db.Teacher.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.School.Id).FirstOrDefault().ToString());
 
-                "SchoolAdmin" => new Claim(claimKey,
-                                        _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
-                                        .Select(t => t.School.Id).First().ToString()),
+                case "SchoolAdmin":
+                    return new Claim(model.Role,
+                        _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.School.Id).FirstOrDefault().ToString());
 
-                "Student" => new Claim(claimKey,
-                                        _db.Student.Where(t => t.user.Email == model.Email)
-                                        .Select(t => t.School.Id).First().ToString()),
+                case "Student":
+                    return new Claim(model.Role,
+                        _db.Student.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.School.Id).FirstOrDefault().ToString());
 
-                _ => throw new Exception("Given Role does not exist"),
-            };
+            }
+            throw new Exception("Given Role does not exist ");
+
         }
 
     }
