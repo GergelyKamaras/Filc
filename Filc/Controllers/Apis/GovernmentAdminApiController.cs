@@ -156,7 +156,7 @@ namespace Filc.Controllers.Apis
         {
             try
             {
-                if (await _registration.Register(new RegistrationModel(teacher.user, "Government")) != true)
+                if (await _registration.Register(new RegistrationModel(teacher.user, "Teacher")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -291,7 +291,7 @@ namespace Filc.Controllers.Apis
         {
             try
             {
-                if (await _registration.Register(new RegistrationModel(student.user, "Government")) != true)
+                if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -332,7 +332,7 @@ namespace Filc.Controllers.Apis
         {
             try
             {
-                if (await _registration.Register(new RegistrationModel(parent.user, "Government")) != true)
+                if (await _registration.Register(new RegistrationModel(parent.user, "Parent")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
