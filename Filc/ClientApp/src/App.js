@@ -38,7 +38,7 @@ function App() {
           </Route>
 
           {/*TODO: Routes available to GovAdmins*/}
-          <Route path="govadmin" element={<RequireAuth allowedRoles={["GovAdmin"]} />}>
+          <Route path="govadmin" element={<RequireAuth allowedRoles={["Government"]} />}>
             <Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />
             <Route path="schooladmins/:id" element={<SchoolAdmin />} />
             <Route path="schools/" element={<Schools />} />
