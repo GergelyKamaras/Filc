@@ -51,50 +51,6 @@ namespace Filc.Controllers
             });
         }
 
-
-        [HttpPost]
-        [Route("register")]
-        // Centrum
-        public async Task<ObjectResult> Register(RegistrationModel model)
-        {
-            var userExists = await _userManager.FindByEmailAsync(model.Email);
-            if (userExists != null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    new JWTAuthenticationResponse { Status = "Error", Message = "User already exists!" });
-            }
-
-            ApplicationUser user = new ()
-            { 
-                UserName=model.Email,
-                Email = model.Email,
-                Salt = model.Salt,
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (!result.Succeeded)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                   new JWTAuthenticationResponse { Status = "Error", Message = "User creation failed! Please check user details and try again" });
-            }
-
-            if (await _roleManager.RoleExistsAsync(model.Role))
-            {
-                await _userManager.AddToRoleAsync(user, model.Role);
-
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                   new JWTAuthenticationResponse { Status = "Error", Message = "The specified Role is not valid" });
-            }
-
-            return Ok(new JWTAuthenticationResponse 
-            { 
-                Status = "Success",
-                Message = "User created successfully!"
-            });
-        }
-
         [HttpPost]
         [Route("loginsalt")]
         public ObjectResult GetLoginSalt(EmailModel model)
@@ -128,7 +84,6 @@ namespace Filc.Controllers
                 var token = GetToken(authClaims);
                 return Ok(new
                 {
-
                     message = "SUCCESS",
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
@@ -138,7 +93,6 @@ namespace Filc.Controllers
                    new JWTAuthenticationResponse { Status = "Error", Message = "Account not valid" });;
 
         }
-
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
