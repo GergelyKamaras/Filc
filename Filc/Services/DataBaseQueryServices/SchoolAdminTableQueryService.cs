@@ -16,10 +16,8 @@ namespace Filc.Services.DataBaseQueryServices
     {
         private readonly ESContext _db;
         private readonly IUserServiceFullAccess _userService;
-        private readonly IRegistration _registration;
-        public SchoolAdminTableQueryService(ESContext esContext, IUserServiceFullAccess userService, IRegistration registration)
+        public SchoolAdminTableQueryService(ESContext esContext, IUserServiceFullAccess userService)
         {
-            _registration = registration;
             _userService = userService;
             _db = esContext;
         }
@@ -52,19 +50,8 @@ namespace Filc.Services.DataBaseQueryServices
             return new SchoolAdminDTO(schoolAdmin);
         }
 
-        public async Task<JWTAuthenticationResponse> AddSchoolAdmin(SchoolAdmin schoolAdmin)
+        public JWTAuthenticationResponse AddSchoolAdmin(SchoolAdmin schoolAdmin)
         {
-            try
-            {
-                if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
-                {
-                    throw new Exception("Error registering user!");
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error during user registration!" + e);
-            }
             ApplicationUser user = _userService.GetUserByEmail(schoolAdmin.user.Email);
             schoolAdmin.School = _db.School.First(school => school.Id == schoolAdmin.School.Id);
             if(user.Email != null)

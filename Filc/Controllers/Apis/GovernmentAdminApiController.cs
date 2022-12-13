@@ -7,7 +7,9 @@ using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Student;
 using Filc.Models.ViewModels.Teacher;
+using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Filc.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,10 +27,12 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolServiceFullAccess _schoolService;
         private readonly IStudentServiceFullAccess _studentService;
         private readonly ITeacherServiceFullAccess _teacherService;
+        private readonly IRegistration _registration;
         
         public GovernmentAdminApiController(IGovernmentAdminServiceFullAccess governmentAdminService, ILessonServiceFullAccess lessonService,
             IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, ISchoolAdminServiceFullAccess schoolAdminService,
-            ISchoolServiceFullAccess schoolService, IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService)
+            ISchoolServiceFullAccess schoolService, IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService,
+            IRegistration registration)
         {
             _governmentAdminService = governmentAdminService;
             _lessonService = lessonService;
@@ -38,6 +42,7 @@ namespace Filc.Controllers.Apis
             _schoolService = schoolService;
             _studentService = studentService;
             _teacherService = teacherService;
+            _registration = registration;
         }
 
         // Government Admins
@@ -55,8 +60,19 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        public ObjectResult AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
+        public async Task<ObjectResult> AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(admin.user, "Government")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error during user registration!" + e);
+            }
             return Ok(_governmentAdminService.AddGovernmentAdmin(admin));
         }
 
@@ -327,8 +343,19 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("schooladmins")]
-        public ObjectResult AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        public async Task<ObjectResult> AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
         {
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error during user registration!" + e);
+            }
             return Ok(_schoolAdminService.AddSchoolAdmin(schoolAdmin));
         }
 
