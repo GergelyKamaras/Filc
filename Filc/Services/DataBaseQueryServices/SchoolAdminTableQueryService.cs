@@ -1,10 +1,14 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.JWTAuthenticationModel;
+using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Filc.Services.ModelConverter;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Filc.ViewModel;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -12,8 +16,10 @@ namespace Filc.Services.DataBaseQueryServices
     {
         private readonly ESContext _db;
         private readonly IUserServiceFullAccess _userService;
-        public SchoolAdminTableQueryService(ESContext esContext, IUserServiceFullAccess userService)
+        private readonly IRegistration _registration;
+        public SchoolAdminTableQueryService(ESContext esContext, IUserServiceFullAccess userService, IRegistration registration)
         {
+            _registration = registration;
             _userService = userService;
             _db = esContext;
         }
@@ -46,8 +52,19 @@ namespace Filc.Services.DataBaseQueryServices
             return new SchoolAdminDTO(schoolAdmin);
         }
 
-        public void AddSchoolAdmin(SchoolAdmin schoolAdmin)
+        public async Task<JWTAuthenticationResponse> AddSchoolAdmin(SchoolAdmin schoolAdmin)
         {
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error during user registration!" + e);
+            }
             ApplicationUser user = _userService.GetUserByEmail(schoolAdmin.user.Email);
             schoolAdmin.School = _db.School.First(school => school.Id == schoolAdmin.School.Id);
             if(user.Email != null)
@@ -55,7 +72,13 @@ namespace Filc.Services.DataBaseQueryServices
                 schoolAdmin.user = user;
                 _db.SchoolAdmin.Add(schoolAdmin);
                 _db.SaveChanges();
-            }     
+            }
+
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration Successful!"
+            };
         }  
 
         public void UpdateSchoolAdmin(SchoolAdmin schoolAdmin)

@@ -327,9 +327,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("schooladmins")]
-        public void AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        public ObjectResult AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
         {
-            _schoolAdminService.AddSchoolAdmin(schoolAdmin);
+            return Ok(_schoolAdminService.AddSchoolAdmin(schoolAdmin));
         }
 
         [HttpPut]
