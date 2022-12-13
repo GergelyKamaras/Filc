@@ -73,7 +73,8 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during user registration!" + e);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             return Ok(_governmentAdminService.AddGovernmentAdmin(admin));
         }
@@ -162,7 +163,8 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during user registration!" + e);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             
             return Ok(_teacherService.AddTeacher(teacher));
@@ -296,7 +298,8 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during user registration!" + e);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             return Ok(_studentService.AddStudent(student));
         }
@@ -336,7 +339,8 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during user registration!" + e);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             return Ok(_parentService.AddParent(parent));
         }
@@ -390,7 +394,8 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during user registration!" + e);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             return Ok(_schoolAdminService.AddSchoolAdmin(schoolAdmin));
         }
