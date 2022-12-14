@@ -2,19 +2,26 @@
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
 using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Student;
 using Filc.Models.ViewModels.Teacher;
+using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Filc.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.DependencyResolver;
 
 namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("api/governmentadmins")]
+    [Authorize(Roles = "Government")]
+    [EnableCors]
     public class GovernmentAdminApiController : Controller
     {
         private readonly IGovernmentAdminServiceFullAccess _governmentAdminService;
@@ -25,10 +32,12 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolServiceFullAccess _schoolService;
         private readonly IStudentServiceFullAccess _studentService;
         private readonly ITeacherServiceFullAccess _teacherService;
+        private readonly IRegistration _registration;
         
         public GovernmentAdminApiController(IGovernmentAdminServiceFullAccess governmentAdminService, ILessonServiceFullAccess lessonService,
             IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, ISchoolAdminServiceFullAccess schoolAdminService,
-            ISchoolServiceFullAccess schoolService, IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService)
+            ISchoolServiceFullAccess schoolService, IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService,
+            IRegistration registration)
         {
             _governmentAdminService = governmentAdminService;
             _lessonService = lessonService;
@@ -38,6 +47,7 @@ namespace Filc.Controllers.Apis
             _schoolService = schoolService;
             _studentService = studentService;
             _teacherService = teacherService;
+            _registration = registration;
         }
 
         // Government Admins
@@ -55,10 +65,21 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("register/governmentAdmin")]
-        public void AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
+        public async Task<ObjectResult> AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
-            _governmentAdminService.AddGovernmentAdmin(admin);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(admin.user, "Government")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            return Ok(_governmentAdminService.AddGovernmentAdmin(admin));
         }
 
         [HttpPut]
@@ -98,9 +119,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("schools")]
-        public void AddSchool([FromBody] School school)
+        public ObjectResult AddSchool([FromBody] School school)
         {
-            _schoolService.AddSchool(school);
+            return Ok(_schoolService.AddSchool(school));
         }
 
         [HttpDelete]
@@ -133,10 +154,23 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("register/teacher")]
-        public void AddTeacher([FromBody] Teacher teacher)
+        [Route("teachers")]
+        public async Task<ObjectResult> AddTeacher([FromBody] Teacher teacher)
         {
-            _teacherService.AddTeacher(teacher);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(teacher.user, "Teacher")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            
+            return Ok(_teacherService.AddTeacher(teacher));
         }
 
         [HttpPut]
@@ -177,9 +211,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("lessons")]
-        public void AddLesson([FromBody] Lesson lesson)
+        public ObjectResult AddLesson([FromBody] Lesson lesson)
         {
-            _lessonService.AddLesson(lesson);
+            return Ok(_lessonService.AddLesson(lesson));
         }
 
         [HttpPut]
@@ -220,9 +254,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("marks")]
-        public void AddMark([FromBody] Mark mark)
+        public ObjectResult AddMark([FromBody] Mark mark)
         {
-            _markService.AddMark(mark);
+            return Ok(_markService.AddMark(mark));
         }
 
         [HttpPut]
@@ -255,10 +289,22 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("register/Student")]
-        public void AddStudent([FromBody] Student student)
+        [Route("students")]
+        public async Task<ObjectResult> AddStudent([FromBody] Student student)
         {
-            _studentService.AddStudent(student);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            return Ok(_studentService.AddStudent(student));
         }
 
         [HttpPut]
@@ -284,10 +330,22 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("register/parent")]
-        public void AddParent([FromBody] Parent parent)
+        [Route("parents")]
+        public async Task<ObjectResult> AddParent([FromBody] Parent parent)
         {
-            _parentService.AddParent(parent);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(parent.user, "Parent")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            return Ok(_parentService.AddParent(parent));
         }
 
         [HttpPut]
@@ -298,7 +356,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpDelete]
-        [Route("parents")]
+        [Route("parents/{id}")]
         public void DeleteParent(int id)
         {
             _parentService.DeleteParent(id);
@@ -327,10 +385,22 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("register/schoolAdmin")]
-        public void AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        [Route("schooladmins")]
+        public async Task<ObjectResult> AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
         {
-            _schoolAdminService.AddSchoolAdmin(schoolAdmin);
+            try
+            {
+                if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
+                {
+                    throw new Exception("Error registering user!");
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+            }
+            return Ok(_schoolAdminService.AddSchoolAdmin(schoolAdmin));
         }
 
         [HttpPut]

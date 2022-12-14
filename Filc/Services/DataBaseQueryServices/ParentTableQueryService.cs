@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Parent;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
@@ -24,16 +25,19 @@ namespace Filc.Services.DataBaseQueryServices
             return new ParentDTO(parent);
         }
 
-        public void AddParent(Parent parent)
+        public JWTAuthenticationResponse AddParent(Parent parent)
         {
             ApplicationUser user = _userService.GetUserByEmail(parent.user.Email);
             parent.user = user;
-            for (int i = 0; i < parent.Children.Count; i++)
-            {
-                parent.Children[i] = _db.Student.First(s => s.Id == parent.Children[i].Id);
-            }
+            parent.Children = new List<Student>();
             _db.Parent.Add(parent);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!",
+                Id = parent.Id
+            };
         }
 
         public void UpdateParent(Parent parent)
@@ -49,7 +53,10 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void DeleteParent(int id)
         {
-            _db.Parent.Remove(_db.Parent.First(parent => parent.Id == id));
+            Parent parent = _db.Parent.Include(p => p.user)
+                .First(p => p.Id == id);
+            _userService.DeleteUser(parent.user.Id);
+            _db.SaveChanges();
         }
     }
 }

@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Configuration;
 using Filc.Services;
+using Filc.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -84,6 +85,11 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
+builder.Services.AddTransient<IRegistration, RegistrationService>();
+builder.Services.AddTransient<ILogin, LoginService>();
+builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
+builder.Services.AddTransient<IDBModelService, DBModelService>();
+
 
 // Register entity based query service interface implementations
 builder.Services.AddTransient<IGovernmentAdminServiceFullAccess, GovernmentAdminTableQueryService>();
@@ -129,8 +135,14 @@ var seedService = app.Services.CreateScope().ServiceProvider;
 try
 {
     await SeedRoles.InitRoleSeeds(seedService.GetRequiredService<RoleManager<IdentityRole>>());
-    await SeedUsers.InitData(seedService.GetRequiredService<RoleManager<IdentityRole>>(),
-        seedService.GetRequiredService<UserManager<ApplicationUser>>());
+    await SeedUsers.InitData(seedService.GetRequiredService<IGovernmentAdminServiceFullAccess>(),
+        seedService.GetRequiredService<ISchoolAdminServiceFullAccess>(),
+        seedService.GetRequiredService<IStudentServiceFullAccess>(),
+        seedService.GetRequiredService<ITeacherServiceFullAccess>(),
+        seedService.GetRequiredService<IParentServiceFullAccess>(),
+        seedService.GetRequiredService<IRegistration>(),
+        seedService.GetRequiredService<ISchoolServiceFullAccess>(),
+        seedService.GetRequiredService<IDBModelService>());
 }
 catch (Exception ex)
 {

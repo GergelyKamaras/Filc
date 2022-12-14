@@ -1,10 +1,14 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.JWTAuthenticationModel;
+using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Filc.Services.ModelConverter;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Filc.ViewModel;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -46,7 +50,7 @@ namespace Filc.Services.DataBaseQueryServices
             return new SchoolAdminDTO(schoolAdmin);
         }
 
-        public void AddSchoolAdmin(SchoolAdmin schoolAdmin)
+        public JWTAuthenticationResponse AddSchoolAdmin(SchoolAdmin schoolAdmin)
         {
             ApplicationUser user = _userService.GetUserByEmail(schoolAdmin.user.Email);
             schoolAdmin.School = _db.School.First(school => school.Id == schoolAdmin.School.Id);
@@ -55,7 +59,14 @@ namespace Filc.Services.DataBaseQueryServices
                 schoolAdmin.user = user;
                 _db.SchoolAdmin.Add(schoolAdmin);
                 _db.SaveChanges();
-            }     
+            }
+
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration Successful!",
+                Id = schoolAdmin.Id
+            };
         }  
 
         public void UpdateSchoolAdmin(SchoolAdmin schoolAdmin)
@@ -68,7 +79,9 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void DeleteSchoolAdmin(int schoolAdminId)
         {
-            _db.SchoolAdmin.Remove(_db.SchoolAdmin.First(admin => admin.Id == schoolAdminId));
+            SchoolAdmin admin = _db.SchoolAdmin.Include(a => a.user)
+                .First(a => a.Id == schoolAdminId);
+            _userService.DeleteUser(admin.user.Id);
             _db.SaveChanges();
         }
     }

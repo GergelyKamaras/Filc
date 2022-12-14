@@ -18,6 +18,9 @@ namespace Filc.ViewModel
         [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
 
+        [Required]
+        public string Role { get; set; }
+
 
     }
 }

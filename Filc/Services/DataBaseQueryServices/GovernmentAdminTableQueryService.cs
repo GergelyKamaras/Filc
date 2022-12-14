@@ -1,7 +1,11 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
+using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Filc.ViewModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Filc.Services.DataBaseQueryServices
@@ -26,16 +30,25 @@ namespace Filc.Services.DataBaseQueryServices
             return _db.GovernmentAdmin.Include(admin => admin.user)
                 .First(x => x.Id == id);
         }
-        public void AddGovernmentAdmin(GovernmentAdmin governmentAdmin)
+        public JWTAuthenticationResponse AddGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
             ApplicationUser user = _userService.GetUserByEmail(governmentAdmin.user.Email);
             governmentAdmin.user = user;
             _db.GovernmentAdmin.Add(governmentAdmin);
             _db.SaveChanges();
+
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!",
+                Id = governmentAdmin.Id
+            };
         }
         public void RemoveGovernmentAdmin(int id)
         {
-            _db.GovernmentAdmin.Remove(_db.GovernmentAdmin.First(x => x.Id == id));
+            GovernmentAdmin admin = _db.GovernmentAdmin.Include(a => a.user)
+                .First(a => a.Id == id);
+            _userService.DeleteUser(admin.user.Id);
             _db.SaveChanges();
         }
         public void UpdateGovernmentAdmin(GovernmentAdmin governmentAdmin)

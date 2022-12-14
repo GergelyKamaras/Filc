@@ -29,6 +29,7 @@ const InnerProfil = () => {
         var data = {
             Email: email,
             Password: hashedPassword,
+            Role: "Teacher"
         };
         FetchLogin(data);
             setIsLoggedIn(x=> loggedpage)

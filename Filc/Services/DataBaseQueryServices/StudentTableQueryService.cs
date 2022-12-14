@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Shared;
 using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
@@ -37,7 +38,7 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapStudentsToStudentViewModels(students);
         }
 
-        public void AddStudent(Student student)
+        public JWTAuthenticationResponse AddStudent(Student student)
         {
             ApplicationUser user = _userService.GetUserByEmail(student.user.Email);
             student.School = _db.School.First(school => school.Id == student.School.Id);
@@ -46,6 +47,12 @@ namespace Filc.Services.DataBaseQueryServices
             student.user = user;
             _db.Student.Add(student);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!",
+                Id = student.Id
+            };
         }
 
         public void UpdateStudent(Student student)
@@ -60,7 +67,9 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void DeleteStudent(int id)
         {
-            _db.Student.Remove(_db.Student.First(student => student.Id == id));
+            Student student = _db.Student.Include(s => s.user)
+                .First(s => s.Id == id);
+            _userService.DeleteUser(student.user.Id);
             _db.SaveChanges();
         }
     }
