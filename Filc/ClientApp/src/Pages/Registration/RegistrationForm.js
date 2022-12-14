@@ -1,4 +1,5 @@
 ﻿import FetchSchoolList from "../Schools/FetchSchoolList";
+import RegisterParent  from "./RegisterParent";
 import { useState, useEffect } from 'react';
 
 
@@ -83,14 +84,7 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
                  </div>
             }
             {role === "Parent" &&
-                <div>
-                    <label htmlFor="Children">Add child</label>
-                    <select defaultValue={form?.child ? form.child : ""} onChange={(e) => updateField(e.target.value, "child")} id="Child" type="text" className="form-control">
-                        <option>These students need to be fetched from the backend</option>
-                        <option>Student1</option>
-                        <option>Student2</option>
-                    </select>
-                </div>
+                <RegisterParent updateField={updateField} />
             }
 
             <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Add</button>
