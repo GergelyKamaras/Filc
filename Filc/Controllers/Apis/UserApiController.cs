@@ -1,14 +1,19 @@
-﻿using EFDataAccessLibrary.Models;
+﻿using EFDataAccessLibrary.DataAccess;
+using EFDataAccessLibrary.Models;
 using Filc.Services.DataBaseQueryServices;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
+    [EnableCors]
+    [ApiController]
     [Route("api/users")]
-
-    public class UserApiController
+    [Authorize(Roles = "Government")]
+    public class UserApiController : Controller
     {
         private readonly IUserServiceFullAccess _userService;
         public UserApiController(IUserServiceFullAccess userService)
@@ -21,19 +26,5 @@ namespace Filc.Controllers.Apis
         {
             return _userService.GetAllUsers();
         }
-
-        [HttpGet]
-        [Route("first")]
-        public ApplicationUser GetFirstUser()
-        {
-            return _userService.GetAllUsers().First();
-        }
-
-        [HttpPost]
-        public void AddUser([FromBody] ApplicationUser user)
-        {
-            _userService.AddUser(user);
-        }
-
     }
 }
