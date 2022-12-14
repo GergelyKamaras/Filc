@@ -75,7 +75,7 @@ namespace Filc.Controllers.Apis
             catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                   new JWTAuthenticationResponse { Status = e.ToString(), Message = "Account not valid" });
+                   new JWTAuthenticationResponse { Status = e.ToString(), Message = "Invalid email/password" });
             }
         }
     }

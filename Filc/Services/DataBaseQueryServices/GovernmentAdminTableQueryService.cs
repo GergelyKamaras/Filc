@@ -27,6 +27,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public GovernmentAdmin GetGovernmentAdmin(int id)
         {
+            
             return _db.GovernmentAdmin.Include(admin => admin.user)
                 .First(x => x.Id == id);
         }

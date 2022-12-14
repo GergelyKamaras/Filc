@@ -5,7 +5,7 @@ namespace Filc.Models.AuthenticationModels
     public class EmailModel
     {
 
-        [EmailAddress]
+        [Required]
         public string Email { get; set; }
     }
 }
