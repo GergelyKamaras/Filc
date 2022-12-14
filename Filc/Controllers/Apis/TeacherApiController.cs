@@ -18,7 +18,6 @@ namespace Filc.Controllers.Apis
     [EnableCors]
     public class TeacherApiController : ControllerBase
     {
-
         private readonly IMarkServiceFullAccess _markService;
         private readonly ILessonServiceForTeacherRole _lessonService;
         private readonly ISchoolServiceForTeacherRole _schoolService;
@@ -104,9 +103,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("marks")]
-        public void AddMark([FromBody] Mark mark)
+        public ObjectResult AddMark([FromBody] Mark mark)
         {
-            _markService.AddMark(mark);
+            return Ok(_markService.AddMark(mark));
         }
 
         [HttpPut]
