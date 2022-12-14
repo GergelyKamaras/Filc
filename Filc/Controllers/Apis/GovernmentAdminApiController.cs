@@ -289,7 +289,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("register/students")]
+        [Route("register/student")]
         public async Task<ObjectResult> AddStudent([FromBody] Student student)
         {
             try

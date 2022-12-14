@@ -10,14 +10,14 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
     
     const updateField = (newValue, field) => {
         
-        if (field == "school"){
+        if (field === "school"){
             updateForm({ ...form, [field]: {"id": newValue} })
         }
         else if (field === "email"){
-            updateForm({ ...form, ["user"]: {"email": newValue}})
+            updateForm({ ...form, "user": {"email": newValue}})
         }
         else if (field === "password"){
-            updateForm({ ...form, ["user"]: {...form["user"] ,"password": newValue}});
+            updateForm({ ...form, "user": {...form["user"] ,"password": newValue}});
         }
         else {
             updateForm({ ...form, [field]: newValue })

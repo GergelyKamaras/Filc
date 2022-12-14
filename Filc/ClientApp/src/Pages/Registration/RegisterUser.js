@@ -15,7 +15,7 @@ const RegisterUser = () => {
         e.preventDefault();
 
         const hashes = HashPassword(form["user"]["password"]);
-        form["user"]["password"] = hashes["hashedPassword"];
+        form["user"]["PasswordHash"] = hashes["hashedPassword"];
         form["user"]["salt"] = hashes["hashSalt"];
         form["user"]["role"] = role;
         alert("Launching fetch for: " + role);

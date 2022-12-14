@@ -10,7 +10,7 @@ const RegisterUser = (data, role) => {
         body: JSON.stringify(data)
     }).then((response) => response.json())
       .then((result) => {
-        if (result.message === "SUCCESS") {
+        if (result.status === "Success") {
             alert("You have registered the user.");
         } else {
             alert("Something went wrong")
