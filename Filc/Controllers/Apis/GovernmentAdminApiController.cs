@@ -12,6 +12,7 @@ using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.DependencyResolver;
 
@@ -19,6 +20,8 @@ namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("api/governmentadmins")]
+    [Authorize(Roles = "Government")]
+    [EnableCors]
     public class GovernmentAdminApiController : Controller
     {
         private readonly IGovernmentAdminServiceFullAccess _governmentAdminService;

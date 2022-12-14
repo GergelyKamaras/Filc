@@ -11,12 +11,15 @@ using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Student;
 using Filc.Models.ViewModels.Teacher;
+using Microsoft.AspNetCore.Cors;
 
 namespace Filc.Controllers.Apis
 {
     
     [ApiController]
     [Route("api/schooladmins")]
+    [Authorize(Roles = "SchoolAdmin")]
+    [EnableCors]
     public class SchoolAdminApiController : ControllerBase
     {
         private readonly ISchoolAdminServiceForSchoolAdminRole _schoolAdminService;

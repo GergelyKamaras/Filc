@@ -5,12 +5,15 @@ using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("api/students")]
+    [Authorize(Roles = "Student")]
+    [EnableCors]
     public class StudentApiController : ControllerBase
     {
         
