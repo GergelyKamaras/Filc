@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Cors;
 using Filc.Models.AuthenticationModels;
 using Filc.Services.Interfaces;
 
-namespace Filc.Controllers
+namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("authentication")]
@@ -50,8 +50,8 @@ namespace Filc.Controllers
         [Route("loginsalt")]
         public ObjectResult GetLoginSalt(EmailModel model)
         {
-            
-            return Ok(new 
+
+            return Ok(new
             {
                 Status = "Success",
                 Message = _userService.GetSaltByEmail(model.Email)
@@ -78,6 +78,5 @@ namespace Filc.Controllers
                    new JWTAuthenticationResponse { Status = e.ToString(), Message = "Account not valid" });
             }
         }
-        
     }
 }
