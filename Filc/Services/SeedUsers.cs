@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.ViewModel;
@@ -14,7 +15,7 @@ namespace EFDataAccessLibrary.DataAccess
     {
         public static async Task InitData(IGovernmentAdminServiceFullAccess govService, ISchoolAdminServiceFullAccess schoolAdminService, 
             IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService, IParentServiceFullAccess parentService, 
-            IRegistration registration, ISchoolServiceFullAccess schoolService)
+            IRegistration registration, ISchoolServiceFullAccess schoolService, IDBModelService dbService)
         {
             School school1 = new School()
             {
@@ -31,7 +32,8 @@ namespace EFDataAccessLibrary.DataAccess
 
             try
             {
-                schoolService.AddSchool(school1);
+                JWTAuthenticationResponse response = schoolService.AddSchool(school1);
+                school1 = dbService.GetSchoolById(response.Id);
             }
             catch (Exception e)
             {
