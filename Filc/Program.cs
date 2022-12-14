@@ -88,6 +88,7 @@ builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
 builder.Services.AddTransient<IRegistration, RegistrationService>();
 builder.Services.AddTransient<ILogin, LoginService>();
 builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
+builder.Services.AddTransient<IDBModelService, DBModelService>();
 
 
 // Register entity based query service interface implementations
@@ -140,7 +141,8 @@ try
         seedService.GetRequiredService<ITeacherServiceFullAccess>(),
         seedService.GetRequiredService<IParentServiceFullAccess>(),
         seedService.GetRequiredService<IRegistration>(),
-        seedService.GetRequiredService<ISchoolServiceFullAccess>());
+        seedService.GetRequiredService<ISchoolServiceFullAccess>(),
+        seedService.GetRequiredService<IDBModelService>());
 }
 catch (Exception ex)
 {
