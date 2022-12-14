@@ -1,26 +1,25 @@
 ﻿import { useState } from 'react'
 import RegisterUserFetch from './FetchRegisterUser'
 import RegistrationForm from './RegistrationForm';
-
+import bcrypt from 'bcryptjs';
 
 const RegisterUser = () => {
     
     const [role, updateRole] = useState("");
-    const [form, updateForm] = useState({ user: {} });
+    const [form, updateForm] = useState({});
 
     function handleChange(event) {
         updateRole(event.target.value);
     }
-    function handleSubmit(event) {
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const hashes = HashPassword(form["user"]["password"]);
+        form["user"]["password"] = hashes["hashedPassword"];
+        form["user"]["salt"] = hashes["hashSalt"];
+        form["user"]["role"] = role;
         alert("Launching fetch for: " + role);
-        event.preventDefault();
-
-
-
-        
-
-       
-
+        console.log(form)
         RegisterUserFetch(form, role);
         // possibly add creatorRole as a parameter in the future for authorization purposes
 
@@ -29,7 +28,15 @@ const RegisterUser = () => {
         //Id can be taken from that to navigate to user view page
     }
 
-   
+    function HashPassword (password) {
+        let salt = bcrypt.genSaltSync(10);
+
+        const hashedPassword = bcrypt.hashSync(password, salt);
+        return {
+            "hashedPassword": hashedPassword,
+            "hashSalt": salt
+            }
+    }
 
     return (
         <div className="register-form">
