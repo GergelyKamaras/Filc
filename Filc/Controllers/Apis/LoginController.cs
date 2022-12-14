@@ -64,6 +64,7 @@ namespace Filc.Controllers.Apis
         {
             try
             {
+
                 var token = await _loginService.Login(model);
                 return Ok(new
                 {
