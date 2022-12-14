@@ -1,6 +1,7 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,10 +15,16 @@ namespace Filc.Services.DataBaseQueryServices
             _db = esContext;
         }
 
-        public void AddSchool(School school)
+        public JWTAuthenticationResponse AddSchool(School school)
         {
             _db.School.Add(school);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!",
+                Id = school.Id
+            };
         }
 
         public SchoolDTO GetSchool(int id)

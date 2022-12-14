@@ -57,10 +57,12 @@ namespace Filc.Services.DataBaseQueryServices
             teacher.user = user;
             _db.Teacher.Add(teacher);
             _db.SaveChanges();
+
             return new JWTAuthenticationResponse()
             {
                 Status = "Success",
-                Message = "Registration successful!"
+                Message = "Registration successful!",
+                Id = teacher.Id
             };
         }
 

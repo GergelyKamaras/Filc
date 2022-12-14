@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +44,7 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 
-        public void AddLesson(Lesson lesson)
+        public JWTAuthenticationResponse AddLesson(Lesson lesson)
         {
             lesson.School = _db.School.First(s => s.Id == lesson.School.Id);
             
@@ -59,6 +60,12 @@ namespace Filc.Services.DataBaseQueryServices
             
             _db.Lesson.Add(lesson);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!",
+                Id = lesson.Id
+            };
         }
 
         public void UpdateLesson(Lesson lesson)

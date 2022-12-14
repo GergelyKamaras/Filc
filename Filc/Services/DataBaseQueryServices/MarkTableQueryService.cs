@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Mark;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.EntityFrameworkCore;
@@ -22,13 +23,19 @@ namespace Filc.Services.DataBaseQueryServices
                 .First(x => x.Id == id);
             return new MarkDTO(mark);
         }
-        public void AddMark(Mark mark)
+        public JWTAuthenticationResponse AddMark(Mark mark)
         {
             mark.Lesson = _db.Lesson.First(l => l.Id == mark.Lesson.Id);
             mark.Student = _db.Student.First(s => s.Id == mark.Student.Id);
             mark.Teacher = _db.Teacher.First(t => t.Id == mark.Teacher.Id);
             _db.Mark.Add(mark);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Registration successful!",
+                Id = mark.Id
+            };
         }
         public void UpdateMark(Mark mark)
         {
