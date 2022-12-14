@@ -1,4 +1,4 @@
-﻿import SchoolFetchById from "../Controllers/SchoolFetchById";
+﻿import FetchSchoolById from "./FetchSchoolById";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const School = () => {
     useEffect(() => {
         const dataFetch = async () => {
 
-            const data = await SchoolFetchById(params.id);
+            const data = await FetchSchoolById(params.id);
 
             setSchool(data);
             setLoading(false);

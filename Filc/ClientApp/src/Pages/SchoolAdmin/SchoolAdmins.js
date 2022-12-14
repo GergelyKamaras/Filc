@@ -1,4 +1,4 @@
-﻿import SchoolAdminListFetch from "../Controllers/SchoolAdminListFetch";
+﻿import FetchSchoolAdminList from "./FetchSchoolAdminList";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -11,7 +11,7 @@ const SchoolAdmins = () => {
     () => {
       const fetchData = async () => {
 
-        const data = await SchoolAdminListFetch(params.schoolid);
+        const data = await FetchSchoolAdminList(params.schoolid);
 
         setSchoolAdmins(data);
         setLoading(false);

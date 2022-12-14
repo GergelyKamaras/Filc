@@ -1,12 +1,12 @@
-import Header from '../components/Header';
-import SignInBox from '../components/IndexPageComponents/SignInBox';
+﻿import Header from '../Shared/Header';
+import InnerProfil from '../Home/InnerProfil';
 import React from "react";
 
 const LoginPage = () => {
     return (
         <>
             <Header />
-            <SignInBox />
+            <InnerProfil />
         </>
     );
 };

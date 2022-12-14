@@ -1,7 +1,7 @@
 
-import InnerProfil from "../components/IndexPageComponents/InnerProfil";
-import '../Style/IndexPage/IndexPage.css'
-import News from '../components/IndexPageComponents/News'
+import InnerProfil from "./InnerProfil";
+import '../../Style/IndexPage/IndexPage.css'
+import News from './News'
 
 const IndexPage = () => {
 

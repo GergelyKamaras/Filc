@@ -1,8 +1,8 @@
-﻿import SchoolListFetch from "../Controllers/SchoolListFetch";
-import AddSchool from '../Components/AddSchool'
+﻿import FetchSchoolList from "./FetchSchoolList";
+import AddSchool from './AddSchool'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../../../../Style/SchoolsPage.css';
+import '../../Style/SchoolsPage.css';
 
 
 const Schools = () => {
@@ -19,7 +19,7 @@ const Schools = () => {
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
-            const Schools = await SchoolListFetch();
+            const Schools = await FetchSchoolList();
             setSchoolData({ schools: Schools });
             setIsLoading(false);
         };
