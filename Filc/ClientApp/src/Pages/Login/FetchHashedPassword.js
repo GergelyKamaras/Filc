@@ -7,7 +7,7 @@ const GetHashedPasswordFetch = (data) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-
+        
     }).then((response) => response.json()).then(result =>{
         return result.message; 
   }) 
