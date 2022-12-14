@@ -1,6 +1,6 @@
-﻿import AddSchoolFetch from '../Controllers/SchoolAdd'
+﻿import FetchAddSchool from './FetchAddSchool'
 import { useRef } from 'react'
-import '../../../../Style/AddSchool.css';
+import '../../Style/AddSchool.css';
 
 function AddSchool() {
     const nameInputRef = useRef();
@@ -26,7 +26,7 @@ function AddSchool() {
             classes: []
         };
 
-        AddSchoolFetch(schoolData);
+        FetchAddSchool(schoolData);
     }
 
     return (

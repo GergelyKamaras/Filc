@@ -2,17 +2,17 @@
 
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
-import Layout from './components/Layout'
-import RequireAuth from './components/RequireAuth';
-import Unauthorized from './components/Unauthorized';
-import NotFound from './components/NotFound';
-import SchoolAdmins from './components/UserComponents/GovAdminComponents/Components/SchoolAdmins';
-import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
-import Schools from './components/UserComponents/GovAdminComponents/Components/Schools';
-import School from './components/UserComponents/GovAdminComponents/Components/School';
-import IndexPage from './Pages/AppIndex';
-import LoginPage from './Pages/LoginPage';
-import RegisterUser from './components/UserComponents/GovAdminComponents/Components/Registration/RegisterUser'
+import Layout from './Pages/Shared/Layout'
+import RequireAuth from './Pages/Other/RequireAuth';
+import Unauthorized from './Pages/Other/Unauthorized';
+import NotFound from './Pages/Other/NotFound';
+import SchoolAdmins from './Pages/SchoolAdmin/SchoolAdmins';
+import SchoolAdmin from './Pages/SchoolAdmin/SchoolAdmin';
+import Schools from './Pages/Schools/Schools';
+import School from './Pages/Schools/School';
+import IndexPage from './Pages/Home/AppIndex';
+import LoginPage from './Pages/Login/LoginPage';
+import RegisterUser from './Pages/Registration/RegisterUser';
 
 function App() {
 

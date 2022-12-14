@@ -1,4 +1,4 @@
-﻿import SchoolAdminFetchById from "../Controllers/SchoolAdminFetchById";
+﻿import FetchSchoolAdminById from "./FetchSchoolAdminById";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ const SchoolAdmin = () => {
 
     useEffect(() => {
     const fetchData = async () => {
-        const data = await SchoolAdminFetchById(id);
+        const data = await FetchSchoolAdminById(id);
 
         setSchoolAdmin(data);
         console.log(data);

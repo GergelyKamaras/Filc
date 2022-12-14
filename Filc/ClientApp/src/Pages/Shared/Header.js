@@ -7,9 +7,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react'
-import InnerProfil from './IndexPageComponents/InnerProfil'
+import InnerProfil from '../Home/InnerProfil'
+import "../../Style/navbar.css"
 
-import "../Style/navbar.css"
 function Header() {
     const role = localStorage.getItem("userRole");
     const navigate = useNavigate();

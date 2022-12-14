@@ -1,12 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {useNavigate} from 'react-router-dom';
+import React, {useState} from "react";
 import '../../Style/IndexPage/InnerProfil.css'
 import '../../Style/IndexPage/SignIn.css'
 import bcrypt from 'bcryptjs'
 import { useRef } from 'react'
-import RegistrationFetch from "../controllers/RegistrationFetch"
-import GetHashedPasswordFetch from "../controllers/GetHashedPasswordFetch"
-import LoginApiFetch from "../controllers/LoginApiFetch"
+import FetchHashedPassword from "../Login/FetchHashedPassword"
+import FetchLogin from "../Login/FetchLogin"
 
 
 
@@ -15,26 +13,6 @@ const InnerProfil = () => {
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-
-    const handleRegistration = (e) => {
-        e.preventDefault();
-
-        const salt = bcrypt.genSaltSync(10);
-
-        const email = emailInputRef.current.value;
-        const password = passwordInputRef.current.value;
-        const hashedPassword = bcrypt.hashSync(password, salt);
-
-        var userData = {
-            Email: email,
-            Username: email,
-            Password: hashedPassword,
-            Salt: salt,
-            Role: "SchoolAdmin"
-        };
-        console.log(userData);
-        RegistrationFetch(userData);
-    }
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -45,14 +23,14 @@ const InnerProfil = () => {
             Email:email
         }
 
-        const salt = await GetHashedPasswordFetch(userEmail);
+        const salt = await FetchHashedPassword(userEmail);
         const hashedPassword = bcrypt.hashSync(passwordInputRef.current.value, salt)
         
         var data = {
             Email: email,
             Password: hashedPassword,
         };
-        LoginApiFetch(data);
+        FetchLogin(data);
             setIsLoggedIn(x=> loggedpage)
 
     }
@@ -99,8 +77,6 @@ const InnerProfil = () => {
                                 <label htmlFor="Password">Password</label>
                                 <input ref={passwordInputRef} id="Password" type="password" className="form-control" />
                             </div>
-                            {/* <button type="submit" className="btn btn-primary"
-                                onClick={handleRegistration}>Register</button> */}
                             <button type="submit" className="login-btn"
                                 onClick={handleLogin}>Login</button>
                         </form>

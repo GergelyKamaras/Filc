@@ -14,7 +14,7 @@ const RegisterUser = () => {
         alert("Launching fetch for: " + role);
         event.preventDefault();
 
-        RegisterUserFetch(form, role);
+        RegisterUserFetch(form, role, creatorRole);
         //.then((response) => navigate/responseID
         //fetch could later return registered user object,
         //Id can be taken from that to navigate to user view page
