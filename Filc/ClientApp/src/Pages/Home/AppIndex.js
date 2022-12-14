@@ -1,7 +1,7 @@
 
-import InnerProfil from "./InnerProfil";
 import '../../Style/IndexPage/IndexPage.css'
 import News from './News'
+import LoginForm from "../Login/LoginUser";
 
 const IndexPage = () => {
 
@@ -14,7 +14,7 @@ const IndexPage = () => {
                 </div>
                 <div className="profile">
                     <div className="profile-inner">
-                        <InnerProfil/>
+                        <LoginForm/>
                     </div>
                 </div>
                 <div className="school-news">
