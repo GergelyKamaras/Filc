@@ -134,7 +134,13 @@ var seedService = app.Services.CreateScope().ServiceProvider;
 try
 {
     await SeedRoles.InitRoleSeeds(seedService.GetRequiredService<RoleManager<IdentityRole>>());
-    await SeedUsers.InitData(seedService.GetRequiredService<IGovernmentAdminServiceFullAccess>(), seedService.GetRequiredService<IRegistration>());
+    await SeedUsers.InitData(seedService.GetRequiredService<IGovernmentAdminServiceFullAccess>(),
+        seedService.GetRequiredService<ISchoolAdminServiceFullAccess>(),
+        seedService.GetRequiredService<IStudentServiceFullAccess>(),
+        seedService.GetRequiredService<ITeacherServiceFullAccess>(),
+        seedService.GetRequiredService<IParentServiceFullAccess>(),
+        seedService.GetRequiredService<IRegistration>(),
+        seedService.GetRequiredService<ISchoolServiceFullAccess>());
 }
 catch (Exception ex)
 {
