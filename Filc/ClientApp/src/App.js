@@ -1,7 +1,7 @@
 
 
 import './App.css';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import Layout from './components/Layout'
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/Unauthorized';
@@ -12,12 +12,28 @@ import Schools from './components/UserComponents/GovAdminComponents/Components/S
 import School from './components/UserComponents/GovAdminComponents/Components/School';
 import IndexPage from './Pages/AppIndex';
 import LoginPage from './Pages/LoginPage';
+import { ListStudents } from './Pages/ListStudents';
 
 function App() {
 
 
     return (
-      <Routes>
+        <>
+            <ul>
+                <li><Link to="/allstudents">Get all Students</Link></li>
+                <li><Link to="/allteachers">Get all Teachers</Link></li>
+                <li><Link to="/allschooladmins">Get all School admins</Link></li>
+            </ul>
+            
+            
+        <Routes>
+                <Route path="/allstudents" element={<ListStudents URL="https://localhost:7014/api/schooladmins/students" />} />
+                
+                <Route path="/allstudents/:id" element="asd" />
+                
+                <Route path="/allteachers" element={<ListStudents URL="https://localhost:7014/api/schooladmins/teachers" />} />
+                <Route path="/allschooladmins" element={<ListStudents URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
+
         <Route path="/" element={<Layout />}>
           {/*Routes available to all users*/}
           <Route path="" element={<IndexPage/>} />
@@ -45,9 +61,11 @@ function App() {
           </Route>
 
           {/*Not Existing Route*/}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+          <Route path="*" element={<NotFound />} /></Route>
+
+           
+            </Routes>
+        </>
     );
 }
 
