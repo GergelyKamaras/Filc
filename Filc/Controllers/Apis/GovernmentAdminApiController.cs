@@ -55,6 +55,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
+        [Route("register/governmentAdmin")]
         public void AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
             _governmentAdminService.AddGovernmentAdmin(admin);
@@ -132,7 +133,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("teachers")]
+        [Route("register/teacher")]
         public void AddTeacher([FromBody] Teacher teacher)
         {
             _teacherService.AddTeacher(teacher);
@@ -254,7 +255,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("students")]
+        [Route("register/Student")]
         public void AddStudent([FromBody] Student student)
         {
             _studentService.AddStudent(student);
@@ -283,7 +284,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("parents")]
+        [Route("register/parent")]
         public void AddParent([FromBody] Parent parent)
         {
             _parentService.AddParent(parent);
@@ -326,7 +327,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("schooladmins")]
+        [Route("register/schoolAdmin")]
         public void AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
         {
             _schoolAdminService.AddSchoolAdmin(schoolAdmin);
