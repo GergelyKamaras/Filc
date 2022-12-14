@@ -1,6 +1,6 @@
 ﻿
 const RegisterUser = (data, role) => {
-    const url = "https://localhost:7014/api/governmentadmin/register/" + role;
+    const url = "https://localhost:7014/api/governmentadmins/register/" + role;
     fetch(url, {
         method: "POST", headers: {
             "Accept": "application/json",
@@ -12,7 +12,6 @@ const RegisterUser = (data, role) => {
       .then((result) => {
         if (result.message === "SUCCESS") {
             alert("You have registered the user.");
-
         } else {
             alert("Something went wrong")
         }
