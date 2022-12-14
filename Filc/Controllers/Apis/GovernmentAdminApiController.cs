@@ -20,7 +20,7 @@ namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("api/governmentadmins")]
-    [Authorize(Roles = "Government")]
+    //[Authorize(Roles = "Government")]
     [EnableCors]
     public class GovernmentAdminApiController : Controller
     {
@@ -289,7 +289,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("students")]
+        [Route("register/students")]
         public async Task<ObjectResult> AddStudent([FromBody] Student student)
         {
             try
