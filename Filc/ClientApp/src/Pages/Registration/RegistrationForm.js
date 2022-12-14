@@ -1,13 +1,11 @@
 ﻿import FetchSchoolList from "../Schools/FetchSchoolList";
 import { useState, useEffect } from 'react';
-import bcrypt from 'bcryptjs';
+
 
 const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
 
     const [schoolData, setSchoolData] = useState({ schools: [] });
     const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     
     const updateField = (newValue, field) => {
@@ -15,34 +13,19 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
         if (field == "school"){
             updateForm({ ...form, [field]: {"id": newValue} })
         }
-        else if (field == "user"){
-            updateForm({ ...form, [field]: newValue})}
+        else if (field === "email"){
+            updateForm({ ...form, ["user"]: {"email": newValue}})
+        }
+        else if (field === "password"){
+            updateForm({ ...form, ["user"]: {...form["user"] ,"password": newValue}});
+        }
         else {
             updateForm({ ...form, [field]: newValue })
         }
     }
-            
-    const createUser = (e) => {
-        e.preventDefault();
-        const passwordHash = HashPassword(password);
-        const user = {
-            "email": email,
-            "password": passwordHash["hashedPassword"],
-            "salt": passwordHash["hashSalt"]
-        }
-        updateForm({ ...form, ["user"]: user});
-        handleSubmit();
-    }
 
-    const HashPassword = (password) => {
-        let salt = bcrypt.genSaltSync(10);
-
-        const hashedPassword = bcrypt.hashSync(password, salt);
-        return {
-            "hashedPassword": hashedPassword,
-            "hashSalt": salt
-            }
-    }
+   
+    
 
 
     useEffect(() => {
@@ -60,11 +43,11 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
          <form>
             <div>
                 <label htmlFor="email">Email</label>
-                <input defaultValue={form?.email ? form.email : ""} onChange={(e) => setEmail(e.target.value)} id="email" type="email" className="form-control" />
+                <input defaultValue={form?.email ? form.email : ""} onChange={(e) => updateField(e.target.value, "email")} id="email" type="email" className="form-control" />
             </div>
             <div>
                 <label htmlFor="Password">Password</label>
-                <input defaultValue={form?.password ? form.password : ""} onChange={(e) => setPassword(e.target.value)} id="Password" type="password" className="form-control" />
+                <input defaultValue={form?.password ? form.password : ""} onChange={(e) => updateField(e.target.value, "password")} id="Password" type="password" className="form-control" />
             </div>
             {(role === "Student" || role === "Teacher" || role === "SchoolAdmin") &&
                  <div>
@@ -110,7 +93,7 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
                 </div>
             }
 
-            <button type="submit" className="btn btn-primary" onClick={createUser}>Add</button>
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Add</button>
         </form>
 
     )
