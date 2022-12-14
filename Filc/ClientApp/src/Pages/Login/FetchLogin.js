@@ -11,7 +11,7 @@ const LoginApiFetch = (data) => {
                 alert("You are logged in");
                 localStorage.setItem("AccessToken", result.token);
             }else{
-                alert(result.message)
+                alert(result.message, "ez az")
             }
         })
     }

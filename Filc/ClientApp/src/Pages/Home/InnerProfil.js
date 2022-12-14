@@ -3,7 +3,7 @@ import '../../Style/IndexPage/InnerProfil.css'
 import '../../Style/IndexPage/SignIn.css'
 
 
-const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm, handleLogin, handleChange}) => {
+const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm, handleLogin}) => {
 
 
     const updateLoginField = (newValue, field) => {
@@ -12,7 +12,7 @@ const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm
     }
 
     useEffect(() => {
-        
+
         if(localStorage.getItem("AccessToken") !== null){
             updateLoginStatus(false)
         }else{updateLoginStatus(true)}
@@ -31,13 +31,7 @@ const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm
                 <label htmlFor="password">Password</label>
                 <input defaultValue={loginForm?.password ? loginForm.password : ""} onChange={(e) => updateLoginField(e.target.value, "password")} id="Password" type="password" className="form-control"/>
             </div>
-            <select className="role-form" onChange={handleChange}>
-                <option value="Government">Government Admin</option>
-                <option value="SchoolAdmin">School Admin</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Student">Student</option>
-                <option value="Parent">Parent</option>
-            </select>
+            
             <button type="submit" className="login-btn"
                 onClick={handleLogin}>Login</button>
             </form>

@@ -9,7 +9,6 @@ const LoginForm = () => {
     
     const [loginStatus, updateLoginStatus] = useState(true);
     const [loginForm, updateLoginForm] = useState({});
-    const [role, updateRole] = useState("")
 
     async function handleLogin(e)  {
         e.preventDefault();
@@ -20,17 +19,14 @@ const LoginForm = () => {
         const data = {
             "Email": email,
             "Password": bcrypt.hashSync(loginForm["password"], salt),
-            "RememberMe": false,
-            "Role": role,
+            "RememberMe": false
         }; 
 
         FetchLogin(data);
         updateLoginStatus(false)
     }
     
-    function handleChange(event) {
-        updateRole(event.target.value);
-    }
+    
 
     return (
         
@@ -42,7 +38,7 @@ const LoginForm = () => {
             <div className="profile-details">
                 <div className="sign-in-box">
                     <div className="sign-in-box-inner"> 
-                        <InnerProfil loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} updateLoginForm={updateLoginForm} loginForm={loginForm} handleLogin={handleLogin} handleChange = {handleChange} />
+                        <InnerProfil loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} updateLoginForm={updateLoginForm} loginForm={loginForm} handleLogin={handleLogin} />
                     </div>
                 </div>
             </div>
