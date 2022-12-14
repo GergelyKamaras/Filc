@@ -16,7 +16,6 @@ namespace EFDataAccessLibrary.Models
         [Required]
         public ApplicationUser user { get; set; }
 
-        [Required]
-        public List<Student> Children { get; set; }
+        public List<Student>? Children { get; set; }
     }
 }
