@@ -353,7 +353,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpDelete]
-        [Route("parents")]
+        [Route("parents/{id}")]
         public void DeleteParent(int id)
         {
             _parentService.DeleteParent(id);
