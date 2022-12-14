@@ -119,9 +119,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("schools")]
-        public void AddSchool([FromBody] School school)
+        public ObjectResult AddSchool([FromBody] School school)
         {
-            _schoolService.AddSchool(school);
+            return Ok(_schoolService.AddSchool(school));
         }
 
         [HttpDelete]
@@ -211,9 +211,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("lessons")]
-        public void AddLesson([FromBody] Lesson lesson)
+        public ObjectResult AddLesson([FromBody] Lesson lesson)
         {
-            _lessonService.AddLesson(lesson);
+            return Ok(_lessonService.AddLesson(lesson));
         }
 
         [HttpPut]
@@ -254,9 +254,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("marks")]
-        public void AddMark([FromBody] Mark mark)
+        public ObjectResult AddMark([FromBody] Mark mark)
         {
-            _markService.AddMark(mark);
+            return Ok(_markService.AddMark(mark));
         }
 
         [HttpPut]
