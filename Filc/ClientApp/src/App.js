@@ -11,7 +11,6 @@ import SchoolAdmin from './Pages/SchoolAdmin/SchoolAdmin';
 import Schools from './Pages/Schools/Schools';
 import School from './Pages/Schools/School';
 import AppIndex from './Pages/Home/AppIndex';
-import LoginPage from './Pages/Login/LoginPage';
 import RegisterUser from './Pages/Registration/RegisterUser';
 
 function App() {
@@ -23,7 +22,7 @@ function App() {
 
                 {/*Routes available to all users*/}
                 <Route path="" element={<AppIndex/>} />
-                <Route path='/login' element={<LoginPage/>}/>
+
                 <Route path="Unauthorized" element={<Unauthorized />} />
                 <Route path="schooladmins/:id" element={<SchoolAdmin />} />
 

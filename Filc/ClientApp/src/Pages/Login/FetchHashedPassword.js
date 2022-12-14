@@ -1,7 +1,4 @@
 ﻿
-import React from 'react'
-import { resultingClientExists } from 'workbox-core/_private';
-
 const GetHashedPasswordFetch = (data) => {
     const myresponse = fetch('https://localhost:7014/authentication/loginsalt', {
         method: 'POST',
