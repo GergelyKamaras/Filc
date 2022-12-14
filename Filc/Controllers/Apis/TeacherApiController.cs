@@ -7,12 +7,15 @@ using Filc.Models.ViewModels.Teacher;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("api/teachers")]
+    [Authorize(Roles = "Teacher")]
+    [EnableCors]
     public class TeacherApiController : ControllerBase
     {
 
