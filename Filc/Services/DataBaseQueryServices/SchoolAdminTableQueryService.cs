@@ -64,7 +64,8 @@ namespace Filc.Services.DataBaseQueryServices
             return new JWTAuthenticationResponse()
             {
                 Status = "Success",
-                Message = "Registration Successful!"
+                Message = "Registration Successful!",
+                Id = schoolAdmin.Id
             };
         }  
 

@@ -77,8 +77,8 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
-        ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
         ValidateLifetime = false,
         ValidateIssuerSigningKey = true
     };
@@ -88,6 +88,7 @@ builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
 builder.Services.AddTransient<IRegistration, RegistrationService>();
 builder.Services.AddTransient<ILogin, LoginService>();
 builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
+builder.Services.AddTransient<IDBModelService, DBModelService>();
 
 
 // Register entity based query service interface implementations
@@ -134,7 +135,14 @@ var seedService = app.Services.CreateScope().ServiceProvider;
 try
 {
     await SeedRoles.InitRoleSeeds(seedService.GetRequiredService<RoleManager<IdentityRole>>());
-    await SeedUsers.InitData(seedService.GetRequiredService<IGovernmentAdminServiceFullAccess>(), seedService.GetRequiredService<IRegistration>());
+    await SeedUsers.InitData(seedService.GetRequiredService<IGovernmentAdminServiceFullAccess>(),
+        seedService.GetRequiredService<ISchoolAdminServiceFullAccess>(),
+        seedService.GetRequiredService<IStudentServiceFullAccess>(),
+        seedService.GetRequiredService<ITeacherServiceFullAccess>(),
+        seedService.GetRequiredService<IParentServiceFullAccess>(),
+        seedService.GetRequiredService<IRegistration>(),
+        seedService.GetRequiredService<ISchoolServiceFullAccess>(),
+        seedService.GetRequiredService<IDBModelService>());
 }
 catch (Exception ex)
 {

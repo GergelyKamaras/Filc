@@ -36,9 +36,9 @@ namespace Filc.Services
                 foreach (var userRole in userRoles)
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                    if (userRole != "Government")
+                        authClaims.Add(GetSchoolIdClaim(model, userRole));
                 }
-                if (model.Role != "GovernmentAdmin")
-                    authClaims.Add(GetShoolIdClaim(model));
 
                 return _jwtTokenGenerator.GetToken(authClaims);
                 
@@ -46,22 +46,22 @@ namespace Filc.Services
             throw new Exception();
         }
 
-        private Claim GetShoolIdClaim(LoginModel model)
+        private Claim GetSchoolIdClaim(LoginModel model, string role)
         {
-            switch (model.Role)
+            switch (role)
             {
                 case "Teacher":
-                    return new Claim(model.Role,
+                    return new Claim("schoolId",
                         _db.Teacher.Where(t => t.user.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 
                 case "SchoolAdmin":
-                    return new Claim(model.Role,
+                    return new Claim("schoolId" ,
                         _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 
                 case "Student":
-                    return new Claim(model.Role,
+                    return new Claim("schoolId",
                         _db.Student.Where(t => t.user.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 

@@ -5,12 +5,15 @@ using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("api/parents")]
+    [Authorize(Roles = "Parent")]
+    [EnableCors]
     public class ParentApiController : ControllerBase
     {
         private readonly IStudentServiceForParentRole _studentService;

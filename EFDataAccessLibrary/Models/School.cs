@@ -11,22 +11,19 @@ namespace EFDataAccessLibrary.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        [Required]
         [MaxLength(100)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
-        [Required]
         [MaxLength(20)]
-        public string SchoolType { get; set; }
-        public List<SchoolAdmin> SchoolAdmin { get; set; }
-        public List<Student> Students { get; set; }
-        public List<Subject> Subjects { get; set; }
-        public List<Lesson> Lessons { get; set; }
-        public List<Teacher> Teachers { get; set; }
-        public List<SchoolClass> Classes { get; set; }
+        public string? SchoolType { get; set; }
+        public List<SchoolAdmin>? SchoolAdmin { get; set; }
+        public List<Student>? Students { get; set; }
+        public List<Subject>? Subjects { get; set; }
+        public List<Lesson>? Lessons { get; set; }
+        public List<Teacher>? Teachers { get; set; }
+        public List<SchoolClass>? Classes { get; set; }
     }
 }

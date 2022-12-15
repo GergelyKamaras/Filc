@@ -27,6 +27,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public GovernmentAdmin GetGovernmentAdmin(int id)
         {
+            
             return _db.GovernmentAdmin.Include(admin => admin.user)
                 .First(x => x.Id == id);
         }
@@ -40,7 +41,8 @@ namespace Filc.Services.DataBaseQueryServices
             return new JWTAuthenticationResponse()
             {
                 Status = "Success",
-                Message = "Registration successful!"
+                Message = "Registration successful!",
+                Id = governmentAdmin.Id
             };
         }
         public void RemoveGovernmentAdmin(int id)

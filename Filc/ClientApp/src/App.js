@@ -1,16 +1,18 @@
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom'
-import Layout from './components/Layout'
-import RequireAuth from './components/RequireAuth';
-import Unauthorized from './components/Unauthorized';
-import NotFound from './components/NotFound';
-import SchoolAdmins from './components/UserComponents/GovAdminComponents/Components/SchoolAdmins';
-import SchoolAdmin from './components/UserComponents/GovAdminComponents/Components/SchoolAdmin';
-import Schools from './components/UserComponents/GovAdminComponents/Components/Schools';
-import School from './components/UserComponents/GovAdminComponents/Components/School';
-import IndexPage from './Pages/AppIndex';
-import LoginPage from './Pages/LoginPage';
+import { Routes, Route } from 'react-router-dom'
+import Layout from './Pages/Shared/Layout'
+import RequireAuth from './Pages/Other/RequireAuth';
+import Unauthorized from './Pages/Other/Unauthorized';
+import NotFound from './Pages/Other/NotFound';
+import SchoolAdmins from './Pages/SchoolAdmin/SchoolAdmins';
+import SchoolAdmin from './Pages/SchoolAdmin/SchoolAdmin';
+import Schools from './Pages/Schools/Schools';
+import School from './Pages/Schools/School';
+import AppIndex from './Pages/Home/AppIndex';
+import RegisterUser from './Pages/Registration/RegisterUser';
+import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
+
 
 function App() {
     return (
@@ -29,6 +31,7 @@ function App() {
 
                 <Route path="/allschooladmins" element={<ListData URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
                 <Route path="/allschooladmins/:id" element="school admin" />
+
 
         <Route path="/" element={<Layout />}>
           {/*Routes available to all users*/}
@@ -61,6 +64,7 @@ function App() {
           <Route path="*" element={<NotFound />} /></Route>
             </Routes>
         </>
+
     );
 }
 
