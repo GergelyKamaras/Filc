@@ -9,41 +9,52 @@ import SchoolAdmins from './Pages/SchoolAdmin/SchoolAdmins';
 import SchoolAdmin from './Pages/SchoolAdmin/SchoolAdmin';
 import Schools from './Pages/Schools/Schools';
 import School from './Pages/Schools/School';
+import RegisterUser from './Pages/Registration/RegisterUser';
+import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
-//import jwt from 'jwt-decode';
+import {useState} from 'react';
 
 
-function App() {
-    //let schoolId = null
-    //if (localStorage.length > 0) {
-    //    schoolId = jwt(localStorage.AccessToken)["schoolId"]
-    //    console.log(schoolId);
-    //}
-    
-    return (
-        <>  
-            <ul>
                 {/*govadmin links*/}
                 <li><Link to="/govadmin/students">Get all Students</Link></li>
                 <li><Link to="/govadmin/teachers">Get all Teachers</Link></li>
                 <li><Link to="/govadmin/schools">Get all Schools</Link></li>
                 <li><Link to="/govadmin/schooladmins">Get all School admins</Link></li>
-                {/*<li><Link to="/govadmin/all">Get all Government admins</Link></li>*/}
+                
 
-                {/*schooladmin links*/}
-                {/*<li><Link to={"schooladmin/schools/"+{schoolId}+"/admins"}>Get all School admins of one school</Link></li>*/}
-            </ul>   
-            <Routes>
-                {/*<Route path={"schooladmin/schools/"+{schoolId}+"/admins"} element={<ListData URL={"https://localhost:7014/api/schooladmins/"+{schoolId}+"/admins"}/>} />*/}
-               
-        <Route path="/" element={<Layout />}>
+function App() {
+
+    const [loginStatus, updateLoginStatus] = useState(true);
+
+    return (
+        <>
+            {/* <ul>
+                <li><Link to="/allstudents">Get all Students</Link></li>
+                <li><Link to="/allteachers">Get all Teachers</Link></li>
+                <li><Link to="/schooladmin/allschooladmins">Get all School admins</Link></li>
+            </ul>    */}
+        <Routes>
+              
+        <Route path="/" element={<Layout loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>}>
+        <Route path="/allstudents" element={<ListData URL="https://localhost:7014/api/schooladmins/students" />} />
+                <Route path="/allstudents/:id" element="student" />
+                
+                <Route path="/allteachers" element={<ListData URL="https://localhost:7014/api/schooladmins/teachers" />} />
+                <Route path="/allteachers/:id" element="teacher" />
+
+                <Route path="/allschooladmins" element={<ListData URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
+                <Route path="/allschooladmins/:id" element="school admin" />
+
           {/*Routes available to all users*/}
-          <Route path="" element={<IndexPage/>} />
+          <Route path="" element={<IndexPage loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>} />
           <Route path="Unauthorized" element={<Unauthorized />} />
 
           {/*TODO: Routes available to Students*/}
           <Route element={<RequireAuth allowedRoles={["Student"]} />}>
+          <Route path="/student/myschool" element={<MySchool/>} />
           </Route>
+
+
 
           {/*TODO: Routes available to Teachers*/}
           <Route element={<RequireAuth allowedRoles={["Teacher"]} />}>
@@ -65,6 +76,7 @@ function App() {
             {/*<Route path="schooladmins/:id" element={<SchoolAdmin />} />*/}
             {/*<Route path="schools/" element={<Schools />} />*/}
             {/*<Route path="schools/:id" element={<School />} />*/}
+
           </Route>
 
           {/*Not Existing Route*/}

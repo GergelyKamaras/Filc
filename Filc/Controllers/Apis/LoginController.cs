@@ -11,7 +11,10 @@ using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Filc.Models.AuthenticationModels;
+using Filc.Services;
 using Filc.Services.Interfaces;
+using Serilog;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 
 namespace Filc.Controllers.Apis
 {
@@ -38,7 +41,9 @@ namespace Filc.Controllers.Apis
         [Route("/logout")]
         public async Task<IActionResult> Logout()
         {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             await _signInManager.SignOutAsync();
+            CustomLogger.LogRequest(token, "Signed out");
             return Ok(new JWTAuthenticationResponse
             {
                 Status = "Success",
@@ -66,6 +71,7 @@ namespace Filc.Controllers.Apis
             {
 
                 var token = await _loginService.Login(model);
+                Log.Information($"Logged in as {model.Email}");
                 return Ok(new
                 {
                     message = "SUCCESS",
@@ -75,6 +81,7 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
+                Log.Error("Error logging in" + e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                    new JWTAuthenticationResponse { Status = e.ToString(), Message = "Invalid email/password" });
             }

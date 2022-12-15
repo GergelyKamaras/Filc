@@ -4,11 +4,10 @@ import FetchLogin from "./FetchLogin"
 import bcrypt from 'bcryptjs'
 import InnerProfil from "../Home/InnerProfil";
 import '../../Style/IndexPage/InnerProfil.css'
-import { Navigate } from "react-router-dom";
 
-const LoginForm = () => {
+const LoginForm = ({loginStatus, updateLoginStatus}) => {
     
-    const [loginStatus, updateLoginStatus] = useState(true);
+    
     const [loginForm, updateLoginForm] = useState({});
 
     async function handleLogin(e)  {
@@ -25,6 +24,7 @@ const LoginForm = () => {
 
         await FetchLogin(data);
         updateLoginStatus(false);
+    
     }
     
     

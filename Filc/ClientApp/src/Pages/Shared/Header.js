@@ -1,51 +1,45 @@
-﻿import Button from 'react-bootstrap/Button';
+﻿import NavbarLinks from '../Navbar/NavbarLinks'
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import {Link, useNavigate} from 'react-router-dom';
-import {useEffect, useState} from 'react'
-import InnerProfil from '../Home/InnerProfil'
+import {useNavigate} from 'react-router-dom';
+import React, {useEffect, useState} from 'react'
 import "../../Style/navbar.css"
+import jwt from 'jwt-decode'
+import { NavItem } from 'react-bootstrap';
 
-function Header() {
-    const role = localStorage.getItem("userRole");
+
+function Header({loginStatus, updateLoginStatus}) {
+  const [role , updateRole] = useState(null)
+  
+    
+  useEffect(() => {
+    
+    try{
+      updateRole(jwt(localStorage?.AccessToken)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"])
+      console.log("you are logged in")
+    }catch{
+      console.log("not logged in")
+    }
+  },[loginStatus])
+  
+  
     const navigate = useNavigate();
     const logout = (e) => {
       e.preventDefault();
       localStorage.clear();
       navigate("")
+      updateRole(null)
+      updateLoginStatus(true)
     }
-    const govAdminFuncts =<>
-     <Nav.Link href="govadmin/schools">All Schools</Nav.Link>
-    <Nav.Link href="govadmin/schooladmins/1">School Administrators</Nav.Link>
-    <Nav.Link href="#action3">All Students</Nav.Link>
-    <Nav.Link href="#action2">View national statistics</Nav.Link>
-    </>
-    const standard =
-    <>
-    <Nav.Link href="">Login first</Nav.Link>
-    </>
-    useEffect(()=>{
-      setFucts(
-        (role===null) ? 
-          standard
-        :
-        govAdminFuncts
-      
-      )
-  },[localStorage.getItem("userRole")])
-  const [fucts, setFucts] = useState(
-    <>
-      <Nav.Link href="">Login first</Nav.Link>
-    </>
-  )
+
+  
   return (
     <>
       {[false].map((expand) => (
-        <Navbar key={expand} bg="light" expand={expand} className="mb-3 navbar">
+        <Navbar role={role} key={expand} bg="light" expand={expand} className="mb-3 navbar">
           <Container fluid>
             <Navbar.Brand className='navbar-title' href="">For Interactive Learning Community</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -61,32 +55,27 @@ function Header() {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  {
-                  
-                    fucts
-                  }
-                    
-                  
-                  
-                  {
-                      role ? 
-                  <NavDropdown
-                    title="Profile manager"
-                    id={`offcanvasNavbarDropdown-expand-${expand}`}
-                    >
-                        <NavDropdown.Item href="#action3">Edit personal data</NavDropdown.Item>
-                        <NavDropdown.Item href="#action4">Change password</NavDropdown.Item>
-                        <NavDropdown.Item href="#action5">Settings</NavDropdown.Item>
-                        <NavDropdown.Item onClick={(e) => logout(e)}>Logout</NavDropdown.Item>
-                  </NavDropdown>
-                  :
-                  <NavDropdown
-                  title="Not logged in"
-                  id={`offcanvasNavbarDropdown-expand-${expand}`}
-                  >
+                  {role !== null ?   
+                    ( <div>
+                      <NavbarLinks role={role} />
                       
-                  </NavDropdown>
-                  }
+
+                      <NavDropdown
+                        title="Profile manager"
+                        id={`offcanvasNavbarDropdown-expand-${expand}`}
+                        >
+                            <NavDropdown.Item href="#action3">Edit personal data</NavDropdown.Item>
+                            <NavDropdown.Item href="#action4">Change password</NavDropdown.Item>
+                            <NavDropdown.Item href="#action5">Settings</NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => logout(e)}>Logout</NavDropdown.Item>
+                      </NavDropdown>
+                    </div>)
+                  :
+                  
+                  (<NavItem>
+                    You are not logged in, please login first
+                  </NavItem> )}
+                  
                 </Nav>
                 {/* <Form className="d-flex">
                   <Form.Control
