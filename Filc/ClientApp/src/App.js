@@ -20,11 +20,9 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />} >
 
-                {/*Routes available to all users*/}
+                {/*Routes available to all users without login*/}
                 <Route path="" element={<AppIndex/>} />
-
                 <Route path="Unauthorized" element={<Unauthorized />} />
-                <Route path="schooladmins/:id" element={<SchoolAdmin />} />
 
                 {/*TODO: Routes available to Students*/}
                 <Route element={<RequireAuth allowedRoles={["Student"]} />} >
