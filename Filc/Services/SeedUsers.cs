@@ -32,7 +32,11 @@ namespace EFDataAccessLibrary.DataAccess
 
             try
             {
-                JWTAuthenticationResponse response = schoolService.AddSchool(school1);
+                JWTAuthenticationResponse response = new JWTAuthenticationResponse();
+                if (!dbService.SchoolNameExists(school1.Name))
+                {
+                    response = schoolService.AddSchool(school1);
+                }
                 school1 = dbService.GetSchoolById(response.Id);
             }
             catch (Exception e)
