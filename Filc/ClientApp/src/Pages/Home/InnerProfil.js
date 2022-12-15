@@ -15,9 +15,9 @@ const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm
 
         if(localStorage.getItem("AccessToken") !== null){
             updateLoginStatus(false)
-        }else{updateLoginStatus(true)}
+        }else{}
 
-    });
+    }); 
 
     return(
     <div>
