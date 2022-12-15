@@ -37,7 +37,7 @@ namespace Filc.Services
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                     if (userRole != "Government")
-                        authClaims.Add(GetShoolIdClaim(model, userRole));
+                        authClaims.Add(GetSchoolIdClaim(model, userRole));
                 }
 
                 return _jwtTokenGenerator.GetToken(authClaims);
@@ -46,7 +46,7 @@ namespace Filc.Services
             throw new Exception();
         }
 
-        private Claim GetShoolIdClaim(LoginModel model, string role)
+        private Claim GetSchoolIdClaim(LoginModel model, string role)
         {
             switch (role)
             {
