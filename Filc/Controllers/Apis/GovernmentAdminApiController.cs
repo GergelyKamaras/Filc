@@ -60,8 +60,16 @@ namespace Filc.Controllers.Apis
         public List<GovernmentAdmin> GetAllGovernmentAdmins()
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            CustomLogger.RequestLog(token, "Get all admins");
-            return _governmentAdminService.GetAllGovernmentAdmins();
+            try
+            {
+                CustomLogger.LogRequest(token, "Get all admins");
+                return _governmentAdminService.GetAllGovernmentAdmins();
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
