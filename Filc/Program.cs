@@ -11,7 +11,7 @@ using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Configuration;
+using Serilog;
 using Filc.Services;
 using Filc.Services.Interfaces;
 
@@ -40,6 +40,12 @@ builder.Services.AddSpaStaticFiles(configuration =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
 // Add Entity Dbcontext
 builder.Services.AddDbContext<ESContext>(options =>
 {
@@ -162,6 +168,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
+Log.Information("Server started");
 
 app.MapFallbackToFile("index.html");
 
