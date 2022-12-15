@@ -18,7 +18,7 @@ namespace Filc.Controllers.Apis
     
     [ApiController]
     [Route("api/schooladmins")]
-    [Authorize(Roles = "SchoolAdmin")]
+    //Authorize(Roles = "SchoolAdmin")]
     [EnableCors]
     public class SchoolAdminApiController : ControllerBase
     {
@@ -45,10 +45,10 @@ namespace Filc.Controllers.Apis
             _teacherService = teacherService;
             _registration = registration;
         }
-
+        
         // SchoolAdmins
         [HttpGet]
-        [Route("schools/{id}/admins")]
+        [Route("schools/{schoolId}/admins")]
         public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdminsBySchool(int schoolId)
         {
             return _schoolAdminService.GetAllSchoolAdminsBySchool(schoolId);

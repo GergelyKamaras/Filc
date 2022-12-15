@@ -32,11 +32,15 @@ export function ListData(props) {
     const productsData = useMemo(
         () => [...products], [products]);  
 
+    
+   
+
     const productsColumns = useMemo(
         () =>
             products[0]
                 ? Object.keys(products[0])
-                    .filter((key) => key !== "lessons" && key !== "lessons" && key !== "marks" && key !== "school" && key !== "user" && key !== "subjects")
+                    .filter((key) => key !== "teachers" && key !== "lessons" && key !== "marks" && key !== "school" && key !== "user" && key !== "subjects"
+                                  && key !== "students" && key !== "schoolAdmin" && key !== "lessons" && key !== "classes")
                     .map((key) => {
                         if (key === "image")
                             return {
@@ -159,6 +163,9 @@ export function ListData(props) {
 async function apiGet(url) {
     let response = await fetch(url, {
         method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("AccessToken")
+        }
     });
     if (!response.ok) {
         throw new Error(`Something went wrong during fetching data from ${url}`)
