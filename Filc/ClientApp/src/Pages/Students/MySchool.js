@@ -1,4 +1,4 @@
-﻿import FetchSchoolById from "../Schools/FetchSchoolById";
+﻿import FetchSchoolByIdOnStudentRoute from "./FetchSchoolByIdOnStudentRoute";
 import { useEffect, useState } from "react";
 
 const MySchool = () => {
@@ -9,7 +9,7 @@ const MySchool = () => {
         () => {
             const fetchData = async () => {
 
-                const data = await FetchSchoolById(jwt(localStorage.AccessToken)["http://schemas.microsoft.com/ws/2008/06/identity/claims/schoolId"]);
+                const data = await FetchSchoolByIdOnStudentRoute();
 
                 setSchool(data);
                 setLoading(false);
