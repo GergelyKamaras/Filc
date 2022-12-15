@@ -108,6 +108,7 @@ namespace Filc.Controllers.Apis
                 return StatusCode(StatusCodes.Status500InternalServerError,
                 new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
+            CustomLogger.LogRequest(token, "Add Government admin");
             return Ok(_governmentAdminService.AddGovernmentAdmin(admin));
         }
 
@@ -596,6 +597,7 @@ namespace Filc.Controllers.Apis
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
+            CustomLogger.LogRequest(token, "Add student");
             return Ok(_studentService.AddStudent(student));
         }
 
