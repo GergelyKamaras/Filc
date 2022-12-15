@@ -1,5 +1,6 @@
+import IndexPage from './Pages/Home/AppIndex'
 import './App.css';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import Layout from './Pages/Shared/Layout'
 import RequireAuth from './Pages/Other/RequireAuth';
 import Unauthorized from './Pages/Other/Unauthorized';
@@ -36,7 +37,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/*Routes available to all users*/}
           <Route path="" element={<IndexPage/>} />
-          <Route path='/login' element={<LoginPage/>}/>
           <Route path="Unauthorized" element={<Unauthorized />} />
 
           {/*TODO: Routes available to Students*/}
