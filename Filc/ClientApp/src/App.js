@@ -13,6 +13,8 @@ import School from './Pages/Schools/School';
 import AppIndex from './Pages/Home/AppIndex';
 import RegisterUser from './Pages/Registration/RegisterUser';
 import MySchool from './Pages/Students/MySchool';
+import Marks from './Pages/Students/Marks';
+import Mark from './Pages/Students/Mark';
 
 function App() {
 
@@ -28,6 +30,8 @@ function App() {
                 {/*TODO: Routes available to Students*/}
                 <Route path="student" element={<RequireAuth allowedRoles={["Student"]} />} >
                     <Route path="myschool" element={<MySchool />} />
+                    <Route path="marks" element={<Marks />} />
+                    <Route path="marks/id" element={<Mark /> } />
                 </Route>
           
                 {/*TODO: Routes available to Teachers*/}
