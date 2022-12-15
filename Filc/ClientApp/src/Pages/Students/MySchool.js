@@ -50,6 +50,7 @@ const MySchool = () => {
             }
         </>
     );
+}
 
 
 export default MySchool;
