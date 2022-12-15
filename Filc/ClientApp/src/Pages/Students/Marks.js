@@ -15,15 +15,15 @@ const Marks = () => {
                 <tbody>
                     <tr>
                         <td>Math</td>
-                        <td><Link to="marks/id">5</Link>, <Link to="marks/id">3</Link>, <Link to="marks/id">5</Link></td>
+                        <td><Link to="id">5</Link>, <Link to="id">3</Link>, <Link to="id">5</Link></td>
                     </tr>
                     <tr>
                         <td>Literature</td>
-                        <td><Link to="marks/id">3</Link>, <Link to="marks/id">3</Link>, <Link to="marks/id">1</Link></td>
+                        <td><Link to="id">3</Link>, <Link to="id">3</Link>, <Link to="id">1</Link></td>
                     </tr>
                     <tr>
                         <td>P.E.</td>
-                        <td><Link to="marks/id">5</Link>, <Link to="marks/id">5</Link>, <Link to="marks/id">5</Link></td>
+                        <td><Link to="id">5</Link>, <Link to="id">5</Link>, <Link to="id">5</Link></td>
                     </tr>
                 </tbody>
             </table>
