@@ -1,5 +1,3 @@
-
-
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom'
 import Layout from './components/Layout'
@@ -12,27 +10,25 @@ import Schools from './components/UserComponents/GovAdminComponents/Components/S
 import School from './components/UserComponents/GovAdminComponents/Components/School';
 import IndexPage from './Pages/AppIndex';
 import LoginPage from './Pages/LoginPage';
-import { ListStudents } from './Pages/ListStudents';
+import { ListData } from './Pages/ListData';
 
 function App() {
-
-
     return (
         <>
             <ul>
                 <li><Link to="/allstudents">Get all Students</Link></li>
                 <li><Link to="/allteachers">Get all Teachers</Link></li>
-                <li><Link to="/allschooladmins">Get all School admins</Link></li>
-            </ul>
-            
-            
+                <li><Link to="/schooladmin/allschooladmins">Get all School admins</Link></li>
+            </ul>   
         <Routes>
-                <Route path="/allstudents" element={<ListStudents URL="https://localhost:7014/api/schooladmins/students" />} />
+                <Route path="/allstudents" element={<ListData URL="https://localhost:7014/api/schooladmins/students" />} />
+                <Route path="/allstudents/:id" element="student" />
                 
-                <Route path="/allstudents/:id" element="asd" />
-                
-                <Route path="/allteachers" element={<ListStudents URL="https://localhost:7014/api/schooladmins/teachers" />} />
-                <Route path="/allschooladmins" element={<ListStudents URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
+                <Route path="/allteachers" element={<ListData URL="https://localhost:7014/api/schooladmins/teachers" />} />
+                <Route path="/allteachers/:id" element="teacher" />
+
+                <Route path="/allschooladmins" element={<ListData URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
+                <Route path="/allschooladmins/:id" element="school admin" />
 
         <Route path="/" element={<Layout />}>
           {/*Routes available to all users*/}
@@ -49,7 +45,8 @@ function App() {
           </Route>
 
           {/*TODO: Routes available to SchoolAdmins*/}
-          <Route element={<RequireAuth allowedRoles={["SchoolAdmin"]} />}>
+          <Route path="schooladmin" element={<RequireAuth allowedRoles={["SchoolAdmin"]} />}>
+            <Route path="allschooladmins" element={<ListData URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
           </Route>
 
           {/*TODO: Routes available to GovAdmins*/}
@@ -62,8 +59,6 @@ function App() {
 
           {/*Not Existing Route*/}
           <Route path="*" element={<NotFound />} /></Route>
-
-           
             </Routes>
         </>
     );
