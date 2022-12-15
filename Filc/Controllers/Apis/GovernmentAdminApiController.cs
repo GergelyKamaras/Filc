@@ -20,7 +20,7 @@ namespace Filc.Controllers.Apis
 {
     [ApiController]
     [Route("api/governmentadmins")]
-    //[Authorize(Roles = "Government")]
+    [Authorize(Roles = "Government")]
     [EnableCors]
     public class GovernmentAdminApiController : Controller
     {
