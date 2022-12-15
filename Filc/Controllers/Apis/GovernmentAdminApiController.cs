@@ -287,7 +287,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("teachers")]
+        [Route("register/teacher")]
         public async Task<ObjectResult> AddTeacher([FromBody] Teacher teacher)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
@@ -652,7 +652,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("parents")]
+        [Route("register/parent")]
         public async Task<ObjectResult> AddParent([FromBody] Parent parent)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
