@@ -36,7 +36,7 @@ namespace Filc.Services
                 foreach (var userRole in userRoles)
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                    if (userRole != "GovernmentAdmin")
+                    if (userRole != "Government")
                         authClaims.Add(GetShoolIdClaim(model, userRole));
                 }
 
@@ -51,17 +51,17 @@ namespace Filc.Services
             switch (role)
             {
                 case "Teacher":
-                    return new Claim(role,
+                    return new Claim("schoolId",
                         _db.Teacher.Where(t => t.user.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 
                 case "SchoolAdmin":
-                    return new Claim(role,
+                    return new Claim("schoolId" ,
                         _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 
                 case "Student":
-                    return new Claim(role,
+                    return new Claim("schoolId",
                         _db.Student.Where(t => t.user.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 

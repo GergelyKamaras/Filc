@@ -30,6 +30,10 @@ namespace Filc.Services.DataBaseQueryServices
             ApplicationUser user = _userService.GetUserByEmail(parent.user.Email);
             parent.user = user;
             parent.Children = new List<Student>();
+            for (int i = 0; i < parent.Children.Count; i++)
+            {
+                parent.Children[i] = _db.Student.First(s => s.Id == parent.Children[i].Id);
+            }
             _db.Parent.Add(parent);
             _db.SaveChanges();
             return new JWTAuthenticationResponse()

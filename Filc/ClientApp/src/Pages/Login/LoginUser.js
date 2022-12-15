@@ -4,6 +4,7 @@ import FetchLogin from "./FetchLogin"
 import bcrypt from 'bcryptjs'
 import InnerProfil from "../Home/InnerProfil";
 import '../../Style/IndexPage/InnerProfil.css'
+import { Navigate } from "react-router-dom";
 
 const LoginForm = () => {
     
@@ -22,8 +23,8 @@ const LoginForm = () => {
             "RememberMe": false
         }; 
 
-        FetchLogin(data);
-        updateLoginStatus(false)
+        await FetchLogin(data);
+        updateLoginStatus(false);
     }
     
     

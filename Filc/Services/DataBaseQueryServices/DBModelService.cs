@@ -17,5 +17,15 @@ namespace Filc.Services.DataBaseQueryServices
         {
             return _db.School.FirstOrDefault(s => s.Id == id);
         }
+
+        public bool SchoolNameExists(string name)
+        {
+            return _db.School.Any(s => s.Name == name);
+        }
+
+        public Student GetStudentById(int id)
+        {
+            return _db.Student.First(s => s.Id == id);
+        }
     }
 }

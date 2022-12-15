@@ -13,9 +13,10 @@ import "../../Style/navbar.css"
 function Header() {
     const role = localStorage.getItem("userRole");
     const navigate = useNavigate();
-    const logout = () => {
-        localStorage.clear();
-        navigate("")
+    const logout = (e) => {
+      e.preventDefault();
+      localStorage.clear();
+      navigate("")
     }
     const govAdminFuncts =<>
      <Nav.Link href="govadmin/schools">All Schools</Nav.Link>
@@ -76,7 +77,7 @@ function Header() {
                         <NavDropdown.Item href="#action3">Edit personal data</NavDropdown.Item>
                         <NavDropdown.Item href="#action4">Change password</NavDropdown.Item>
                         <NavDropdown.Item href="#action5">Settings</NavDropdown.Item>
-                        <NavDropdown.Item onClick={(e) => e.preventDefault(), logout}>Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={(e) => logout(e)}>Logout</NavDropdown.Item>
                   </NavDropdown>
                   :
                   <NavDropdown
