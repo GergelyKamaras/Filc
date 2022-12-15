@@ -446,42 +446,100 @@ namespace Filc.Controllers.Apis
         [Route("marks/{id}")]
         public MarkDTO GetMark(int id)
         {
-            return _markService.GetMark(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get mark {id}");
+                return _markService.GetMark(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
         [Route("marks/student/{id}")]
         public List<MarkDTO> GetMarksByStudent(int id)
         {
-            return _markService.GetMarksByStudent(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get marks by student {id}");
+                return _markService.GetMarksByStudent(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
         [Route("marks/lesson/{id}")]
         public List<MarkDTO> GetMarksByLesson(int id)
         {
-            return _markService.GetMarkByLesson(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get marks by lesson {id}");
+                return _markService.GetMarkByLesson(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpPost]
         [Route("marks")]
         public ObjectResult AddMark([FromBody] Mark mark)
         {
-            return Ok(_markService.AddMark(mark));
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Add mark");
+                return Ok(_markService.AddMark(mark));
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpPut]
         [Route("marks")]
         public void UpdateMark([FromBody] Mark mark)
         {
-            _markService.UpdateMark(mark);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Update mark {mark.Id}");
+                _markService.UpdateMark(mark);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         [HttpDelete]
         [Route("marks/{id}")]
         public void DeleteMark(int id)
         {
-            _markService.DeleteMark(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Delete mark {id}");
+                _markService.DeleteMark(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         // Students
