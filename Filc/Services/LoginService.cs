@@ -36,7 +36,7 @@ namespace Filc.Services
                 foreach (var userRole in userRoles)
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                    if (userRole != "GovernmentAdmin")
+                    if (userRole != "Government")
                         authClaims.Add(GetShoolIdClaim(model, userRole));
                 }
 
