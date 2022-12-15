@@ -344,42 +344,101 @@ namespace Filc.Controllers.Apis
         [Route("lessons/{id}")]
         public LessonDTO GetLesson(int id)
         {
-            return _lessonService.GetLessonById(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get Lesson {id}");
+                return _lessonService.GetLessonById(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
         [Route("lessons/students/{id}")]
         public List<LessonDTO> GetLessonsByStudent(int id)
         {
-            return _lessonService.GetLessonByStudentId(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get lessons by student {id}");
+                return _lessonService.GetLessonByStudentId(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
         [Route("lessons/teachers/{id}")]
         public List<LessonDTO> GetLessonsByTeacher(int id)
         {
-            return _lessonService.GetLessonsByTeacher(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get lessons by teacher {id}");
+                return _lessonService.GetLessonsByTeacher(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpPost]
         [Route("lessons")]
         public ObjectResult AddLesson([FromBody] Lesson lesson)
         {
-            return Ok(_lessonService.AddLesson(lesson));
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Add lesson");
+                return Ok(_lessonService.AddLesson(lesson));
+
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpPut]
         [Route("lessons")]
         public void UpdateLesson([FromBody] Lesson lesson)
         {
-            _lessonService.UpdateLesson(lesson);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Update lesson {lesson.Id}");
+                _lessonService.UpdateLesson(lesson);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         [HttpDelete]
         [Route("lessons/{id}")]
         public void DeleteLesson(int id)
         {
-            _lessonService.DeleteLesson(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Delete lesson {id}");
+                _lessonService.DeleteLesson(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         // Marks
