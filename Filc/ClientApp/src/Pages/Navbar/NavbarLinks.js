@@ -11,7 +11,7 @@ const NavbarLinks = ({ role }) => {
                     <Nav.Link href="govadmin/schooladmins/1">School Administrator by ID</Nav.Link>
                     <Nav.Link href="govadmin/schools/1/admins">School Administrator by School</Nav.Link>
                     <Nav.Link href="allstudents">All Students</Nav.Link>
-                    <Nav.Link href="#action2">View national statistics</Nav.Link>
+                    <Nav.Link href="allteachers">Teacher related page</Nav.Link>
                 </>
             )
         case "SchoolAdmin":
