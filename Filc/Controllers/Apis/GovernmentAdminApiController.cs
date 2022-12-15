@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
 using Filc.Models.EntityViewModels.SchoolAdmin;
@@ -8,13 +10,16 @@ using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Student;
 using Filc.Models.ViewModels.Teacher;
+using Filc.Services;
 using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using NuGet.DependencyResolver;
+using Serilog;
 
 namespace Filc.Controllers.Apis
 {
@@ -54,6 +59,8 @@ namespace Filc.Controllers.Apis
         [HttpGet]
         public List<GovernmentAdmin> GetAllGovernmentAdmins()
         {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            CustomLogger.RequestLog(token, "Get all admins");
             return _governmentAdminService.GetAllGovernmentAdmins();
         }
 
