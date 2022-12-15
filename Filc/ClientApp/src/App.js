@@ -13,9 +13,13 @@ import AppIndex from './Pages/Home/AppIndex';
 import RegisterUser from './Pages/Registration/RegisterUser';
 import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
+import {useState} from 'react';
 
 
 function App() {
+
+    const [loginStatus, updateLoginStatus] = useState(true);
+
     return (
         <>
             <ul>
@@ -34,9 +38,9 @@ function App() {
                 <Route path="/allschooladmins/:id" element="school admin" />
 
 
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>}>
           {/*Routes available to all users*/}
-          <Route path="" element={<IndexPage/>} />
+          <Route path="" element={<IndexPage loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>} />
           <Route path="Unauthorized" element={<Unauthorized />} />
 
           {/*TODO: Routes available to Students*/}

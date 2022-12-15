@@ -2,8 +2,9 @@
 import '../../Style/IndexPage/IndexPage.css'
 import News from './News'
 import LoginForm from "../Login/LoginUser";
+import React from "react";
 
-const IndexPage = () => {
+const IndexPage = ({loginStatus, updateLoginStatus}) => {
 
 
     return (
@@ -14,7 +15,7 @@ const IndexPage = () => {
                 </div>
                 <div className="profile">
                     <div className="profile-inner">
-                        <LoginForm/>
+                        <LoginForm loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>
                     </div>
                 </div>
                 <div className="school-news">
