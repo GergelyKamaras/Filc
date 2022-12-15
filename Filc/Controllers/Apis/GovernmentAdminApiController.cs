@@ -17,6 +17,7 @@ using Filc.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using NuGet.Common;
 using NuGet.DependencyResolver;
 using Serilog;
@@ -547,20 +548,41 @@ namespace Filc.Controllers.Apis
         [Route("students")]
         public List<StudentDTO> GetAllStudents()
         {
-            return _studentService.GetAllStudents();
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get all students");
+                return _studentService.GetAllStudents();
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
         [Route("students/{id}")]
         public StudentDTO GetStudent(int id)
         {
-            return _studentService.GetStudent(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get student {id}");
+                return _studentService.GetStudent(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpPost]
         [Route("register/student")]
         public async Task<ObjectResult> AddStudent([FromBody] Student student)
         {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             try
             {
                 if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
@@ -570,6 +592,7 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
+                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
@@ -580,14 +603,32 @@ namespace Filc.Controllers.Apis
         [Route("students")]
         public void UpdateStudent([FromBody] Student student)
         {
-            _studentService.UpdateStudent(student);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Update student {student.Id}");
+                _studentService.UpdateStudent(student);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         [HttpDelete]
         [Route("students/{id}")]
         public void RemoveStudent(int id)
         {
-            _studentService.DeleteStudent(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Delete student {id}");
+                _studentService.DeleteStudent(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         // Parents
@@ -595,13 +636,24 @@ namespace Filc.Controllers.Apis
         [Route("parents/{id}")]
         public ParentDTO GetParent(int id)
         {
-            return _parentService.GetParent(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get parent {id}");
+                return _parentService.GetParent(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpPost]
         [Route("parents")]
         public async Task<ObjectResult> AddParent([FromBody] Parent parent)
         {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             try
             {
                 if (await _registration.Register(new RegistrationModel(parent.user, "Parent")) != true)
@@ -611,9 +663,11 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
+                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
+            CustomLogger.LogRequest(token, $"Add parent");
             return Ok(_parentService.AddParent(parent));
         }
 
@@ -621,14 +675,32 @@ namespace Filc.Controllers.Apis
         [Route("parents")]
         public void UpdateParent([FromBody] Parent parent)
         {
-            _parentService.UpdateParent(parent);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Update parent {parent.Id}");
+                _parentService.UpdateParent(parent);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         [HttpDelete]
         [Route("parents/{id}")]
         public void DeleteParent(int id)
         {
-            _parentService.DeleteParent(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Delete parent {id}");
+                _parentService.DeleteParent(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         // SchoolAdmins
@@ -636,27 +708,58 @@ namespace Filc.Controllers.Apis
         [Route("schooladmins")]
         public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdmins()
         {
-            return _schoolAdminService.GetAllSchoolAdmins();
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get schooladmins");
+                return _schoolAdminService.GetAllSchoolAdmins();
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
         [Route("schooladmins/school/{id}")]
         public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdminsBySchool(int id)
         {
-            return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get schooladmins by school {id}");
+                return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpGet]
         [Route("schooladmins/{id}")]
         public Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO GetAdmin(int id)
         {
-            return _schoolAdminService.GetSchoolAdminById(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Get school admin {id}");
+                return _schoolAdminService.GetSchoolAdminById(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+                return null;
+            }
         }
 
         [HttpPost]
         [Route("schooladmins")]
         public async Task<ObjectResult> AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
         {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             try
             {
                 if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
@@ -666,9 +769,11 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
+                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
+            CustomLogger.LogRequest(token, $"Add school admin");
             return Ok(_schoolAdminService.AddSchoolAdmin(schoolAdmin));
         }
 
@@ -676,14 +781,32 @@ namespace Filc.Controllers.Apis
         [Route("schooladmins")]
         public void UpdateSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
         {
-            _schoolAdminService.UpdateSchoolAdmin(schoolAdmin);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Update school admin {schoolAdmin.Id}");
+                _schoolAdminService.UpdateSchoolAdmin(schoolAdmin);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
 
         [HttpDelete]
         [Route("schooladmins")]
         public void DeleteSchoolAdmin(int id)
         {
-            _schoolAdminService.DeleteSchoolAdmin(id);
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            try
+            {
+                CustomLogger.LogRequest(token, $"Delete school admin {id}");
+                _schoolAdminService.DeleteSchoolAdmin(id);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(token, e);
+            }
         }
     }
 }
