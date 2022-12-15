@@ -20,10 +20,10 @@ const NavbarLinks = ({ role }) => {
                     <Nav.Link href="">Administrators</Nav.Link>
                     <Nav.Link href="allschooladmins">School administrators</Nav.Link>
                     <Nav.Link href="">Add new user</Nav.Link>
-                    <Nav.Link href="">School related page</Nav.Link>
-                    <Nav.Link href="">Teacher related page</Nav.Link>
+                    <Nav.Link href="allschooladmins">School related page</Nav.Link>
+                    <Nav.Link href="allteachers">Teacher related page</Nav.Link>
                     <Nav.Link href="">Lessons/Timetable</Nav.Link>
-                    <Nav.Link href="">Students/Marks</Nav.Link>
+                    <Nav.Link href="allstudents">Students/Marks</Nav.Link>
                 </>
             )
 
