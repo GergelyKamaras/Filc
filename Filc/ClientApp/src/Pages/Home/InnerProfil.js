@@ -38,7 +38,12 @@ const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm
         ):(
         
         <div>
-            sajt
+            <p>
+                Welcome
+            </p>
+            <p>
+                Email:     {loginForm["email"]}
+            </p>
         </div>
         )
         }

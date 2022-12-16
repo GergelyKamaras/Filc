@@ -54,6 +54,7 @@ function Header({loginStatus, updateLoginStatus}) {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
+                <Nav.Link href='/'>Home</Nav.Link>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   {role !== null ?   
                     ( <div>

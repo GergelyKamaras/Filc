@@ -36,3 +36,10 @@ body{
 .profile-functs{
     grid-area: 3 / 3 / 4 / 4;
 }
+
+.profile-name{
+    display: inline;
+    margin-top: 65px;
+    margin-left: 30px;
+    font-size: 24px;
+}
