@@ -19,7 +19,6 @@ const NavbarLinks = ({ role }) => {
         case "SchoolAdmin":
             return(
                 <>
-
                     <Nav.Link href="schooladmin/register">Add new user</Nav.Link>
                     <NavItem> not available yet...</NavItem>
                     <Nav.Link href="allschooladmins">School related page</Nav.Link>

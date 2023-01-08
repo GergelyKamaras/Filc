@@ -57,7 +57,7 @@ function App() {
             {/*<Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />*/}
             {/*<Route path="schooladmins/:id" element={<SchoolAdmin />} />*/}
             {/*<Route path="schools/" element={<Schools />} />*/}
-            {/*<Route path="schools/:id" element={<School />} />*/}
+            <Route path="schools/:id" element={<School />} />
 
           </Route>
 

@@ -14,3 +14,8 @@
 .row-even {
     background-color: rgba(87, 97, 165, 0.8)
 }
+
+.col{
+    padding: '10px';
+    border: 'solid 1px gray',
+}
