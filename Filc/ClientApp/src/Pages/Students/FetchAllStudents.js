@@ -3,7 +3,7 @@ const FetchAllStudents = async () => {
       'https://localhost:7014/api/governmentadmins/students', {
             method: 'GET',
             headers: {
-                "Authorization": "Bearer" + localStorage.getItem("AccessToken")
+                "Authorization": "Bearer " + localStorage.getItem("AccessToken")
             }
     }
     );

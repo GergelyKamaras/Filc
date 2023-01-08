@@ -1,3 +1,5 @@
+
+import jwt from "jwt-decode";
 import React, { useEffect } from "react";
 import '../../Style/IndexPage/InnerProfil.css'
 import '../../Style/IndexPage/SignIn.css'
@@ -5,6 +7,26 @@ import '../../Style/IndexPage/SignIn.css'
 
 const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm, handleLogin}) => {
 
+    const getUserToken = () => {
+        console.log(jwt(localStorage?.AccessToken))
+        return jwt(localStorage?.AccessToken);
+    }
+
+    const getUserId = () => {
+        return getUserToken()["userId"]
+    }
+
+    const getUserName = () => {
+        return `${getUserToken()["userFirstName"]} ${getUserToken()["userLastName"]}`
+    }
+    
+    const getUserEmail = () => {
+        return getUserToken()["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
+    }
+
+    const getUserBirthDate = () => {
+        return getUserToken()["userBithDate"]
+    }
 
     const updateLoginField = (newValue, field) => {
         updateLoginForm({ ...loginForm, [field]: newValue })
@@ -38,11 +60,18 @@ const InnerProfil = ({loginStatus, updateLoginStatus, loginForm, updateLoginForm
         ):(
         
         <div>
-            <p>
-                Welcome
+            <p className="userId">
+                ID number: <strong> {getUserId()} </strong>
             </p>
-            <p>
-                Email:     {loginForm["email"]}
+
+            <p className="userName">
+                Name: <strong> {getUserName()} </strong>
+            </p>
+            <p className="userEmail">
+                Email: <strong> {getUserEmail()}</strong>
+            </p>
+            <p className="userBirthDate">
+                Birth Date: <strong> {getUserBirthDate()}</strong>
             </p>
         </div>
         )
