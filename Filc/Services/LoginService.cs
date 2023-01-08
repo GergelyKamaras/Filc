@@ -37,7 +37,10 @@ namespace Filc.Services
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                     if (userRole != "Government")
-                        authClaims.Add(GetSchoolIdClaim(model, userRole));
+                        foreach(var userData in GetUserDatasClaim(model, userRole))
+                        {
+                            authClaims.Add(userData);
+                        }
                 }
 
                 return _jwtTokenGenerator.GetToken(authClaims);
@@ -46,26 +49,85 @@ namespace Filc.Services
             throw new Exception();
         }
 
-        private Claim GetSchoolIdClaim(LoginModel model, string role)
+        
+        private List<Claim> GetUserDatasClaim(LoginModel model, string role)
         {
+            List<Claim> userDatas = new();
+
             switch (role)
             {
                 case "Teacher":
-                    return new Claim("schoolId",
+                    userDatas.Add(new Claim("schoolId",
                         _db.Teacher.Where(t => t.user.Email == model.Email)
-                        .Select(t => t.School.Id).FirstOrDefault().ToString());
+                        .Select(t => t.School.Id).FirstOrDefault().ToString()));
+
+                    userDatas.Add(new Claim("userId",
+                        _db.Teacher.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.Id).FirstOrDefault().ToString()));
+
+                    userDatas.Add(new Claim("userFirstName",
+                        _db.Teacher.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.FirstName).First().ToString()));
+
+                    userDatas.Add(new Claim("userLastName",
+                        _db.Teacher.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.LastName).First().ToString()));
+
+                    userDatas.Add(new Claim("userBithDate",
+                        _db.Teacher.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.BirthDate).FirstOrDefault().ToString()));
+
+                    return userDatas;
 
                 case "SchoolAdmin":
-                    return new Claim("schoolId" ,
+                    
+                    userDatas.Add(new Claim("schoolId",
                         _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
-                        .Select(t => t.School.Id).FirstOrDefault().ToString());
+                        .Select(t => t.School.Id).FirstOrDefault().ToString()));
+
+                    userDatas.Add(new Claim("userId",
+                        _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.Id).FirstOrDefault().ToString()));
+
+                    userDatas.Add(new Claim("userFirstName",
+                        _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.FirstName).First().ToString()));
+
+                    userDatas.Add(new Claim("userLastName",
+                        _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.LastName).First().ToString()));
+
+                    userDatas.Add(new Claim("userBithDate",
+                        _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.BirthDate).FirstOrDefault().ToString()));
+
+                    return userDatas;
 
                 case "Student":
-                    return new Claim("schoolId",
+                    
+                    userDatas.Add(new Claim("schoolId",
                         _db.Student.Where(t => t.user.Email == model.Email)
-                        .Select(t => t.School.Id).FirstOrDefault().ToString());
+                        .Select(t => t.School.Id).FirstOrDefault().ToString()));
 
+                    userDatas.Add(new Claim("userId",
+                        _db.Student.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.Id).FirstOrDefault().ToString()));
+
+                    userDatas.Add(new Claim("userFirstName",
+                        _db.Student.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.FirstName).First().ToString()));
+
+                    userDatas.Add(new Claim("userLastName",
+                        _db.Student.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.LastName).First().ToString()));
+
+                    userDatas.Add(new Claim("userBithDate",
+                        _db.Student.Where(t => t.user.Email == model.Email)
+                        .Select(t => t.BirthDate).FirstOrDefault().ToString()));
+
+                    return userDatas;
             }
+
             throw new Exception("Given Role does not exist ");
 
         }
