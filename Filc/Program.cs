@@ -131,10 +131,15 @@ builder.Services.AddTransient<ITeacherServiceForTeacherRole, TeacherTableQuerySe
 //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order middleware order
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-     app.UseHsts();
+    app.UseExceptionHandler("/error-development");
+    app.UseHsts();
+}
+else
+{
+    app.UseExceptionHandler("/error");
+    app.UseHsts();
 }
 
 var seedService = app.Services.CreateScope().ServiceProvider;
