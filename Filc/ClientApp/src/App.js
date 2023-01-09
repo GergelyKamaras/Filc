@@ -33,21 +33,21 @@ function App() {
                     <Route path="" element={<IndexPage loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>} />
                     <Route path="Unauthorized" element={<Unauthorized />} />
                     {/*COMMENT: If you want to add a new Route, follow the example below*/}
-                    <!-- Route path="pathname" element={/* <Component propname={propname} />*/} -->
+                    {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
 
 
                     {/*ROUTE: Routes available to Students*/}
                     <Route element={<RequireAuth allowedRoles={["Student"]} />}>
                         <Route path="student/myschool" element={<MySchool />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Student Route tags!*/}
-                        <!-- Route path="pathname" element={/* <Component propname={propname} />*/} -->
+                        {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
 
 
                     {/*ROUTE: Routes available to Teachers*/}
                     <Route element={<RequireAuth allowedRoles={["Teacher"]} />}>
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
-                        <!-- Route path="pathname" element={/* <Component propname={propname} />*/} -->
+                        {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
 
                                                                                     
@@ -55,7 +55,7 @@ function App() {
                     <Route path="schooladmin" element={<RequireAuth allowedRoles={["SchoolAdmin", "Government"]} />}>
                         <Route path="register" element={<RegisterUser />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
-                        <!-- Route path="pathname" element={/* <Component propname={propname} />*/} -->
+                        {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
 
 
@@ -68,7 +68,7 @@ function App() {
                         <Route path="schools" element={<ListData URL="https://localhost:7014/api/governmentadmins/schools" />} />
                         <Route path="schooladmins" element={<ListData URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
-                        <!-- Route path="pathname" element={/* <Component propname={propname} />*/} -->
+                        {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                         {/*COMMENT: Previously used routes, awaiting REMOVAL for finished project, currently kept if we need them*/}
                             {/*<Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />*/}
                             {/*<Route path="schooladmins/:id" element={<SchoolAdmin />} />*/}
