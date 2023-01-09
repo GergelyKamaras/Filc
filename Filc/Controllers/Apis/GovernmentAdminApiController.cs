@@ -60,6 +60,7 @@ namespace Filc.Controllers.Apis
         [HttpGet]
         public List<GovernmentAdmin> GetAllGovernmentAdmins()
         {
+            throw new Exception("Error!!!");
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             try
             {
@@ -68,7 +69,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -86,7 +86,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -104,7 +103,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                 new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
@@ -124,7 +122,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
         
@@ -141,7 +138,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -159,7 +155,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -177,7 +172,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -194,7 +188,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -210,7 +203,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -228,7 +220,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -246,7 +237,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -263,7 +253,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -281,7 +270,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -300,7 +288,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
@@ -321,7 +308,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -337,7 +323,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -354,7 +339,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -371,7 +355,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -388,7 +371,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -406,7 +388,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -423,7 +404,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -439,7 +419,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -456,7 +435,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -473,7 +451,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -490,7 +467,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -507,7 +483,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -524,7 +499,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -540,7 +514,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -557,7 +530,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -574,7 +546,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -593,7 +564,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
@@ -613,7 +583,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -629,7 +598,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -646,7 +614,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -665,7 +632,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
@@ -685,7 +651,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -701,7 +666,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -718,7 +682,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -735,7 +698,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -752,7 +714,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return null;
             }
         }
@@ -771,7 +732,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
@@ -791,7 +751,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
 
@@ -807,7 +766,6 @@ namespace Filc.Controllers.Apis
             }
             catch (Exception e)
             {
-                CustomLogger.LogError(token, e);
             }
         }
     }
