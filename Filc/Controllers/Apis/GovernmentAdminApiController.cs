@@ -60,17 +60,10 @@ namespace Filc.Controllers.Apis
         [HttpGet]
         public List<GovernmentAdmin> GetAllGovernmentAdmins()
         {
-            throw new Exception("Error!!!");
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, "Get all admins");
-                return _governmentAdminService.GetAllGovernmentAdmins();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+        
+            CustomLogger.LogRequest(token, "Get all admins");
+            return _governmentAdminService.GetAllGovernmentAdmins();
         }
 
         [HttpGet]
@@ -78,22 +71,16 @@ namespace Filc.Controllers.Apis
         public GovernmentAdmin GetGovernmentAdmin(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get admin {id}");
-                return _governmentAdminService.GetGovernmentAdmin(id);
-                
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+
+            CustomLogger.LogRequest(token, $"Get admin {id}");
+            return _governmentAdminService.GetGovernmentAdmin(id);
         }
 
         [HttpPost]
         public async Task<ObjectResult> AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+
             try
             {
                 if (await _registration.Register(new RegistrationModel(admin.user, "Government")) != true)
@@ -104,7 +91,7 @@ namespace Filc.Controllers.Apis
             catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
             }
             CustomLogger.LogRequest(token, "Add Government admin");
             return Ok(_governmentAdminService.AddGovernmentAdmin(admin));
@@ -114,15 +101,8 @@ namespace Filc.Controllers.Apis
         public void UpdateGovernmentAdmin([FromBody] GovernmentAdmin admin)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update government admin {admin.Id}");
-                _governmentAdminService.UpdateGovernmentAdmin(admin);
-
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update government admin {admin.Id}");
+            _governmentAdminService.UpdateGovernmentAdmin(admin);
         }
         
         [HttpDelete]
@@ -130,15 +110,8 @@ namespace Filc.Controllers.Apis
         public void DeleteGovernmentAdmin(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete government admin {id}");
-                _governmentAdminService.RemoveGovernmentAdmin(id);
-
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete government admin {id}");
+            _governmentAdminService.RemoveGovernmentAdmin(id);
         }
 
         // Schools
@@ -147,16 +120,8 @@ namespace Filc.Controllers.Apis
         public List<Models.EntityViewModels.School.SchoolDTO> GetAllSchools()
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, "Get all schools");
-                return _schoolService.GetAllSchools();
-
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, "Get all schools");
+            return _schoolService.GetAllSchools();
         }
 
         [HttpGet]
@@ -164,16 +129,8 @@ namespace Filc.Controllers.Apis
         public Models.EntityViewModels.School.SchoolDTO GetSchool(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get school {id}");
-                return _schoolService.GetSchool(id);
-
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get school {id}");
+            return _schoolService.GetSchool(id);
         }
 
         [HttpPut]
@@ -181,14 +138,8 @@ namespace Filc.Controllers.Apis
         public void UpdateSchool([FromBody] School school)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update school {school.Id}");
-                _schoolService.UpdateSchool(school);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update school {school.Id}");
+            _schoolService.UpdateSchool(school);
         }
 
         [HttpPost]
@@ -196,15 +147,8 @@ namespace Filc.Controllers.Apis
         public ObjectResult AddSchool([FromBody] School school)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Add school");
-                return Ok(_schoolService.AddSchool(school));
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Add school");
+            return Ok(_schoolService.AddSchool(school));
         }
 
         [HttpDelete]
@@ -212,15 +156,8 @@ namespace Filc.Controllers.Apis
         public void DeleteSchool(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete school {id}");
-                _schoolService.RemoveSchool(id);
-
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete school {id}");
+            _schoolService.RemoveSchool(id);
         }
 
         // Teachers
@@ -229,16 +166,8 @@ namespace Filc.Controllers.Apis
         public List<TeacherDTO> GetAllTeachers()
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get all teachers");
-                return _teacherService.GetAllTeachers();
-
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get all teachers");
+            return _teacherService.GetAllTeachers();
         }
 
         [HttpGet]
@@ -246,15 +175,8 @@ namespace Filc.Controllers.Apis
         public TeacherDTO GetTeacher(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get teacher {id}");
-                return _teacherService.GetTeacher(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get teacher {id}");
+            return _teacherService.GetTeacher(id);
         }
 
         [HttpGet]
@@ -262,16 +184,8 @@ namespace Filc.Controllers.Apis
         public List<TeacherDTO> GetTeachersBySchool(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get teachers by school {id}");
-                return _teacherService.GetAllTeachersBySchool(id);
-
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get teachers by school {id}");
+            return _teacherService.GetAllTeachersBySchool(id);
         }
 
         [HttpPost]
@@ -300,15 +214,8 @@ namespace Filc.Controllers.Apis
         public void UpdateTeacher([FromBody] Teacher teacher)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update teacher {teacher.Id}");
-                _teacherService.UpdateTeacher(teacher);
-
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update teacher {teacher.Id}");
+            _teacherService.UpdateTeacher(teacher);
         }
 
         [HttpDelete]
@@ -316,14 +223,8 @@ namespace Filc.Controllers.Apis
         public void DeleteTeacher(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete teacher {id}");
-                _teacherService.RemoveTeacher(id);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete teacher {id}");
+            _teacherService.RemoveTeacher(id);
         }
 
         // Lessons
@@ -332,15 +233,8 @@ namespace Filc.Controllers.Apis
         public LessonDTO GetLesson(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get Lesson {id}");
-                return _lessonService.GetLessonById(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get Lesson {id}");
+            return _lessonService.GetLessonById(id);
         }
 
         [HttpGet]
@@ -348,15 +242,8 @@ namespace Filc.Controllers.Apis
         public List<LessonDTO> GetLessonsByStudent(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get lessons by student {id}");
-                return _lessonService.GetLessonByStudentId(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get lessons by student {id}");
+            return _lessonService.GetLessonByStudentId(id);
         }
 
         [HttpGet]
@@ -364,15 +251,8 @@ namespace Filc.Controllers.Apis
         public List<LessonDTO> GetLessonsByTeacher(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get lessons by teacher {id}");
-                return _lessonService.GetLessonsByTeacher(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get lessons by teacher {id}");
+            return _lessonService.GetLessonsByTeacher(id);
         }
 
         [HttpPost]
@@ -380,16 +260,8 @@ namespace Filc.Controllers.Apis
         public ObjectResult AddLesson([FromBody] Lesson lesson)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Add lesson");
-                return Ok(_lessonService.AddLesson(lesson));
-
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Add lesson");
+            return Ok(_lessonService.AddLesson(lesson));
         }
 
         [HttpPut]
@@ -397,14 +269,8 @@ namespace Filc.Controllers.Apis
         public void UpdateLesson([FromBody] Lesson lesson)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update lesson {lesson.Id}");
-                _lessonService.UpdateLesson(lesson);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update lesson {lesson.Id}");
+            _lessonService.UpdateLesson(lesson);
         }
 
         [HttpDelete]
@@ -412,14 +278,8 @@ namespace Filc.Controllers.Apis
         public void DeleteLesson(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete lesson {id}");
-                _lessonService.DeleteLesson(id);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete lesson {id}");
+            _lessonService.DeleteLesson(id);
         }
 
         // Marks
@@ -428,15 +288,8 @@ namespace Filc.Controllers.Apis
         public MarkDTO GetMark(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get mark {id}");
-                return _markService.GetMark(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get mark {id}");
+            return _markService.GetMark(id);
         }
 
         [HttpGet]
@@ -444,15 +297,8 @@ namespace Filc.Controllers.Apis
         public List<MarkDTO> GetMarksByStudent(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get marks by student {id}");
-                return _markService.GetMarksByStudent(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get marks by student {id}");
+            return _markService.GetMarksByStudent(id);
         }
 
         [HttpGet]
@@ -460,15 +306,8 @@ namespace Filc.Controllers.Apis
         public List<MarkDTO> GetMarksByLesson(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get marks by lesson {id}");
-                return _markService.GetMarkByLesson(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get marks by lesson {id}");
+            return _markService.GetMarkByLesson(id);
         }
 
         [HttpPost]
@@ -476,15 +315,8 @@ namespace Filc.Controllers.Apis
         public ObjectResult AddMark([FromBody] Mark mark)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Add mark");
-                return Ok(_markService.AddMark(mark));
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Add mark");
+            return Ok(_markService.AddMark(mark));
         }
 
         [HttpPut]
@@ -492,14 +324,8 @@ namespace Filc.Controllers.Apis
         public void UpdateMark([FromBody] Mark mark)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update mark {mark.Id}");
-                _markService.UpdateMark(mark);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update mark {mark.Id}");
+            _markService.UpdateMark(mark);
         }
 
         [HttpDelete]
@@ -507,14 +333,8 @@ namespace Filc.Controllers.Apis
         public void DeleteMark(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete mark {id}");
-                _markService.DeleteMark(id);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete mark {id}");
+            _markService.DeleteMark(id);
         }
 
         // Students
@@ -523,15 +343,8 @@ namespace Filc.Controllers.Apis
         public List<StudentDTO> GetAllStudents()
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get all students");
-                return _studentService.GetAllStudents();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get all students");
+            return _studentService.GetAllStudents();
         }
 
         [HttpGet]
@@ -539,15 +352,8 @@ namespace Filc.Controllers.Apis
         public StudentDTO GetStudent(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get student {id}");
-                return _studentService.GetStudent(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get student {id}");
+            return _studentService.GetStudent(id);
         }
 
         [HttpPost]
@@ -576,14 +382,8 @@ namespace Filc.Controllers.Apis
         public void UpdateStudent([FromBody] Student student)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update student {student.Id}");
-                _studentService.UpdateStudent(student);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update student {student.Id}");
+            _studentService.UpdateStudent(student);
         }
 
         [HttpDelete]
@@ -591,14 +391,8 @@ namespace Filc.Controllers.Apis
         public void RemoveStudent(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete student {id}");
-                _studentService.DeleteStudent(id);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete student {id}");
+            _studentService.DeleteStudent(id);
         }
 
         // Parents
@@ -606,16 +400,9 @@ namespace Filc.Controllers.Apis
         [Route("parents/{id}")]
         public ParentDTO GetParent(int id)
         {
-            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get parent {id}");
-                return _parentService.GetParent(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1]; 
+            CustomLogger.LogRequest(token, $"Get parent {id}");
+            return _parentService.GetParent(id);
         }
 
         [HttpPost]
@@ -644,14 +431,8 @@ namespace Filc.Controllers.Apis
         public void UpdateParent([FromBody] Parent parent)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update parent {parent.Id}");
-                _parentService.UpdateParent(parent);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update parent {parent.Id}");
+            _parentService.UpdateParent(parent);
         }
 
         [HttpDelete]
@@ -659,14 +440,8 @@ namespace Filc.Controllers.Apis
         public void DeleteParent(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete parent {id}");
-                _parentService.DeleteParent(id);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete parent {id}");
+            _parentService.DeleteParent(id);
         }
 
         // SchoolAdmins
@@ -675,15 +450,8 @@ namespace Filc.Controllers.Apis
         public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdmins()
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get schooladmins");
-                return _schoolAdminService.GetAllSchoolAdmins();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get schooladmins");
+            return _schoolAdminService.GetAllSchoolAdmins();
         }
 
         [HttpGet]
@@ -691,15 +459,8 @@ namespace Filc.Controllers.Apis
         public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdminsBySchool(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get schooladmins by school {id}");
-                return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get schooladmins by school {id}");
+            return _schoolAdminService.GetAllSchoolAdminsBySchool(id);
         }
 
         [HttpGet]
@@ -707,15 +468,8 @@ namespace Filc.Controllers.Apis
         public Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO GetAdmin(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Get school admin {id}");
-                return _schoolAdminService.GetSchoolAdminById(id);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            CustomLogger.LogRequest(token, $"Get school admin {id}");
+            return _schoolAdminService.GetSchoolAdminById(id);
         }
 
         [HttpPost]
@@ -744,14 +498,8 @@ namespace Filc.Controllers.Apis
         public void UpdateSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Update school admin {schoolAdmin.Id}");
-                _schoolAdminService.UpdateSchoolAdmin(schoolAdmin);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Update school admin {schoolAdmin.Id}");
+            _schoolAdminService.UpdateSchoolAdmin(schoolAdmin);
         }
 
         [HttpDelete]
@@ -759,14 +507,9 @@ namespace Filc.Controllers.Apis
         public void DeleteSchoolAdmin(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            try
-            {
-                CustomLogger.LogRequest(token, $"Delete school admin {id}");
-                _schoolAdminService.DeleteSchoolAdmin(id);
-            }
-            catch (Exception e)
-            {
-            }
+            CustomLogger.LogRequest(token, $"Delete school admin {id}");
+            _schoolAdminService.DeleteSchoolAdmin(id);
+            
         }
     }
 }
