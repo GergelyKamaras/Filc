@@ -1,3 +1,4 @@
+import { NavItem } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 
 const NavbarLinks = ({ role }) => {
@@ -7,19 +8,20 @@ const NavbarLinks = ({ role }) => {
         case "Government":
             return (
                 <>
-                    <Nav.Link href="govadmin/schools">All Schools</Nav.Link>
-                    <Nav.Link href="govadmin/schooladmins/1">School Administrator by ID</Nav.Link>
-                    <Nav.Link href="govadmin/schools/1/admins">School Administrator by School</Nav.Link>
-                    <Nav.Link href="allstudents">All Students</Nav.Link>
-                    <Nav.Link href="allteachers">Teacher related page</Nav.Link>
+                    <Nav.Link href="/govadmin/schools">All Schools</Nav.Link>
+                    <Nav.Link href="/govadmin/schooladmins">School Administrator</Nav.Link>
+                    <Nav.Link href="/govadmin/students">All Students</Nav.Link>
+                    <Nav.Link href="/govadmin/teachers">Teacher related page</Nav.Link>
+                    <Nav.Link href="schooladmin/register">Add new user</Nav.Link>
+                    <Nav.Link href="govadmin/addschool">Add new school</Nav.Link>
                 </>
             )
         case "SchoolAdmin":
             return(
                 <>
-                    <Nav.Link href="">Administrators</Nav.Link>
-                    <Nav.Link href="allschooladmins">School administrators</Nav.Link>
-                    <Nav.Link href="">Add new user</Nav.Link>
+
+                    <Nav.Link href="schooladmin/register">Add new user</Nav.Link>
+                    <NavItem> not available yet...</NavItem>
                     <Nav.Link href="allschooladmins">School related page</Nav.Link>
                     <Nav.Link href="allteachers">Teacher related page</Nav.Link>
                     <Nav.Link href="">Lessons/Timetable</Nav.Link>
@@ -30,6 +32,7 @@ const NavbarLinks = ({ role }) => {
         case "Teacher":
             return(
                 <>
+                    <NavItem> not available yet...</NavItem>
                     <Nav.Link href="teachers">Teachers</Nav.Link>
                     <Nav.Link href="schools">Schools</Nav.Link>
                     <Nav.Link href="lessons">Lessons</Nav.Link>
@@ -40,7 +43,8 @@ const NavbarLinks = ({ role }) => {
         case "Student":
             return(
                 <>
-                    <Nav.Link href="govadmin/schools">Schools</Nav.Link>
+                    <NavItem> not available yet...</NavItem>
+                    <Nav.Link href="student/myschool">Schools related page</Nav.Link>
                     <Nav.Link href="teachers">Teachers</Nav.Link>
                     <Nav.Link href="schools">Schools</Nav.Link>
                     <Nav.Link href="lessons">Lessons</Nav.Link>

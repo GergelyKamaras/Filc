@@ -34,7 +34,11 @@ const LoginForm = ({loginStatus, updateLoginStatus}) => {
         <div className="profile">
             <div className="profile-top">
                 <div className="profile-pic">unavailable</div>
-                <p className="not-logged-text">You have to login first</p>
+                {loginStatus ?
+                    (<p className="not-logged-text">You have to login first</p>)
+                    : 
+                    (<p className="profile-name"> {loginForm["email"]} </p>)
+                }
             </div>
             <div className="profile-details">
                 <div className="sign-in-box">
