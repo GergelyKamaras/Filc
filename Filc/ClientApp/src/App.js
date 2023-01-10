@@ -12,14 +12,24 @@ import School from './Pages/Schools/School';
 import RegisterUser from './Pages/Registration/RegisterUser';
 import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
+import { useLocation } from 'react-router-dom';
         
 function App() {
+  let location = useLocation().pathname
 
-    const [loginStatus, updateLoginStatus] = useState(true);
-    const [loginForm, updateLoginForm] = useState({});
-    const [pageTitle, updatePageTitle] = useState({});
+  const [loginStatus, updateLoginStatus] = useState(true);
+  const [loginForm, updateLoginForm] = useState({});
+  const [pageTitle, updatePageTitle] = useState('Home page');
+  
+  useEffect(() => {
+    if(location === "/")
+    updatePageTitle("Home page")
+    else if(location === "/profile")
+    updatePageTitle("Profile page")
+  },[location])
+
 
     return (
         <>
@@ -89,7 +99,7 @@ function App() {
             </Routes>
         </>
 
-    );
+  );
 }
 
 export default App;
