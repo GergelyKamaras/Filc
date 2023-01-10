@@ -5,7 +5,8 @@ import "../../Style/navbar.css"
 import jwt from 'jwt-decode'
 import NavbarHead from '../Navbar/navbarHead';
 
-function Header({loginStatus, updateLoginStatus,loginForm}) {
+
+function Header(props) {
   const [role , updateRole] = useState(null)
   
     
@@ -13,17 +14,13 @@ function Header({loginStatus, updateLoginStatus,loginForm}) {
     
     try{
       updateRole(jwt(localStorage?.AccessToken)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"])
-      console.log("you are logged in")
+      
     }catch{
-      console.log("not logged in")
+     
     }
-  },[loginStatus])
+  },[props.loginStatus])
   
-  
-   
 
-  
-  
   return (
     <div className='navbar'>
       <div className='navbar-title'>
@@ -31,7 +28,7 @@ function Header({loginStatus, updateLoginStatus,loginForm}) {
       </div>
       <div className='navbar-body'>
         <div className='navbar-header'>
-          <NavbarHead loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} loginForm={loginForm}/>
+          <NavbarHead loginStatus={props.loginStatus} updateLoginStatus={props.updateLoginStatus} loginForm={props.loginForm} role={role}/>
         </div>
       </div>
     </div>
