@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import { useNavigate } from 'react-router-dom'
 import "../../Style/navbar.css"
 
-const NavbarLinks = ({ role }) => {
+const SideBarNav = ({ role }) => {
 
     const navigate = useNavigate()
 
@@ -73,4 +73,4 @@ const NavbarLinks = ({ role }) => {
         
     }
 }
-export default NavbarLinks;
+export default SideBarNav;
