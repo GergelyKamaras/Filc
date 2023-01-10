@@ -19,7 +19,7 @@ namespace Filc.Models.ViewModels.Teacher
         public TeacherDTO(EFDataAccessLibrary.Models.Teacher teacher)
         {
             Id = teacher.Id;
-            user = teacher.User;
+            user = teacher.user;
             FirstName = teacher.FirstName;
             LastName = teacher.LastName;
             BirthDate = teacher.BirthDate;

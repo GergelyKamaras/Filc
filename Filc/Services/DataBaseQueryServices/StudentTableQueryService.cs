@@ -21,7 +21,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public StudentDTO GetStudent(int id)
         {
-            Student student = _db.Student.Include(student => student.User)
+            Student student = _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
                 .Include(student => student.Marks)
@@ -31,7 +31,7 @@ namespace Filc.Services.DataBaseQueryServices
 
         public List<StudentDTO> GetAllStudents()
         {
-            List<Student> students = _db.Student.Include(student => student.User)
+            List<Student> students = _db.Student.Include(student => student.user)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
                 .Include(student => student.Marks)
@@ -39,14 +39,9 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapStudentsToStudentViewModels(students);
         }
 
-        public JWTAuthenticationResponse AddStudent(StudentInputDTO student)
+        public JWTAuthenticationResponse AddStudent(Student student)
         {
-            ApplicationUser user = _userService.GetUserByEmail(student.User.Email);
-            student.School = _db.School.First(school => school.Id == student.School.Id);
-            student.Marks = _db.Mark.Where(mark => mark.Student.Id == student.Id).ToList();
-            student.Lessons = _db.Lesson.Where(lesson => lesson.students.Any(s => s.Id == student.Id)).ToList();
-            student.user = user;
-            _db.Student.Add((Student)student);
+            _db.Student.Add(student);
             _db.SaveChanges();
             return new JWTAuthenticationResponse()
             {
@@ -58,19 +53,15 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateStudent(Student student)
         {
-            student.User = _userService.GetUserByEmail(student.User.Email);
-            student.School = _db.School.First(s => s.Id == student.School.Id);
-            student.Marks = _db.Mark.Where(mark => mark.Student.Id == student.Id).ToList();
-            student.Lessons = _db.Lesson.Where(lesson => lesson.students.Any(s => s.Id == student.Id)).ToList();
             _db.Student.Update(student);
             _db.SaveChanges();
         }
 
         public void DeleteStudent(int id)
         {
-            Student student = _db.Student.Include(s => s.User)
+            Student student = _db.Student.Include(s => s.user)
                 .First(s => s.Id == id);
-            _userService.DeleteUser(student.User.Id);
+            _userService.DeleteUser(student.user.Id);
             _db.SaveChanges();
         }
     }

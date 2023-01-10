@@ -88,7 +88,7 @@ namespace Filc.Controllers.Apis
             GovernmentAdmin admin = _inputDtoConverter.ConvertDtoToGovernmentAdmin(adminInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(admin.User, "Government")) != true)
+                if (await _registration.Register(new RegistrationModel(admin.user, "Government")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -204,7 +204,7 @@ namespace Filc.Controllers.Apis
             Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(teacher.User, "Teacher")) != true)
+                if (await _registration.Register(new RegistrationModel(teacher.user, "Teacher")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -327,8 +327,8 @@ namespace Filc.Controllers.Apis
         public ObjectResult AddMark([FromBody] MarkInputDTO markInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            CustomLogger.LogRequest(token, $"Add mark");
             var mark = _inputDtoConverter.ConvertDtoToMark(markInputDto);
+            CustomLogger.LogRequest(token, $"Add mark");
             return Ok(_markService.AddMark(mark));
         }
 
@@ -378,7 +378,7 @@ namespace Filc.Controllers.Apis
             Student student = _inputDtoConverter.ConvertDtoToStudent(studentInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(student.User, "Student")) != true)
+                if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -429,7 +429,7 @@ namespace Filc.Controllers.Apis
             Parent parent = _inputDtoConverter.ConvertDtoToParent(parentInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(parent.User, "Parent")) != true)
+                if (await _registration.Register(new RegistrationModel(parent.user, "Parent")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -498,7 +498,7 @@ namespace Filc.Controllers.Apis
             SchoolAdmin schoolAdmin = _inputDtoConverter.ConvertDtoToSchoolAdmin(schoolAdminInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(schoolAdmin.User, "SchoolAdmin")) != true)
+                if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }

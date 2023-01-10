@@ -19,7 +19,7 @@ namespace Filc.Models.ViewModels.Lesson
             Name = lesson.Name;
             Subject = lesson.Subject;
             Students = new List<StudentSharedDTO>();
-            lesson.Students.ForEach(student => Students.Add(new StudentSharedDTO(student)));
+            lesson.students.ForEach(student => Students.Add(new StudentSharedDTO(student)));
             Teachers = new List<TeacherSharedDTO>();
             lesson.Teachers.ForEach(teacher => Teachers.Add(new TeacherSharedDTO(teacher)));
             School = new SchoolSharedDTO(lesson.School);

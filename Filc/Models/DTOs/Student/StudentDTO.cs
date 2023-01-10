@@ -20,7 +20,7 @@ namespace Filc.Models.ViewModels.Student
         public StudentDTO(EFDataAccessLibrary.Models.Student student)
         {
             Id = student.Id;
-            user = student.User;
+            user = student.user;
             FirstName = student.FirstName;
             LastName = student.LastName;
             BirthDate = student.BirthDate;
