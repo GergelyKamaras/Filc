@@ -15,7 +15,7 @@ namespace EFDataAccessLibrary.Models
         public int Id { get; set; }
 
         [Required]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser user { get; set; }
 
         [Required]
         [MaxLength(40)]
