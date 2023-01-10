@@ -1,11 +1,14 @@
 ﻿using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.InputDTOs;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Models.ViewModels.Mark;
+using Filc.Models.ViewModels.Shared;
 using Filc.Models.ViewModels.Student;
 using Filc.Models.ViewModels.Teacher;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
+using Filc.Services.ModelConverter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -23,16 +26,18 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolServiceForTeacherRole _schoolService;
         private readonly IStudentServiceForTeacherRole _studentService;
         private readonly ITeacherServiceForTeacherRole _teacherService;
+        private readonly IInputDTOConverter _inputDtoConverter;
 
         public TeacherApiController(IMarkServiceFullAccess markService, ILessonServiceForTeacherRole teacherRoleLessonService,
             ISchoolServiceForTeacherRole teacherRoleSchoolService, IStudentServiceForTeacherRole teacherRoleStudentService,
-            ITeacherServiceForTeacherRole teacherRoleTeacherService)
+            ITeacherServiceForTeacherRole teacherRoleTeacherService, IInputDTOConverter inputDtoConverter)
         {
             _markService = markService;
             _lessonService = teacherRoleLessonService;
             _schoolService = teacherRoleSchoolService;
             _studentService = teacherRoleStudentService;
             _teacherService = teacherRoleTeacherService;
+            _inputDtoConverter = inputDtoConverter;
         }
 
         // Schools
@@ -52,8 +57,9 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPut]
-        public void UpdateTeacher([FromBody] Teacher teacher)
+        public void UpdateTeacher([FromBody] TeacherInputDTO teacherInputDto)
         {
+            Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
             _teacherService.UpdateTeacher(teacher);
         }
 
@@ -103,15 +109,17 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("marks")]
-        public ObjectResult AddMark([FromBody] Mark mark)
+        public ObjectResult AddMark([FromBody] MarkInputDTO markInputDto)
         {
+            var mark = _inputDtoConverter.ConvertDtoToMark(markInputDto);
             return Ok(_markService.AddMark(mark));
         }
 
         [HttpPut]
         [Route("marks")]
-        public void UpdateMark([FromBody] Mark mark)
+        public void UpdateMark([FromBody] MarkInputDTO markInputDto)
         {
+            var mark = _inputDtoConverter.ConvertDtoToMark(markInputDto);
             _markService.UpdateMark(mark);
         }
 

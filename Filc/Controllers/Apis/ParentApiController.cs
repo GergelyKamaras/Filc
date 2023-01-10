@@ -1,9 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.InputDTOs;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
+using Filc.Services.ModelConverter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -20,14 +22,16 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolServiceForParentRole _schoolService;
         private readonly IMarkServiceForParentRole _markService;
         private readonly IParentServiceForParentRole _parentService;
+        private readonly IInputDTOConverter _inputDtoConverter;
 
         public ParentApiController(IStudentServiceForParentRole studentService, ISchoolServiceForParentRole schoolService,
-            IMarkServiceForParentRole markService, IParentServiceForParentRole parentService)
+            IMarkServiceForParentRole markService, IParentServiceForParentRole parentService, IInputDTOConverter inputDtoConverter)
         {
             _studentService = studentService;
             _schoolService = schoolService;
             _markService = markService;
             _parentService = parentService;
+            _inputDtoConverter = inputDtoConverter;
         }
 
         // Schools
@@ -62,8 +66,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("students")]
-        public void UpdateStudent([FromBody] Student student)
+        public void UpdateStudent([FromBody] StudentInputDTO studentInputDto)
         {
+            Student student = _inputDtoConverter.ConvertDtoToStudent(studentInputDto);
             _studentService.UpdateStudent(student);
         }
 
@@ -77,8 +82,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("parents")]
-        public void UpdateParent([FromBody] Parent parent)
+        public void UpdateParent([FromBody] ParentInputDTO parentInputDto)
         {
+            Parent parent = _inputDtoConverter.ConvertDtoToParent(parentInputDto);
             _parentService.UpdateParent(parent);
         }
     }
