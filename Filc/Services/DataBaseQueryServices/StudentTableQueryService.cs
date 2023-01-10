@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.InputDTOs;
 using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Shared;
 using Filc.Models.ViewModels.Student;
@@ -20,7 +21,7 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public StudentDTO GetStudent(int id)
         {
-            Student student = _db.Student.Include(student => student.user)
+            Student student = _db.Student.Include(student => student.User)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
                 .Include(student => student.Marks)
@@ -30,7 +31,7 @@ namespace Filc.Services.DataBaseQueryServices
 
         public List<StudentDTO> GetAllStudents()
         {
-            List<Student> students = _db.Student.Include(student => student.user)
+            List<Student> students = _db.Student.Include(student => student.User)
                 .Include(student => student.Lessons)
                 .Include(student => student.School)
                 .Include(student => student.Marks)
@@ -38,14 +39,14 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapStudentsToStudentViewModels(students);
         }
 
-        public JWTAuthenticationResponse AddStudent(Student student)
+        public JWTAuthenticationResponse AddStudent(StudentInputDTO student)
         {
-            ApplicationUser user = _userService.GetUserByEmail(student.user.Email);
+            ApplicationUser user = _userService.GetUserByEmail(student.User.Email);
             student.School = _db.School.First(school => school.Id == student.School.Id);
             student.Marks = _db.Mark.Where(mark => mark.Student.Id == student.Id).ToList();
             student.Lessons = _db.Lesson.Where(lesson => lesson.students.Any(s => s.Id == student.Id)).ToList();
             student.user = user;
-            _db.Student.Add(student);
+            _db.Student.Add((Student)student);
             _db.SaveChanges();
             return new JWTAuthenticationResponse()
             {
@@ -57,7 +58,7 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateStudent(Student student)
         {
-            student.user = _userService.GetUserByEmail(student.user.Email);
+            student.User = _userService.GetUserByEmail(student.User.Email);
             student.School = _db.School.First(s => s.Id == student.School.Id);
             student.Marks = _db.Mark.Where(mark => mark.Student.Id == student.Id).ToList();
             student.Lessons = _db.Lesson.Where(lesson => lesson.students.Any(s => s.Id == student.Id)).ToList();
@@ -67,9 +68,9 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void DeleteStudent(int id)
         {
-            Student student = _db.Student.Include(s => s.user)
+            Student student = _db.Student.Include(s => s.User)
                 .First(s => s.Id == id);
-            _userService.DeleteUser(student.user.Id);
+            _userService.DeleteUser(student.User.Id);
             _db.SaveChanges();
         }
     }

@@ -128,7 +128,7 @@ namespace EFDataAccessLibrary.DataAccess
                 Address = "Street 1"
             };
             
-            teacher.user = user3;
+            teacher.User = user3;
             teacher.School = school1;
 
             try
@@ -151,7 +151,7 @@ namespace EFDataAccessLibrary.DataAccess
                 Address = "Street 2"
             };
 
-            student.user = user4;
+            student.User = user4;
             student.School = school1;
 
             try

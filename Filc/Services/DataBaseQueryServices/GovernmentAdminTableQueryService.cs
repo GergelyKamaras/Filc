@@ -22,19 +22,19 @@ namespace Filc.Services.DataBaseQueryServices
 
         public List<GovernmentAdmin> GetAllGovernmentAdmins()
         {
-            return _db.GovernmentAdmin.Include(admin => admin.user)
+            return _db.GovernmentAdmin.Include(admin => admin.User)
                 .ToList();
         }
         public GovernmentAdmin GetGovernmentAdmin(int id)
         {
             
-            return _db.GovernmentAdmin.Include(admin => admin.user)
+            return _db.GovernmentAdmin.Include(admin => admin.User)
                 .First(x => x.Id == id);
         }
         public JWTAuthenticationResponse AddGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
-            ApplicationUser user = _userService.GetUserByEmail(governmentAdmin.user.Email);
-            governmentAdmin.user = user;
+            ApplicationUser user = _userService.GetUserByEmail(governmentAdmin.User.Email);
+            governmentAdmin.User = user;
             _db.GovernmentAdmin.Add(governmentAdmin);
             _db.SaveChanges();
 
@@ -49,12 +49,12 @@ namespace Filc.Services.DataBaseQueryServices
         {
             GovernmentAdmin admin = _db.GovernmentAdmin.Include(a => a.user)
                 .First(a => a.Id == id);
-            _userService.DeleteUser(admin.user.Id);
+            _userService.DeleteUser(admin.User.Id);
             _db.SaveChanges();
         }
         public void UpdateGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
-            governmentAdmin.user = _db.GovernmentAdmin.First(admin => admin.Id == governmentAdmin.Id).user;
+            governmentAdmin.User = _db.GovernmentAdmin.First(admin => admin.Id == governmentAdmin.Id).user;
             _db.GovernmentAdmin.Update(governmentAdmin);
             _db.SaveChanges();
         }

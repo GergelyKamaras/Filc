@@ -16,7 +16,7 @@ namespace Filc.Models.ViewModels.Shared
         public TeacherSharedDTO(EFDataAccessLibrary.Models.Teacher teacher)
         {
             Id = teacher.Id;
-            user = teacher.user;
+            user = teacher.User;
             FirstName = teacher.FirstName;
             LastName = teacher.LastName;
             BirthDate = teacher.BirthDate;

@@ -4,15 +4,18 @@ using System.Security.Claims;
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
 using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.InputDTOs;
 using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
+using Filc.Models.ViewModels.Shared;
 using Filc.Models.ViewModels.Student;
 using Filc.Models.ViewModels.Teacher;
 using Filc.Services;
 using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
+using Filc.Services.ModelConverter;
 using Filc.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -25,7 +28,7 @@ using Serilog;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/governmentadmins")]
+    [Route("api/government")]
     [Authorize(Roles = "Government")]
     [EnableCors]
     public class GovernmentAdminApiController : Controller
@@ -39,11 +42,12 @@ namespace Filc.Controllers.Apis
         private readonly IStudentServiceFullAccess _studentService;
         private readonly ITeacherServiceFullAccess _teacherService;
         private readonly IRegistration _registration;
+        private readonly IInputDTOConverter _inputDtoConverter;
         
         public GovernmentAdminApiController(IGovernmentAdminServiceFullAccess governmentAdminService, ILessonServiceFullAccess lessonService,
             IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, ISchoolAdminServiceFullAccess schoolAdminService,
             ISchoolServiceFullAccess schoolService, IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService,
-            IRegistration registration)
+            IRegistration registration, IInputDTOConverter inputDtoConverter)
         {
             _governmentAdminService = governmentAdminService;
             _lessonService = lessonService;
@@ -54,6 +58,7 @@ namespace Filc.Controllers.Apis
             _studentService = studentService;
             _teacherService = teacherService;
             _registration = registration;
+            _inputDtoConverter = inputDtoConverter;
         }
 
         // Government Admins
@@ -77,13 +82,13 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        public async Task<ObjectResult> AddGovernmentAdmin([FromBody] GovernmentAdmin admin)
+        public async Task<ObjectResult> AddGovernmentAdmin([FromBody] GovernmentAdminInputDTO adminInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-
+            GovernmentAdmin admin = _inputDtoConverter.ConvertDtoToGovernmentAdmin(adminInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(admin.user, "Government")) != true)
+                if (await _registration.Register(new RegistrationModel(admin.User, "Government")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -98,9 +103,10 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPut]
-        public void UpdateGovernmentAdmin([FromBody] GovernmentAdmin admin)
+        public void UpdateGovernmentAdmin([FromBody] GovernmentAdminInputDTO adminInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            GovernmentAdmin admin = _inputDtoConverter.ConvertDtoToGovernmentAdmin(adminInputDto);
             CustomLogger.LogRequest(token, $"Update government admin {admin.Id}");
             _governmentAdminService.UpdateGovernmentAdmin(admin);
         }
@@ -135,18 +141,20 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("schools")]
-        public void UpdateSchool([FromBody] School school)
+        public void UpdateSchool([FromBody] SchoolInputDTO schoolInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            School school = _inputDtoConverter.ConvertDtoToSchool(schoolInputDto);
             CustomLogger.LogRequest(token, $"Update school {school.Id}");
             _schoolService.UpdateSchool(school);
         }
 
         [HttpPost]
         [Route("schools")]
-        public ObjectResult AddSchool([FromBody] School school)
+        public ObjectResult AddSchool([FromBody] SchoolInputDTO schoolInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            School school = _inputDtoConverter.ConvertDtoToSchool(schoolInputDto);
             CustomLogger.LogRequest(token, $"Add school");
             return Ok(_schoolService.AddSchool(school));
         }
@@ -190,12 +198,13 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("register/teacher")]
-        public async Task<ObjectResult> AddTeacher([FromBody] Teacher teacher)
+        public async Task<ObjectResult> AddTeacher([FromBody] TeacherInputDTO teacherInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(teacher.user, "Teacher")) != true)
+                if (await _registration.Register(new RegistrationModel(teacher.User, "Teacher")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -211,9 +220,10 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("teachers")]
-        public void UpdateTeacher([FromBody] Teacher teacher)
+        public void UpdateTeacher([FromBody] TeacherInputDTO teacherInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
             CustomLogger.LogRequest(token, $"Update teacher {teacher.Id}");
             _teacherService.UpdateTeacher(teacher);
         }
@@ -257,18 +267,20 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("lessons")]
-        public ObjectResult AddLesson([FromBody] Lesson lesson)
+        public ObjectResult AddLesson([FromBody] LessonInputDTO lessonInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             CustomLogger.LogRequest(token, $"Add lesson");
+            var lesson = _inputDtoConverter.ConvertDtoToLesson(lessonInputDto);
             return Ok(_lessonService.AddLesson(lesson));
         }
 
         [HttpPut]
         [Route("lessons")]
-        public void UpdateLesson([FromBody] Lesson lesson)
+        public void UpdateLesson([FromBody] LessonInputDTO lessonInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            var lesson = _inputDtoConverter.ConvertDtoToLesson(lessonInputDto);
             CustomLogger.LogRequest(token, $"Update lesson {lesson.Id}");
             _lessonService.UpdateLesson(lesson);
         }
@@ -312,18 +324,20 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("marks")]
-        public ObjectResult AddMark([FromBody] Mark mark)
+        public ObjectResult AddMark([FromBody] MarkInputDTO markInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             CustomLogger.LogRequest(token, $"Add mark");
+            var mark = _inputDtoConverter.ConvertDtoToMark(markInputDto);
             return Ok(_markService.AddMark(mark));
         }
 
         [HttpPut]
         [Route("marks")]
-        public void UpdateMark([FromBody] Mark mark)
+        public void UpdateMark([FromBody] MarkInputDTO markInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            var mark = _inputDtoConverter.ConvertDtoToMark(markInputDto);
             CustomLogger.LogRequest(token, $"Update mark {mark.Id}");
             _markService.UpdateMark(mark);
         }
@@ -358,12 +372,13 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("register/student")]
-        public async Task<ObjectResult> AddStudent([FromBody] Student student)
+        public async Task<ObjectResult> AddStudent([FromBody] StudentInputDTO studentInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            Student student = _inputDtoConverter.ConvertDtoToStudent(studentInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
+                if (await _registration.Register(new RegistrationModel(student.User, "Student")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -379,9 +394,10 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("students")]
-        public void UpdateStudent([FromBody] Student student)
+        public void UpdateStudent([FromBody] StudentInputDTO studentInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            Student student = _inputDtoConverter.ConvertDtoToStudent(studentInputDto);
             CustomLogger.LogRequest(token, $"Update student {student.Id}");
             _studentService.UpdateStudent(student);
         }
@@ -407,12 +423,13 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("register/parent")]
-        public async Task<ObjectResult> AddParent([FromBody] Parent parent)
+        public async Task<ObjectResult> AddParent([FromBody] ParentInputDTO parentInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            Parent parent = _inputDtoConverter.ConvertDtoToParent(parentInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(parent.user, "Parent")) != true)
+                if (await _registration.Register(new RegistrationModel(parent.User, "Parent")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -428,9 +445,10 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("parents")]
-        public void UpdateParent([FromBody] Parent parent)
+        public void UpdateParent([FromBody] ParentInputDTO parentInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            Parent parent = _inputDtoConverter.ConvertDtoToParent(parentInputDto);
             CustomLogger.LogRequest(token, $"Update parent {parent.Id}");
             _parentService.UpdateParent(parent);
         }
@@ -474,12 +492,13 @@ namespace Filc.Controllers.Apis
 
         [HttpPost]
         [Route("schooladmins")]
-        public async Task<ObjectResult> AddSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        public async Task<ObjectResult> AddSchoolAdmin([FromBody] SchoolAdminInputDTO schoolAdminInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            SchoolAdmin schoolAdmin = _inputDtoConverter.ConvertDtoToSchoolAdmin(schoolAdminInputDto);
             try
             {
-                if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
+                if (await _registration.Register(new RegistrationModel(schoolAdmin.User, "SchoolAdmin")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -495,9 +514,10 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("schooladmins")]
-        public void UpdateSchoolAdmin([FromBody] SchoolAdmin schoolAdmin)
+        public void UpdateSchoolAdmin([FromBody] SchoolAdminInputDTO schoolAdminInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            SchoolAdmin schoolAdmin = _inputDtoConverter.ConvertDtoToSchoolAdmin(schoolAdminInputDto);
             CustomLogger.LogRequest(token, $"Update school admin {schoolAdmin.Id}");
             _schoolAdminService.UpdateSchoolAdmin(schoolAdmin);
         }

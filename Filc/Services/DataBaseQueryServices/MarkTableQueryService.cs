@@ -4,6 +4,8 @@ using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Mark;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Microsoft.EntityFrameworkCore;
+using Filc.Models.ViewModels.Shared;
+using System.ComponentModel.DataAnnotations;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -25,9 +27,6 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public JWTAuthenticationResponse AddMark(Mark mark)
         {
-            mark.Lesson = _db.Lesson.First(l => l.Id == mark.Lesson.Id);
-            mark.Student = _db.Student.First(s => s.Id == mark.Student.Id);
-            mark.Teacher = _db.Teacher.First(t => t.Id == mark.Teacher.Id);
             _db.Mark.Add(mark);
             _db.SaveChanges();
             return new JWTAuthenticationResponse()
@@ -67,5 +66,7 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(mark => mark.Subject).ToList();
             return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
         }
-    }
+
+
+}
 }

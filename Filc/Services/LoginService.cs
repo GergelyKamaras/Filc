@@ -52,7 +52,7 @@ namespace Filc.Services
             {
                 case "Teacher":
                     return new Claim("schoolId",
-                        _db.Teacher.Where(t => t.user.Email == model.Email)
+                        _db.Teacher.Where(t => t.User.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 
                 case "SchoolAdmin":
@@ -62,7 +62,7 @@ namespace Filc.Services
 
                 case "Student":
                     return new Claim("schoolId",
-                        _db.Student.Where(t => t.user.Email == model.Email)
+                        _db.Student.Where(t => t.User.Email == model.Email)
                         .Select(t => t.School.Id).FirstOrDefault().ToString());
 
             }
