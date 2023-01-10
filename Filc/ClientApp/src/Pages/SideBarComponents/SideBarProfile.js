@@ -6,13 +6,11 @@ import {useNavigate} from 'react-router-dom';
 import FetchHashedPassword from "../Login/FetchHashedPassword"
 import FetchLogin from "../Login/FetchLogin"
 import bcrypt from 'bcryptjs'
-import NavbarLinks from './NavbarLinks';
+import NavbarLinks from './SideBarNav';
 import {useEffect} from "react"
 
-import { useLocation } from 'react-router-dom';
 
-const NavbarHead = (props) => {
-  let location = useLocation().pathname
+const SideBarProfile = (props) => {
 
   const navigate = useNavigate();
 
@@ -52,14 +50,14 @@ const NavbarHead = (props) => {
   }
   
   useEffect(() => {
-    try {
-      let token = localStorage?.AccessToken;
-      props.loginStatus(false)
-      console.log("logged in")
-    }catch{
-      console.log("nope") 
-    }
-  },[location])
+    
+      if(localStorage?.AccessToken){
+        props.updateLoginStatus(false)
+      }
+      else{
+        props.updateLoginStatus(true)
+      }
+  },[])
 
     return (
       <>
@@ -89,4 +87,4 @@ const NavbarHead = (props) => {
     )
   }
 
-export default NavbarHead;
+export default SideBarProfile;

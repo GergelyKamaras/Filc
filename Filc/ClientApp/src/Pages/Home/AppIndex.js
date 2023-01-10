@@ -12,8 +12,7 @@ const IndexPage = (props) => {
     useEffect(() => {
         if(localStorage.getItem("AccessToken") !== null){
             props.updateLoginStatus(false)
-        }else{}
-
+        }
     }); 
 
     
