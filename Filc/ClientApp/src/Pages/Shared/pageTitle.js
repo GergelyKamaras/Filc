@@ -1,12 +1,12 @@
-
-import {IoIosHome} from 'react-icons/io';
+import Icon from "./icons"
 
 
 const PageTitle = (props) => {
+    
     return(
         <>
-            <p className='page-title'> {props.PageTitle} </p>
-            <IoIosHome className='home-icon'/>
+            <p className='page-title'> {props.pageTitle} </p>
+            <Icon pageTitle={props.pageTitle} />
         </>
     )
 }
