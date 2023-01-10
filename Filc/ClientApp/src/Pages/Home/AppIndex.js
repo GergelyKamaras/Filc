@@ -3,9 +3,7 @@ import '../../Style/IndexPage/IndexPage.css'
 import News from './News'
 import React, {useEffect} from "react";
 
-
 const IndexPage = (props) => {
-    console.log(props)
     
     const updateLoginField = (newValue, field) => {
         props.updateLoginForm({ ...props.loginForm, [field]: newValue })
@@ -17,6 +15,8 @@ const IndexPage = (props) => {
         }else{}
 
     }); 
+
+    
     return (
         <div className="index-parent">
         {props.loginStatus? (
