@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/teachers")]
+    [Route("api/teacher")]
     [Authorize(Roles = "Teacher")]
     [EnableCors]
     public class TeacherApiController : ControllerBase

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/parents")]
+    [Route("api/parent")]
     [Authorize(Roles = "Parent")]
     [EnableCors]
     public class ParentApiController : ControllerBase

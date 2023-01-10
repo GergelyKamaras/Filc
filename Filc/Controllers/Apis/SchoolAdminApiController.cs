@@ -18,7 +18,7 @@ namespace Filc.Controllers.Apis
 {
     
     [ApiController]
-    [Route("api/schooladmins")]
+    [Route("api/schooladmin")]
     //Authorize(Roles = "SchoolAdmin")]
     [EnableCors]
     public class SchoolAdminApiController : ControllerBase
@@ -150,7 +150,7 @@ namespace Filc.Controllers.Apis
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             try
             {
-                if (await _registration.Register(new RegistrationModel(teacher.user, "Teacher")) != true)
+                if (await _registration.Register(new RegistrationModel(teacher.User, "Teacher")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
@@ -320,7 +320,7 @@ namespace Filc.Controllers.Apis
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             try
             {
-                if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
+                if (await _registration.Register(new RegistrationModel(student.User, "Student")) != true)
                 {
                     throw new Exception("Error registering user!");
                 }
