@@ -1,5 +1,6 @@
 ﻿import FetchSchoolByIdOnStudentRoute from "./FetchSchoolByIdOnStudentRoute";
 import { useEffect, useState } from "react";
+import Loading from "../Shared/Loader";
 
 const MySchool = () => {
     const [loading, setLoading] = useState(true);
@@ -15,32 +16,39 @@ const MySchool = () => {
                 setLoading(false);
             }
             fetchData();
-        }
-    );
+        },[]);
 
     return (
         <>
-            {loading ? <h3>Loading...</h3>
+            {loading ? <Loading/>
                 : school ? (
                     <div className="school" key={school.id}>
-                        <h3>{school.name}</h3>
-                        <p><strong>Address:</strong> {school.address}</p>
-                        <p><strong>Type: </strong>{school.schoolType}</p>
-                        <p><strong>School Admins: </strong></p>
-                        {school.schoolAdmin.map((admin) => (
-                            <p key={admin.id}> - {admin.firstName} {admin.lastName}</p>
-                        ))}
-                        <p><strong>Number of students: </strong>{school.students.length}</p>
-                        <p><strong>Subjects:</strong></p>
-                        {school.subjects.map((subject) => (
-                            <p key={subject.id}> - {subject.name}</p>
-                        ))}
-                        <p><strong>Teachers:</strong> </p>
-                        {school.teachers.map((teacher) => (
-                            <p key={teacher.id}> - {teacher.firstName} {teacher.LastName}</p>
-                        ))}
+                        <div className="school-header">
+                            <p> {school.name}</p>
+                        </div>
+                        <div className="school-body">
+                            <div className="school-address">
+                                <p className="address-title"> Address </p>
+                                <a href="https://www.google.com/maps/place/Very+Rd,+Machias,+NY+14101,+USA/@42.4023945,-78.5262785,17z/data=!3m1!4b1!4m5!3m4!1s0x89d25bac90436571:0x5a9f8df8f8567c0e!8m2!3d42.4023906!4d-78.5240898" className="address"> {school.address} </a>
+                            </div>
+                            <div className="school-type">
+                                <p className="type-title"> Qualification of school education </p>
+                                <p className="type"> {school.schoolType} </p>
+                            </div>
+                            <div className="school-administrator">
+                                <p className="administrator-title"> School administrator </p>
+                                {school.schoolAdmin.map((admin) => (
+                                <p className="administrator" key={admin.id}>  {admin.firstName} {admin.lastName} </p>
+                                ))}
+                            </div>
+                            <div className="school-students">
+                                <p className="students-title"> Total students </p>
+                                <p className="students"> {school.students.length} </p>
+                            </div>
+                        </div>
+                            <div className="school-footer">
+                        </div>
                     </div>
-
                 ) : (
                     <div>
                         <h3>Data not found</h3>
