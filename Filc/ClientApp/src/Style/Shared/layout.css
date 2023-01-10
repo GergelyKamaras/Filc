@@ -39,10 +39,11 @@ overflow: hidden;
 }
 .content 
 {
+    background-color: white;
     grid-area: 1 / 2 / 2 / 3; 
     position: relative; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    margin-top: 3rem;
+    margin-top: 4rem;
 }
