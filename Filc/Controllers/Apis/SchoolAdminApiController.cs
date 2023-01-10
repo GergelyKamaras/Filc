@@ -94,10 +94,9 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPut]
-        public void UpdateSchoolAdmin(SchoolAdminInputDTO schoolAdminInputDto)
+        public void UpdateSchoolAdmin(SchoolAdmin admin)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            SchoolAdmin admin = _inputDtoConverter.ConvertDtoToSchoolAdmin(schoolAdminInputDto);
             CustomLogger.LogRequest(token, $"Update school admin {admin.Id}");
             _schoolAdminService.UpdateSchoolAdmin(admin);
         }
@@ -114,10 +113,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("schools")]
-        public void UpdateSchool([FromBody] SchoolInputDTO schoolInputDto)
+        public void UpdateSchool([FromBody] School school)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            School school = _inputDtoConverter.ConvertDtoToSchool(schoolInputDto);
             CustomLogger.LogRequest(token, $"Update school {school.Id}");
             _schoolService.UpdateSchool(school);
         }
@@ -174,10 +172,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("teachers")]
-        public void UpdateTeacher([FromBody] TeacherInputDTO teacherInputDto)
+        public void UpdateTeacher([FromBody] Teacher teacher)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
             CustomLogger.LogRequest(token, $"Update teacher {teacher.Id}");
             _teacherService.UpdateTeacher(teacher);
         }
@@ -231,10 +228,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("lessons")]
-        public void UpdateLesson([FromBody] LessonInputDTO lessonInputDto)
+        public void UpdateLesson([FromBody] Lesson lesson)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            var lesson = _inputDtoConverter.ConvertDtoToLesson(lessonInputDto);
             CustomLogger.LogRequest(token, $"Update lesson {lesson.Id}");
             _lessonService.UpdateLesson(lesson);
         }
@@ -289,10 +285,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("marks")]
-        public void UpdateMark([FromBody] MarkInputDTO markInputDto)
+        public void UpdateMark([FromBody] Mark mark)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            var mark = _inputDtoConverter.ConvertDtoToMark(markInputDto);
             CustomLogger.LogRequest(token, $"Update mark {mark.Id}");
             _markService.UpdateMark(mark);
         }
@@ -350,10 +345,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("students")]
-        public void UpdateStudent([FromBody] StudentInputDTO studentInputDto)
+        public void UpdateStudent([FromBody] Student student)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            Student student = _inputDtoConverter.ConvertDtoToStudent(studentInputDto);
             CustomLogger.LogRequest(token, $"Update student {student.Id}");
             _studentService.UpdateStudent(student);
         }
@@ -401,10 +395,9 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("parents")]
-        public void UpdateParent([FromBody] ParentInputDTO parentInputDto)
+        public void UpdateParent([FromBody] Parent parent)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            Parent parent = _inputDtoConverter.ConvertDtoToParent(parentInputDto);
             CustomLogger.LogRequest(token, $"Update parent {parent.Id}");
             _parentService.UpdateParent(parent);
         }

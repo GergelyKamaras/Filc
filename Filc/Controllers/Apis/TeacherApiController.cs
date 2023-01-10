@@ -57,9 +57,8 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPut]
-        public void UpdateTeacher([FromBody] TeacherInputDTO teacherInputDto)
+        public void UpdateTeacher([FromBody] Teacher teacher)
         {
-            Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
             _teacherService.UpdateTeacher(teacher);
         }
 
@@ -117,9 +116,8 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("marks")]
-        public void UpdateMark([FromBody] MarkInputDTO markInputDto)
+        public void UpdateMark([FromBody] Mark mark)
         {
-            var mark = _inputDtoConverter.ConvertDtoToMark(markInputDto);
             _markService.UpdateMark(mark);
         }
 

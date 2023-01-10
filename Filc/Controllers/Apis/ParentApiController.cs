@@ -66,9 +66,8 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("students")]
-        public void UpdateStudent([FromBody] StudentInputDTO studentInputDto)
+        public void UpdateStudent([FromBody] Student student)
         {
-            Student student = _inputDtoConverter.ConvertDtoToStudent(studentInputDto);
             _studentService.UpdateStudent(student);
         }
 
@@ -82,9 +81,8 @@ namespace Filc.Controllers.Apis
 
         [HttpPut]
         [Route("parents")]
-        public void UpdateParent([FromBody] ParentInputDTO parentInputDto)
+        public void UpdateParent([FromBody] Parent parent)
         {
-            Parent parent = _inputDtoConverter.ConvertDtoToParent(parentInputDto);
             _parentService.UpdateParent(parent);
         }
     }
