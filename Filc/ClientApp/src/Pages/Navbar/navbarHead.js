@@ -6,9 +6,13 @@ import {useNavigate} from 'react-router-dom';
 import FetchHashedPassword from "../Login/FetchHashedPassword"
 import FetchLogin from "../Login/FetchLogin"
 import bcrypt from 'bcryptjs'
+import NavbarLinks from './NavbarLinks';
+import {useEffect} from "react"
+
+import { useLocation } from 'react-router-dom';
 
 const NavbarHead = (props) => {
-  
+  let location = useLocation().pathname
 
   const navigate = useNavigate();
 
@@ -46,6 +50,16 @@ const NavbarHead = (props) => {
   const getUserName = () => {
       return `${getUserToken()["userFirstName"]} ${getUserToken()["userLastName"]}`
   }
+  
+  useEffect(() => {
+    try {
+      let token = localStorage?.AccessToken;
+      props.loginStatus(false)
+      console.log("logged in")
+    }catch{
+      console.log("nope") 
+    }
+  },[location])
 
     return (
       <>
@@ -65,6 +79,9 @@ const NavbarHead = (props) => {
               <h2> Welcome! </h2>
               <p> {getUserName()}</p>
               <button className='navbar-login-button' typeof='button' onClick={(e) => logout(e)}> Logout </button>
+            </div>
+            <div className="header-body">
+              <NavbarLinks role={props.role}/>
             </div>
           </>
         )}
