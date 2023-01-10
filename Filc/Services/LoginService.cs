@@ -73,7 +73,7 @@ namespace Filc.Services
                         _db.Teacher.Where(t => t.user.Email == model.Email)
                         .Select(t => t.LastName).First().ToString()));
 
-                    userDatas.Add(new Claim("userBithDate",
+                    userDatas.Add(new Claim("userBirthDate",
                         _db.Teacher.Where(t => t.user.Email == model.Email)
                         .Select(t => t.BirthDate).FirstOrDefault().ToString()));
 
@@ -97,7 +97,7 @@ namespace Filc.Services
                         _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
                         .Select(t => t.LastName).First().ToString()));
 
-                    userDatas.Add(new Claim("userBithDate",
+                    userDatas.Add(new Claim("userBirthDate",
                         _db.SchoolAdmin.Where(t => t.user.Email == model.Email)
                         .Select(t => t.BirthDate).FirstOrDefault().ToString()));
 
@@ -121,9 +121,9 @@ namespace Filc.Services
                         _db.Student.Where(t => t.user.Email == model.Email)
                         .Select(t => t.LastName).First().ToString()));
 
-                    userDatas.Add(new Claim("userBithDate",
+                    userDatas.Add(new Claim("userBirthDate",
                         _db.Student.Where(t => t.user.Email == model.Email)
-                        .Select(t => t.BirthDate).FirstOrDefault().ToString()));
+                        .Select(t => t.BirthDate).FirstOrDefault().ToString().Substring(0, 12)));
 
                     return userDatas;
             }
