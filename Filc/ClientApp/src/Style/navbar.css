@@ -76,3 +76,28 @@
 .navbar-login-button:hover { 
    background-color: #002ead; 
 }
+
+.header-body{
+    margin-top: 4rem;
+
+}
+
+.navbar-direction-button{
+    margin-top: 0.51rem;
+    background-color: #0a0a23;
+    color: #fff;
+    border: 1px solid white; 
+    margin-left: 1rem;
+    border-radius: 5px; 
+    padding: 1px; 
+    height: 30px;
+    width: 250px;
+    transition: 0.4s;
+}
+.profile{
+    margin-top: 30rem;
+} 
+
+.navbar-direction-button:hover { 
+    background-color: #002ead; 
+ }
