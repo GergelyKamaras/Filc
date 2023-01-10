@@ -19,7 +19,7 @@ namespace EFDataAccessLibrary.Models
         public Subject Subject { get; set; }
 
         [Required]
-        public List<Student> students { get; set; }
+        public List<Student> Students { get; set; }
 
         [Required]
         public List<Teacher> Teachers { get; set; }
