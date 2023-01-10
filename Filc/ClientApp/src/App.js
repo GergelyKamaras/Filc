@@ -18,6 +18,8 @@ import {useState} from 'react';
 function App() {
 
     const [loginStatus, updateLoginStatus] = useState(true);
+    const [loginForm, updateLoginForm] = useState({});
+    const [pageTitle, updatePageTitle] = useState({});
 
     return (
         <>

@@ -1,12 +1,21 @@
 ﻿import { Outlet } from 'react-router-dom';
 import Header from './Header';
-import React from "react";
+import "../../Style/Shared/layout.css"
+import PageTitle from './pageTitle';
 
-const Layout = ({loginStatus, updateLoginStatus}) => {
+const Layout = (props) => {
+
   return (
     <main className="App">
-      <Header loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>
-      <Outlet />
+      <div className='NavLine'>
+        <Header loginStatus={props.loginStatus} updateLoginStatus={props.updateLoginStatus} loginForm={props.loginForm}/>
+      </div>
+      <div className='page-header'>
+        <PageTitle PageTitle={props.PageTitle}/>
+      </div>
+      <div className='content'>
+        <Outlet/>
+      </div>
     </main>
   );
 }

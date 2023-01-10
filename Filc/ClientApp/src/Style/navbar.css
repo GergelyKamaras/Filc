@@ -1,0 +1,78 @@
+.navbar{
+    
+}
+
+.navbar-title{
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.377);
+    margin-top: 1rem;
+    height: 2.5rem;
+}
+
+.navbar-title a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+   
+}
+
+.navbar-body {
+    margin-left: 1rem;
+}
+
+.navbar-header{
+    display: inline-flexbox;
+    height: 80px;
+}
+
+
+.navbar-header h2{
+    color:white;
+}
+
+.navbar-profile-pic-icon{
+    color:white;
+    height: 80px;
+    width: 80px;
+    margin-top: 3rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+    border: 2px solid white;
+    text-align: center;
+    justify-items: center;
+}
+.login 
+{
+    top: 6.6rem;
+}
+
+.not-login{
+    top: 9.5rem;
+}
+
+.navbar-login-section{
+    display: inline-block;
+    position: absolute;
+    
+    margin-left:1rem;
+}
+
+.navbar-login-section p{
+    font-size: 14px;
+    color: white;
+}
+
+.navbar-login-button { 
+    background-color: #0a0a23;
+    color: #fff;
+    border: 1px solid white; 
+    margin-left: 1rem;
+    border-radius: 10px; 
+    padding: 1px; 
+    height: 30px;
+    width: 100px;
+    transition: 0.4s;
+}
+
+.navbar-login-button:hover { 
+   background-color: #002ead; 
+}
