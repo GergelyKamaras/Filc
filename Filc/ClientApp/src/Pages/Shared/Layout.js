@@ -11,7 +11,7 @@ const Layout = (props) => {
         <Header loginStatus={props.loginStatus} updateLoginStatus={props.updateLoginStatus} loginForm={props.loginForm}/>
       </div>
       <div className='page-header'>
-        <PageTitle PageTitle={props.PageTitle}/>
+        <PageTitle pageTitle={props.pageTitle}/>
       </div>
       <div className='content'>
         <Outlet/>
