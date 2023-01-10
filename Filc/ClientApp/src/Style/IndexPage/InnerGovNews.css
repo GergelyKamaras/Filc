@@ -1,6 +1,7 @@
 .news-box{
+    padding: 1rem;
     width: 1100px;
-    height: 600px;
+    height: 900px;
     margin-top: -20px;
     border-radius: 4px;
     background: linear-gradient(145deg, #f8f8f8, #f0f0f0);
