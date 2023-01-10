@@ -1,5 +1,5 @@
 
-import {IoIosHome, IoMdPerson } from 'react-icons/io';
+import {IoIosHome, IoMdPerson, IoIosSchool } from 'react-icons/io';
 
 const Icon = (props) =>{
     console.log(props.pageTitle)
@@ -11,6 +11,11 @@ const Icon = (props) =>{
     else if (props.pageTitle === "Profile page"){
         return(
             <IoMdPerson className='icon'/>
+        )
+    }
+    else if(props.pageTitle === "School Details"){
+        return(
+            <IoIosSchool className="icon"/>
         )
     }
 }
