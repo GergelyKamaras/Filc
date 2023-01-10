@@ -18,16 +18,16 @@ import {useState} from 'react';
 function App() {
 
     const [loginStatus, updateLoginStatus] = useState(true);
+    const [loginForm, updateLoginForm] = useState({});
+    const [pageTitle, updatePageTitle] = useState({});
 
     return (
         <>
-            
-        <Routes>
-              
-        <Route path="/" element={<Layout loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>}>
+        <Routes> 
+        <Route path="/" element={<Layout loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} loginForm={loginForm} pageTitle={pageTitle} updatePageTitle={updatePageTitle} />}>
         
           {/*Routes available to all users*/}
-          <Route path="" element={<IndexPage loginStatus={loginStatus} updateLoginStatus={updateLoginStatus}/>} />
+          <Route path="" element={<IndexPage loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} loginForm={loginForm} updateLoginForm={updateLoginForm}/>} />
           <Route path="Unauthorized" element={<Unauthorized />} />
 
           {/*TODO: Routes available to Students*/}

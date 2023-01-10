@@ -1,17 +1,11 @@
-﻿import NavbarLinks from '../Navbar/NavbarLinks'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import {useNavigate} from 'react-router-dom';
+﻿
+
 import React, {useEffect, useState} from 'react'
 import "../../Style/navbar.css"
 import jwt from 'jwt-decode'
-import { NavItem } from 'react-bootstrap';
+import NavbarHead from '../Navbar/navbarHead';
 
-
-function Header({loginStatus, updateLoginStatus}) {
+function Header({loginStatus, updateLoginStatus,loginForm}) {
   const [role , updateRole] = useState(null)
   
     
@@ -26,20 +20,26 @@ function Header({loginStatus, updateLoginStatus}) {
   },[loginStatus])
   
   
-    const navigate = useNavigate();
-    const logout = (e) => {
-      e.preventDefault();
-      localStorage.clear();
-      navigate("")
-      updateRole(null)
-      updateLoginStatus(true)
-    }
+   
 
   
+  
   return (
-    <>
-      {[false].map((expand) => (
-        <Navbar role={role} key={expand} bg="light" expand={expand} className="mb-3 navbar">
+    <div className='navbar'>
+      <div className='navbar-title'>
+        <a href='/'> For Interactive Learning Community </a>
+      </div>
+      <div className='navbar-body'>
+        <div className='navbar-header'>
+          <NavbarHead loginStatus={loginStatus} updateLoginStatus={updateLoginStatus} loginForm={loginForm}/>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{/* {[false].map((expand) => (
+        <Navbar role={role} key={expand} bg="light" expand={expand} className="mb-3 navbar own-navbar">
           <Container fluid>
             <Navbar.Brand className='navbar-title' href="">For Interactive Learning Community</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -78,23 +78,11 @@ function Header({loginStatus, updateLoginStatus}) {
                   </NavItem> )}
                   
                 </Nav>
-                {/* <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="outline-success">Search</Button>
-                </Form> */}
+                
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-      ))}
-    </>
-  );
-}
-
+      ))} */}
 
 export default Header;
