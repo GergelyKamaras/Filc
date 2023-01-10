@@ -12,7 +12,8 @@ import School from './Pages/Schools/School';
 import RegisterUser from './Pages/Registration/RegisterUser';
 import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
-import {useState} from 'react';
+import { useState } from 'react';
+import Teachers from "./Pages/Teacher/Teachers";
 
         
 function App() {
@@ -45,7 +46,8 @@ function App() {
 
 
                     {/*ROUTE: Routes available to Teachers*/}
-                    <Route element={<RequireAuth allowedRoles={["Teacher"]} />}>
+                    <Route path="teacher" element={<RequireAuth allowedRoles={["Teacher"]} />}>
+                        <Route path="teachers" element={<Teachers /> } />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
                         {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
