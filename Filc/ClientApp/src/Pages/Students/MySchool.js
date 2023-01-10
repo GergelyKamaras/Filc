@@ -1,6 +1,7 @@
 ﻿import FetchSchoolByIdOnStudentRoute from "./FetchSchoolByIdOnStudentRoute";
 import { useEffect, useState } from "react";
 import Loading from "../Shared/Loader";
+import "../../Style/SchoolPage/SchoolPage.css"
 
 const MySchool = () => {
     const [loading, setLoading] = useState(true);
