@@ -1,5 +1,5 @@
 ﻿import { Outlet } from 'react-router-dom';
-import Header from './Header';
+import Header from './SideBar';
 import "../../Style/Shared/layout.css"
 import PageTitle from './pageTitle';
 
