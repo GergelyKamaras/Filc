@@ -25,9 +25,11 @@ function App() {
   
   useEffect(() => {
     if(location === "/")
-    updatePageTitle("Home page")
+      updatePageTitle("Home page")
     else if(location === "/profile")
-    updatePageTitle("Profile page")
+      updatePageTitle("Profile page")
+    else if(location === "/student/myschool")
+      updatePageTitle("School Details")
   },[location])
 
 
