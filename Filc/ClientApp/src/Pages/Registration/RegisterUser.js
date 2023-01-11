@@ -2,6 +2,8 @@
 import RegisterUserFetch from './FetchRegisterUser'
 import RegistrationForm from './RegistrationForm';
 import bcrypt from 'bcryptjs';
+import "../../Style/UserReg/RegisterUser.css"
+import {FaUserLock} from "react-icons/fa"
 
 const RegisterUser = () => {
     
@@ -40,17 +42,27 @@ const RegisterUser = () => {
 
     return (
         <div className="register-form">
-            <h1>Register new user</h1>
-
-            <select onChange={handleChange}>
-                <option value="Government">Government Admin</option>
-                <option value="SchoolAdmin">School Admin</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Student">Student</option>
-                <option value="Parent">Parent</option>
-            </select>
-
-            <RegistrationForm role={role} updateForm={updateForm} form={form} handleSubmit={handleSubmit} />
+            <div className='register-form-header'>
+                <p>Register new user</p>
+            </div>
+            <div className='register-form-body'>
+                <div className="register-body">
+                    <div className='icon-div'>
+                        <FaUserLock className='form-icon'/>
+                    </div>
+                    <div className="title-box">
+                        <p> Role: </p>
+                    </div>
+                    <select className="role-select" onChange={handleChange}>
+                        <option value="Government">Government Admin</option>
+                        <option value="SchoolAdmin">School Admin</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Student">Student</option>
+                        <option value="Parent">Parent</option>
+                    </select>
+                </div>
+                <RegistrationForm role={role} updateForm={updateForm} form={form} handleSubmit={handleSubmit} />
+            </div>
                    
         </div>
 

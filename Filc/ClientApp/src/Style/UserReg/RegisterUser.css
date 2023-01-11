@@ -1,0 +1,120 @@
+.register-form{
+    width: 75%;
+    height: 100%;
+    margin-top: 10%;
+
+}
+.register-form-header{
+    text-align: center;
+    border-bottom: 5px solid hsl(240, 15%, 20%);
+    margin-right: 50%;
+    
+}
+
+.register-form-header p{
+    font-size: 30px;
+    font-family: "Fantasy";
+    font-weight: 600;
+}
+
+.register-form-body{
+    width: 60%;
+    height: 100%;
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+
+
+/* role select section */
+
+
+.role-select{
+    min-width: 11.8rem;
+    height: 70%;
+    width: 100%;
+    text-align: center;
+    border-radius: 0.5rem;
+}
+
+.role-select option{
+    font-family: "Fantasy";
+    font-weight: 100;
+    text-decoration: none;
+
+}
+
+
+/* Email section */
+
+
+/* password section */
+
+
+/* name section */
+
+
+
+
+/* date of bith section */
+
+
+/* shared */
+
+.register-body{
+    border-radius: 0.5rem;
+    padding: 5px;
+    margin-right: 40%;
+    height: 3rem;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 3rem 6rem auto;
+}
+
+.input{
+    height: 2rem;
+    border: 1px solid hsl(240, 15%, 20%);
+    border-radius: 0.5rem;
+}
+
+.icon-div{
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+}
+
+.form-icon{
+    height: 3rem;
+    width: 2rem;
+    padding-bottom: 1rem;
+}
+
+
+.title-box{
+    height: 2rem;
+    text-align: left;
+    padding: 2px;
+    word-break: keep-all;
+}
+
+.title-box p{
+    font-family: "Fantasy";
+    font-size: 18px;
+}
+
+.submit-button { 
+    background-color: #0a0a23;
+    color: #fff;
+    border: 1px solid white; 
+    border-radius: 10px; 
+    padding: 1px; 
+    height: 30px;
+    width: 100px;
+    transition: 0.4s;
+    margin-right: 40%;
+    margin-top: 1rem;
+    float: right
+}
+
+.submit-button:hover { 
+   background-color: #002ead; 
+}
