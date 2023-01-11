@@ -3,7 +3,7 @@
     `https://localhost:7014/api/governmentadmins/schools/${id}`, {
           method: 'GET',
           headers: {
-              "Authorization": "Bearer" + localStorage.getItem("AccessToken")
+              "Authorization": "Bearer " + localStorage.getItem("AccessToken")
           }
   }
   );

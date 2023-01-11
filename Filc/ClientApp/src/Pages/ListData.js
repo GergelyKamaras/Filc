@@ -12,7 +12,7 @@ export function ListData(props) {
     //"https://fakestoreapi.com/products"
     //"https://jsonplaceholder.typicode.com/posts"
 
-    const URL = "https://localhost:7014/api/schooladmins/students"
+    //const URL = "https://localhost:7014/api/schooladmins/students"
 
     useEffect(() => {
         let isCancelled = false;
@@ -142,10 +142,7 @@ export function ListData(props) {
                                         <td
                                             className="col"
                                             {...cell.getCellProps()}
-                                            style={{
-                                                padding: '10px',
-                                                border: 'solid 1px gray',
-                                            }}
+                                            
                                         >
                                             {cell.render('Cell')}
                                         </td>
