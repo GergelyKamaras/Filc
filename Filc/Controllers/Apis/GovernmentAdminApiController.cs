@@ -25,7 +25,7 @@ using Serilog;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/governmentadmins")]
+    [Route("api/government")]
     [Authorize(Roles = "Government")]
     [EnableCors]
     public class GovernmentAdminApiController : Controller

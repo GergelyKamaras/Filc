@@ -18,7 +18,7 @@ namespace Filc.Controllers.Apis
 {
     
     [ApiController]
-    [Route("api/schooladmins")]
+    [Route("api/schooladmin")]
     //Authorize(Roles = "SchoolAdmin")]
     [EnableCors]
     public class SchoolAdminApiController : ControllerBase

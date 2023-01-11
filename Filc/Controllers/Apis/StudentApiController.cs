@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/students")]
+    [Route("api/student")]
     [Authorize(Roles = "Student")]
     [EnableCors]
     public class StudentApiController : ControllerBase
