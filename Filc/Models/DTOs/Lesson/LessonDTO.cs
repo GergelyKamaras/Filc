@@ -9,7 +9,7 @@ namespace Filc.Models.ViewModels.Lesson
         public int Id { get; set; }
         public string Name { get; set; }
         public Subject Subject { get; set; }
-        public List<StudentSharedDTO> students { get; set; }
+        public List<StudentSharedDTO> Students { get; set; }
         public List<TeacherSharedDTO> Teachers { get; set; }
         public SchoolSharedDTO School { get; set; }
 
@@ -18,8 +18,8 @@ namespace Filc.Models.ViewModels.Lesson
             Id = lesson.Id;
             Name = lesson.Name;
             Subject = lesson.Subject;
-            students = new List<StudentSharedDTO>();
-            lesson.students.ForEach(student => students.Add(new StudentSharedDTO(student)));
+            Students = new List<StudentSharedDTO>();
+            lesson.students.ForEach(student => Students.Add(new StudentSharedDTO(student)));
             Teachers = new List<TeacherSharedDTO>();
             lesson.Teachers.ForEach(teacher => Teachers.Add(new TeacherSharedDTO(teacher)));
             School = new SchoolSharedDTO(lesson.School);

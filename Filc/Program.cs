@@ -14,6 +14,7 @@ using System.Text;
 using Serilog;
 using Filc.Services;
 using Filc.Services.Interfaces;
+using Filc.Services.ModelConverter;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -95,6 +96,7 @@ builder.Services.AddTransient<IRegistration, RegistrationService>();
 builder.Services.AddTransient<ILogin, LoginService>();
 builder.Services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
 builder.Services.AddTransient<IDBModelService, DBModelService>();
+builder.Services.AddTransient<IInputDTOConverter, InputDtoConverter>();
 
 
 // Register entity based query service interface implementations
