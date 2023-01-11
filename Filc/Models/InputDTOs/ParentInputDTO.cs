@@ -6,7 +6,7 @@ namespace Filc.Models.ViewModels.Parent
     public class ParentInputDTO
     {
         public int? Id { get; set; }
-        public string Email { get; set; }
+        public ApplicationUser user { get; set; }
 
     }
 }
