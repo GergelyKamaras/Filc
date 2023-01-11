@@ -17,13 +17,7 @@ function AddSchool() {
         var schoolData = {
             Name: name,
             address: address,
-            schoolType: schoolType,
-            schoolAdmin: [],
-            students: [],
-            subjects: [],
-            lessons: [],
-            teachers: [],
-            classes: []
+            schoolType: schoolType
         };
 
         FetchAddSchool(schoolData);

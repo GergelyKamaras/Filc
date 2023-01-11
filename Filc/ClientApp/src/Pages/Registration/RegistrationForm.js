@@ -11,10 +11,7 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
     
     const updateField = (newValue, field) => {
         
-        if (field === "school"){
-            updateForm({ ...form, [field]: {"id": newValue} })
-        }
-        else if (field === "email"){
+        if (field === "email"){
             updateForm({ ...form, "user": {"email": newValue}})
         }
         else if (field === "password"){
@@ -24,10 +21,6 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
             updateForm({ ...form, [field]: newValue })
         }
     }
-
-   
-    
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,8 +66,8 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
                     </div>
             
                     <div>
-                        <label htmlFor="School">School</label>
-                        <select defaultValue={form?.school ? form.school : ""} onChange={(e) => updateField(e.target.value, "school")} id="School" type="text" className="form-control">
+                        <label htmlFor="SchoolId">School</label>
+                        <select defaultValue={form?.school ? form.school : ""} onChange={(e) => updateField(e.target.value, "SchoolId")} id="SchoolId" type="text" className="form-control">
                         {isLoading ? (
                             <option>Loading...</option>) :
                             (schoolData.schools.map((school) => (
