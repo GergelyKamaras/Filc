@@ -56,6 +56,13 @@ namespace Filc.Controllers.Apis
             return _teacherService.GetTeacher(id);
         }
 
+        [HttpGet]
+        [Route("teachers/{schoolId}")]
+        public List<TeacherDTO> GetAllTeachers(int schoolId)
+        {
+            return _teacherService.GetAllTeachersBySchool(schoolId);
+        }
+
         [HttpPut]
         public void UpdateTeacher([FromBody] Teacher teacher)
         {

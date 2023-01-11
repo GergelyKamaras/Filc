@@ -3,6 +3,7 @@ import { useGlobalFilter, useTable, useSortBy } from 'react-table'
 import { GlobalFilter } from "./globalFilter";
 import '../Style/Shared/table.css';
 import { Link } from 'react-router-dom';
+import UniversalFetch from './Shared/FetchUniversal';
 
 export function ListData(props) {
     //const [err, setErr] = useState('');
@@ -16,7 +17,7 @@ export function ListData(props) {
 
     useEffect(() => {
         let isCancelled = false;
-        apiGet(props.URL)
+        UniversalFetch("get", props.URL, "")
             .then((data) => {
                 if (!isCancelled) {
                     setProducts(data);
@@ -153,19 +154,20 @@ export function ListData(props) {
     )
 }
 
-async function apiGet(url) {
-    let response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem("AccessToken")
-        }
-    });
-    if (!response.ok) {
-        throw new Error(`Something went wrong during fetching data from ${url}`)
-    } else {
-        return await response.json()
-    }
-}
+//async function apiGet(url) {
+//    let response = await fetch(url, {
+//        method: 'GET',
+//        headers: {
+//            "Authorization": "Bearer " + localStorage.getItem("AccessToken")
+//        }
+//    });
+//    if (!response.ok) {
+//        throw new Error(`Something went wrong during fetching data from ${url}`)
+//    } else {
+//        return await response.json()
+//    }
+//    return await UniversalFetch("get", url, "");
+//}
 
 const formatMoney = (value) => {
     if (value) {

@@ -12,12 +12,14 @@ import School from './Pages/Schools/School';
 import RegisterUser from './Pages/Registration/RegisterUser';
 import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import AddMark from "./Pages/Teacher/AddMark";
+import jwt from 'jwt-decode';
 
 import { useLocation } from 'react-router-dom';
         
 function App() {
-  let location = useLocation().pathname
+    let location = useLocation().pathname
 
   const [loginStatus, updateLoginStatus] = useState(true);
   const [loginForm, updateLoginForm] = useState({});
@@ -60,11 +62,13 @@ function App() {
           </Route>
 
 
-          {/*ROUTE: Routes available to Teachers*/}
-          <Route element={<RequireAuth allowedRoles={["Teacher"]} />}>
-              {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
-              {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
-          </Route>
+                    {/*ROUTE: Routes available to Teachers*/}
+                    <Route path="teacher" element={<RequireAuth allowedRoles={["Teacher"]} />}>
+                      <Route path="teachers" element={<ListData URL={localStorage.length > 0 ? "teachers/" + jwt(localStorage.AccessToken)["schoolId"] : ""} />} />
+                      <Route path="add-grade" element={<AddMark />} />
+                        {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
+                        {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
+                    </Route>
 
                                                                           
           {/*ROUTE: Routes available to SchoolAdmins*/}
@@ -77,12 +81,12 @@ function App() {
 
           {/*ROUTE: Routes available to GovAdmins*/}
           <Route path="govadmin" element={<RequireAuth allowedRoles={["Government"]} />}>
-              <Route path="all" element={<ListData URL="https://localhost:7014/api/governmentadmins" />} />/
+              <Route path="all" element={<ListData URL="" />} />/
               <Route path="addschool" element={<Schools />} />
-              <Route path="students" element={<ListData URL="https://localhost:7014/api/governmentadmins/students" />} />
-              <Route path="teachers" element={<ListData URL="https://localhost:7014/api/governmentadmins/teachers" />} />
-              <Route path="schools" element={<ListData URL="https://localhost:7014/api/governmentadmins/schools" />} />
-              <Route path="schooladmins" element={<ListData URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
+              <Route path="students" element={<ListData URL="students" />} />
+              <Route path="teachers" element={<ListData URL="teachers" />} />
+              <Route path="schools" element={<ListData URL="schools" />} />
+              <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
               {/*COMMENT: Previously used routes, awaiting REMOVAL for finished project, currently kept if we need them*/}
