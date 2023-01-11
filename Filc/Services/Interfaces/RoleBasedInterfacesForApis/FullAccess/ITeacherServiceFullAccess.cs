@@ -7,8 +7,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
 {
     public interface ITeacherServiceFullAccess : ITeacherServiceForTeacherRole
     {
-        public List<TeacherDTO> GetAllTeachers();
-        public List<TeacherDTO> GetAllTeachersBySchool(int schoolId);
+        public List<TeacherDTO> GetAllTeachers();       
         public JWTAuthenticationResponse AddTeacher(Teacher teacher);
         public void RemoveTeacher(int id);
     }

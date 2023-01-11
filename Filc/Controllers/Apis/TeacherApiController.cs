@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/teachers")]
+    [Route("api/teacher")]
     [Authorize(Roles = "Teacher")]
     [EnableCors]
     public class TeacherApiController : ControllerBase
@@ -49,6 +49,13 @@ namespace Filc.Controllers.Apis
         public TeacherDTO GetTeacher(int id)
         {
             return _teacherService.GetTeacher(id);
+        }
+
+        [HttpGet]
+        [Route("teachers/{schoolId}")]
+        public List<TeacherDTO> GetAllTeachers(int schoolId)
+        {
+            return _teacherService.GetAllTeachersBySchool(schoolId);
         }
 
         [HttpPut]
