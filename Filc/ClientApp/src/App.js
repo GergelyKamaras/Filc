@@ -30,6 +30,8 @@ function App() {
       updatePageTitle("Profile page")
     else if(location === "/student/myschool")
       updatePageTitle("School Details")
+    else if(location === "/schooladmin/register")
+      updatePageTitle("User Registration")
   },[location])
 
 
