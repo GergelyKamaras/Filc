@@ -37,13 +37,12 @@ overflow: hidden;
     margin-left: 0.5rem;
     margin-top: 0.8rem;
 }
-.content 
-{
+.content {
     background-color: white;
-    grid-area: 1 / 2 / 2 / 3; 
-    position: relative; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    grid-area: 1 / 2 / 2 / 3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 4rem;
 }
