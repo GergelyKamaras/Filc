@@ -14,11 +14,12 @@ import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
 import { useState, useEffect } from 'react';
 import Teachers from "./Pages/Teacher/Teachers";
+import jwt from 'jwt-decode';
 
 import { useLocation } from 'react-router-dom';
         
 function App() {
-  let location = useLocation().pathname
+    let location = useLocation().pathname
 
   const [loginStatus, updateLoginStatus] = useState(true);
   const [loginForm, updateLoginForm] = useState({});
@@ -61,7 +62,7 @@ function App() {
 
                     {/*ROUTE: Routes available to Teachers*/}
                     <Route path="teacher" element={<RequireAuth allowedRoles={["Teacher"]} />}>
-                        <Route path="teachers" element={<Teachers /> } />
+                      <Route path="teachers" element={<ListData URL=`https://localhost:7014/api/teacher/teachers/${jwt(localStorage.AccessToken)['schoolId']}` />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
                         {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
