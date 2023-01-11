@@ -1,4 +1,4 @@
-﻿import Header from "../Shared/Header";
+﻿import Header from "../Shared/SideBar";
 
 const SchoolListFetch = async () => {
   const response = await fetch(
