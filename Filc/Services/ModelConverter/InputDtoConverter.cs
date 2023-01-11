@@ -56,7 +56,7 @@ namespace Filc.Services.ModelConverter
         {
             GovernmentAdmin admin = new()
             {
-                user = _db.Users.First(g => g.UserName == adminInputDto.UserName)
+                user = adminInputDto.user
             };
             if (adminInputDto.Id != null)
             {
@@ -91,7 +91,7 @@ namespace Filc.Services.ModelConverter
         {
             Teacher teacher = new()
             {
-                user = _db.Users.First(u => u.UserName == teacherInputDto.Email),
+                user = teacherInputDto.user,
                 FirstName = teacherInputDto.FirstName,
                 LastName = teacherInputDto.LastName,
                 BirthDate = teacherInputDto.BirthDate,
@@ -111,7 +111,7 @@ namespace Filc.Services.ModelConverter
         {
             Student student = new()
             {
-                user = _db.Users.First(u => u.UserName == studentInputDto.Email),
+                user = studentInputDto.user,
                 FirstName = studentInputDto.FirstName,
                 LastName = studentInputDto.LastName,
                 BirthDate = studentInputDto.BirthDate,
@@ -131,7 +131,7 @@ namespace Filc.Services.ModelConverter
         {
             Parent parent = new()
             {
-                user = _db.Users.First(u => u.UserName == parentInputDto.Email),
+                user = parentInputDto.user,
                 Children = new List<Student>()
             };
             if (parentInputDto.Id != null)
@@ -145,7 +145,7 @@ namespace Filc.Services.ModelConverter
         {
             SchoolAdmin schoolAdmin = new()
             {
-                user = _db.Users.First(u => u.UserName == schoolAdminInputDto.Email),
+                user = schoolAdminInputDto.user,
                 FirstName = schoolAdminInputDto.FirstName,
                 LastName = schoolAdminInputDto.LastName,
                 BirthDate = schoolAdminInputDto.BirthDate,
