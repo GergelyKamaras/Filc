@@ -18,12 +18,12 @@ const SideBarNav = ({ role }) => {
                 <>
                 <div className='registration'> 
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/register")}> User Registration </button>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "govadmin/addschool")}> School Registration </button>
+                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "govadmin/addschool")}> Institutional registration </button>
                 </div>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schools")}> All Schools </button>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schooladmins")}> School Administrator </button>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/students")}> All Students </button>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/teachers")}> Teacher related page </button>
+                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schools")}> Educational institutions  </button>
+                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schooladmins")}> Institutional administrators </button>
+                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/students")}> Student directory </button>
+                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/teachers")}> Teacher directory </button>
                 </>
             )
         case "SchoolAdmin":

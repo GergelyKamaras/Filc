@@ -26,14 +26,37 @@ function App() {
   const [pageTitle, updatePageTitle] = useState('Home page');
   
   useEffect(() => {
-    if(location === "/")
-      updatePageTitle("Home page")
-    else if(location === "/profile")
-      updatePageTitle("Profile page")
-    else if(location === "/student/myschool")
-      updatePageTitle("School Details")
-    else if(location === "/schooladmin/register")
-      updatePageTitle("User Registration")
+    switch (location) {
+      case "/":
+          updatePageTitle("Home page");
+          break;
+      case "/profile":
+          updatePageTitle("Profile page");
+          break;
+      case "/student/myschool":
+          updatePageTitle("School Details");
+          break;
+      case "/schooladmin/register":
+          updatePageTitle("User Registration");
+          break;
+      case "/govadmin/schools":
+          updatePageTitle("Educational institutions");
+          break;
+      case "/govadmin/schooladmins":
+          updatePageTitle("Institutional administrators");
+          break;
+      case "/govadmin/students":
+          updatePageTitle("Student directory");
+          break;
+      case "/govadmin/teachers":
+          updatePageTitle("Teacher directory");
+          break;
+      case "/govadmin/addschool":
+          updatePageTitle("Institutional registration")
+          break;
+      default:
+          // handle any unanticipated locations here
+  }
   },[location])
 
 
