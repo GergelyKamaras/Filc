@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect, useMemo } from 'react';
 import { useGlobalFilter, useTable, useSortBy } from 'react-table'
 import { GlobalFilter } from "./globalFilter";
-import './table.css';
+import '../Style/Shared/table.css';
 import { Link } from 'react-router-dom';
 
 export function ListData(props) {
@@ -66,12 +66,12 @@ export function ListData(props) {
         hooks.visibleColumns.push((columns) => [
             ...columns,
             {   
-                id: "Show",
-                Header: "Show",
+                id: "Details",
+                Header: "Details",
                 Cell: ({ row }) => (
                     //row.values.id
                     //console.log(row.values.id),
-                    <button style={{ cursor: 'pointer' }}
+                    <button className="showButtons"
                         onClick={() => console.log(row.values.id)}>
                         <Link to={`${window.location.pathname}/${row.values.id}`}>Show</Link>                       
                     </button>
@@ -104,26 +104,22 @@ export function ListData(props) {
     const isEven = (index) => index % 2 === 0;
     
     return (   
-        <>  
+        <div className="wrapper">  
             <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
                 setGlobalFilter={setGlobalFilter}
                 globalFilter={state.globalFilter}
             />
-            <table {...getTableProps()} style={{ border: 'solid 1px blue' }} className="productsTable">
-                <thead>
+            <table {...getTableProps()} className="dataTable">
+                <thead className="tHeads">
                     {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr className="tHeadRows"
+                            {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
                                 <th
                                     {...column.getHeaderProps(column.getSortByToggleProps())}
-                                    style={{
-                                        borderBottom: 'solid 3px blue',
-                                        background: 'aliceblue',
-                                        color: 'black',
-                                        fontWeight: 'bold',
-                                        cursor: 'pointer'
-                                    }}
+                                    className="tableHeaders"
+                                    
                                 >
                                     {column.render('Header')}
                                     {column.isSorted ? (column.isSortedDesc ? " ▼" : " ▲") : ""}
@@ -153,7 +149,7 @@ export function ListData(props) {
                     })}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }
 

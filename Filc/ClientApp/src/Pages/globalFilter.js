@@ -15,8 +15,9 @@ export function GlobalFilter({
 
     
     return (
-        <div>
-            <p>Search:</p>
+        
+        <div className="searchBar">
+            <p>Search</p>
             <input
                 value={value || ""}
                 onChange={(e) => {
