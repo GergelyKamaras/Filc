@@ -13,7 +13,7 @@ import RegisterUser from './Pages/Registration/RegisterUser';
 import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
 import { useState, useEffect } from 'react';
-import Teachers from "./Pages/Teacher/Teachers";
+import AddMark from "./Pages/Teacher/AddMark";
 import jwt from 'jwt-decode';
 
 import { useLocation } from 'react-router-dom';
@@ -63,6 +63,7 @@ function App() {
                     {/*ROUTE: Routes available to Teachers*/}
                     <Route path="teacher" element={<RequireAuth allowedRoles={["Teacher"]} />}>
                       <Route path="teachers" element={<ListData URL={localStorage.length > 0 ? "teachers/" + jwt(localStorage.AccessToken)["schoolId"] : ""} />} />
+                      <Route path="add-grade" element={<AddMark />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
                         {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
