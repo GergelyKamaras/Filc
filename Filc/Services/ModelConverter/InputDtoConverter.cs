@@ -123,7 +123,7 @@ namespace Filc.Services.ModelConverter
             if (studentInputDto.Id != null)
             {
                 student.Id = (int)studentInputDto.Id;
-            }
+            };
             return student;
         }
 

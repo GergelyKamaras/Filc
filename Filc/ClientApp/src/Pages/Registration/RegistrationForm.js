@@ -20,6 +20,7 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
         else {
             updateForm({ ...form, [field]: newValue })
         }
+        console.log(form)
     }
 
     useEffect(() => {
@@ -30,6 +31,7 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
             setIsLoading(false);
         };
         fetchData();
+        updateField(1,"SchoolId")
     }, []);
 
 
@@ -67,7 +69,7 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
             
                     <div>
                         <label htmlFor="SchoolId">School</label>
-                        <select defaultValue={form?.school ? form.school : ""} onChange={(e) => updateField(e.target.value, "SchoolId")} id="SchoolId" type="text" className="form-control">
+                        <select defaultValue={form?.school ? form.school : ""} onChange={(e) => updateField(e.target.value, "SchoolId")} id="Id" type="text" className="form-control">
                         {isLoading ? (
                             <option>Loading...</option>) :
                             (schoolData.schools.map((school) => (
