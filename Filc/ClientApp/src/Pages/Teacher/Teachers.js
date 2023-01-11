@@ -10,23 +10,28 @@ const Teachers = () => {
         () => {
             const fetchData = async () => {
 
-                const data = await UniversalFetch("get", `schools/${jwt(localStorage.AccessToken)["schoolId"]}`);
+                const data = await UniversalFetch("get", `teachers/${jwt(localStorage.AccessToken)["schoolId"]}`);
+                console.log(data);
 
                 setTeachers(data);
                 setLoading(false);
             }
             fetchData();
-        }
+        }, []
     );
 
     return (
         <>
             {loading ? <h3>Loading...</h3>
                 : teachers ? (
-                    <div className="school" key={teachers.id}>
-                        <h3>{teachers.name}</h3>
-                    </div>
-
+                    teachers.map((teacher) => (
+                        <div key={teacher.id}>
+                            <h3>{teacher.firstName} {teacher.lastName}</h3>
+                            <p><strong>Birthdate:</strong>{teacher.birthDate}</p>
+                            <p><strong>Address:</strong>{teacher.address}</p>
+                        </div>
+                        )   
+                    )
                 ) : (
                     <div>
                         <h3>Data not found</h3>
