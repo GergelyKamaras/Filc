@@ -221,7 +221,6 @@ namespace Filc.Controllers.Apis
         public void UpdateTeacher([FromBody] Teacher teacher)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
-            Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
             CustomLogger.LogRequest(token, $"Update teacher {teacher.Id}");
             _teacherService.UpdateTeacher(teacher);
         }
