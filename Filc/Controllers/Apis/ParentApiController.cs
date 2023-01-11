@@ -1,9 +1,11 @@
 ﻿using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.InputDTOs;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
+using Filc.Services.ModelConverter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Filc.Controllers.Apis
 {
     [ApiController]
-    [Route("api/parents")]
+    [Route("api/parent")]
     [Authorize(Roles = "Parent")]
     [EnableCors]
     public class ParentApiController : ControllerBase
@@ -20,14 +22,16 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolServiceForParentRole _schoolService;
         private readonly IMarkServiceForParentRole _markService;
         private readonly IParentServiceForParentRole _parentService;
+        private readonly IInputDTOConverter _inputDtoConverter;
 
         public ParentApiController(IStudentServiceForParentRole studentService, ISchoolServiceForParentRole schoolService,
-            IMarkServiceForParentRole markService, IParentServiceForParentRole parentService)
+            IMarkServiceForParentRole markService, IParentServiceForParentRole parentService, IInputDTOConverter inputDtoConverter)
         {
             _studentService = studentService;
             _schoolService = schoolService;
             _markService = markService;
             _parentService = parentService;
+            _inputDtoConverter = inputDtoConverter;
         }
 
         // Schools

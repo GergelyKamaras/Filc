@@ -17,12 +17,11 @@ const SideBarNav = ({ role }) => {
             return (
                 <>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schools")}> All Schools </button>
+                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "govadmin/addschool")}> Add new school </button>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schooladmins")}> School Administrator </button>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/students")}> All Students </button>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/teachers")}> Teacher related page </button>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/register")}> Add new user </button>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "govadmin/addschool")}> Add new school</button>
-                   
                 </>
             )
         case "SchoolAdmin":

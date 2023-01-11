@@ -1,12 +1,10 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Models.ViewModels.Shared;
 
-namespace Filc.Models.ViewModels.Parent
+namespace Filc.Models.InputDTOs
 {
-    public class ParentInputDTO
+    public class GovernmentAdminInputDTO
     {
         public int? Id { get; set; }
         public ApplicationUser user { get; set; }
-
     }
 }

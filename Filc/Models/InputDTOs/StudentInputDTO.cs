@@ -4,8 +4,8 @@ namespace Filc.Models.InputDTOs
 {
     public class StudentInputDTO
     {
-        public int Id { get; set; }
-        public ApplicationUser User { get; set; }
+        public int? Id { get; set; }
+        public ApplicationUser user { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
