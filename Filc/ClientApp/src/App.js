@@ -62,7 +62,7 @@ function App() {
 
                     {/*ROUTE: Routes available to Teachers*/}
                     <Route path="teacher" element={<RequireAuth allowedRoles={["Teacher"]} />}>
-                      <Route path="teachers" element={<ListData URL={"https://localhost:7014/api/teacher/teachers/" + jwt(localStorage.AccessToken)["schoolId"]} />} />
+                      <Route path="teachers" element={<ListData URL={"teachers/" + jwt(localStorage.AccessToken)["schoolId"]} />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
                         {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
@@ -78,12 +78,12 @@ function App() {
 
           {/*ROUTE: Routes available to GovAdmins*/}
           <Route path="govadmin" element={<RequireAuth allowedRoles={["Government"]} />}>
-              <Route path="all" element={<ListData URL="https://localhost:7014/api/governmentadmins" />} />/
+              <Route path="all" element={<ListData URL="" />} />/
               <Route path="addschool" element={<Schools />} />
-              <Route path="students" element={<ListData URL="https://localhost:7014/api/governmentadmins/students" />} />
-              <Route path="teachers" element={<ListData URL="https://localhost:7014/api/governmentadmins/teachers" />} />
-              <Route path="schools" element={<ListData URL="https://localhost:7014/api/governmentadmins/schools" />} />
-              <Route path="schooladmins" element={<ListData URL="https://localhost:7014/api/governmentadmins/schooladmins" />} />
+              <Route path="students" element={<ListData URL="students" />} />
+              <Route path="teachers" element={<ListData URL="teachers" />} />
+              <Route path="schools" element={<ListData URL="schools" />} />
+              <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
               {/*COMMENT: Previously used routes, awaiting REMOVAL for finished project, currently kept if we need them*/}
