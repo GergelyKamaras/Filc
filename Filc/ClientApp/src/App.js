@@ -11,7 +11,8 @@ import { ListData } from './Pages/ListData';
 import { useState, useEffect } from 'react';
 import AddMark from "./Pages/Teacher/AddMark";
 import jwt from 'jwt-decode';
-import AddSchool from './Pages/Schools/AddSchool'
+import AddSchool from './Pages/Schools/AddSchool';
+import School from './Pages/Schools/School'
 
 import { useLocation } from 'react-router-dom';
         
@@ -107,13 +108,13 @@ function App() {
               <Route path="teachers" element={<ListData URL="teachers" />} />
               <Route path="schools" element={<ListData URL="schools" />} />
               <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
+              <Route path="schools/:id" element={<School/>} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
               {/*COMMENT: Previously used routes, awaiting REMOVAL for finished project, currently kept if we need them*/}
                   {/*<Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />*/}
                   {/*<Route path="schooladmins/:id" element={<SchoolAdmin />} />*/}
                   {/*<Route path="schools/" element={<Schools />} />*/}
-                  {/*<Route path="schools/:id" element={<School />} />*/}
           </Route>
 
 
