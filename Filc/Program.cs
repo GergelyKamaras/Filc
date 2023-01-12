@@ -107,6 +107,7 @@ builder.Services.AddTransient<ITeacherServiceFullAccess, TeacherTableQueryServic
 builder.Services.AddTransient<ISchoolAdminServiceFullAccess, SchoolAdminTableQueryService>();
 builder.Services.AddTransient<ISchoolServiceFullAccess, SchoolTableQueryService>();
 builder.Services.AddTransient<ILessonServiceFullAccess, LessonTableQueryService>();
+builder.Services.AddTransient<ISubjectServiceFullAccess, SubjectTableQueryService>();
 builder.Services.AddTransient<IMarkServiceFullAccess, MarkTableQueryService>();
 
 // Register role based query service interface implementations

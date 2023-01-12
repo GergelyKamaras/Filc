@@ -1,4 +1,8 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.EntityViewModels.Student;
+using Filc.Models.EntityViewModels.Subject;
+using Filc.Models.EntityViewModels.Teacher;
 using Microsoft.AspNetCore.Mvc;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole;
@@ -6,8 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
-using Filc.Models.ViewModels.Student;
-using Filc.Models.ViewModels.Teacher;
 using Microsoft.AspNetCore.Cors;
 using Filc.Models.JWTAuthenticationModel;
 using Filc.Services.Interfaces;
@@ -33,12 +35,13 @@ namespace Filc.Controllers.Apis
         private readonly ISchoolServiceForSchoolAdminRole _schoolService;
         private readonly IStudentServiceFullAccess _studentService;
         private readonly ITeacherServiceFullAccess _teacherService;
+        private readonly ISubjectServiceFullAccess _subjectService;
         private readonly IRegistration _registration;
         private readonly IInputDTOConverter _inputDtoConverter;
 
         public SchoolAdminApiController(ILessonServiceFullAccess lessonService, IMarkServiceFullAccess markService, IParentServiceFullAccess parentService, 
             ISchoolAdminServiceForSchoolAdminRole schoolAdminService, ISchoolServiceForSchoolAdminRole schoolService, 
-            IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService,
+            IStudentServiceFullAccess studentService, ITeacherServiceFullAccess teacherService, ISubjectServiceFullAccess subjectService,
             IRegistration registration, IInputDTOConverter inputDtoConverter)
         {
             _lessonService = lessonService;
@@ -48,6 +51,7 @@ namespace Filc.Controllers.Apis
             _schoolService = schoolService;
             _studentService = studentService;
             _teacherService = teacherService;
+            _subjectService = subjectService;
             _registration = registration;
             _inputDtoConverter = inputDtoConverter;
         }
@@ -55,7 +59,7 @@ namespace Filc.Controllers.Apis
         // SchoolAdmins
         [HttpGet]
         [Route("schools/{schoolId}/admins")]
-        public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdminsBySchool(int schoolId)
+        public List<SchoolAdminDTO> GetAllSchoolAdminsBySchool(int schoolId)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             CustomLogger.LogRequest(token, $"Get schooladmins by school {schoolId}");
@@ -64,7 +68,7 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("{id}")]
-        public Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO GetSchoolAdminById(int id)
+        public SchoolAdminDTO GetSchoolAdminById(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             CustomLogger.LogRequest(token, $"Get school admin {id}");
@@ -224,6 +228,34 @@ namespace Filc.Controllers.Apis
             var lesson = _inputDtoConverter.ConvertDtoToLesson(lessonInputDto);
             CustomLogger.LogRequest(token, $"Add lesson");
             return Ok(_lessonService.AddLesson(lesson));
+        }
+
+        [HttpPost]
+        [Route("subjects")]
+        public ObjectResult AddSubject([FromBody] SubjectInputDTO subjectInputDto)
+        {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            Subject subject = _inputDtoConverter.ConvertDtoToSubject(subjectInputDto);
+
+            int subjectId = _subjectService.AddSubject(subject).Id;
+
+            School school = _schoolService.GetSchoolObject(subjectInputDto.SchoolId);
+            school.Subjects ??= new List<Subject>();
+
+            Subject registeredSubject = _subjectService.GetSubject(subjectId);
+            school.Subjects.Add(registeredSubject);
+
+            CustomLogger.LogRequest(token, $"Add subject");
+            return Ok(_schoolService.UpdateSchool(school));
+        }
+
+        [HttpGet]
+        [Route("subjects/{schoolId}")]
+        public List<Subject> GetSubjectsBySchool(int schoolId)
+        {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            CustomLogger.LogRequest(token, $"Get Subjects by school: {schoolId}");
+            return _subjectService.GetSubjectsBySchool(schoolId);
         }
 
         [HttpPut]
