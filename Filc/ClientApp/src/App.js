@@ -87,6 +87,10 @@ function App() {
                     <Route path="teacher" element={<RequireAuth allowedRoles={["Teacher"]} />}>
                       <Route path="teachers" element={<ListData URL={localStorage.length > 0 ? "teachers/" + jwt(localStorage.AccessToken)["schoolId"] : ""} />} />
                       <Route path="add-grade" element={<AddMark />} />
+                      <Route path="students" element={<ListData URL={localStorage.length > 0 ? "students/" + jwt(localStorage.AccessToken)["userId"] : ""}  />} />
+                      <Route path="teachers" element={<ListData URL="teachers" />} />
+                      <Route path="schools" element={<ListData URL="schools" />} />
+                      <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
                         {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
@@ -95,6 +99,10 @@ function App() {
           {/*ROUTE: Routes available to SchoolAdmins*/}
           <Route path="schooladmin" element={<RequireAuth allowedRoles={["SchoolAdmin", "Government"]} />}>
               <Route path="register" element={<RegisterUser />} />
+              <Route path="students" element={<ListData URL="students" />} />
+              <Route path="teachers" element={<ListData URL="teachers" />} />
+              <Route path="schools" element={<ListData URL="schools" />} />
+              <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
           </Route>

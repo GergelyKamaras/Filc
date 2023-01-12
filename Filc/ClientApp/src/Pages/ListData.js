@@ -4,12 +4,14 @@ import { GlobalFilter } from "./globalFilter";
 import '../Style/Shared/table.css';
 import { Link } from 'react-router-dom';
 import UniversalFetch from './Shared/FetchUniversal';
+import Loading from './Shared/Loader';
 
 export function ListData(props) {
     //const [err, setErr] = useState('');
     //const [isLoading, setIsLoading] = useState(false);
 
     const [products, setProducts] = useState([])
+    const [loading, updateLoading] = useState(true)
     //"https://fakestoreapi.com/products"
     //"https://jsonplaceholder.typicode.com/posts"
 
@@ -21,15 +23,15 @@ export function ListData(props) {
             .then((data) => {
                 if (!isCancelled) {
                     setProducts(data);
-                    console.log(data)
                 }
             });
-        return () => {
-            console.log("cancelled")
+            return () => {
+            updateLoading(false)
             isCancelled = true;
         };
-    }, [props]);
 
+    }, [props]);
+    
     const productsData = useMemo(
         () => [...products], [products]);  
 
@@ -104,7 +106,12 @@ export function ListData(props) {
 
     const isEven = (index) => index % 2 === 0;
     
-    return (   
+    return (  
+
+        loading ? (
+            <Loading/>
+        ) :
+        (
         <div className="wrapper">  
             <GlobalFilter
                 preGlobalFilteredRows={preGlobalFilteredRows}
@@ -151,6 +158,7 @@ export function ListData(props) {
                 </tbody>
             </table>
         </div>
+        )
     )
 }
 
