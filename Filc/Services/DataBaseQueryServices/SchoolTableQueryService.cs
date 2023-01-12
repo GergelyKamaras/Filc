@@ -51,16 +51,35 @@ namespace Filc.Services.DataBaseQueryServices
             return ModelConverter.ModelConverter.MapSchoolToSchoolViewModel(schools);
         }
 
+        public School GetSchoolObject(int id)
+        {
+            School school = _db.School.Include(school => school.Classes)
+                .Include(school => school.Lessons)
+                .Include(school => school.SchoolAdmin)
+                .Include(school => school.Students)
+                .Include(school => school.Subjects)
+                .Include(school => school.Teachers)
+                .First(x => x.Id == id);
+
+            return school;
+        }
+
         public void RemoveSchool(int id)
         {
             _db.School.Remove(_db.School.First(school => school.Id == id));
             _db.SaveChanges();
         }
 
-        public void UpdateSchool(School school)
+        public JWTAuthenticationResponse UpdateSchool(School school)
         {
             _db.School.Update(school);
             _db.SaveChanges();
+            return new JWTAuthenticationResponse()
+            {
+                Status = "Success",
+                Message = "Update successful!",
+                Id = school.Id
+            };
         }
     }
 }
