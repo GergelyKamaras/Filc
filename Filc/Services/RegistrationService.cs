@@ -1,9 +1,15 @@
-﻿using EFDataAccessLibrary.Models;
+﻿using System.Text;
+using EFDataAccessLibrary.Models;
 using Filc.Models.JWTAuthenticationModel;
 using Filc.Services.Interfaces;
 using Filc.ViewModel;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
+using MimeKit.Text;
+using MimeKit;
 
 namespace Filc.Services
 {
@@ -43,6 +49,7 @@ namespace Filc.Services
             if (await _roleManager.RoleExistsAsync(model.Role))
             {
                 await _userManager.AddToRoleAsync(user, model.Role);
+                SendEmail(model.Email, model.Password);
 
             }
             else
@@ -51,6 +58,24 @@ namespace Filc.Services
             }
 
             return true;
+        }
+
+        public void SendEmail(string userEmail, string starterPassword)
+        {
+            string text = "Hello,</br>You have just been registered to the Filc System. To login, please visit: www.filc.edu.</br></br>Your login credentials are:</br>" +
+                          $"Username: {userEmail}</br>Password: {starterPassword}</br></br>If you have any questions, please contact your School Admin.</br></br>Best regards,</br>The Filc Team";
+
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("filc-system@outlook.com"));
+            email.To.Add(MailboxAddress.Parse(userEmail));
+            email.Subject = "You've been registered to Filc";
+            email.Body = new TextPart(TextFormat.Html) { Text = text };
+
+            using var smtp = new SmtpClient();
+            smtp.Connect("smtp.office365.com", 587, SecureSocketOptions.StartTls);
+            smtp.Authenticate("filc-system@outlook.com", "FilcAdminCodeCool2023");
+            smtp.Send(email);
+            smtp.Disconnect(true);
         }
     }
 }
