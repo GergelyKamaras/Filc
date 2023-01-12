@@ -1,13 +1,9 @@
 import { NavItem } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
+import { useNavigate } from 'react-router-dom'
 import "../../Style/navbar.css"
-import { useParams, useNavigate } from 'react-router-dom';
-import jwt from 'jwt-decode';
 
 const SideBarNav = ({ role }) => {
-
-    let params = useParams();
-    const userId = jwt(localStorage?.AccessToken)["userId"];
 
     const navigate = useNavigate()
 
@@ -60,7 +56,7 @@ const SideBarNav = ({ role }) => {
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "teachers")}> Teachers </button>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schools")}> Schools </button>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "lessons")}> Lessons </button>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, `student/marks/${userId}`)}> Marks </button>
+                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "marks")}> Marks </button>
                     
                     <button  className='navbar-direction-button profile' typeof='button' onClick={(e) => navigateTo(e, "profile")}> Show profile </button>
                 </>
