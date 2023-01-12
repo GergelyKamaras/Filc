@@ -12,6 +12,8 @@ import { useState, useEffect } from 'react';
 import AddMark from "./Pages/Teacher/AddMark";
 import jwt from 'jwt-decode';
 import AddSchool from './Pages/Schools/AddSchool'
+import AddSubject from './Pages/Subjects/AddSubject';
+import AddLesson from './Pages/Lessons/AddLesson';
 
 import { useLocation } from 'react-router-dom';
         
@@ -94,6 +96,8 @@ function App() {
           {/*ROUTE: Routes available to SchoolAdmins*/}
           <Route path="schooladmin" element={<RequireAuth allowedRoles={["SchoolAdmin", "Government"]} />}>
               <Route path="register" element={<RegisterUser />} />
+              <Route path="addsubject" element={<AddSubject />} />
+              <Route path="addlesson" element={<AddLesson />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
           </Route>
