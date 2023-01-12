@@ -6,7 +6,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole
     public interface ISchoolServiceForSchoolAdminRole
     {
         public SchoolDTO GetSchool(int id);
-
+        public List<SchoolDTO> GetAllSchools();
         public void UpdateSchool(School school);
     }
 }

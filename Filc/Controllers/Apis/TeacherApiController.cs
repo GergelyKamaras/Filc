@@ -136,6 +136,12 @@ namespace Filc.Controllers.Apis
         }
 
         // Students
+        [HttpGet("allStudents/{id}")]
+        public List<StudentDTO> GetAllStudentByTeacher(int id)
+        {
+            return _studentService.GetStudentsbyTeacherId(id).ToList();
+        }
+
         [HttpGet]
         [Route("students/{id}")]
         public StudentDTO GetStudent(int id)

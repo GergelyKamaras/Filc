@@ -110,6 +110,15 @@ namespace Filc.Controllers.Apis
             CustomLogger.LogRequest(token, $"Get school {id}");
             return _schoolService.GetSchool(id);
         }
+        
+        [HttpGet]
+        [Route("schools")]
+        public List<Models.EntityViewModels.School.SchoolDTO> GetAllSchool()
+        {
+            string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
+            CustomLogger.LogRequest(token, $"Get all school");
+            return _schoolService.GetAllSchools();
+        }
 
         [HttpPut]
         [Route("schools")]
