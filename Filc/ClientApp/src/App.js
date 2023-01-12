@@ -14,6 +14,7 @@ import jwt from 'jwt-decode';
 import AddSchool from './Pages/Schools/AddSchool'
 import AddSubject from './Pages/Subjects/AddSubject';
 import AddLesson from './Pages/Lessons/AddLesson';
+import { LinkTeacher } from './Pages/Teacher/LinkTeacher';
 
 import { useLocation } from 'react-router-dom';
         
@@ -79,6 +80,7 @@ function App() {
           {/*ROUTE: Routes available to Students*/}
           <Route element={<RequireAuth allowedRoles={["Student"]} />}>
               <Route path="student/myschool" element={<MySchool />} />
+              <Route path="student/marks/:id" element={<ListData URL={localStorage.length > 0 ? "marks/" + jwt(localStorage.AccessToken)["userId"] : ""} />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Student Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
           </Route>
@@ -98,6 +100,8 @@ function App() {
               <Route path="register" element={<RegisterUser />} />
               <Route path="addsubject" element={<AddSubject />} />
               <Route path="addlesson" element={<AddLesson />} />
+              <Route path="subjects" element={<ListData URL={localStorage.length > 0 ? "subjects/" + jwt(localStorage.AccessToken)["schoolId"] : ""} />} />
+              <Route path="linkteacher" element={<LinkTeacher />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
           </Route>
