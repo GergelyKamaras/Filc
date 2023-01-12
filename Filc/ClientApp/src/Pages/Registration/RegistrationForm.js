@@ -23,7 +23,6 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
         else {
             updateForm({ ...form, [field]: newValue })
         }
-        console.log(form)
     }
 
     useEffect(() => {
