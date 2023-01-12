@@ -52,6 +52,9 @@ function App() {
       case "/govadmin/addschool":
           updatePageTitle("Institutional registration")
           break;
+      case "/teacher/add-grade":
+          updatePageTitle("Student grading")
+          break;
       default:
           // handle any unanticipated locations here
   }

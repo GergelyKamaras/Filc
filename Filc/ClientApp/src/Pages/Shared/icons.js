@@ -1,7 +1,8 @@
 
 import {IoIosHome, IoMdPerson, IoIosSchool } from 'react-icons/io';
-import { GiArchiveRegister } from "react-icons/gi";
+import { GiArchiveRegister, GiUpgrade } from "react-icons/gi";
 import { AiFillSnippets } from "react-icons/ai";
+
 const Icon = (props) =>{
     console.log(props.pageTitle)
     if(props.pageTitle === "Home page"){
@@ -31,6 +32,11 @@ const Icon = (props) =>{
             props.pageTitle === "Teacher directory"){
         return(
             <AiFillSnippets className='icon'/>
+        )
+    }
+    else if(props.pageTitle === "Student grading"){
+        return(
+            <GiUpgrade className='icon'/>
         )
     }
 }
