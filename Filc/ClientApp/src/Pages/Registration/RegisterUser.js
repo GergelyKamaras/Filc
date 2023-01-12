@@ -16,9 +16,6 @@ const RegisterUser = () => {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const salt = GenerateSalt();
-        form["user"]["salt"] = salt;
-
         const hashes = HashPassword(form["user"]["password"]);
         form["user"]["PasswordHash"] = hashes["hashedPassword"];
         form["user"]["salt"] = hashes["hashSalt"];
