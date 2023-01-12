@@ -3,6 +3,7 @@ using EFDataAccessLibrary.Models;
 using Filc.Models.InputDTOs;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Shared;
+using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using NuGet.DependencyResolver;
 
 namespace Filc.Services.ModelConverter
@@ -10,10 +11,12 @@ namespace Filc.Services.ModelConverter
     public class InputDtoConverter : IInputDTOConverter
     {
         private ESContext _db;
+        private ISchoolServiceFullAccess _schoolService;
 
-        public InputDtoConverter(ESContext esContext)
+        public InputDtoConverter(ESContext esContext, ISchoolServiceFullAccess schoolService)
         {
             _db = esContext;
+            _schoolService = schoolService;
         }
 
         public Mark ConvertDtoToMark(MarkInputDTO markInputDto)
@@ -157,6 +160,20 @@ namespace Filc.Services.ModelConverter
                 schoolAdmin.Id = (int)schoolAdminInputDto.Id;
             }
             return schoolAdmin;
+        }
+
+        public Subject ConvertDtoToSubject(SubjectInputDTO subjectInputDto)
+        {
+            Subject subject = new()
+            {
+                Title = subjectInputDto.Title
+            };
+
+            if (subjectInputDto.Id != null)
+            {
+                subject.Id = (int) subjectInputDto.Id;
+            }
+            return subject;
         }
     }
 }

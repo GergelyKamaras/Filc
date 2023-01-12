@@ -1,6 +1,6 @@
-﻿using EFDataAccessLibrary.Models;
-using System.ComponentModel.DataAnnotations;
-using Filc.Models.ViewModels.Shared;
+﻿using System.ComponentModel.DataAnnotations;
+using Filc.Models.DTOs.Shared;
+using Filc.Models.EntityViewModels.Subject;
 
 namespace Filc.Models.ViewModels.Mark
 {
@@ -12,7 +12,7 @@ namespace Filc.Models.ViewModels.Mark
         public float Grade { get; set; }
         public string Description { get; set; }
         public LessonSharedDTO Lesson { get; set; }
-        public SubjectSharedDTO Subject { get; set; }
+        public SubjectDTO Subject { get; set; }
         public DateTime Date { get; set; }
 
         public MarkDTO(EFDataAccessLibrary.Models.Mark mark)
@@ -20,7 +20,7 @@ namespace Filc.Models.ViewModels.Mark
             Grade = mark.Grade;
             Description = mark.Description;
             Date = mark.Date;
-            Subject = new SubjectSharedDTO(mark.Subject);
+            Subject = new SubjectDTO(mark.Subject);
             Teacher = new TeacherSharedDTO(mark.Teacher);
             Student = new StudentSharedDTO(mark.Student);
             Lesson = new LessonSharedDTO(mark.Lesson);

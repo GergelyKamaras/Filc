@@ -1,5 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
 using System.ComponentModel.DataAnnotations;
+using Filc.Models.DTOs.Shared;
 using Filc.Models.ViewModels.Shared;
 
 namespace Filc.Models.ViewModels.Lesson
@@ -8,7 +9,7 @@ namespace Filc.Models.ViewModels.Lesson
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Subject Subject { get; set; }
+        public EFDataAccessLibrary.Models.Subject Subject { get; set; }
         public List<StudentSharedDTO> Students { get; set; }
         public List<TeacherSharedDTO> Teachers { get; set; }
         public SchoolSharedDTO School { get; set; }

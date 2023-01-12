@@ -1,7 +1,4 @@
-﻿using EFDataAccessLibrary.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace Filc.Models.ViewModels.Shared
+﻿namespace Filc.Models.DTOs.Shared
 {
     public class MarkSharedDTO
     {

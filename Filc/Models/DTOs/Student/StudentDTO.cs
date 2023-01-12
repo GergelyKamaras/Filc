@@ -1,9 +1,8 @@
 ﻿using EFDataAccessLibrary.Models;
-using System.ComponentModel.DataAnnotations;
-using Filc.Models.ViewModels.Mark;
+using Filc.Models.DTOs.Shared;
 using Filc.Models.ViewModels.Shared;
 
-namespace Filc.Models.ViewModels.Student
+namespace Filc.Models.EntityViewModels.Student
 {
     public class StudentDTO
     {

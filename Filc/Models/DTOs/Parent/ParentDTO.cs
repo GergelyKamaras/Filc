@@ -1,4 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.DTOs.Shared;
 using Filc.Models.ViewModels.Shared;
 
 namespace Filc.Models.ViewModels.Parent
