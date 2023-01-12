@@ -1,7 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Models.ViewModels.Shared;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+using Filc.Models.DTOs.Shared;
 
 namespace Filc.Models.EntityViewModels.SchoolAdmin
 {

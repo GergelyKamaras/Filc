@@ -6,7 +6,7 @@ import "../../Style/UserReg/RegisterUser.css"
 import {FaUserLock} from "react-icons/fa"
 
 const RegisterUser = () => {
-    
+    const [password, updatePassword] = useState("");
     const [role, updateRole] = useState("");
     const [form, updateForm] = useState({});
 
@@ -16,9 +16,8 @@ const RegisterUser = () => {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const hashes = HashPassword(form["user"]["password"]);
-        form["user"]["PasswordHash"] = hashes["hashedPassword"];
-        form["user"]["salt"] = hashes["hashSalt"];
+        const salt = GenerateSalt();
+        form["user"]["salt"] = salt;
         form["user"]["role"] = role;
         alert("Launching fetch for: " + role);
         console.log(form)
@@ -30,14 +29,8 @@ const RegisterUser = () => {
         //Id can be taken from that to navigate to user view page
     }
 
-    function HashPassword (password) {
-        let salt = bcrypt.genSaltSync(10);
-
-        const hashedPassword = bcrypt.hashSync(password, salt);
-        return {
-            "hashedPassword": hashedPassword,
-            "hashSalt": salt
-            }
+    function GenerateSalt () {
+        return bcrypt.genSaltSync(10);
     }
 
     return (

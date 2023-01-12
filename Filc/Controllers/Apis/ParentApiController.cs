@@ -1,9 +1,9 @@
 ﻿using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
+using Filc.Models.EntityViewModels.Student;
 using Filc.Models.InputDTOs;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
-using Filc.Models.ViewModels.Student;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.ParentRole;
 using Filc.Services.ModelConverter;
 using Microsoft.AspNetCore.Authorization;

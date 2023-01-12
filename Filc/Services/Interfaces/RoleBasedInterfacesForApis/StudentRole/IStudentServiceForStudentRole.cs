@@ -1,5 +1,5 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Models.ViewModels.Student;
+using Filc.Models.EntityViewModels.Student;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.StudentRole
 {

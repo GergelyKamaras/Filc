@@ -4,14 +4,14 @@ using System.Security.Claims;
 using EFDataAccessLibrary.Models;
 using Filc.Models.EntityViewModels.School;
 using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.EntityViewModels.Student;
+using Filc.Models.EntityViewModels.Teacher;
 using Filc.Models.InputDTOs;
 using Filc.Models.JWTAuthenticationModel;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
 using Filc.Models.ViewModels.Shared;
-using Filc.Models.ViewModels.Student;
-using Filc.Models.ViewModels.Teacher;
 using Filc.Services;
 using Filc.Services.Interfaces;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
@@ -458,7 +458,7 @@ namespace Filc.Controllers.Apis
         // SchoolAdmins
         [HttpGet]
         [Route("schooladmins")]
-        public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdmins()
+        public List<SchoolAdminDTO> GetAllSchoolAdmins()
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             CustomLogger.LogRequest(token, $"Get schooladmins");
@@ -467,7 +467,7 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("schooladmins/school/{id}")]
-        public List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> GetAllSchoolAdminsBySchool(int id)
+        public List<SchoolAdminDTO> GetAllSchoolAdminsBySchool(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             CustomLogger.LogRequest(token, $"Get schooladmins by school {id}");
@@ -476,7 +476,7 @@ namespace Filc.Controllers.Apis
 
         [HttpGet]
         [Route("schooladmins/{id}")]
-        public Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO GetAdmin(int id)
+        public SchoolAdminDTO GetAdmin(int id)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             CustomLogger.LogRequest(token, $"Get school admin {id}");
