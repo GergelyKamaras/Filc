@@ -5,16 +5,13 @@ import Layout from './Pages/Shared/Layout'
 import RequireAuth from './Pages/Other/RequireAuth';
 import Unauthorized from './Pages/Other/Unauthorized';
 import NotFound from './Pages/Other/NotFound';
-import SchoolAdmins from './Pages/SchoolAdmin/SchoolAdmins';
-import SchoolAdmin from './Pages/SchoolAdmin/SchoolAdmin';
-import Schools from './Pages/Schools/Schools';
-import School from './Pages/Schools/School';
 import RegisterUser from './Pages/Registration/RegisterUser';
 import MySchool from './Pages/Students/MySchool';
 import { ListData } from './Pages/ListData';
 import { useState, useEffect } from 'react';
 import AddMark from "./Pages/Teacher/AddMark";
 import jwt from 'jwt-decode';
+import AddSchool from './Pages/Schools/AddSchool'
 
 import { useLocation } from 'react-router-dom';
         
@@ -105,7 +102,7 @@ function App() {
           {/*ROUTE: Routes available to GovAdmins*/}
           <Route path="govadmin" element={<RequireAuth allowedRoles={["Government"]} />}>
               <Route path="all" element={<ListData URL="" />} />/
-              <Route path="addschool" element={<Schools />} />
+              <Route path="addschool" element={<AddSchool />} />
               <Route path="students" element={<ListData URL="students" />} />
               <Route path="teachers" element={<ListData URL="teachers" />} />
               <Route path="schools" element={<ListData URL="schools" />} />

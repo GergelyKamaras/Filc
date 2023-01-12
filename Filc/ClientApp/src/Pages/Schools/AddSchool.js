@@ -1,47 +1,67 @@
 ﻿import FetchAddSchool from './FetchAddSchool'
-import { useRef } from 'react'
-import '../../Style/AddSchool.css';
+import { useState } from 'react'
+import "../../Style/UserReg/RegisterUser.css"
+import {FaSchool} from "react-icons/fa"
+import { ImLocation2 } from "react-icons/im"
+import {TbListDetails} from "react-icons/tb"
 
 function AddSchool() {
-    const nameInputRef = useRef();
-    const addressInputRef = useRef();
-    const schoolTypeInputRef = useRef();
+    
+    const [form, updateForm] = useState({});
+
+    const updateField = (newValue, field) => {
+    
+        updateForm({ ...form, [field]: newValue })
+    
+    }   
 
     const addSchoolToDb = (e) => {
         e.preventDefault();
-
-        const name = nameInputRef.current.value;
-        const address = addressInputRef.current.value;
-        const schoolType = schoolTypeInputRef.current.value;
-
         var schoolData = {
-            Name: name,
-            address: address,
-            schoolType: schoolType
+            name: form["name"],
+            address: form["address"],
+            schoolType: form["schoolType"]
         };
 
         FetchAddSchool(schoolData);
     }
 
     return (
-        <div className="add-new-school" style={{ display: 'grid', float: 'right' }}>
-            <h3>Register a new school</h3>
-            <div className="col-md-12">
+        <div className="register-form">
+            <div className='register-form-header'>
+                <p>Register a new school</p>
+            </div>
+            <div className='register-form-body'>
                 <form>
-                    <div className="form-group">
-                        <label htmlFor="name">School Name</label>
-                        <input ref={nameInputRef} id="name" type="text" className="form-control" />
+                    <div className="register-body">
+                        <div className="icon-div">
+                            <FaSchool className='form-icon'/>
+                        </div>
+                        <div className="title-box">
+                            <p> Name: </p>
+                        </div>
+                        <input  onChange={(e) => updateField(e.target.value, "name")} id="name" type="text" className="input" />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="address">Address</label>
-                        <input ref={addressInputRef} id="address" type="text" className="form-control" />
+                    <div className="register-body">
+                        <div className="icon-div">
+                            <ImLocation2 className='form-icon'/>
+                        </div>
+                        <div className="title-box">
+                            <p> Address: </p>
+                        </div>
+                        <input onChange={(e) => updateField(e.target.value, "address")} id="address" type="text" className="input" />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="schoolType">School type:</label>
-                        <input ref={schoolTypeInputRef} id="schoolType" type="text" className="form-control" />
+                    <div className="register-body">
+                        <div className="icon-div">
+                            <TbListDetails className="form-icon"/>
+                        </div>
+                        <div className="title-box">
+                            <p> SchoolType: </p>
+                        </div>
+                        <input onChange={(e) => updateField(e.target.value, "schoolType")} id="schoolType" type="text" className="input" />
                     </div>
 
-                    <button type="submit" className="btn btn-primary"
+                    <button type="submit" className="submit-button"
                         onClick={addSchoolToDb}>Register School</button>
 
                 </form>
