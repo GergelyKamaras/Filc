@@ -6,7 +6,7 @@ import "../../Style/UserReg/RegisterUser.css"
 import {FaUserLock} from "react-icons/fa"
 
 const RegisterUser = () => {
-    
+    const [password, updatePassword] = useState("");
     const [role, updateRole] = useState("");
     const [form, updateForm] = useState({});
 
@@ -17,7 +17,6 @@ const RegisterUser = () => {
         e.preventDefault();
 
         const salt = GenerateSalt();
-        form["user"]["password"] = form["user"]["password"];
         form["user"]["salt"] = salt;
         form["user"]["role"] = role;
         alert("Launching fetch for: " + role);
