@@ -17,7 +17,7 @@ namespace EFDataAccessLibrary.Models
         [MaxLength(100)]
         public string? Address { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(100)]
         public string? SchoolType { get; set; }
         public List<SchoolAdmin>? SchoolAdmin { get; set; }
         public List<Student>? Students { get; set; }
