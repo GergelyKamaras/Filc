@@ -1,6 +1,10 @@
 ﻿import UniversalFetch from "../Shared/FetchUniversal";
 import { useEffect, useState } from "react";
 import jwt from 'jwt-decode';
+import "../../Style/Teacher/AddMark.css"
+import {MdSubject, MdDescription} from "react-icons/md";
+import {BsFillFilePersonFill, BsFillCalendarDateFill} from "react-icons/bs";
+import {GiUpgrade} from "react-icons/gi";
 
 const AddMark = () => {
     //TODO: Class Selector (School classes) [LATER]
@@ -45,50 +49,83 @@ const AddMark = () => {
     }
 
     return (
-        <>
-            <h2>Give a grade</h2>
-            <form>
+        <div className="add-mark-container">
+            <div className="add-mark-header">
+                <p>Give a grade</p>
+            </div>
+            <div className="add-mark-form-body">
+                <form>
+                <div className="add-mark-body">
+                    <div className="icon-div">
+                        <MdSubject className="form-icon"/>
+                    </div>
+                    <div className="title-box">
+                        <p> Subject: </p>
+                    </div>
+                    <select className="select" value={subject} onChange={(e) => setSubject(e.target.value)}>
+                        <option value={0}>Please choose one from the list.</option>
+                        {teacher ?
+                            teacher.subjects.length > 0 ?
+                                teacher.subjects.map((subject) =>
+                            <option key={subject.id} value={subject.id}>{subject.name}</option>
+                                ) : <option value="">There is no subject related to you.</option>
+                            : <option>Loading...</option>}
+                    </select>
+                </div>
+                <div className="add-mark-body">
+                    <div className="icon-div">
+                        <BsFillFilePersonFill className="form-icon"/>
+                    </div>
+                    <div className="title-box">
+                        <p> Student: </p>
+                    </div>
+                    <select className="select" value={student} onChange={(e) => setStudent(e.target.value)}>
+                        <option value={0}>Please choose one from the list.</option>
+                        {school ?
+                            school.students.map((student) =>
+                                <option key={student.id} value={student.id}>{student.firstName} {student.lastName}</option>
+                            ) : <option>Loading...</option>}
+                    </select>
+                </div>
+                <div className="add-mark-body">
+                    <div className="icon-div">
+                        <GiUpgrade className="form-icon"/>
+                    </div>
+                    <div className="title-box">
+                        <p> Grade: </p>
+                    </div>
+                    <select className="select" value={grade} onChange={(e) => setGrade(e.target.value)}>
+                        <option value={5}>5</option>
+                        <option value={4}>4</option>
+                        <option value={3}>3</option>
+                        <option value={2}>2</option>
+                        <option value={1}>1</option>
+                    </select>
+                </div>
+                <div className="add-mark-body">
+                    <div className="icon-div">
+                        <MdDescription className="form-icon"/>
+                    </div>
+                    <div className="title-box">
+                        <p> Description: </p>
+                    </div>
+                    <input className="input" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="E.g.: Today's test result">
+                    </input>
 
-                <label>Subject:</label>
-                <select value={subject} onChange={(e) => setSubject(e.target.value)}>
-                    <option value={0}>Please choose one from the list.</option>
-                    {teacher ?
-                        teacher.subjects.length > 0 ?
-                            teacher.subjects.map((subject) =>
-                        <option key={subject.id} value={subject.id}>{subject.name}</option>
-                            ) : <option value="">There is no subject related to you.</option>
-                        : <option>Loading...</option>}
-                </select>
-
-                <label>Student:</label>
-                <select value={student} onChange={(e) => setStudent(e.target.value)}>
-                    <option value={0}>Please choose one from the list.</option>
-                    {school ?
-                        school.students.map((student) =>
-                            <option key={student.id} value={student.id}>{student.firstName} {student.lastName}</option>
-                        ) : <option>Loading...</option>}
-                </select>
-
-                <label>Grade:</label>
-                <select value={grade} onChange={(e) => setGrade(e.target.value)}>
-                    <option value={5}>5</option>
-                    <option value={4}>4</option>
-                    <option value={3}>3</option>
-                    <option value={2}>2</option>
-                    <option value={1}>1</option>
-                </select>
-
-                <label>Description:</label>
-                <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="E.g.: Today's test result">
-                </textarea>
-
-                <label>Date:</label>
-                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="éééé-hh-nn" />
-
-                <button type="submit" onClick={(e) => handleSubmit(e)}>Add Grade</button>
-
-            </form>
-        </>
+                </div>
+                <div className="add-mark-body">
+                    <div className="icon-div">
+                        <BsFillCalendarDateFill className="form-icon"/>
+                    </div>
+                    <div className="title-box">
+                        <p> Date: </p>
+                    </div>
+                        <input className="input" type="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="éééé-hh-nn" />
+                </div>
+                    <button className="submit-button" type="submit" onClick={(e) => handleSubmit(e)}>Add Grade</button>
+                </form>
+            </div>
+        </div>
     );
 }
 

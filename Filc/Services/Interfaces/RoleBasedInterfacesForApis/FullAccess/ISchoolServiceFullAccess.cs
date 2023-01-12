@@ -11,7 +11,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
     public interface ISchoolServiceFullAccess : ISchoolServiceForParentRole, ISchoolServiceForStudentRole, ISchoolServiceForTeacherRole, ISchoolServiceForSchoolAdminRole
     {
         public new SchoolDTO GetSchool(int id);
-        public List<SchoolDTO> GetAllSchools();
+        
         public JWTAuthenticationResponse AddSchool(School school);
         public void RemoveSchool(int id);
         public new void UpdateSchool(School school);

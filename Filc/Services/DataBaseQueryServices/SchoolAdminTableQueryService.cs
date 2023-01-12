@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Filc.Services.ModelConverter;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Filc.ViewModel;
+using Filc.Models.EntityViewModels.School;
 
 namespace Filc.Services.DataBaseQueryServices
 {
@@ -21,7 +22,7 @@ namespace Filc.Services.DataBaseQueryServices
             _userService = userService;
             _db = esContext;
         }
-
+        
         public List<SchoolAdminDTO> GetAllSchoolAdmins()
         {
             List<SchoolAdmin> schoolAdmins = _db.SchoolAdmin
@@ -84,5 +85,6 @@ namespace Filc.Services.DataBaseQueryServices
             _userService.DeleteUser(admin.user.Id);
             _db.SaveChanges();
         }
+
     }
 }
