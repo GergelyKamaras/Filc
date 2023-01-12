@@ -29,12 +29,20 @@ const SideBarNav = ({ role }) => {
         case "SchoolAdmin":
             return(
                 <>
-                    <Nav.Link href="schooladmin/register">Add new user</Nav.Link>
+                    <div className='registration'> 
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/register")}> User Registration </button>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "govadmin/addschool")}> Institutional registration </button>
+                    </div>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schools")}> Educational institutions  </button>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/schooladmins")}> Institutional administrators </button>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/students")}> Student directory </button>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "/govadmin/teachers")}> Teacher directory </button>
+                    {/* <Nav.Link href="schooladmin/register">Add new user</Nav.Link>
                     <NavItem> not available yet...</NavItem>
                     <Nav.Link href="allschooladmins">School related page</Nav.Link>
                     <Nav.Link href="allteachers">Teacher related page</Nav.Link>
                     <Nav.Link href="">Lessons/Timetable</Nav.Link>
-                    <Nav.Link href="allstudents">Students/Marks</Nav.Link>
+                    <Nav.Link href="allstudents">Students/Marks</Nav.Link> */}
                 </>
             )
 
