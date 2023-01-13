@@ -14,6 +14,8 @@ import jwt from 'jwt-decode';
 import AddSchool from './Pages/Schools/AddSchool'
 import AddSubject from './Pages/Subjects/AddSubject';
 import AddLesson from './Pages/Lessons/AddLesson';
+import School from './Pages/Schools/School'
+
 
 import { useLocation } from 'react-router-dom';
         
@@ -53,6 +55,9 @@ function App() {
       case "/govadmin/addschool":
           updatePageTitle("Institutional registration")
           break;
+      case "/teacher/add-grade":
+          updatePageTitle("Student grading")
+          break;
       default:
           // handle any unanticipated locations here
   }
@@ -88,6 +93,10 @@ function App() {
                     <Route path="teacher" element={<RequireAuth allowedRoles={["Teacher"]} />}>
                       <Route path="teachers" element={<ListData URL={localStorage.length > 0 ? "teachers/" + jwt(localStorage.AccessToken)["schoolId"] : ""} />} />
                       <Route path="add-grade" element={<AddMark />} />
+                      <Route path="students" element={<ListData URL={localStorage.length > 0 ? "students/" + jwt(localStorage.AccessToken)["userId"] : ""}  />} />
+                      <Route path="teachers" element={<ListData URL="teachers" />} />
+                      <Route path="schools" element={<ListData URL="schools" />} />
+                      <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
                         {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the Teacher Route tags!*/}
                         {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
                     </Route>
@@ -98,6 +107,10 @@ function App() {
               <Route path="register" element={<RegisterUser />} />
               <Route path="addsubject" element={<AddSubject />} />
               <Route path="addlesson" element={<AddLesson />} />
+              <Route path="students" element={<ListData URL="students" />} />
+              <Route path="teachers" element={<ListData URL="teachers" />} />
+              <Route path="schools" element={<ListData URL="schools" />} />
+              <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
           </Route>
@@ -111,13 +124,13 @@ function App() {
               <Route path="teachers" element={<ListData URL="teachers" />} />
               <Route path="schools" element={<ListData URL="schools" />} />
               <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
+              <Route path="schools/:id" element={<School/>} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
               {/*COMMENT: Previously used routes, awaiting REMOVAL for finished project, currently kept if we need them*/}
                   {/*<Route path="schools/:schoolid/admins" element={<SchoolAdmins />} />*/}
                   {/*<Route path="schooladmins/:id" element={<SchoolAdmin />} />*/}
                   {/*<Route path="schools/" element={<Schools />} />*/}
-                  {/*<Route path="schools/:id" element={<School />} />*/}
           </Route>
 
 

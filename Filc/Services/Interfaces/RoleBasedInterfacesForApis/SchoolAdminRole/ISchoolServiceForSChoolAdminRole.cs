@@ -9,5 +9,7 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.SchoolAdminRole
         public SchoolDTO GetSchool(int id);
         public School GetSchoolObject(int id);
         public JWTAuthenticationResponse UpdateSchool(School school);
+        public List<SchoolDTO> GetAllSchools();
+
     }
 }

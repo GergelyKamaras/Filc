@@ -29,6 +29,26 @@ namespace Filc.Services.DataBaseQueryServices
             return new StudentDTO(student);
         }
 
+        public List<StudentDTO> GetStudentsbyTeacherId(int teacherId)
+        {
+
+            var teacherLessons = _db.Teacher
+                                .Include(t => t.user)
+                                .Include(t => t.Lessons)
+                                .Include(t => t.Subjects)
+                                .Where(t => t.Id == teacherId)
+                                .SelectMany(t => t.Lessons ?? Enumerable.Empty<Lesson>());
+
+            var studentList = _db.Student
+                                .Include(s => s.user)
+                                .Include(s => s.Marks)
+                                .Include(s => s.Lessons)
+                                .Where(s => (s.Lessons ?? Enumerable.Empty<Lesson>()).Intersect(teacherLessons).Any())
+                                .ToList();
+
+            return ModelConverter.ModelConverter.MapStudentsToStudentViewModels(studentList);
+        }
+
         public List<StudentDTO> GetAllStudents()
         {
             List<Student> students = _db.Student.Include(student => student.user)
