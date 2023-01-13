@@ -36,6 +36,7 @@ const SideBarNav = ({ role }) => {
                     </div>
                         <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/schools")}> Educational institutions  </button>
                         <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/students")}> Student directory </button>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/subjects")}> Subject directory </button>
                         <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/teachers")}> Teacher directory </button>
                     
                 </>
