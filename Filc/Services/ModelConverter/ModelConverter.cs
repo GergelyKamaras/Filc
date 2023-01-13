@@ -1,20 +1,20 @@
 ﻿using EFDataAccessLibrary.Models;
-using Filc.Models.EntityViewModels.School;
 using Filc.Models.EntityViewModels.SchoolAdmin;
+using Filc.Models.EntityViewModels.Student;
+using Filc.Models.EntityViewModels.Subject;
+using Filc.Models.EntityViewModels.Teacher;
 using Filc.Models.ViewModels.Lesson;
 using Filc.Models.ViewModels.Mark;
 using Filc.Models.ViewModels.Parent;
-using Filc.Models.ViewModels.Student;
-using Filc.Models.ViewModels.Teacher;
 
 namespace Filc.Services.ModelConverter
 {
     public static class ModelConverter
     {
-        public static List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> MapSchoolAdminToSchoolAdminViewModel(List<SchoolAdmin> schoolAdmins)
+        public static List<SchoolAdminDTO> MapSchoolAdminToSchoolAdminViewModel(List<SchoolAdmin> schoolAdmins)
         {
-            List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO> schoolAdminList = new List<Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO>();
-            schoolAdmins.ForEach(admin => schoolAdminList.Add(new Models.EntityViewModels.SchoolAdmin.SchoolAdminDTO(admin)));
+            List<SchoolAdminDTO> schoolAdminList = new List<SchoolAdminDTO>();
+            schoolAdmins.ForEach(admin => schoolAdminList.Add(new SchoolAdminDTO(admin)));
 
             return schoolAdminList;
         }
@@ -62,6 +62,13 @@ namespace Filc.Services.ModelConverter
             return teacherModels;
         }
 
+        public static List<SubjectDTO> MapSubjectsToSubjectViewModels(List<Subject> subjects)
+        {
+            List<SubjectDTO> subjectModels = new List<SubjectDTO>();
+            subjects.ForEach(s => subjectModels.Add(new SubjectDTO(s)));
+            return subjectModels;
+;
+        }
 
 
     }

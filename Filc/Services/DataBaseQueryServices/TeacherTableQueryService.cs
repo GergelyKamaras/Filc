@@ -1,7 +1,7 @@
 ﻿using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.Teacher;
 using Filc.Models.JWTAuthenticationModel;
-using Filc.Models.ViewModels.Teacher;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 using Microsoft.AspNetCore.Identity;

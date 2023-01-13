@@ -1,5 +1,4 @@
-﻿using EFDataAccessLibrary.Models;
-using Filc.Models.EntityViewModels.School;
+﻿using Filc.Models.EntityViewModels.School;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole
 {

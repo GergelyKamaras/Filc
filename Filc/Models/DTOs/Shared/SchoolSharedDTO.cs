@@ -1,8 +1,6 @@
-﻿using EFDataAccessLibrary.Models.ModelInterfaces;
-using System.ComponentModel.DataAnnotations;
-using EFDataAccessLibrary.Models;
+﻿using EFDataAccessLibrary.Models;
 
-namespace Filc.Models.ViewModels.Shared
+namespace Filc.Models.DTOs.Shared
 {
     public class SchoolSharedDTO
     {

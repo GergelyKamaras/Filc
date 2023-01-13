@@ -1,6 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
+using Filc.Models.EntityViewModels.Teacher;
 using Filc.Models.JWTAuthenticationModel;
-using Filc.Models.ViewModels.Teacher;
 using Filc.Services.Interfaces.RoleBasedInterfacesForApis.TeacherRole;
 
 namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess

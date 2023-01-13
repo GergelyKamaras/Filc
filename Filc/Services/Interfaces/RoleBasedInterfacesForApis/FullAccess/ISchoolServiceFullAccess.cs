@@ -14,6 +14,6 @@ namespace Filc.Services.Interfaces.RoleBasedInterfacesForApis.FullAccess
         
         public JWTAuthenticationResponse AddSchool(School school);
         public void RemoveSchool(int id);
-        public new void UpdateSchool(School school);
+        public new JWTAuthenticationResponse UpdateSchool(School school);
     }
 }

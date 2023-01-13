@@ -1,8 +1,6 @@
 ﻿using EFDataAccessLibrary.Models;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
-namespace Filc.Models.ViewModels.Shared
+namespace Filc.Models.DTOs.Shared
 {
     public class StudentSharedDTO
     {

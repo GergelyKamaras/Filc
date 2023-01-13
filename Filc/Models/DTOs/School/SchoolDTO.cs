@@ -1,7 +1,5 @@
-﻿using EFDataAccessLibrary.Models;
-using Filc.Models.ViewModels.Shared;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using Filc.Models.DTOs.Shared;
+using Filc.Models.EntityViewModels.Subject;
 
 namespace Filc.Models.EntityViewModels.School
 {
@@ -13,7 +11,7 @@ namespace Filc.Models.EntityViewModels.School
         public string SchoolType { get; set; }
         public List<SchoolAdminSharedDTO> SchoolAdmin { get; set; }
         public List<StudentSharedDTO> Students { get; set; }
-        public List<SubjectSharedDTO> Subjects { get; set; }
+        public List<SubjectDTO> Subjects { get; set; }
         public List<LessonSharedDTO> Lessons { get; set; }
         public List<TeacherSharedDTO> Teachers { get; set; }
         public List<SchoolClassSharedDTO> Classes { get; set; }
@@ -31,8 +29,8 @@ namespace Filc.Models.EntityViewModels.School
             Students = new List<StudentSharedDTO>();
             school.Students.ForEach(student => Students.Add(new StudentSharedDTO(student)));
 
-            Subjects = new List<SubjectSharedDTO>();
-            school.Subjects.ForEach(subject => Subjects.Add(new SubjectSharedDTO(subject)));
+            Subjects = new List<SubjectDTO>();
+            school.Subjects.ForEach(subject => Subjects.Add(new SubjectDTO(subject)));
 
             Lessons = new List<LessonSharedDTO>();
             school.Lessons.ForEach(lesson => Lessons.Add(new LessonSharedDTO(lesson)));

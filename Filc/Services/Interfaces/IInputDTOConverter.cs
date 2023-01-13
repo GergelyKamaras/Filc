@@ -16,4 +16,5 @@ public interface IInputDTOConverter
     public Student ConvertDtoToStudent(StudentInputDTO studentInputDto);
     public Parent ConvertDtoToParent(ParentInputDTO parentInputDto);
     public SchoolAdmin ConvertDtoToSchoolAdmin(SchoolAdminInputDTO schoolAdminInputDto);
+    public Subject ConvertDtoToSubject(SubjectInputDTO subjectInputDto);
 }

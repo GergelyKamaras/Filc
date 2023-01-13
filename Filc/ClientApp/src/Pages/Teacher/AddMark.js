@@ -64,7 +64,7 @@ const AddMark = () => {
                     </div>
                     <select className="select" value={subject} onChange={(e) => setSubject(e.target.value)}>
                         <option value={0}>Please choose one from the list.</option>
-                        {teacher ?
+                        {teacher.subjects ?
                             teacher.subjects.length > 0 ?
                                 teacher.subjects.map((subject) =>
                             <option key={subject.id} value={subject.id}>{subject.name}</option>

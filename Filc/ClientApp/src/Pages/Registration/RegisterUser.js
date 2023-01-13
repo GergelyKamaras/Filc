@@ -6,7 +6,7 @@ import "../../Style/UserReg/RegisterUser.css"
 import {FaUserLock} from "react-icons/fa"
 
 const RegisterUser = () => {
-    
+    const [password, updatePassword] = useState("");
     const [role, updateRole] = useState("");
     const [form, updateForm] = useState({});
 

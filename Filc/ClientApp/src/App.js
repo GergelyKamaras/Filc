@@ -11,8 +11,11 @@ import { ListData } from './Pages/ListData';
 import { useState, useEffect } from 'react';
 import AddMark from "./Pages/Teacher/AddMark";
 import jwt from 'jwt-decode';
-import AddSchool from './Pages/Schools/AddSchool';
+import AddSchool from './Pages/Schools/AddSchool'
+import AddSubject from './Pages/Subjects/AddSubject';
+import AddLesson from './Pages/Lessons/AddLesson';
 import School from './Pages/Schools/School'
+
 
 import { useLocation } from 'react-router-dom';
         
@@ -102,6 +105,8 @@ function App() {
           {/*ROUTE: Routes available to SchoolAdmins*/}
           <Route path="schooladmin" element={<RequireAuth allowedRoles={["SchoolAdmin", "Government"]} />}>
               <Route path="register" element={<RegisterUser />} />
+              <Route path="addsubject" element={<AddSubject />} />
+              <Route path="addlesson" element={<AddLesson />} />
               <Route path="students" element={<ListData URL="students" />} />
               <Route path="teachers" element={<ListData URL="teachers" />} />
               <Route path="schools" element={<ListData URL="schools" />} />
