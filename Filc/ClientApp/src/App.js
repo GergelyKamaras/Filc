@@ -119,6 +119,7 @@ function App() {
               <Route path="students" element={<ListData URL="students" />} />
               <Route path="teachers" element={<ListData URL="teachers" />} />
               <Route path="schools" element={<ListData URL="schools" />} />
+              <Route path="subjects" element={<ListData URL={localStorage.length > 0 ? "subjects/" + jwt(localStorage.AccessToken)["schoolId"] : ""} />} />
               <Route path="schooladmins" element={<ListData URL="schooladmins" />} />
               {/*COMMENT: If you want to add a new Route, follow the example below and add it BETWEEN the SchoolAdmin Route tags!*/}
               {/*<Route path="pathname" element={/* <Component propname={propname} />} />*/}
