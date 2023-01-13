@@ -1,4 +1,5 @@
 ﻿import FetchSchoolList from "../Schools/FetchSchoolList";
+import UniversalFetch from "../Shared/FetchUniversal"
 import RegisterParent  from "./RegisterParent";
 import { useState, useEffect } from 'react';
 import {IoMailSharp} from "react-icons/io5"
@@ -28,7 +29,7 @@ const RegistrationForm = ({ role, form, updateForm, handleSubmit }) => {
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
-            const Schools = await FetchSchoolList();
+            const Schools = await UniversalFetch("get", "schools", "");
             setSchoolData({ schools: Schools });
             setIsLoading(false);
         };
