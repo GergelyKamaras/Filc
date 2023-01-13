@@ -31,7 +31,8 @@ const SideBarNav = ({ role }) => {
                 <>
                     <div className='registration'> 
                         <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/register")}> User Registration </button>
-                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/subject")}> Subject Registration  </button>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/addsubject")}> Subject Registration  </button>
+                        <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/addlesson")}> Lesson Registration  </button>
                     </div>
                         <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/schools")}> Educational institutions  </button>
                         <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "schooladmin/students")}> Student directory </button>
@@ -45,7 +46,7 @@ const SideBarNav = ({ role }) => {
                 <>
                     
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "teacher/teachers")}> Teacher directory </button>
-                    <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "teacher/students")}> Student directory </button>
+                    <button  className='navbar-direction-button' typeof='button' > Student directory (maintance) </button>
                     <button  className='navbar-direction-button' typeof='button' onClick={(e) => navigateTo(e, "teacher/add-grade")}> Student Grading </button>
                     
             

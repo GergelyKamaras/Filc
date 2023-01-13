@@ -15,13 +15,15 @@ const Icon = (props) =>{
             <IoMdPerson className='icon'/>
         )
     }
-    else if(props.pageTitle === "School Details"){
+    else if(props.pageTitle === "School details"){
         return(
             <IoIosSchool className="icon"/>
         )
     }
-    else if(props.pageTitle === "User Registration" ||
-            props.pageTitle === "Institutional registration"){
+    else if(props.pageTitle === "User registration" ||
+            props.pageTitle === "Institutional registration" ||
+            props.pageTitle === "Subject registration" || 
+            props.pageTitle === "Lesson registration"){
         return(
             <GiArchiveRegister className='icon'/>
         )

@@ -28,36 +28,45 @@ function App() {
   
   useEffect(() => {
     switch (location) {
-      case "/":
-          updatePageTitle("Home page");
-          break;
-      case "/profile":
-          updatePageTitle("Profile page");
-          break;
-      case "/student/myschool":
-          updatePageTitle("School Details");
-          break;
-      case "/schooladmin/register":
-          updatePageTitle("User Registration");
-          break;
-      case "/govadmin/schools":
-          updatePageTitle("Educational institutions");
-          break;
-      case "/govadmin/schooladmins":
-          updatePageTitle("Institutional administrators");
-          break;
-      case "/govadmin/students":
-          updatePageTitle("Student directory");
-          break;
-      case "/govadmin/teachers":
-          updatePageTitle("Teacher directory");
-          break;
-      case "/govadmin/addschool":
-          updatePageTitle("Institutional registration")
-          break;
-      case "/teacher/add-grade":
-          updatePageTitle("Student grading")
-          break;
+        case "/":
+            updatePageTitle("Home page");
+            break;
+        case "/profile":
+            updatePageTitle("Profile page");
+            break;
+        case "/student/myschool":
+            updatePageTitle("School details");
+            break;
+        case "/schooladmin/register":
+            updatePageTitle("User registration");
+            break;
+        case "/govadmin/schools":
+            updatePageTitle("Educational institutions");
+            break;
+        case "/govadmin/schooladmins":
+            updatePageTitle("Institutional administrators");
+            break;
+        case "/govadmin/students":
+            updatePageTitle("Student directory");
+            break;
+        case "/govadmin/teachers":
+            updatePageTitle("Teacher directory");
+            break;
+        case "/govadmin/addschool":
+            updatePageTitle("Institutional registration")
+            break;
+        case "/teacher/add-grade":
+            updatePageTitle("Student grading")
+            break;
+        case "/schooladmin/addsubject":
+            updatePageTitle("Subject registration")
+            break;
+        case "/schooladmin/addlesson":
+            updatePageTitle("Lesson registration")
+            break;
+        case "/teacher/teachers":
+            updatePageTitle("Student directory")
+        
       default:
           // handle any unanticipated locations here
   }

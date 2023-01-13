@@ -24,7 +24,7 @@ function SideBar(props) {
     <div className='navbar'>
       <div className='navbar-title'>
         {/* message for Hajni: This have to be change randomly */}
-        <a href='/'> For Interactive Learning Community </a>
+        <a href='/'> Fantabulous Intelligent Learning Corporate </a>
       </div>
       <div className='navbar-body'>
         <div className='navbar-header'>
