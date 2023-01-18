@@ -462,7 +462,7 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("schooladmins")]
+        [Route("register/schooladmin")]
         public async Task<ObjectResult> AddSchoolAdmin([FromBody] SchoolAdminInputDTO schoolAdminInputDto)
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
