@@ -86,18 +86,12 @@ namespace Filc.Controllers.Apis
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             GovernmentAdmin admin = _inputDtoConverter.ConvertDtoToGovernmentAdmin(adminInputDto);
-            try
-            {
-                if (await _registration.Register(new RegistrationModel(admin.user, "Government")) != true)
-                {
-                    throw new Exception("Error registering user!");
-                }
-            }
-            catch (Exception e)
+            if (await _registration.Register(new RegistrationModel(admin.user, "Government")) != true)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+                    new JWTAuthenticationResponse { Status = "Error", Message = "Error registering user!" });
             }
+            
             CustomLogger.LogRequest(token, "Add Government admin");
             return Ok(_governmentAdminService.AddGovernmentAdmin(admin));
         }
@@ -200,18 +194,13 @@ namespace Filc.Controllers.Apis
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             Teacher teacher = _inputDtoConverter.ConvertDtoToTeacher(teacherInputDto);
-            try
-            {
-                if (await _registration.Register(new RegistrationModel(teacher.user, "Teacher")) != true)
-                {
-                    throw new Exception("Error registering user!");
-                }
-            }
-            catch (Exception e)
+            
+            if (await _registration.Register(new RegistrationModel(teacher.user, "Teacher")) != true)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+                    new JWTAuthenticationResponse { Status = "Error", Message = "Error registering user!" });
             }
+            
             CustomLogger.LogRequest(token, $"Add teacher");
             return Ok(_teacherService.AddTeacher(teacher));
         }
@@ -371,18 +360,12 @@ namespace Filc.Controllers.Apis
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             Student student = _inputDtoConverter.ConvertDtoToStudent(studentInputDto);
-            try
-            {
-                if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
-                {
-                    throw new Exception("Error registering user!");
-                }
-            }
-            catch (Exception e)
+            if (await _registration.Register(new RegistrationModel(student.user, "Student")) != true)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+                    new JWTAuthenticationResponse { Status = "Error", Message = "Error registering user!" });
             }
+            
             CustomLogger.LogRequest(token, "Add student");
             return Ok(_studentService.AddStudent(student));
         }
@@ -421,18 +404,13 @@ namespace Filc.Controllers.Apis
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             Parent parent = _inputDtoConverter.ConvertDtoToParent(parentInputDto);
-            try
-            {
-                if (await _registration.Register(new RegistrationModel(parent.user, "Parent")) != true)
-                {
-                    throw new Exception("Error registering user!");
-                }
-            }
-            catch (Exception e)
+            
+            if (await _registration.Register(new RegistrationModel(parent.user, "Parent")) != true)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+                    new JWTAuthenticationResponse { Status = "Error", Message = "Error registering user!" });
             }
+            
             CustomLogger.LogRequest(token, $"Add parent");
             return Ok(_parentService.AddParent(parent));
         }
@@ -489,18 +467,13 @@ namespace Filc.Controllers.Apis
         {
             string token = HttpContext.Request.Headers.Authorization.ToString().Split(' ')[1];
             SchoolAdmin schoolAdmin = _inputDtoConverter.ConvertDtoToSchoolAdmin(schoolAdminInputDto);
-            try
-            {
-                if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
-                {
-                    throw new Exception("Error registering user!");
-                }
-            }
-            catch (Exception e)
+            
+            if (await _registration.Register(new RegistrationModel(schoolAdmin.user, "SchoolAdmin")) != true)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new JWTAuthenticationResponse { Status = "Error", Message = $"{e}" });
+                    new JWTAuthenticationResponse { Status = "Error", Message = $"Error registering user!" });
             }
+            
             CustomLogger.LogRequest(token, $"Add school admin");
             return Ok(_schoolAdminService.AddSchoolAdmin(schoolAdmin));
         }
