@@ -7,7 +7,7 @@ import {FaUserLock} from "react-icons/fa"
 
 const RegisterUser = () => {
     const [password, updatePassword] = useState("");
-    const [role, updateRole] = useState("");
+    const [role, updateRole] = useState("government");
     const [form, updateForm] = useState({});
 
     function handleChange(event) {
@@ -53,8 +53,8 @@ const RegisterUser = () => {
                     <div className="title-box">
                         <p> Role: </p>
                     </div>
-                    <select className="role-select" onChange={handleChange}>
-                        <option value="Government">Government Admin</option>
+                    <select className="role-select" onChange={handleChange} required>
+                        <option value="Government" selected>Government Admin</option>
                         <option value="SchoolAdmin">School Admin</option>
                         <option value="Teacher">Teacher</option>
                         <option value="Student">Student</option>
