@@ -81,6 +81,7 @@ namespace Filc.Controllers.Apis
             return _governmentAdminService.GetGovernmentAdmin(id);
         }
 
+        [Route("register/government")]
         [HttpPost]
         public async Task<ObjectResult> AddGovernmentAdmin([FromBody] GovernmentAdminInputDTO adminInputDto)
         {
