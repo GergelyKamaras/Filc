@@ -1,22 +1,18 @@
 ﻿# Add nodeJS
-FROM node:16
-WORKDIR /clientapp
-ENV PATH="./node_modules/.bin:$PATH"
-COPY ./Filc/ClientApp .
-EXPOSE 44463
+FROM node:16 as frontend-builder
+WORKDIR /core
+COPY /Filc/ClientApp .
+RUN npm install
+EXPOSE 44453
 RUN npm run build
 
 # Build backend
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as backend
+WORKDIR /core
+COPY --from=frontend-builder /core/build /core/ClientApp
 COPY . .
-RUN dotnet restore "./Filc/Filc.csproj" --disable-parallel
-RUN dotnet publish "./Filc/Filc.csproj" -c release -o /app --no-restore
+WORKDIR /core/Filc
 
-# Serve stage
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal
-WORKDIR /app
-COPY --from=build /app ./
-
-EXPOSE 7014
-
-ENTRYPOINT ["dotnet", "Filc.dll"]
+RUN dotnet dev-certs https && dotnet restore && dotnet run
+WORKDIR /core/Filc/ClientApp
+CMD [ "npm", "start" ]
