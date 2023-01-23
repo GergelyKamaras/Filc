@@ -1,4 +1,7 @@
-﻿# Build backend
+﻿# Add nodeJS
+FROM node:16
+
+# Build backend
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 COPY . .
 RUN dotnet restore "./Filc/Filc.csproj" --disable-parallel
