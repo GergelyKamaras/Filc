@@ -1,13 +1,9 @@
-﻿using System.Text;
-using EFDataAccessLibrary.Models;
-using Filc.Models.JWTAuthenticationModel;
+﻿using EFDataAccessLibrary.Models;
 using Filc.Services.Interfaces;
 using Filc.ViewModel;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 using MimeKit.Text;
 using MimeKit;
 
@@ -49,14 +45,20 @@ namespace Filc.Services
             if (await _roleManager.RoleExistsAsync(model.Role))
             {
                 await _userManager.AddToRoleAsync(user, model.Role);
-                SendEmail(model.Email, model.Password);
-
             }
             else
             {
                 throw new Exception("The specified Role is not valid");
             }
 
+            try
+            {
+                SendEmail(model.Email, model.Password);
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(e.StackTrace, "Error sending notification email!");
+            }
             return true;
         }
 
