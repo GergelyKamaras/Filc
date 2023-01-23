@@ -13,7 +13,7 @@
 	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
   </PropertyGroup>
 	
-	<ItemGroup>
+  <ItemGroup>
 		<PackageReference Include="MailKit" Version="3.4.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
 		<PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.3" />
@@ -133,6 +133,7 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\GovAdmin\Index.cshtml" />
   </ItemGroup>
+
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
 		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
