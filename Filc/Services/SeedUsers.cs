@@ -88,7 +88,7 @@ namespace EFDataAccessLibrary.DataAccess
             admin.user = user1;
             try
             {
-                if (await registration.Register(new RegistrationModel(user1, "Government")) == true)
+                if (await registration.Register(new RegistrationModel(user1, "Government"), true) == true)
                 {
                     govService.AddGovernmentAdmin(admin);
                 }
@@ -110,7 +110,7 @@ namespace EFDataAccessLibrary.DataAccess
 
             try
             {
-                if (await registration.Register(new RegistrationModel(user2, "SchoolAdmin")) == true)
+                if (await registration.Register(new RegistrationModel(user2, "SchoolAdmin"), true) == true)
                 {
                     schoolAdminService.AddSchoolAdmin(schoolAdmin);
                 }
@@ -133,7 +133,7 @@ namespace EFDataAccessLibrary.DataAccess
 
             try
             {
-                if (await registration.Register(new RegistrationModel(user3, "Teacher")) == true)
+                if (await registration.Register(new RegistrationModel(user3, "Teacher"), true) == true)
                 {
                     teacherService.AddTeacher(teacher);
                 }
@@ -156,7 +156,7 @@ namespace EFDataAccessLibrary.DataAccess
 
             try
             {
-                if (await registration.Register(new RegistrationModel(user4, "Student")) == true)
+                if (await registration.Register(new RegistrationModel(user4, "Student"), true) == true)
                 {
                     studentService.AddStudent(student);
                 }
@@ -175,7 +175,7 @@ namespace EFDataAccessLibrary.DataAccess
             
             try
             {
-                if (await registration.Register(new RegistrationModel(user5, "Parent")) == true)
+                if (await registration.Register(new RegistrationModel(user5, "Parent"), true) == true)
                 {
                     parentService.AddParent(parent);
                 }

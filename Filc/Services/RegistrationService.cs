@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using MimeKit.Text;
 using MimeKit;
+using Org.BouncyCastle.Crypto.Engines;
 
 namespace Filc.Services
 {
@@ -24,7 +25,7 @@ namespace Filc.Services
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        public async Task<bool> Register(RegistrationModel model)
+        public async Task<bool> Register(RegistrationModel model, bool seed=false)
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
 
@@ -49,12 +50,22 @@ namespace Filc.Services
             if (await _roleManager.RoleExistsAsync(model.Role))
             {
                 await _userManager.AddToRoleAsync(user, model.Role);
-                SendEmail(model.Email, model.Password);
-
             }
             else
             {
                 throw new Exception("The specified Role is not valid");
+            }
+
+            try
+            {
+                if (!seed)
+                {
+                    SendEmail(model.Email, model.Password);
+                }
+            }
+            catch (Exception e)
+            {
+                CustomLogger.LogError(e.StackTrace, "Error sending notification email!");
             }
 
             return true;
