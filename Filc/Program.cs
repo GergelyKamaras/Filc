@@ -134,10 +134,17 @@ builder.Services.AddTransient<ITeacherServiceForTeacherRole, TeacherTableQuerySe
 //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order middleware order
 var app = builder.Build();
 
+
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
     app.UseHsts();
+    using(var scope = app.Services.CreateScope())
+    {
+        var EsContext = scope.ServiceProvider.GetRequiredService<EsContext>();
+        EsContext.Database.EnsureCreated();
+
+    }
 }
 else
 {
@@ -165,6 +172,9 @@ catch (Exception ex)
 }
 
 app.UseHttpsRedirection();
+
+
+
 app.UseStaticFiles();
 app.UseSpaStaticFiles();
 app.UseRouting();
