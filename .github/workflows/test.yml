@@ -27,4 +27,4 @@ jobs:
 
       - name: test echo
         run: |
-          echo I'm running!
+          echo I work therefore I am
