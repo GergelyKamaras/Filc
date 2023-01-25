@@ -21,17 +21,17 @@ builder.Configuration.AddJsonFile("appsettings.json");
 
 var allowOrigins = builder.Configuration.GetValue<string>("AllowOrigins");
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("MyAllowedOrigins",
-        policy =>
-        {
-            policy.WithOrigins(allowOrigins) // note the port is included 
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        });
-});
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("MyAllowedOrigins",
+//        policy =>
+//        {
+//            policy.WithOrigins(allowOrigins) // note the port is included 
+//                .AllowAnyHeader()
+//                .AllowAnyMethod()
+//                .AllowCredentials();
+//        });
+//});
 
 // add react Single page app rootpath
 builder.Services.AddSpaStaticFiles(configuration =>

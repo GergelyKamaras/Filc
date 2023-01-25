@@ -8,9 +8,6 @@ RUN apt-get update -yq \
 WORKDIR /core
 COPY . .
 
-WORKDIR /core/Filc/ClientApp
-RUN npm install --force
-
 WORKDIR /core/Filc
 RUN dotnet build
 
@@ -20,5 +17,4 @@ EXPOSE 7014
 EXPOSE 5014
 
 RUN dotnet dev-certs https && dotnet restore
-WORKDIR 
 CMD ["dotnet", "run"]
