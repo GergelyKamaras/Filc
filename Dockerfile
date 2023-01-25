@@ -9,10 +9,7 @@ WORKDIR /core
 COPY . .
 
 WORKDIR /core/Filc
-RUN dotnet build
 
-EXPOSE 44463
-EXPOSE 44453
 EXPOSE 7014
 EXPOSE 5014
 
