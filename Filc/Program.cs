@@ -17,9 +17,14 @@ using Filc.Services.Interfaces;
 using Filc.Services.ModelConverter;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Extensions.Options;
+using System.Security.Cryptography.X509Certificates;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+
 
 var allowOrigins = builder.Configuration.GetValue<string>("AllowOrigins");
 
@@ -139,7 +144,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-    app.UseHsts();
 }
 else
 {
