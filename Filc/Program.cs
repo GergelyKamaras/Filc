@@ -16,6 +16,7 @@ using Filc.Services;
 using Filc.Services.Interfaces;
 using Filc.Services.ModelConverter;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore.InMemory;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -51,7 +52,7 @@ Log.Logger = new LoggerConfiguration()
 // Add Entity Dbcontext
 builder.Services.AddDbContext<ESContext>(options =>
 {
-    options.UseInMemoryDatabase("Memorydb");
+    options.UseInMemoryDatabase("MemoryDb");
 });
 // Add Role and User To Database
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
