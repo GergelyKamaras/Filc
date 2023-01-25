@@ -51,7 +51,7 @@ Log.Logger = new LoggerConfiguration()
 // Add Entity Dbcontext
 builder.Services.AddDbContext<ESContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    options.UseInMemoryDatabase("Memorydb");
 });
 // Add Role and User To Database
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
