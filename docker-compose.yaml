@@ -1,0 +1,11 @@
+version: "3"
+services:
+  backend:
+    build: ./
+    ports:
+      - 7014:7014
+      - 5014:5014
+  frontend:
+    build: ./ClientApp
+    ports:
+      - 3000:3000
