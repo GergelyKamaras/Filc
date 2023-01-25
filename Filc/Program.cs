@@ -36,7 +36,7 @@ builder.Services.AddCors(options =>
 // add react Single page app rootpath
 builder.Services.AddSpaStaticFiles(configuration =>
 {
-    configuration.RootPath = "ClientApp/build";
+    configuration.RootPath = "clientapp/build";
 });
 
 // Add services to the container.
@@ -50,7 +50,7 @@ Log.Logger = new LoggerConfiguration()
 // Add Entity Dbcontext
 builder.Services.AddDbContext<ESContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    options.UseInMemoryDatabase("Memorydb");
 });
 // Add Role and User To Database
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -90,7 +90,6 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true
     };
 });
-
 builder.Services.AddTransient<IUserServiceFullAccess, UserTableQueryService>();
 builder.Services.AddTransient<IRegistration, RegistrationService>();
 builder.Services.AddTransient<ILogin, LoginService>();
@@ -133,6 +132,11 @@ builder.Services.AddTransient<ITeacherServiceForTeacherRole, TeacherTableQuerySe
 
 //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-6.0#middleware-order middleware order
 var app = builder.Build();
+
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "clientapp";
+});
 
 if (app.Environment.IsDevelopment())
 {
