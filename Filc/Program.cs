@@ -15,6 +15,9 @@ using Serilog;
 using Filc.Services;
 using Filc.Services.Interfaces;
 using Filc.Services.ModelConverter;
+using Microsoft.AspNetCore.Server.Kestrel;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");

@@ -13,5 +13,5 @@ WORKDIR /core/Filc
 EXPOSE 7014
 EXPOSE 5014
 
-RUN dotnet dev-certs https && dotnet restore
+RUN dotnet dev-certs https --trust && dotnet restore
 CMD ["dotnet", "run"]
