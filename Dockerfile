@@ -13,7 +13,6 @@ RUN dotnet build "Filc.csproj" -c Release -o /app/build
 #Stage 2: publish
 
 FROM build AS publish
-RUN ls -la
 
 RUN dotnet publish "Filc.csproj" -c Release -o /app/publish
 
@@ -24,17 +23,19 @@ FROM node:16 AS node-builder
 WORKDIR /node
 COPY ./Filc/ClientApp /node
 RUN npm install
-RUN npm build
+RUN npm run build
 
 #Stage 4: final
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 
 WORKDIR /app
+
 EXPOSE 5014
 EXPOSE 7014
-RUN mkdir /app/Filc/wwwroot
+RUN mkdir /app/wwwroot
+COPY --from=publish /app/publish .
+RUN ls -la
 
-COPY --from=publish /src/app/publish .
-COPY --from=node-builder /node/build ./Filc/wwwroot
+COPY --from=node-builder /node/build ./wwwroot
 
 ENTRYPOINT ["dotnet", "Filc.dll"]
