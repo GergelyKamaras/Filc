@@ -13,5 +13,6 @@ WORKDIR /core/Filc
 EXPOSE 7014
 EXPOSE 5014
 
+RUN dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p 123456
 RUN dotnet dev-certs https --trust && dotnet restore
 CMD ["dotnet", "run"]
