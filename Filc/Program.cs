@@ -15,6 +15,7 @@ using Serilog;
 using Filc.Services;
 using Filc.Services.Interfaces;
 using Filc.Services.ModelConverter;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -171,13 +172,15 @@ app.UseRouting();
 app.UseCors("MyAllowedOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseSpa(spa => {
     spa.Options.SourcePath = "ClientApp";
 
-    if (env.IsDevelopment()) {
+    if (app.Environment.IsDevelopment()) {
         spa.UseReactDevelopmentServer(npmScript: "start");
     }
 });
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
