@@ -39,6 +39,7 @@ RUN ls -la /app
 COPY --from=node-builder /node/build ./wwwroot
 ENV ASPNETCORE_URLS=https://+:7014;http://+:5014
 ENV ASPNETCORE_HTTPS_PORT=7014
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/app/myserver.crt
-ENV ASPNETCORE_Kestrel__Certificates__PrivateKeyPath=/app/myserver.key 
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password=H71k2tfg3
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=\https\\filc-certs.pfx
+
 ENTRYPOINT ["dotnet", "Filc.dll"]
