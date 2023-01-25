@@ -36,7 +36,7 @@ builder.Services.AddCors(options =>
 // add react Single page app rootpath
 builder.Services.AddSpaStaticFiles(configuration =>
 {
-    configuration.RootPath = "ClientApp/build";
+    configuration.RootPath = "wwwroot";
 });
 
 // Add services to the container.
@@ -171,7 +171,13 @@ app.UseRouting();
 app.UseCors("MyAllowedOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSpa(spa => {
+    spa.Options.SourcePath = "ClientApp";
 
+    if (env.IsDevelopment()) {
+        spa.UseReactDevelopmentServer(npmScript: "start");
+    }
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
