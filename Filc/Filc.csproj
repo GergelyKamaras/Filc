@@ -7,7 +7,6 @@
 	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 	<TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
 	<IsPackable>false</IsPackable>
-  <UserSecretsId>57393389627611478466</UserSecretsId>
 	<SpaRoot>ClientApp</SpaRoot>
 	<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 	<RootNamespace>Filc</RootNamespace>

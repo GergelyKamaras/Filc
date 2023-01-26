@@ -61,6 +61,7 @@
   },
   "proxy":"https://172.104.238.6:7014",
   "scripts": {
+    "prestart": "node aspnetcore-https && node aspnetcore-react",
     "start": "rimraf ./build && react-scripts start",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
