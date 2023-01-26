@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Filc", "Filc.csproj", "{840
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFDataAccessLibrary", "..\EFDataAccessLibrary\EFDataAccessLibrary.csproj", "{32DA0BC7-9361-45E4-B2BC-64B6506B46A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilcTests", "..\FilcTests\FilcTests.csproj", "{568B4F3A-4786-4FA1-B825-1AEC8256E434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilcTests", "..\FilcTests\FilcTests.csproj", "{568B4F3A-4786-4FA1-B825-1AEC8256E434}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
