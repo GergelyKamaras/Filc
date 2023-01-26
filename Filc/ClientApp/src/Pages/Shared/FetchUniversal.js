@@ -13,7 +13,7 @@ async function UniversalFetch(type, endpoint, payload) {
 
     if (type === "get") {
         response = await fetch(
-            `https://localhost:7014/api/${role}/${endpoint}`, {
+            `/api/${role}/${endpoint}`, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("AccessToken")
@@ -24,7 +24,7 @@ async function UniversalFetch(type, endpoint, payload) {
 
     if (type === "post") {
         response = await fetch(
-            `https://localhost:7014/api/${role}/${endpoint}`, {
+            `/api/${role}/${endpoint}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

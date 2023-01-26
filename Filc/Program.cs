@@ -15,9 +15,16 @@ using Serilog;
 using Filc.Services;
 using Filc.Services.Interfaces;
 using Filc.Services.ModelConverter;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Extensions.Options;
+using System.Security.Cryptography.X509Certificates;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+
 
 var allowOrigins = builder.Configuration.GetValue<string>("AllowOrigins");
 
@@ -36,7 +43,7 @@ builder.Services.AddCors(options =>
 // add react Single page app rootpath
 builder.Services.AddSpaStaticFiles(configuration =>
 {
-    configuration.RootPath = "ClientApp/build";
+    configuration.RootPath = "wwwroot";
 });
 
 // Add services to the container.
@@ -50,7 +57,7 @@ Log.Logger = new LoggerConfiguration()
 // Add Entity Dbcontext
 builder.Services.AddDbContext<ESContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    options.UseInMemoryDatabase("MemoryDb");
 });
 // Add Role and User To Database
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -137,7 +144,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-    app.UseHsts();
 }
 else
 {
@@ -171,6 +177,14 @@ app.UseRouting();
 app.UseCors("MyAllowedOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSpa(spa => {
+    spa.Options.SourcePath = "ClientApp";
+
+    if (app.Environment.IsDevelopment()) {
+        spa.UseReactDevelopmentServer(npmScript: "start");
+    }
+});
 
 app.MapControllerRoute(
     name: "default",

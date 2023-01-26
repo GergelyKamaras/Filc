@@ -1,6 +1,6 @@
 ﻿
 const RegisterUser = (data, role) => {
-    const url = "https://localhost:7014/api/government/register/" + role;
+    const url = "/api/government/register/" + role;
     fetch(url, {
         method: "POST", headers: {
             "Accept": "application/json",
