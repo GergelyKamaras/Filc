@@ -1,6 +1,6 @@
 ﻿
 const GetHashedPasswordFetch = (data) => {
-    const myresponse = fetch('https://localhost:7014/authentication/loginsalt', {
+    const myresponse = fetch('/authentication/loginsalt', {
         method: 'POST',
         headers: {
             "Accept": "application/json",
