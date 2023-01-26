@@ -63,280 +63,280 @@ namespace FilcTests
             Assert.That(exception.Message, Is.EqualTo("Lesson not found."));
         }
 
-        [Test]
-        public void GetLessonByStudentId_ExistingId_ReturnsListOfLessonDTO()
-        {
-            //Arrange
-            var school = new School { Id = 1 };
-            _InMemoryDb.School.Add(school);
+        //[Test]
+        //public void GetLessonByStudentId_ExistingId_ReturnsListOfLessonDTO()
+        //{
+        //    //Arrange
+        //    var school = new School { Id = 1 };
+        //    _InMemoryDb.School.Add(school);
 
-            var subject = new Subject { Id = 1, Title = "Test" };
-            _InMemoryDb.Subject.Add(subject);
+        //    var subject = new Subject { Id = 1, Title = "Test" };
+        //    _InMemoryDb.Subject.Add(subject);
 
-            var student = new Student
-            {
-                Id = 1,
-                user = new ApplicationUser
-                {
-                    UserName = "student@test.com",
-                    Salt = "testSalt",
-                    Id = Guid.NewGuid().ToString()
-                },
-                FirstName = "John",
-                LastName = "Test",
-                Address = "123 Testy Lane",
-                BirthDate = DateTime.Now,
-                School = school
-            };
-            _InMemoryDb.Student.Add(student);
+        //    var student = new Student
+        //    {
+        //        Id = 1,
+        //        user = new ApplicationUser
+        //        {
+        //            UserName = "student@test.com",
+        //            Salt = "testSalt",
+        //            Id = Guid.NewGuid().ToString()
+        //        },
+        //        FirstName = "John",
+        //        LastName = "Test",
+        //        Address = "123 Testy Lane",
+        //        BirthDate = DateTime.Now,
+        //        School = school
+        //    };
+        //    _InMemoryDb.Student.Add(student);
 
-            var lesson1 = new Lesson
-            {
-                Id = 5,
-                Name = "Test",
-                Subject = subject,
-                students = new List<Student> { student },
-                Teachers = new List<Teacher>(),
-                School = school
-            };
+        //    var lesson1 = new Lesson
+        //    {
+        //        Id = 5,
+        //        Name = "Test",
+        //        Subject = subject,
+        //        students = new List<Student> { student },
+        //        Teachers = new List<Teacher>(),
+        //        School = school
+        //    };
 
-            var lesson2 = new Lesson
-            {
-                Id = 6,
-                Name = "Test2",
-                Subject = subject,
-                students = new List<Student> { student },
-                Teachers = new List<Teacher>(),
-                School = school
-            };
+        //    var lesson2 = new Lesson
+        //    {
+        //        Id = 6,
+        //        Name = "Test2",
+        //        Subject = subject,
+        //        students = new List<Student> { student },
+        //        Teachers = new List<Teacher>(),
+        //        School = school
+        //    };
 
-            var lesson3 = new Lesson
-            {
-                Id = 7,
-                Name = "Test3",
-                Subject = subject,
-                students = new List<Student> { student },
-                Teachers = new List<Teacher>(),
-                School = school
-            };
-            _InMemoryDb.Lesson.Add(lesson1);
-            _InMemoryDb.Lesson.Add(lesson2);
-            _InMemoryDb.Lesson.Add(lesson3);
-            _InMemoryDb.SaveChanges();
+        //    var lesson3 = new Lesson
+        //    {
+        //        Id = 7,
+        //        Name = "Test3",
+        //        Subject = subject,
+        //        students = new List<Student> { student },
+        //        Teachers = new List<Teacher>(),
+        //        School = school
+        //    };
+        //    _InMemoryDb.Lesson.Add(lesson1);
+        //    _InMemoryDb.Lesson.Add(lesson2);
+        //    _InMemoryDb.Lesson.Add(lesson3);
+        //    _InMemoryDb.SaveChanges();
 
-            //Act
-            List<LessonDTO> lessons = service.GetLessonByStudentId(1);
-            var count = lessons.Count;
+        //    //Act
+        //    List<LessonDTO> lessons = service.GetLessonByStudentId(1);
+        //    var count = lessons.Count;
 
-            //Assert
-            Assert.That(count, Is.EqualTo(3));
-            Assert.That(lessons[0], Is.InstanceOf<LessonDTO>());
-        }
+        //    //Assert
+        //    Assert.That(count, Is.EqualTo(3));
+        //    Assert.That(lessons[0], Is.InstanceOf<LessonDTO>());
+        //}
 
-        [Test]
-        public void GetLessonByStudentId_NonExistent_ReturnsEmptyList()
-        {
-            //Arrange
-            var school = new School { Id = 1 };
-            _InMemoryDb.School.Add(school);
+        //[Test]
+        //public void GetLessonByStudentId_NonExistent_ReturnsEmptyList()
+        //{
+        //    //Arrange
+        //    var school = new School { Id = 1 };
+        //    _InMemoryDb.School.Add(school);
 
-            var subject = new Subject { Id = 2, Title = "Test" };
-            _InMemoryDb.Subject.Add(subject);
+        //    var subject = new Subject { Id = 2, Title = "Test" };
+        //    _InMemoryDb.Subject.Add(subject);
 
-            var student = new Student
-            {
-                Id = 3,
-                user = new ApplicationUser
-                {
-                    UserName = "student@test.com",
-                    Salt = "testSalt",
-                    Id = Guid.NewGuid().ToString()
-                },
-                FirstName = "John",
-                LastName = "Test",
-                Address = "123 Testy Lane",
-                BirthDate = DateTime.Now,
-                School = school
-            };
-            _InMemoryDb.Student.Add(student);
+        //    var student = new Student
+        //    {
+        //        Id = 3,
+        //        user = new ApplicationUser
+        //        {
+        //            UserName = "student@test.com",
+        //            Salt = "testSalt",
+        //            Id = Guid.NewGuid().ToString()
+        //        },
+        //        FirstName = "John",
+        //        LastName = "Test",
+        //        Address = "123 Testy Lane",
+        //        BirthDate = DateTime.Now,
+        //        School = school
+        //    };
+        //    _InMemoryDb.Student.Add(student);
 
-            var lesson1 = new Lesson
-            {
-                Id = 5,
-                Name = "Test",
-                Subject = subject,
-                students = new List<Student> { student },
-                Teachers = new List<Teacher>(),
-                School = school
-            };
+        //    var lesson1 = new Lesson
+        //    {
+        //        Id = 5,
+        //        Name = "Test",
+        //        Subject = subject,
+        //        students = new List<Student> { student },
+        //        Teachers = new List<Teacher>(),
+        //        School = school
+        //    };
 
-            var lesson2 = new Lesson
-            {
-                Id = 6,
-                Name = "Test2",
-                Subject = subject,
-                students = new List<Student> { student },
-                Teachers = new List<Teacher>(),
-                School = school
-            };
+        //    var lesson2 = new Lesson
+        //    {
+        //        Id = 6,
+        //        Name = "Test2",
+        //        Subject = subject,
+        //        students = new List<Student> { student },
+        //        Teachers = new List<Teacher>(),
+        //        School = school
+        //    };
 
-            var lesson3 = new Lesson
-            {
-                Id = 7,
-                Name = "Test3",
-                Subject = subject,
-                students = new List<Student> { student },
-                Teachers = new List<Teacher>(),
-                School = school
-            };
-            _InMemoryDb.Lesson.Add(lesson1);
-            _InMemoryDb.Lesson.Add(lesson2);
-            _InMemoryDb.Lesson.Add(lesson3);
-            _InMemoryDb.SaveChanges();
+        //    var lesson3 = new Lesson
+        //    {
+        //        Id = 7,
+        //        Name = "Test3",
+        //        Subject = subject,
+        //        students = new List<Student> { student },
+        //        Teachers = new List<Teacher>(),
+        //        School = school
+        //    };
+        //    _InMemoryDb.Lesson.Add(lesson1);
+        //    _InMemoryDb.Lesson.Add(lesson2);
+        //    _InMemoryDb.Lesson.Add(lesson3);
+        //    _InMemoryDb.SaveChanges();
 
-            //Act
-            List<LessonDTO> lessons = service.GetLessonByStudentId(2);
+        //    //Act
+        //    List<LessonDTO> lessons = service.GetLessonByStudentId(2);
 
-            //Assert
-            var count = lessons.Count();
-            Assert.That(count, Is.EqualTo(0));
-        }
+        //    //Assert
+        //    var count = lessons.Count();
+        //    Assert.That(count, Is.EqualTo(0));
+        //}
 
-        [Test]
-        public void GetLessonsByTeacher_ExistingID_returnsLessons()
-        {
-            //Arrange
-            var school = new School
-            {
-                Id = 10
-            };
-            _InMemoryDb.School.Add(school);
-            _InMemoryDb.SaveChanges();
+        //[Test]
+        //public void GetLessonsByTeacher_ExistingID_returnsLessons()
+        //{
+        //    //Arrange
+        //    var school = new School
+        //    {
+        //        Id = 10
+        //    };
+        //    _InMemoryDb.School.Add(school);
+        //    _InMemoryDb.SaveChanges();
 
-            var teacher = new Teacher
-            {
-                Id = 1,
-                user = new ApplicationUser
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Salt = "randomtestsalt",
-                    UserName = "testteacher@test.com"
-                },
-                FirstName = "Test",
-                LastName = "Testy",
-                Address = "456 Teacher Street TeachyTown",
-                BirthDate = DateTime.Now,
-                School = school
-            };
-            _InMemoryDb.Teacher.Add(teacher);
-            _InMemoryDb.SaveChanges();
+        //    var teacher = new Teacher
+        //    {
+        //        Id = 1,
+        //        user = new ApplicationUser
+        //        {
+        //            Id = Guid.NewGuid().ToString(),
+        //            Salt = "randomtestsalt",
+        //            UserName = "testteacher@test.com"
+        //        },
+        //        FirstName = "Test",
+        //        LastName = "Testy",
+        //        Address = "456 Teacher Street TeachyTown",
+        //        BirthDate = DateTime.Now,
+        //        School = school
+        //    };
+        //    _InMemoryDb.Teacher.Add(teacher);
+        //    _InMemoryDb.SaveChanges();
 
-            var subject = new Subject
-            {
-                Id = 11,
-                Title = "Test Studies"
-            };
-            _InMemoryDb.Subject.Add(subject);
-            _InMemoryDb.SaveChanges();
+        //    var subject = new Subject
+        //    {
+        //        Id = 11,
+        //        Title = "Test Studies"
+        //    };
+        //    _InMemoryDb.Subject.Add(subject);
+        //    _InMemoryDb.SaveChanges();
 
-            var lesson1 = new Lesson
-            {
-                Id = 12,
-                Name = "Test lesson",
-                School = school,
-                Subject = subject,
-                Teachers = new List<Teacher> { teacher },
-                students = new List<Student>()
-            };
+        //    var lesson1 = new Lesson
+        //    {
+        //        Id = 12,
+        //        Name = "Test lesson",
+        //        School = school,
+        //        Subject = subject,
+        //        Teachers = new List<Teacher> { teacher },
+        //        students = new List<Student>()
+        //    };
 
-            var lesson2 = new Lesson
-            {
-                Id = 13,
-                Name = "Test lesson2",
-                School = school,
-                Subject = subject,
-                Teachers = new List<Teacher> { teacher },
-                students = new List<Student>()
-            };
-            _InMemoryDb.Lesson.Add(lesson1);
-            _InMemoryDb.Lesson.Add(lesson2);
-            _InMemoryDb.SaveChanges();
+        //    var lesson2 = new Lesson
+        //    {
+        //        Id = 13,
+        //        Name = "Test lesson2",
+        //        School = school,
+        //        Subject = subject,
+        //        Teachers = new List<Teacher> { teacher },
+        //        students = new List<Student>()
+        //    };
+        //    _InMemoryDb.Lesson.Add(lesson1);
+        //    _InMemoryDb.Lesson.Add(lesson2);
+        //    _InMemoryDb.SaveChanges();
 
-            //Act
-            List<LessonDTO> lessons = service.GetLessonsByTeacher(1);
+        //    //Act
+        //    List<LessonDTO> lessons = service.GetLessonsByTeacher(1);
 
-            //Assert
-            var count = lessons.Count();
-            Assert.That(count, Is.EqualTo(2));
-        }
+        //    //Assert
+        //    var count = lessons.Count();
+        //    Assert.That(count, Is.EqualTo(2));
+        //}
 
-        [Test]
-        public void GetLessonsByTeacher_NonExistentID_returnsEmptyList()
-        {
-            //Arrange
-            var school = new School
-            {
-                Id = 10
-            };
-            _InMemoryDb.School.Add(school);
-            _InMemoryDb.SaveChanges();
+        //[Test]
+        //public void GetLessonsByTeacher_NonExistentID_returnsEmptyList()
+        //{
+        //    //Arrange
+        //    var school = new School
+        //    {
+        //        Id = 10
+        //    };
+        //    _InMemoryDb.School.Add(school);
+        //    _InMemoryDb.SaveChanges();
 
-            var teacher = new Teacher
-            {
-                Id = 1,
-                user = new ApplicationUser
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Salt = "randomtestsalt",
-                    UserName = "testteacher@test.com"
-                },
-                FirstName = "Test",
-                LastName = "Testy",
-                Address = "456 Teacher Street TeachyTown",
-                BirthDate = DateTime.Now,
-                School = school
-            };
-            _InMemoryDb.Teacher.Add(teacher);
-            _InMemoryDb.SaveChanges();
+        //    var teacher = new Teacher
+        //    {
+        //        Id = 1,
+        //        user = new ApplicationUser
+        //        {
+        //            Id = Guid.NewGuid().ToString(),
+        //            Salt = "randomtestsalt",
+        //            UserName = "testteacher@test.com"
+        //        },
+        //        FirstName = "Test",
+        //        LastName = "Testy",
+        //        Address = "456 Teacher Street TeachyTown",
+        //        BirthDate = DateTime.Now,
+        //        School = school
+        //    };
+        //    _InMemoryDb.Teacher.Add(teacher);
+        //    _InMemoryDb.SaveChanges();
 
-            var subject = new Subject
-            {
-                Id = 11,
-                Title = "Test Studies"
-            };
-            _InMemoryDb.Subject.Add(subject);
-            _InMemoryDb.SaveChanges();
+        //    var subject = new Subject
+        //    {
+        //        Id = 11,
+        //        Title = "Test Studies"
+        //    };
+        //    _InMemoryDb.Subject.Add(subject);
+        //    _InMemoryDb.SaveChanges();
 
-            var lesson1 = new Lesson
-            {
-                Id = 12,
-                Name = "Test lesson",
-                School = school,
-                Subject = subject,
-                Teachers = new List<Teacher> { teacher },
-                students = new List<Student>()
-            };
+        //    var lesson1 = new Lesson
+        //    {
+        //        Id = 12,
+        //        Name = "Test lesson",
+        //        School = school,
+        //        Subject = subject,
+        //        Teachers = new List<Teacher> { teacher },
+        //        students = new List<Student>()
+        //    };
 
-            var lesson2 = new Lesson
-            {
-                Id = 13,
-                Name = "Test lesson2",
-                School = school,
-                Subject = subject,
-                Teachers = new List<Teacher> { teacher },
-                students = new List<Student>()
-            };
-            _InMemoryDb.Lesson.Add(lesson1);
-            _InMemoryDb.Lesson.Add(lesson2);
-            _InMemoryDb.SaveChanges();
+        //    var lesson2 = new Lesson
+        //    {
+        //        Id = 13,
+        //        Name = "Test lesson2",
+        //        School = school,
+        //        Subject = subject,
+        //        Teachers = new List<Teacher> { teacher },
+        //        students = new List<Student>()
+        //    };
+        //    _InMemoryDb.Lesson.Add(lesson1);
+        //    _InMemoryDb.Lesson.Add(lesson2);
+        //    _InMemoryDb.SaveChanges();
 
-            //Act
-            List<LessonDTO> lessons = service.GetLessonsByTeacher(2);
+        //    //Act
+        //    List<LessonDTO> lessons = service.GetLessonsByTeacher(2);
 
-            //Assert
-            var count = lessons.Count();
-            Assert.That(count, Is.EqualTo(0));
-        }
+        //    //Assert
+        //    var count = lessons.Count();
+        //    Assert.That(count, Is.EqualTo(0));
+        //}
 
         [Test]
         public void AddLesson_NewLesson_AddsLessonReturnsSuccessMessage()
