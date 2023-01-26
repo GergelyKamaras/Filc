@@ -1,6 +1,6 @@
 const FetchAllStudents = async () => {
     const response = await fetch(
-      'https://localhost:7014/api/government/students', {
+      '/api/government/students', {
             method: 'GET',
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("AccessToken")

@@ -1,6 +1,6 @@
 
 const LoginApiFetch = async (data) => {
-    await fetch ("https://localhost:7014/authentication/login",{
+    await fetch ("/authentication/login",{
         method: "POST", headers: {
             "Accept": "application/json",
             'Content-Type': 'application/json'
