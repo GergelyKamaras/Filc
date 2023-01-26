@@ -186,14 +186,14 @@ namespace FilcTests
             _InMemoryDb.GovernmentAdmin.Add(govAdmin1);
             _InMemoryDb.SaveChanges();
 
-            var govAdmin2 = govAdmin1;
-            govAdmin2.user.Email = "updatedemail@test.com";
+            govAdmin1.user.Email = "updatedemail@test.com";
 
             //Act
-            service.UpdateGovernmentAdmin(govAdmin2);
+            service.UpdateGovernmentAdmin(govAdmin1);
 
             //Assert
             var data = _InMemoryDb.GovernmentAdmin.FirstOrDefault(x => x.Id == govAdmin1.Id);
+            Assert.IsNotNull(data);
             Assert.That(data.user.Email, Is.EqualTo("updatedemail@test.com"));
         }
 

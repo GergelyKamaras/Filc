@@ -95,8 +95,13 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void DeleteLesson(int id)
         {
-            _db.Lesson.Remove(_db.Lesson.First(x => x.Id == id));
-            _db.SaveChanges();
+            var lesson = _db.Lesson.FirstOrDefault(x => x.Id == id);
+            if (lesson != null)
+            {
+                _db.Lesson.Remove(lesson);
+                _db.SaveChanges();
+            }
+
         }
     }
 }
