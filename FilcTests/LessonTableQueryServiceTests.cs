@@ -124,17 +124,13 @@ namespace FilcTests
             _InMemoryDb.Lesson.Add(lesson3);
             _InMemoryDb.SaveChanges();
 
-            List<LessonDTO> TestLessons = new List<LessonDTO> {
-                new LessonDTO(lesson1),
-                new LessonDTO(lesson2),
-                new LessonDTO(lesson3)};
-
             //Act
             List<LessonDTO> lessons = service.GetLessonByStudentId(1);
-            var count = lessons.Count();
+            var count = lessons.Count;
 
             //Assert
-            Assert.That(count, Is.EqualTo(lessons.Count()));
+            Assert.That(count, Is.EqualTo(3));
+            Assert.That(lessons[0], Is.InstanceOf<LessonDTO>());
         }
 
         [Test]
