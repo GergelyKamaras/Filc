@@ -19,15 +19,15 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public ApplicationUser GetUserById(string id)
         {
-            return _db.Users.First(user => user.Id == id);
+            return _db.Users.FirstOrDefault(user => user.Id == id);
         }
         public ApplicationUser GetUserByEmail(string email)
         {
-            return _db.Users.First(user => user.Email == email);
+            return _db.Users.FirstOrDefault(user => user.Email == email);
         }
         public string GetSaltByEmail(string email)
         {
-            return _db.Users.First(user => user.Email == email).Salt;
+            return _db.Users.FirstOrDefault(user => user.Email == email).Salt;
         }
         
         public void AddUser(ApplicationUser user)
