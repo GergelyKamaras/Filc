@@ -16,15 +16,10 @@ namespace Filc.ViewModel
         [MaxLength(30)]
         public string Role { get; set; }
 
-        [Required]
-        [MaxLength(200)]
-        public string Salt { get; set; }
-
         public RegistrationModel(ApplicationUser user, string role)
         {
             Email = user.Email;
             Password = user.PasswordHash;
-            Salt = user.Salt;
             Role = role;
         }
     }

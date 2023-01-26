@@ -18,11 +18,10 @@ const SideBarProfile = (props) => {
     e.preventDefault();
 
     const email = props.loginForm["email"]
-    const salt = await FetchHashedPassword({"Email": email});
 
     const data = {
         "Email": email,
-        "Password": bcrypt.hashSync(props.loginForm["password"], salt),
+        "Password": props.loginForm["password"],
         "RememberMe": false
     };
     await FetchLogin(data);

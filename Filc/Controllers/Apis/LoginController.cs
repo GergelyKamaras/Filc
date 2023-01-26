@@ -52,18 +52,6 @@ namespace Filc.Controllers.Apis
         }
 
         [HttpPost]
-        [Route("loginsalt")]
-        public ObjectResult GetLoginSalt(EmailModel model)
-        {
-
-            return Ok(new
-            {
-                Status = "Success",
-                Message = _userService.GetSaltByEmail(model.Email)
-            });
-        }
-
-        [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(LoginModel model)
         {

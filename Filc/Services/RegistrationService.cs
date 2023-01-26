@@ -37,8 +37,7 @@ namespace Filc.Services
             ApplicationUser user = new()
             {
                 UserName = model.Email,
-                Email = model.Email,
-                Salt = model.Salt,
+                Email = model.Email
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
