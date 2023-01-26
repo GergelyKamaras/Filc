@@ -1,18 +1,14 @@
 ﻿# Build backend
-FROM mcr.microsoft.com/dotnet/sdk:6.0
-RUN apt-get update -yq \
-    && apt-get install curl gnupg -yq \
-    && curl -sL https://deb.nodesource.com/setup_16.x | bash \
-    && apt-get install nodejs -yq
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as build-env
 
 WORKDIR /core
-COPY . .
-
+COPY . ./
 WORKDIR /core/Filc
+RUN dotnet restore
 
-EXPOSE 7014
-EXPOSE 5014
+RUN dotnet publish -c Release -o out
 
-RUN dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p 123456
-RUN dotnet dev-certs https --trust && dotnet restore
-CMD ["dotnet", "run"]
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+WORKDIR /core
+COPY --from=build-env /core/Filc/out .
+ENTRYPOINT ["dotnet", "Filc.dll"]

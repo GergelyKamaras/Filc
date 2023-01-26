@@ -5,6 +5,13 @@ services:
     ports:
       - 7014:7014
       - 5014:5014
+    environment:
+      ASPNETCORE_URLS: "htpps://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "7014"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "veryadmin123"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/filcapp.pfx"
+    volumes:
+      - ${USERPROFILE}\.aspnet\https:/https/
   frontend:
     build: ./ClientApp
     ports:
