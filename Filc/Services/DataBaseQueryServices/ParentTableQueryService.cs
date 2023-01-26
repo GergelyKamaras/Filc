@@ -46,7 +46,6 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void UpdateParent(Parent parent)
         {
-            parent.user = _userService.GetUserByEmail(parent.user.Email);
             for (int i = 0; i < parent.Children.Count; i++)
             {
                 parent.Children[i] = _db.Student.First(s => s.Id == parent.Children[i].Id);
@@ -60,6 +59,7 @@ namespace Filc.Services.DataBaseQueryServices
             Parent parent = _db.Parent.Include(p => p.user)
                 .First(p => p.Id == id);
             _userService.DeleteUser(parent.user.Id);
+            _db.Parent.Remove(parent);
             _db.SaveChanges();
         }
     }

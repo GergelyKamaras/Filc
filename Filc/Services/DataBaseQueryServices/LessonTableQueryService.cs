@@ -20,27 +20,34 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
                 .Include(lesson => lesson.Subject)
-                .First(lesson => lesson.Id == id);
-            return new LessonDTO(lesson);
+                .FirstOrDefault(lesson => lesson.Id == id);
+            if (lesson != null) 
+            {
+                return new LessonDTO(lesson);
+            }
+            else
+            {
+                throw new KeyNotFoundException(message:"Lesson not found.");
+            }
         }
 
         public List<LessonDTO> GetLessonByStudentId(int id)
         {
             List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
-                .Include(lesson => lesson.Teachers)
-                .Include(lesson => lesson.students)
-                .Include(lesson => lesson.Subject)
-                .Where(lesson => lesson.students.Exists(student => student.Id == id)).ToList();
+                            .Include(lesson => lesson.Teachers)
+                            .Include(lesson => lesson.students)
+                            .Include(lesson => lesson.Subject)
+                            .Where(lesson => lesson.students.Select(s => s.Id).Any(studentId => studentId == id)).ToList();
             return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 
         public List<LessonDTO> GetLessonsByTeacher(int id)
         {
             List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
-                .Include(lesson => lesson.Teachers)
-                .Include(lesson => lesson.students)
-                .Include(lesson => lesson.Subject)
-                .Where(lesson => lesson.Teachers.Exists(teacher => teacher.Id == id)).ToList();
+                            .Include(lesson => lesson.Teachers)
+                            .Include(lesson => lesson.students)
+                            .Include(lesson => lesson.Subject)
+                            .Where(lesson => lesson.Teachers.Select(t => t.Id).Any(teacherId => teacherId == id)).ToList();
             return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 
@@ -88,8 +95,13 @@ namespace Filc.Services.DataBaseQueryServices
 
         public void DeleteLesson(int id)
         {
-            _db.Lesson.Remove(_db.Lesson.First(x => x.Id == id));
-            _db.SaveChanges();
+            var lesson = _db.Lesson.FirstOrDefault(x => x.Id == id);
+            if (lesson != null)
+            {
+                _db.Lesson.Remove(lesson);
+                _db.SaveChanges();
+            }
+
         }
     }
 }

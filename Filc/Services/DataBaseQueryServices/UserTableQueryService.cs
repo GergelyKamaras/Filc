@@ -19,15 +19,23 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public ApplicationUser GetUserById(string id)
         {
-            return _db.Users.First(user => user.Id == id);
+            return _db.Users.FirstOrDefault(user => user.Id == id);
         }
         public ApplicationUser GetUserByEmail(string email)
         {
-            return _db.Users.First(user => user.Email == email);
+            return _db.Users.FirstOrDefault(user => user.Email == email);
         }
         public string GetSaltByEmail(string email)
         {
-            return _db.Users.First(user => user.Email == email).Salt;
+            var salt = _db.Users.FirstOrDefault(user => user.Email == email);
+            if (salt != null)
+            {
+                return salt.Salt;
+            }
+            else
+            {
+                throw new KeyNotFoundException("Email not found.");
+            }
         }
         
         public void AddUser(ApplicationUser user)

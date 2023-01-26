@@ -83,6 +83,7 @@ namespace Filc.Services.DataBaseQueryServices
             SchoolAdmin admin = _db.SchoolAdmin.Include(a => a.user)
                 .First(a => a.Id == schoolAdminId);
             _userService.DeleteUser(admin.user.Id);
+            _db.SchoolAdmin.Remove(admin);
             _db.SaveChanges();
         }
 
