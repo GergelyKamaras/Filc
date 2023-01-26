@@ -27,9 +27,8 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public GovernmentAdmin GetGovernmentAdmin(int id)
         {
-            
             return _db.GovernmentAdmin.Include(admin => admin.user)
-                .First(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == id);
         }
         public JWTAuthenticationResponse AddGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
@@ -48,15 +47,23 @@ namespace Filc.Services.DataBaseQueryServices
         public void RemoveGovernmentAdmin(int id)
         {
             GovernmentAdmin admin = _db.GovernmentAdmin.Include(a => a.user)
-                .First(a => a.Id == id);
-            _userService.DeleteUser(admin.user.Id);
-            _db.SaveChanges();
+                .FirstOrDefault(a => a.Id == id);
+            if (admin != null)
+            {
+                _userService.DeleteUser(admin.user.Id);
+                _db.GovernmentAdmin.Remove(admin);
+                _db.SaveChanges();
+            }
         }
         public void UpdateGovernmentAdmin(GovernmentAdmin governmentAdmin)
         {
-            governmentAdmin.user = _db.GovernmentAdmin.First(admin => admin.Id == governmentAdmin.Id).user;
-            _db.GovernmentAdmin.Update(governmentAdmin);
-            _db.SaveChanges();
+            var dbAdmin = _db.GovernmentAdmin.FirstOrDefault(a => a.Id == governmentAdmin.Id);
+            if (dbAdmin != null)
+            {
+                governmentAdmin.user = dbAdmin.user;
+                _db.GovernmentAdmin.Update(governmentAdmin);
+                _db.SaveChanges();
+            }
         }
     }
 }
