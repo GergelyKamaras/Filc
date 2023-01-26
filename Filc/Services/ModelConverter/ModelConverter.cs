@@ -37,7 +37,7 @@ namespace Filc.Services.ModelConverter
         {
             List<LessonDTO> lessonModels = new List<LessonDTO>();
             lessons.ForEach(lesson => lessonModels.Add(new LessonDTO(lesson)));
-            return lessonModels;
+            return lessonModels.ToList();
         }
 
         public static List<ParentDTO> MapParentsToParentViewModel(List<Parent> parents)
