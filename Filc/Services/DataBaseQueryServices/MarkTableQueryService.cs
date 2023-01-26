@@ -56,7 +56,15 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Subject)
                 .Where(mark => mark.Student.Id == studentId).ToList();
-            return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
+            if (_db.Student.FirstOrDefault(s=>s.Id == studentId) == null)
+            {
+                throw new Exception("Student ID not found.");
+            }
+            else
+            {
+                return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
+            }
+            
         }
         public List<MarkDTO> GetMarkByLesson(int lessonId)
         {
@@ -64,7 +72,15 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(mark => mark.Student)
                 .Include(mark => mark.Teacher)
                 .Include(mark => mark.Subject).ToList();
-            return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
+            if (_db.Lesson.FirstOrDefault(l=>l.Id==lessonId) == null)
+            {
+                throw new KeyNotFoundException("Lesson ID not found.");
+            }
+            else
+            {
+                return ModelConverter.ModelConverter.MapMarksToMarkViewModels(marks);
+            }
+            
         }
 
 
