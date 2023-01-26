@@ -20,8 +20,15 @@ namespace Filc.Services.DataBaseQueryServices
                 .Include(lesson => lesson.Teachers)
                 .Include(lesson => lesson.students)
                 .Include(lesson => lesson.Subject)
-                .First(lesson => lesson.Id == id);
-            return new LessonDTO(lesson);
+                .FirstOrDefault(lesson => lesson.Id == id);
+            if (lesson != null) 
+            {
+                return new LessonDTO(lesson);
+            }
+            else
+            {
+                throw new KeyNotFoundException(message:"Lesson not found.");
+            }
         }
 
         public List<LessonDTO> GetLessonByStudentId(int id)
