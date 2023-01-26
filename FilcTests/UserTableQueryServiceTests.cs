@@ -140,8 +140,8 @@ namespace FilcTests
         [Test]
         public void GetSaltByEmail_NoSuchUser_ReturnsNull()
         {
-            // Assert
-            Assert.That(service.GetSaltByEmail("NoSuchEmail@InTheWorld.XX") == null);
+            //Act //Assert
+            var exception = Assert.Catch<KeyNotFoundException>(() => service.GetSaltByEmail("NoSuchEmail@InTheWorld.XX"));
         }
 
         [Test]

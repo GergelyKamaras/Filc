@@ -27,7 +27,15 @@ namespace Filc.Services.DataBaseQueryServices
         }
         public string GetSaltByEmail(string email)
         {
-            return _db.Users.FirstOrDefault(user => user.Email == email).Salt;
+            var salt = _db.Users.FirstOrDefault(user => user.Email == email);
+            if (salt != null)
+            {
+                return salt.Salt;
+            }
+            else
+            {
+                throw new KeyNotFoundException("Email not found.");
+            }
         }
         
         public void AddUser(ApplicationUser user)
