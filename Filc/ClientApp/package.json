@@ -59,6 +59,7 @@
     "css-what": "^5.0.1",
     "nth-check": "^3.0.1"
   },
+  "proxy":"https://172.104.238.6:7014",
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
     "build": "react-scripts build",
