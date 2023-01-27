@@ -34,20 +34,20 @@ namespace Filc.Services.DataBaseQueryServices
         public List<LessonDTO> GetLessonByStudentId(int id)
         {
             List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
-                .Include(lesson => lesson.Teachers)
-                .Include(lesson => lesson.students)
-                .Include(lesson => lesson.Subject)
-                .Where(lesson => lesson.students.Exists(student => student.Id == id)).ToList();
+                            .Include(lesson => lesson.Teachers)
+                            .Include(lesson => lesson.students)
+                            .Include(lesson => lesson.Subject)
+                            .Where(lesson => lesson.students.Select(s => s.Id).Any(studentId => studentId == id)).ToList();
             return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 
         public List<LessonDTO> GetLessonsByTeacher(int id)
         {
             List<Lesson> lessons = _db.Lesson.Include(lesson => lesson.School)
-                .Include(lesson => lesson.Teachers)
-                .Include(lesson => lesson.students)
-                .Include(lesson => lesson.Subject)
-                .Where(lesson => lesson.Teachers.Exists(teacher => teacher.Id == id)).ToList();
+                            .Include(lesson => lesson.Teachers)
+                            .Include(lesson => lesson.students)
+                            .Include(lesson => lesson.Subject)
+                            .Where(lesson => lesson.Teachers.Select(t => t.Id).Any(teacherId => teacherId == id)).ToList();
             return ModelConverter.ModelConverter.MapLessonsToLessonViewModels(lessons);
         }
 

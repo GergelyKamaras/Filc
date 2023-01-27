@@ -66,7 +66,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void GetGovernmentAdmin_Found_ReturnsGovernmentAdmin()
+        public void GetGovernmentAdmin_ExistingAdmin_ReturnsGovernmentAdmin()
         {
             //Arrange
             var govAdmin1 = new GovernmentAdmin { Id = 1, user = new ApplicationUser { Salt = "testSalt1" } };
@@ -81,7 +81,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void GetGovernmentAdmin_NotFound_ReturnsNull()
+        public void GetGovernmentAdmin_NonExistentAdmin_ReturnsNull()
         {
             //Arrange
             var govAdmin1 = new GovernmentAdmin { Id = 1, user = new ApplicationUser { Salt = "testSalt1" } };
@@ -94,7 +94,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void AddGovernmentAdmin_NotExisting_AddsGovernmentAdmin()
+        public void AddGovernmentAdmin_NewAdmin_AddsGovernmentAdmin()
         {
             //Arrange
             var govAdmin1 = new GovernmentAdmin
@@ -119,7 +119,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void AddGovernmentAdmin_Existing_DoesntAddAnotherGovernmentAdmin()
+        public void AddGovernmentAdmin_ExistingAdmin_DoesntAddAnotherGovernmentAdmin()
         {
             //Arrange
             var govAdmin1 = new GovernmentAdmin { Id = 1, user = new ApplicationUser { Salt = "testSalt1" } };
@@ -136,7 +136,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void RemoveGovernmentAdmin_Existing_RemovesGovAdmin()
+        public void RemoveGovernmentAdmin_ExistingAdmin_RemovesGovAdmin()
         {
             //Arrange
             var govAdmin1 = new GovernmentAdmin { Id = 1, user = new ApplicationUser { Salt = "testSalt1" } };
@@ -152,7 +152,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void RemoveGovernmentAdmin_NonExistent_DoesntRemoveAnything()
+        public void RemoveGovernmentAdmin_NonExistentAdmin_DoesntRemoveAnything()
         {
             // Arrange
             var govAdmin1 = new GovernmentAdmin { Id = 1, user = new ApplicationUser { Salt = "testSalt1" } };
@@ -171,7 +171,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void UpdateGovernmentAdmin_Existing_UpdatesAdmin()
+        public void UpdateGovernmentAdmin_ExistingAdmin_UpdatesAdmin()
         {
             //Arrange
             var govAdmin1 = new GovernmentAdmin
@@ -198,7 +198,7 @@ namespace FilcTests
         }
 
         [Test]
-        public void UpdateGovernmentAdmin_NonExistent_DoesntUpdateAdmin()
+        public void UpdateGovernmentAdmin_NonExistentAdmin_DoesntUpdateAdmin()
         {
             //Arrange
             var govAdmin1 = new GovernmentAdmin

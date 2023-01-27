@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 
 const AddSchoolFetch = (data) => {
-    fetch("https://localhost:7014/api/government/schools", {
+    fetch("/api/government/schools", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

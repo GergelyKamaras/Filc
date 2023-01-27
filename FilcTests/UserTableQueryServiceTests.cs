@@ -137,12 +137,12 @@ namespace FilcTests
             Assert.That(resultSalt == user1.Salt);
         }
 
-        //[Test]
-        //public void GetSaltByEmail_NoSuchUser_ReturnsNull()
-        //{
-        //    // Assert
-        //    Assert.That(service.GetSaltByEmail("NoSuchEmail@InTheWorld.XX") == null);
-        //}
+        [Test]
+        public void GetSaltByEmail_NoSuchUser_ReturnsNull()
+        {
+            //Act //Assert
+            var exception = Assert.Catch<KeyNotFoundException>(() => service.GetSaltByEmail("NoSuchEmail@InTheWorld.XX"));
+        }
 
         [Test]
         public void UpdateUser_UserExists_UserIsUpdated()
